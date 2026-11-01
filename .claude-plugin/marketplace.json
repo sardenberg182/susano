@@ -1,0 +1,21 @@
+{
+  "name": "susano",
+  "owner": {
+    "name": "Matheus Sardenberg (Sarden)",
+    "url": "https://www.linkedin.com/in/matheus-sardenberg"
+  },
+  "description": "Catálogo do Susano, a sombra do Sarden: método, DNA e biblioteca de growth e RevOps para o Claude Code.",
+  "plugins": [
+    {
+      "name": "susano",
+      "source": "./plugin",
+      "description": "A sombra do Sarden no projeto que você já tem: núcleo de 2 mil tokens na abertura e o método por skills sob demanda.",
+      "category": "knowledge",
+      "tags": [
+        "growth",
+        "revops",
+        "pt-br"
+      ]
+    }
+  ]
+}

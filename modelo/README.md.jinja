@@ -1,0 +1,15 @@
+# {{ org_nome }}: segundo cérebro (modelo Susano)
+
+Conhecimento versionado de {{ org_nome }}, operado pelo Susano no Claude Code. Comece por `SUSANO.md`; o mapa do que existe é `MAPA.md` (`python3 scripts/brain.py mapa`) e o estado quente agregado é `10_{{ org }}/hot.md` (`python3 scripts/brain.py hot`). Outro agente (Codex, Cursor, Gemini CLI): a ordem de leitura está em `AGENTS.md`.
+
+| Pasta | O que mora ali |
+|---|---|
+| `00_susano/` | o método (gerenciado pelo modelo) |
+| `10_{{ org }}/` | a organização, o time, os stakeholders (`pessoas/`) e o estado quente agregado (`hot.md`) |
+| `20_{{ frentes }}/` | uma pasta por frente de trabalho |
+| `30_projetos/` | iniciativas com começo e fim |
+| `40_playbooks/` | processos próprios |
+| `50_referencia/` | referências deste projeto |
+| `90_arquivo/` | o que foi substituído |
+
+A versão do modelo instalada está em `.copier-answers.yml`. Dono: @{{ dono }}.

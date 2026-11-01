@@ -1,0 +1,17 @@
+name: brain
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      # fixado por SHA (v7.0.1, commit 3d3c42e, github.com/actions/checkout/releases, 01/11/2026); atualizar por PR
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: brain.py validate
+        run: python3 scripts/brain.py validate
+      - name: brain.py susano-check
+        run: python3 scripts/brain.py susano-check

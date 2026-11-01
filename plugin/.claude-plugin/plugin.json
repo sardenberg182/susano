@@ -1,0 +1,20 @@
+{
+  "name": "susano",
+  "displayName": "Susano",
+  "version": "0.2.1",
+  "description": "A sombra do Sarden: método, DNA, biblioteca e referências de growth e RevOps carregados sob demanda, com o núcleo em 2 mil tokens na abertura.",
+  "author": {
+    "name": "Matheus Sardenberg (Sarden)",
+    "url": "https://www.linkedin.com/in/matheus-sardenberg"
+  },
+  "repository": "https://github.com/sardenberg182/susano",
+  "license": "MIT AND CC-BY-4.0",
+  "keywords": [
+    "growth",
+    "revops",
+    "sarden",
+    "metodo",
+    "pt-br",
+    "segundo-cerebro"
+  ]
+}

@@ -1,0 +1,43 @@
+# Modelo Susano (método Sarden). Gera e atualiza projetos com `copier copy` e `copier update`.
+_min_copier_version: "9.0.0"
+_subdirectory: modelo
+_skip_if_exists:
+  - AGENTS.md
+  - README.md
+  - .github/CODEOWNERS
+  - "10_*/**"
+  - "20_*/**"
+  - "30_projetos/**"
+  - "40_playbooks/**"
+  - "50_referencia/**"
+  - "90_arquivo/**"
+  - "_templates/**"
+_message_after_copy: |
+  Projeto {{ org_nome }} criado a partir do modelo Susano.
+  1. git init -b main; git add -A; git commit -m "susano: projeto criado"
+  2. python3 scripts/brain.py mapa; python3 scripts/brain.py validate; python3 scripts/brain.py susano-check
+  3. Suba para o GitHub e rode /onboarding no Claude Code.
+
+org:
+  type: str
+  help: Slug da organização ou do projeto (minúsculas, números e hífen). Vira a pasta 10_<org>/.
+  validator: "{% if not (org | regex_search('^[a-z0-9][a-z0-9-]*$')) %}Use minúsculas, números e hífen.{% endif %}"
+org_nome:
+  type: str
+  help: Nome de exibição da organização.
+  default: "{{ org | capitalize }}"
+frentes:
+  type: str
+  help: Nome da pasta das frentes de trabalho (clientes, produtos, contas). Vira 20_<frentes>/.
+  default: clientes
+  validator: "{% if not (frentes | regex_search('^[a-z0-9][a-z0-9-]*$')) %}Use minúsculas, números e hífen.{% endif %}"
+dono:
+  type: str
+  help: Usuário do GitHub de quem aprova os PRs, sem @.
+  validator: "{% if not dono %}Informe o usuário do GitHub do dono.{% endif %}"
+idioma:
+  type: str
+  help: Idioma de trabalho.
+  default: pt-BR
+  choices:
+    - pt-BR

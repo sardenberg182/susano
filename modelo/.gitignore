@@ -1,0 +1,16 @@
+# material bruto e privado nunca entra no Git
+bruto/
+_privado/
+.env
+.env.*
+*.pem
+*.key
+# pessoal (Oficina e preferências): fica só na máquina de quem aplicou, nunca no Git do projeto
+CLAUDE.local.md
+00_pessoal/
+.copier-answers.persona.yml
+# local
+.claude/settings.local.json
+__pycache__/
+*.pyc
+.DS_Store
