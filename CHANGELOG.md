@@ -3,7 +3,7 @@
 ## v0.2.1 (2026-11-01)
 
 - Publicação: repositório público `github.com/sardenberg182/susano` criado pelo Sarden (ordem de 01/11/2026, 19:00; só este repositório, nada da Oficina nem do tegrus-brain). README, catálogo e manifesto do plugin com o endereço real; instalação `claude plugin marketplace add sardenberg182/susano` e `copier copy gh:sardenberg182/susano`.
-- `.github/CODEOWNERS` com o Sarden. Proteção da `main` (PR obrigatório, sem force push nem exclusão, vale para admins) configurada pela API; o Raijin propõe por PR e o Sarden aprova. O workflow de CI do repositório (`testar_modelo.sh` e `testar_plugin.sh` em todo PR) está pronto, mas entra num PR próprio: o token do gh que publicou não tem o escopo `workflow`, que o GitHub exige para criar arquivos em `.github/workflows/` [VERIFICAR: `gh auth refresh -s workflow` no Mac do Sarden].
+- `.github/CODEOWNERS` com o Sarden. Proteção da `main` (PR obrigatório, sem force push nem exclusão, vale para admins) configurada pela API; o Raijin propõe por PR e o Sarden aprova. CI do repositório em `.github/workflows/testes.yml`: `testar_modelo.sh` e `testar_plugin.sh` em todo PR e push na `main` (checkout fixado por SHA, token só leitura, Copier via pipx); entrou por PR depois da publicação, porque o push exige o escopo `workflow` no token do gh.
 
 ## v0.2.0 (2026-11-01)
 
