@@ -2,15 +2,18 @@
 id: ref-analytics-guia-profundo-web-analytics
 tipo: referencia
 origem: __Guia_Profundo_de_Web_Analytics.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: nomenclatura única, estados de consentimento corretos, janelas de atribuição por plataforma, fontes erradas removidas, seção 17.2 fechada)
 ---
 
 # Guia Profundo de Web Analytics
 
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
+
 Este documento consolida conceitos, boas práticas, frameworks e referências de Web Analytics (Digital Analytics) a partir de:
 
 - Conteúdo dos blogs **Analytics Mania** (Julius Fedorovicius) e **Métricas Boss**.
-- Outras fontes de referência, como MeasureSchool, Simo Ahava, Digital Analytics Association (DAA), documentação e guias de GA4/GTM e materiais sobre server-side tagging, privacidade e governança de dados.[1][2][3][4][5][6][7][8][9]
+- Outras fontes de referência, como MeasureSchool, Simo Ahava, Digital Analytics Association (DAA), documentação e guias de GA4/GTM e materiais sobre server-side tagging, privacidade e governança de dados.[2][3][4][5][6][7][8]
 
 O foco é prático: como estruturar uma operação de Web Analytics moderna (GA4, GTM, server-side, privacidade, governança), evitando erros clássicos e aproveitando o máximo valor de dados.
 
@@ -20,11 +23,11 @@ O foco é prático: como estruturar uma operação de Web Analytics moderna (GA4
 
 ### 1.1 Definição e objetivos
 
-Web Analytics é o processo de **coletar, mensurar, analisar e reportar dados de interação digital** (sites, apps, etc.) para entender o comportamento dos usuários e orientar decisões de produto, marketing e negócios.[8][9][10]
+Web Analytics é o processo de **coletar, mensurar, analisar e reportar dados de interação digital** (sites, apps, etc.) para entender o comportamento dos usuários e orientar decisões de produto, marketing e negócios.[8]
 
 Elementos centrais:
 
-- **Coleta**: instrumentação de eventos de navegação, conversão e engajamento (pageviews, cliques, formulários, compras, etc.).[9][11]
+- **Coleta**: instrumentação de eventos de navegação, conversão e engajamento (pageviews, cliques, formulários, compras, etc.).[11]
 - **Mensuração**: definição de métricas, dimensões e KPIs alinhados a objetivos de negócio (ex.: conversões, receita, retenção, engajamento, CAC, LTV).[12][8]
 - **Análise**: interpretação dos dados (segmentação, comparações, coortes, atribuição) para gerar hipóteses e insights acionáveis.[13][14]
 - **Ação/otimização**: uso dos insights para ajustar campanhas, UX, produto e jornada do usuário; testagem contínua (A/B, experimentos).[15][13]
@@ -37,19 +40,19 @@ Na prática moderna, Web Analytics gira em torno de um ecossistema de ferramenta
 
 - **Google Analytics 4 (GA4)**: principal solução gratuita/low cost; baseada em eventos, com foco em cross-device e machine learning.[3][4][11]
 - **Google Tag Manager (GTM)**: camada de gestão de tags e tracking (client-side e server-side), centralizando scripts de marketing e analytics.[4][5][11][3]
-- **Server-side tagging (GTM Server, Google Tag Gateway)**: move parte da coleta para o servidor do próprio negócio, reduzindo bloqueio de cookies, melhorando performance e privacidade, e aumentando o controle sobre dados enviados a terceiros.[6][7][16][1]
+- **Server-side tagging (GTM Server, Google Tag Gateway)**: move parte da coleta para o servidor do próprio negócio, reduzindo bloqueio de cookies, melhorando performance e privacidade, e aumentando o controle sobre dados enviados a terceiros.[6][7][16]
 - **Data Warehouse/Lake (ex.: BigQuery)**: camada para armazenamento bruto e modelagem avançada de dados (coortes, LTV, modelos de atribuição, etc.).[14]
 - **Ferramentas de visualização/BI**: Looker Studio, Power BI, Tableau, etc. para dashboards e storytelling de dados.[18][4]
 - **Ferramentas complementares**: heatmaps e gravação de sessões (Hotjar, Clarity), plataformas de experimentação (Google Optimize legado, Optimizely, VWO), CDPs, etc.[19][13]
 
 ### 1.3 Mentalidade e pilares
 
-Os conteúdos de Analytics Mania, Métricas Boss, DAA e MeasureSchool convergem em alguns pilares de mentalidade saudável de Web Analytics:[10][1][2][3][4]
+Os conteúdos de Analytics Mania, Métricas Boss, DAA e MeasureSchool convergem em alguns pilares de mentalidade saudável de Web Analytics:[2][3][4]
 
 - **Business first**: partir de perguntas de negócio (ex.: “como reduzir churn?”, “onde perco receita no funil?”) e só então escolher métricas e configurações.
 - **Documentação e governança**: manter dicionário de métricas, guia de naming de eventos, versões de contêiner GTM, changelog, etc.[5][20]
-- **Qualidade de dados acima de volume**: evitar o “paradoxo dos dados” (ter muito dado ruim e pouco dado útil), tema recorrente no blog da Métricas Boss.[1][10]
-- **Testes e validação contínua**: nunca publicar tags sem testar (preview, debug, ambientes de teste) e revisar tracking periodicamente.[11][4][1]
+- **Qualidade de dados acima de volume**: evitar o “paradoxo dos dados” (ter muito dado ruim e pouco dado útil), tema recorrente no blog da Métricas Boss.
+- **Testes e validação contínua**: nunca publicar tags sem testar (preview, debug, ambientes de teste) e revisar tracking periodicamente.[11][4]
 - **Privacidade por design**: implementar consentimento, anonimização e minimização de dados desde o desenho do tracking.[16][21][8]
 
 ***
@@ -62,7 +65,7 @@ A combinação mais recomendada na literatura atual é:
 
 1. **GTM como camada principal de instrumentação**, minimizando implementações hard-coded no site/app.[22][3][4][5][11]
 2. **GA4 como ferramenta central de análise** (com exports para BigQuery em cenários mais maduros).[3][4][11]
-3. **Server-side tagging** (GTM Server, Google Tag Gateway) para controlar envios e mitigar problemas de bloqueio/privacidade.[7][6][16][1]
+3. **Server-side tagging** (GTM Server, Google Tag Gateway) para controlar envios e mitigar problemas de bloqueio/privacidade.[7][6][16]
 
 Autores como Julius (Analytics Mania), Simo Ahava e Julian (MeasureSchool) reforçam que GTM não é “nice to have”, mas a forma padrão de implementação moderna, pois torna o tracking:
 
@@ -71,12 +74,10 @@ Autores como Julius (Analytics Mania), Simo Ahava e Julian (MeasureSchool) refor
 
 ### 2.2 Boas práticas de Google Tag Manager
 
-Analytics Mania e o ecossistema de GTM tips destacam boas práticas recorrentes:[23][5][1]
+Analytics Mania e o ecossistema de GTM tips destacam boas práticas recorrentes:[23][5]
 
-- **Naming conventions claras**:
-  - Tags: `[Plataforma] – [Objetivo] – [Detalhe]` (ex.: `GA4 – Event – purchase`, `Meta Ads – Pixel – ViewContent`).
-  - Triggers: `[Tipo] – [Página/Contexto] – [Condição]` (ex.: `Click – CTA – Header`).
-  - Variáveis: nomes descritivos, evitando abreviações obscuras.
+- **Convenção de nomenclatura única** (a mesma de `00_susano/referencias/analytics/google_tag_manager.md`):
+  - Tags: `Plataforma - Tipo - Detalhe` (ex.: `GA4 - Event - purchase`, `Meta - Pixel - ViewContent`); triggers: `Tipo - Contexto - Condição` (ex.: `Click - CTA - Header`); variáveis: `Origem - nome` (ex.: `DL - transaction_id`), em snake_case nos nomes de evento e parâmetro, sem emoji e sem caractere especial.
 - **Estrutura de pastas** no contêiner: separar por produto, domínio, ambiente ou tipo de tag, facilitando navegação em setups complexos.[5][23]
 - **Uso intensivo de variáveis e dataLayer**: enviar dados estruturados via `dataLayer` em vez de “raspar” DOM/URL o tempo todo.[11][5]
 - **Ambientes/Workspaces e versões**:
@@ -84,7 +85,7 @@ Analytics Mania e o ecossistema de GTM tips destacam boas práticas recorrentes:
   - Publicar apenas após revisão e testes com o **Preview/Tag Assistant**.[6][11]
 - **Documentação no próprio GTM**: usar descrições de tags e comentários para explicar lógicas mais complexas.[5]
 
-Erros comuns listados em posts como “21 Most Common GTM Mistakes” incluem:[1]
+Erros comuns listados em posts como “21 Most Common GTM Mistakes” incluem:
 
 - Não verificar se o contêiner está instalado em todas as páginas.
 - Não filtrar ambientes de teste, gerando dados poluídos.
@@ -93,7 +94,7 @@ Erros comuns listados em posts como “21 Most Common GTM Mistakes” incluem:[1
 
 ### 2.3 GA4: configuração básica e avançada
 
-MeasureSchool e Analytics Mania têm tutoriais completos sobre como “começar do jeito certo” com GA4.[4][3][11][1]
+MeasureSchool e Analytics Mania têm tutoriais completos sobre como “começar do jeito certo” com GA4.[4][3][11]
 
 **Passos fundamentais:**
 
@@ -101,22 +102,22 @@ MeasureSchool e Analytics Mania têm tutoriais completos sobre como “começar 
 2. **Instalar GA4 via GTM**, usando uma tag de configuração GA4 com configuração de consentimento adequada.[3][11][4]
 3. **Configurar eventos essenciais**:
    - Eventos recomendados pelo GA4 (ex.: `view_item`, `add_to_cart`, `begin_checkout`, `purchase`, `generate_lead`, etc.).[11][4]
-   - Eventos custom sob medida para o negócio (ex.: clique em CTA crítico, interação com componente-chave, uso de filtros avançados).[9][1]
+   - Eventos custom sob medida para o negócio (ex.: clique em CTA crítico, interação com componente-chave, uso de filtros avançados).
 4. **Marcar conversões** no GA4 (ex.: `purchase`, `generate_lead`, `sign_up`) em alinhamento com metas de negócio.[4][11]
 5. **Configurar audiences** para remarketing, análise de coortes e segmentação de campanhas.[4]
 
-Tópicos avançados frequentemente abordados por Analytics Mania:[1]
+Tópicos avançados frequentemente abordados por Analytics Mania:
 
-- **Cross-domain tracking**: garantir continuidade da sessão entre múltiplos domínios (site principal, checkout externo, subdomínios).[1]
-- **Correções de `session_start` faltante** e problemas de tráfego “unassigned”.[1]
-- **Exclusão de países ou regiões** (por questões legais ou de negócio).[1]
-- **Tracking de tráfego de IA (ChatGPT, Gemini)** classificando corretamente esses referrals em GA4.[1]
+- **Cross-domain tracking**: garantir continuidade da sessão entre múltiplos domínios (site principal, checkout externo, subdomínios).
+- **Correções de `session_start` faltante** e problemas de tráfego “unassigned”.
+- **Exclusão de países ou regiões** (por questões legais ou de negócio).
+- **Tracking de tráfego de IA (ChatGPT, Gemini)** classificando corretamente esses referrals em GA4.
 
 ### 2.4 Server-side tagging e Google Tag Gateway
 
-O avanço de bloqueadores, restrições de cookies e regulações de privacidade fez crescer a adoção de **server-side tagging**.[7][16][6][1]
+O avanço de bloqueadores, restrições de cookies e regulações de privacidade fez crescer a adoção de **server-side tagging**.[7][16][6]
 
-Boas práticas consolidadas em Analytics Mania, MeasureSchool e outros guias:[6][7][1]
+Boas práticas consolidadas em Analytics Mania, MeasureSchool e outros guias:[6][7]
 
 - **Separar contêiner client-side e server-side**: um GTM Web dispara hits para um endpoint de GTM Server, que então encaminha para GA4 e demais destinos.
 - **Hospedar o server container em subdomínio próprio** (ex.: `https://gtm.seudominio.com`), reduzindo bloqueio por ITP/ETP.[7][6]
@@ -126,7 +127,7 @@ Boas práticas consolidadas em Analytics Mania, MeasureSchool e outros guias:[6]
   - Filtragem de tráfego interno/bot antes de chegar a GA4.
 - **Monitorar custos de infraestrutura** (GCP ou alternativa), dimensionando conforme volume de eventos.[6][7]
 
-Google Tag Gateway, abordado em posts recentes do Analytics Mania, surge como camada adicional da Google para mitigar bloqueios, alinhada a server-side tagging e Consent Mode.[1]
+Google Tag Gateway, abordado em posts recentes do Analytics Mania, surge como camada adicional da Google para mitigar bloqueios, alinhada a server-side tagging e Consent Mode.
 
 ***
 
@@ -134,16 +135,16 @@ Google Tag Gateway, abordado em posts recentes do Analytics Mania, surge como ca
 
 ### 3.1 Framework de métricas (North Star, KPIs e métricas de apoio)
 
-Blogs como Métricas Boss e recursos da DAA recomendam estruturar o plano de métricas em camadas:[8][12][1]
+Blogs como Métricas Boss e recursos da DAA recomendam estruturar o plano de métricas em camadas:[8][12]
 
 - **North Star Metric (NSM)**: métrica que melhor reflete o valor entregue ao usuário (ex.: pedidos concluídos, leads qualificados, contas ativas).
-- **KPIs**: indicadores que explicam a NSM (taxa de conversão, receita média por usuário, churn, retenção, engajamento por sessão).[10][14]
+- **KPIs**: indicadores que explicam a NSM (taxa de conversão, receita média por usuário, churn, retenção, engajamento por sessão).[14]
 - **Métricas operacionais**: visitas, pageviews, CTR, bounce rate, tempo médio, etc., usadas para diagnóstico e otimização.
 
 Boas práticas:
 
 - Começar pelo **objetivo de negócio** → derivar perguntas → só então definir métricas e eventos.[12][13]
-- Evitar coleções gigantes de eventos sem propósito claro (“paradoxo dos dados”).[10][1]
+- Evitar coleções gigantes de eventos sem propósito claro (“paradoxo dos dados”).
 - Manter **dicionário de métricas** em um documento vivo (quem usa, como é calculada, fonte, frequência de atualização).[12][5]
 
 ### 3.2 Planejamento de implementação (Measurement Plan)
@@ -166,7 +167,7 @@ A literatura sugere que esse plano seja construído **antes** da implementação
 
 ### 4.1 Tipos de análise comuns
 
-A produção científica e a prática em marketing/analytics listam diversos tipos de análises úteis:[13][14][10]
+A produção científica e a prática em marketing/analytics listam diversos tipos de análises úteis:[13][14]
 
 - **Descritiva**: o que aconteceu? (ex.: tráfego por canal, taxa de conversão por dispositivo, funis).
 - **Diagnóstica**: por que aconteceu? (ex.: queda de conversão associada a uma mudança de UX ou a uma campanha específica).
@@ -187,11 +188,11 @@ Guides da DAA, Digital.gov e tutoriais de GA4/Looker Studio destacam:[8][12][4]
 
 ### 4.3 Casos de uso recorrentes em blogs especializados
 
-Conteúdos da Métricas Boss e de Analytics Mania frequentemente abordam:[1]
+Conteúdos da Métricas Boss e de Analytics Mania frequentemente abordam:
 
-- **Análise de conversões assistidas** e atribuição para entender o papel de cada canal na jornada.[13][1]
-- **Análise de campanhas de mídia** (ROAS, CPA, incrementalidade) usando dados de GA4 + mídia.[1]
-- **Casos práticos** (ex.: recuperação de vendas invisíveis, ajustes de layout que aumentam engajamento mobile, impacto de remarketing em faturamento).[1]
+- **Análise de conversões assistidas** e atribuição para entender o papel de cada canal na jornada.[13]
+- **Análise de campanhas de mídia** (ROAS, CPA, incrementalidade) usando dados de GA4 + mídia.
+- **Casos práticos** (ex.: recuperação de vendas invisíveis, ajustes de layout que aumentam engajamento mobile, impacto de remarketing em faturamento).
 
 ***
 
@@ -199,14 +200,14 @@ Conteúdos da Métricas Boss e de Analytics Mania frequentemente abordam:[1]
 
 ### 5.1 Desafios de privacidade (GDPR, LGPD etc.)
 
-White papers e guias de privacidade destacam que o uso de ferramentas como GA, GTM e AdSense envolve participação em grandes redes de rastreamento de terceiros, com possíveis riscos à privacidade e à liberdade intelectual.[25][21]
+White papers e guias de privacidade destacam que o uso de ferramentas como GA, GTM e AdSense envolve participação em grandes redes de rastreamento de terceiros, com possíveis riscos à privacidade e à liberdade intelectual.[21]
 
 Boas práticas:
 
 - **Minimização de dados**: coletar apenas o necessário, evitar PII (nomes, e-mails, CPF) em URLs, eventos ou parâmetros de analytics.
 - **Anonimização e agregação**: anonimizar IP, geolocalização precisa e outros identificadores sensíveis, especialmente ao usar soluções de terceiros.[21][16]
-- **Governança de consentimento (Consent Mode, CMPs)**: usar Google Consent Mode com GTM, configurando tags para respeitar estados de consentimento (ads_data, analytics_storage, etc.).[16][1]
-- **Transparência e controle**: deixar claro na política de privacidade quais dados são coletados e para que, oferecendo opt-out sempre que possível.[26][21]
+- **Governança de consentimento (Consent Mode, CMPs)**: usar Google Consent Mode com GTM, configurando tags para respeitar os quatro estados de consentimento (`ad_storage`, `analytics_storage`, `ad_user_data`, `ad_personalization`); `ads_data_redaction` e `url_passthrough` são configurações complementares, não estados.[16]
+- **Transparência e controle**: deixar claro na política de privacidade quais dados são coletados e para que, oferecendo opt-out sempre que possível.[21]
 
 ### 5.2 Valores e ética (DAA e bibliotecas)
 
@@ -232,7 +233,7 @@ Guias de Usercentrics, MeasureSchool e outros mostram server-side tagging não s
 
 ### 6.1 Erros listados em Analytics Mania
 
-O artigo “21 Most Common Google Tag Manager Mistakes” descreve erros frequentes, como:[1]
+O artigo “21 Most Common Google Tag Manager Mistakes” descreve erros frequentes, como:
 
 - Não testar adequadamente tags/trigger antes da publicação (falta de uso do Preview e do Tag Assistant).
 - Não implementar **trigger de consentimento** apropriado, disparando tags antes da definição do estado de consentimento.
@@ -241,7 +242,7 @@ O artigo “21 Most Common Google Tag Manager Mistakes” descreve erros frequen
 
 ### 6.2 Problemas recorrentes vistos pela Métricas Boss
 
-Entre os artigos de Web Analytics, destacam-se críticas a antipadrões como:[1]
+Entre os artigos de Web Analytics, destacam-se críticas a antipadrões como:
 
 - “Morte à gambiarra”: uso de soluções improvisadas sem planejamento, que escalam mal e geram dados inconsistentes.
 - Falta de **planejamento cross-channel** de métricas de mídia (orçamento, ROAS, incrementalidade) no GA4.
@@ -259,7 +260,7 @@ Artigos acadêmicos e de mercado apontam riscos quando organizações adotam Web
 
 ## 7. Framework prático de implantação de Web Analytics
 
-Combinando recomendações de Analytics Mania, Métricas Boss, MeasureSchool, DAA e Digital.gov, é possível desenhar um framework em 7 etapas:[3][8][12][4][1]
+Combinando recomendações de Analytics Mania, Métricas Boss, MeasureSchool, DAA e Digital.gov, é possível desenhar um framework em 7 etapas:[3][8][12][4]
 
 1. **Descoberta de negócio**
    - Mapear objetivos e métricas de sucesso (NSM, KPIs).
@@ -296,12 +297,12 @@ Combinando recomendações de Analytics Mania, Métricas Boss, MeasureSchool, DA
 
 ### 8.1 Analytics Mania
 
-- Conteúdo fortemente focado em **GTM, GA4 e server-side tagging**, com muitos tutoriais passo a passo e troubleshooting de problemas específicos (cross-domain, consent mode, erros de sessão, tráfego de IA).[1]
+- Conteúdo fortemente focado em **GTM, GA4 e server-side tagging**, com muitos tutoriais passo a passo e troubleshooting de problemas específicos (cross-domain, consent mode, erros de sessão, tráfego de IA).
 - Ideal para quem implementa diretamente (analistas, devs front-end, engenheiros de dados de marketing).
 
 ### 8.2 Métricas Boss
 
-- Blog extensivo em português com **mais de 500 artigos** sobre Digital Analytics, muitos focados em GA4, orquestração de mídia, casos de uso e cultura de dados.[1]
+- Blog extensivo em português com **mais de 500 artigos** sobre Digital Analytics, muitos focados em GA4, orquestração de mídia, casos de uso e cultura de dados.
 - Destaque para temas como **paradoxo dos dados**, ROI de testes A/B, cases aplicados (Spoleto, Claro, WebContinental) e integração de Web Analytics com estratégia de growth.
 
 ### 8.3 MeasureSchool
@@ -328,7 +329,7 @@ A partir deste panorama, alguns caminhos naturais de aprofundamento são:
 1. **GA4 avançado**: modelagem de eventos complexos, BigQuery export, attribution modeling customizado.[14][4]
 2. **Server-side tagging hands-on**: construir POC com GTM Server, avaliar impacto em performance, privacidade e completude de dados.[16][6][7]
 3. **Arquitetura de dados de marketing**: integrar GA4 com CRM, CDP, data warehouse; definir modelo de dados unificado.[14]
-4. **Governança e compliance**: aprofundar em LGPD/GDPR, Privacy Sandbox, Consent Mode v2, políticas corporativas e frameworks de risk management.[25][21][16]
+4. **Governança e compliance**: aprofundar em LGPD/GDPR, Privacy Sandbox, Consent Mode v2, políticas corporativas e frameworks de risk management.[21][16]
 5. **Experimentação e personalização**: estruturar programas de teste A/B, feature flagging e personalização baseada em dados de analytics e perfil de usuário.[28][19][13]
 
 
@@ -351,7 +352,7 @@ Para e‑commerce, GA4 traz um conjunto de **eventos recomendados** que vale seg
   - `begin_checkout`, `add_shipping_info`, `add_payment_info`.
   - `purchase`: confirmação da compra (pedido).
 
-Boas práticas destacadas em tutoriais de GA4 e blogs técnicos:[4][1]
+Boas práticas destacadas em tutoriais de GA4 e blogs técnicos:[4]
 
 - Usar `item_id` e `item_name` consistentes em todos os eventos.
 - Preencher `item_category`, `item_brand` e atributos relevantes para segmentação.
@@ -365,7 +366,7 @@ Para sites de geração de leads, a literatura enfatiza a necessidade de **quali
 - Enriquecimento com parâmetros: tipo de lead (PF/PJ), produto de interesse, estágio da jornada.
 - Integração com CRM para marcar **MQL/SQL** (ex.: via eventos suplementares ou integração server‑side).
 
-Boas práticas da Métricas Boss e de marketing analytics:[14][1]
+Boas práticas da Métricas Boss e de marketing analytics:[14]
 
 - Medir não só a **quantidade** de leads, mas a **taxa de qualificação** e o valor gerado (receita, LTV) por origem/campanha.
 - Ajustar lances de mídia e orçamentos com base em custo por MQL/SQL, não apenas CPL bruto.
@@ -376,14 +377,14 @@ Boas práticas da Métricas Boss e de marketing analytics:[14][1]
 
 ### 11.1 Desafios em SPA
 
-Em Single Page Applications (React, Vue, Angular), o carregamento inicial é único e a navegação passa a ser controlada por mudanças de rota client-side, o que impacta **pageviews, tempo em página e funis**.[5][1]
+Em Single Page Applications (React, Vue, Angular), o carregamento inicial é único e a navegação passa a ser controlada por mudanças de rota client-side, o que impacta **pageviews, tempo em página e funis**.[5]
 
-Boas práticas disseminadas em Analytics Mania e Simo Ahava:[23][5][1]
+Boas práticas disseminadas em Analytics Mania e Simo Ahava:[23][5]
 
 - Disparar `page_view` (ou eventos equivalentes) em cada mudança de rota, usando:
   - Ou listeners de `history`/`hashchange`.
   - Ou eventos custom (`dataLayer.push({ event: 'virtual_page_view', ... })`) disparados pelo próprio app na troca de tela.
-- Garantir que `page_location`, `page_referrer` e outros parâmetros sejam atualizados adequadamente a cada navegação.[1]
+- Garantir que `page_location`, `page_referrer` e outros parâmetros sejam atualizados adequadamente a cada navegação.
 - Cuidar de **tempo de engajamento** em GA4, já que mudanças de rota sem novos hits podem distorcer métricas se mal configuradas.
 
 ### 11.2 Apps mobile (Firebase + GA4)
@@ -401,7 +402,7 @@ Boas práticas:
 
 ### 12.1 Padrões de UTM
 
-Boa parte da confusão em Web Analytics vem de **UTMs inconsistentes**, algo muito abordado pela Métricas Boss e por guias de Digital Analytics.[8][1]
+Boa parte da confusão em Web Analytics vem de **UTMs inconsistentes**, algo muito abordado pela Métricas Boss e por guias de Digital Analytics.[8]
 
 Boas práticas:
 
@@ -427,17 +428,17 @@ Tutoriais de GA4 e MeasureSchool enfatizam que Web Analytics precisa conversar b
 
 É normal existirem diferenças entre números de GA4, plataformas de mídia e backoffice. A literatura sugere focar em **explicar** essas diferenças, não eliminá‑las por completo:[13][14]
 
-- Janelas de atribuição diferentes (ex.: GA4 last click vs. Ads 7‑day click + 1‑day view).
+- Janelas e modelos de atribuição diferentes (ex.: GA4 com modelo data-driven e janela de 30 ou 90 dias por evento-chave; Meta Ads com 7 dias de clique e 1 dia de visualização por padrão; Google Ads com janela de clique de 30 dias por padrão, configurável de 1 a 90, e janela de visualização própria) [VERIFICAR os defaults vigentes nas páginas oficiais antes de citar ao cliente].
 - Fuso horário e momentos de contabilização (pedido na data X, faturamento em Y).
 - Tratamento de cancelamentos, estornos, fraudes, offline.
 
 ### 13.2 Rotinas de QA e monitoramento
 
-Boas práticas sugeridas por blogs técnicos e tutoriais:[24][1]
+Boas práticas sugeridas por blogs técnicos e tutoriais:[24]
 
 - Criar **painéis de sanity check** (tráfego diário, conversões por canal, % de tráfego direto, etc.).
 - Configurar **alertas** para quedas bruscas (ex.: conversões caíram >50% dia a dia) que possam indicar quebra de tracking.
-- Rodar revisões periódicas de **cardinalidade de dimensões** em GA4 (ex.: número de valores diferentes de `page_location`, `campaign`, etc.) para detectar poluição de dados.[1]
+- Rodar revisões periódicas de **cardinalidade de dimensões** em GA4 (ex.: número de valores diferentes de `page_location`, `campaign`, etc.) para detectar poluição de dados.
 
 ### 13.3 Filtragem de bots e spam
 
@@ -523,7 +524,7 @@ Guias de boas práticas sugerem enxergar maturidade em níveis:[27][12]
 
 ### 17.1 Padrões por tipo de negócio
 
-Estudos e blogs destacam padrões diferentes de uso de Web Analytics por vertical:[10][13][14]
+Estudos e blogs destacam padrões diferentes de uso de Web Analytics por vertical:[13][14]
 
 - **E‑commerce B2C**: foco em funis, ticket médio, mix de canais, abandono de carrinho, lifetime value.
 - **SaaS/Produto digital**: foco em ativação, retenção, churn, feature adoption, eficácia de onboarding.
@@ -533,8 +534,13 @@ Estudos e blogs destacam padrões diferentes de uso de Web Analytics por vertica
 
 O papel de Web Analytics em **CRO (Conversion Rate Optimization)** é central:[28][13]
 
+- O dado aponta a etapa que vaza (funil por dispositivo e por fonte, com a taxa certa de cada passagem); a hipótese nasce dali, não de preferência de layout.
+- Cada teste muda uma variável, com corte definido antes (amostra mínima e prazo) e leitura em GA4 pela dimensão do experimento ou pelo parâmetro de variante no evento.
+- A decisão ao fim do teste é matar ou sistematizar, registrada em `20_<frente>/<slug>/experimentos.md`; método em `00_susano/dna/metodo/diagnostico_de_funil.md` e amostra em `00_susano/referencias/go-to-market/modelos_quantitativos.md` (seção 10).
+
+(O texto de origem terminava cortado nesta seção; os três pontos acima fecham a seção com o método, acrescentados na v0.3.0.)
+
 Fontes
-[1] Evaluating a swine biosecurity website as an education and outreach tool and identifying best practices for end-user engagement: A learning analytics approach. https://linkinghub.elsevier.com/retrieve/pii/S0167587725001291
 [2] Digital Analytics Association (DAA) https://consortiuminfo.org/list/digital-analytics-association-daa/
 [3] Free Google Analytics 4 for Beginners Course​ - MeasureSchool https://measureschool.com/course/google-analytics-for-beginners-course/
 [4] Google Analytics 4 Tutorial for Beginners (2025) - MeasureSchool https://measureschool.com/google-analytics-4/
@@ -542,8 +548,6 @@ Fontes
 [6] How to Set Up Google Tag Manager Server-Side Tagging (2025) https://measureschool.com/google-tag-manager-server-side-tagging/
 [7] GA4 Server-Side Tagging Setup Guide 2024 - Web Star Research https://www.webstarresearch.com/blog/ga4-server-side-tagging-setup-guide-2024/
 [8] Analytics https://digital.gov/topics/analytics/
-[9] Web Analytics Overview and Best Practices (DM Unit 5) - Studocu https://www.studocu.com/ph/document/vma-global-college-training-centers-inc/hospitality-services-and-technology/web-analytics-overview-and-best-practices-dm-unit-5/129257490
-[10] A METRICS BASED APPROACH TO ANALYSE WEB USAGE PATTERN https://cirworld.com/index.php/ijct/article/download/6089/6006
 [11] Complete Google Analytics 4 Course for Beginners (2023) - YouTube https://www.youtube.com/watch?v=ZOmhyQICMXw
 [12] Digital Analytics Association's Essentials Series – Fundamentals in Digital Analytics - Optizent https://www.optizent.com/blog/digital-analytics-associations-essentials-series-fundamentals-in-digital-analytics/
 [13] From web analytics to digital marketing optimization: Increasing the commercial value of digital analytics http://link.springer.com/10.1057/dddmp.2012.20
@@ -558,12 +562,10 @@ Fontes
 [22] I'm Simo Ahava, Senior Data Advocate at Reaktor, and Google ... https://www.reddit.com/r/bigseo/comments/3u7ulv/im_simo_ahava_senior_data_advocate_at_reaktor_and/
 [23] GTM Tips | Simo Ahava's blog https://www.simoahava.com/categories/gtm-tips/
 [24] Tutorials on Google Analytics: How to Craft a Web Analytics Report for a Library Web Site https://ttu-ir.tdl.org/bitstream/2346/58337/10/yang_perrin_report.pdf
-[25] [PDF] O Papel do Banco Central na Performance e Excelência ... - FGCOOP https://www.fgcoop.coop.br/api/file/827/dia-2-9h30-papel-do-bcb-(1).pdf
-[26] Fundo Garantidor das Cooperativas: entenda como funciona https://greencred.com.br/fundo-garantidor-das-cooperativas-entenda-como-funciona/
 [27] SIGNIFICANCE OF ANALYTICS https://oapub.org/soc/index.php/EJMMS/article/download/1246/1831
 [28] Exploration of Effective Methodologies for Web Personalization https://pmpjournal.org/index.php/pmp/article/view/364
 
 ## NOTAS DA MIGRAÇÃO (2026-10-31)
 
-- [VERIFICAR] Fontes [1], [25] e [26] não correspondem ao assunto (a [1] aponta para artigo de biossegurança suína). A fonte [17] saiu na v0.1.3 do modelo: não correspondia ao assunto.
-- [LACUNA] O texto de origem termina cortado na seção 17.2.
+- As fontes [1], [9], [10], [25] e [26] saíram na v0.3.0 (não correspondiam ao assunto ou eram material de baixa confiabilidade); a [17] já tinha saído na v0.1.3. As marcas dessas fontes foram retiradas do texto; afirmação que ficou sem citação vale como leitura geral, não como fato com fonte.
+- A seção 17.2 foi fechada na v0.3.0 com o método (ver nota na própria seção).

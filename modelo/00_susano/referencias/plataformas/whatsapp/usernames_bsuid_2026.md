@@ -2,21 +2,21 @@
 id: ref-plataformas-whatsapp-usernames-bsuid-2026
 tipo: referencia
 origem: whatsapp_usernames_bsuid_2026.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: cronograma conferido na documentação da Meta, formato e comportamento do BSUID, limites de envio marcados)
 ---
 
 # WhatsApp Usernames & BSUID: Mudanças Estruturais 2026
 
-**Fonte**: Documento informativo ChatX/Devsky Tecnologia, Março 2026
-**Baseado em**: Documentação oficial Meta, WhatsApp Business API, WABetaInfo, Twilio, Sanuker
-**Última atualização**: Março 2026
+**Fonte original**: documento informativo de um provedor de soluções WhatsApp (março de 2026), baseado em documentação oficial da Meta, WABetaInfo, Twilio e Sanuker
+**Conferido em 01/11/2026** contra a página "Business-scoped user IDs" da Meta for Developers (developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids/) e o changelog da Twilio (18/02/2026): o cronograma abaixo foi reescrito no passado com o que se confirmou.
 **Classificação**: Conhecimento de plataforma, aplicável a todos os clientes que operam via WhatsApp Business
 
 ---
 
 ## 1. Contexto Geral
 
-A Meta está implementando a maior mudança estrutural do WhatsApp desde a criptografia ponta a ponta (2016). A partir de junho de 2026, usuários e empresas poderão se comunicar via nomes de usuário (@username), sem necessidade de compartilhar número de telefone.
+A Meta está implementando a maior mudança estrutural do WhatsApp desde a criptografia ponta a ponta (2016). Ao longo de 2026, em rollout gradual por região, usuários e empresas passaram a poder se comunicar via nomes de usuário (@username), sem necessidade de compartilhar número de telefone. Os BSUIDs chegaram aos webhooks em abril de 2026; a reserva de username para empresas abriu em 29/06/2026; o envio de mensagem para um BSUID é aceito pela API desde julho de 2026 (fonte: Meta for Developers, "Business-scoped user IDs", verificado em 01/11/2026).
 
 O número de telefone continua existindo como âncora de verificação da conta. O username é uma camada adicional e opcional de identidade.
 
@@ -46,7 +46,7 @@ Username é um identificador único no formato `@nomedeusuario` (mesmo padrão d
 
 - Processo vinculado a contas Meta
 - Quem já tem @username no Instagram ou Facebook poderá reivindicá-lo para o WhatsApp
-- Reserva pode iniciar antes do rollout completo, ainda no 1º semestre de 2026
+- Reserva e adoção de username comercial abertas em 29/06/2026, pelo Meta Business Suite, WhatsApp Manager, app WhatsApp Business ou Username API (confirmado na documentação da Meta em 01/11/2026)
 
 ---
 
@@ -57,8 +57,9 @@ Novo identificador técnico que permite empresas continuarem se comunicando com 
 ### Características técnicas
 
 - Único por par empresa-usuário (mesmo cliente terá BSUIDs diferentes para empresas diferentes)
-- Até 128 caracteres alfanuméricos
-- Entregue via webhooks da API no campo `user_id`
+- Formato: código de país ISO 3166 alpha-2, ponto e até 128 caracteres alfanuméricos (ex.: `BR.1A2B...`); nos webhooks da Twilio, prefixado com `whatsapp:`
+- Entregue via webhooks da API no campo `user_id`, presente em todos os webhooks de mensagem desde o início de abril de 2026
+- Muda quando o usuário troca de número: a Meta avisa por mensagem de sistema no webhook de mensagens, com o ID novo e o anterior; o campo de webhook `user_id_update` anunciado em julho de 2026 não existe (correção da Meta em 11/08/2026)
 - Sempre presente nos webhooks, mesmo que o usuário não tenha ativado username
 - Não visível na interface (identificador de backend; usuário vê apenas o @username)
 - Muda se a empresa migrar de WABA/BSP (novos BSUIDs gerados para todos os clientes)
@@ -73,7 +74,7 @@ Novo identificador técnico que permite empresas continuarem se comunicando com 
 
 ### Contact Book (Agenda de Contatos)
 
-- Lançamento previsto para abril de 2026
+- Lançado no início de abril de 2026 (configuração gerenciável no Business Manager desde março)
 - Armazena automaticamente pares número + BSUID de interações anteriores
 - Clientes que já conversaram com a empresa antes do rollout terão números preservados nos webhooks
 
@@ -92,7 +93,7 @@ Após qualquer interação entre empresa e cliente, o WhatsApp continua retornan
 | Descoberta e branding | Empresa encontrável pelo @username na busca do WhatsApp (similar ao Instagram) |
 | Identificação de clientes novos | Alguns chegarão sem número visível; identificação via BSUID |
 | CRM e integrações | Sistemas integrados (CRM, ERP, BI) precisarão reconhecer BSUID como identificador, além do telefone |
-| Limites de envio em massa | Meta simplificando: empresas verificadas terão acesso direto a 100k mensagens/dia, sem escalonamento gradual por tiers (2K > 10K > 100K) |
+| Limites de envio em massa | [VERIFICAR] A fonte original dizia que empresas verificadas teriam acesso direto a 100 mil conversas por dia sem escalonamento por tiers; a documentação de limites de mensagens da Meta ainda descreve a escada por tiers de conversas iniciadas pela empresa em 24 h. Confirmar na página "Messaging limits" antes de planejar campanha |
 | Pacing de campanhas | Meta introduzindo envio em lotes com monitoramento de qualidade antes de liberar próximos lotes |
 
 ### O que NÃO muda
@@ -110,15 +111,15 @@ Após qualquer interação entre empresa e cliente, o WhatsApp continua retornan
 
 ## 5. Cronograma de Rollout
 
-| Período | Marco | Detalhes |
+| Período | Marco | Estado em 01/11/2026 |
 |---|---|---|
-| Nov 2025 | Anúncio oficial | Meta comunica parceiros e publica documentação para desenvolvedores |
-| 1º sem. 2026 | Reserva de usernames | Possibilidade de reservar @usernames vinculados a contas Meta (Instagram/Facebook) |
-| Abril 2026 | Contact Book | Lançamento da agenda de contatos automática com pares número + BSUID |
-| Junho 2026 | Rollout inicial | Usernames em países de teste; deadline para empresas terem APIs adaptadas |
-| Agosto 2026 | Rollout global | Expansão para todos os países; usernames disponíveis para todos os usuários |
+| Nov 2025 a fev 2026 | Anúncio e documentação | Meta comunicou parceiros; Twilio publicou o changelog do BSUID em 18/02/2026; BSUID visível em webhooks de teste a partir de meados de fevereiro (confirmado) |
+| Março a início de abril 2026 | BSUID e Contact Book | BSUIDs em todos os webhooks de mensagem (a partir de 31/03/2026, segundo provedores) e Contact Book no ar no início de abril (confirmado na documentação da Meta) |
+| 29/06/2026 | Usernames para empresas | reserva e adoção abertas pelo Business Suite, WhatsApp Manager, app ou Username API (confirmado) |
+| Julho 2026 | Envio para BSUID | API aceita mensagem endereçada a BSUID e CTA de pedido de número (confirmado; a documentação listava maio antes) |
+| Ao longo de 2026 | Rollout para usuários | gradual por região (Estados Unidos no fim de junho, segundo provedores); [VERIFICAR] o estado por país antes de afirmar cobertura global |
 
-Rollout é gradual, não instantâneo. Não haverá "dia D" único.
+Rollout gradual, não instantâneo: não houve "dia D" único. A integração que ainda não lê BSUID está atrasada, não "se preparando".
 
 ---
 
@@ -144,7 +145,7 @@ Rollout é gradual, não instantâneo. Não haverá "dia D" único.
 
 ### Para envio em massa e campanhas
 
-- Simplificação dos limites diários (100k direto para verificadas) reduz barreira operacional
+- [VERIFICAR] Se a simplificação dos limites diários se confirmar na documentação de messaging limits, a barreira operacional de escalada por tiers cai; até lá, planejar pela escada vigente
 - Pacing de campanhas pode afetar timing de campanhas que dependem de entrega simultânea [INFERÊNCIA]
 
 ---
@@ -162,11 +163,8 @@ Rollout é gradual, não instantâneo. Não haverá "dia D" único.
 
 ## 8. Fonte e Confiabilidade
 
-Este arquivo foi construído a partir de documento informativo da ChatX/Devsky Tecnologia (março 2026), que por sua vez cita documentação oficial da Meta, WhatsApp Business API, WABetaInfo, Twilio e Sanuker.
-
-Nível de confiabilidade: **Alto para o que está documentado**. Cronograma sujeito a alterações pela Meta. Seções marcadas com [INFERÊNCIA] representam conclusões lógicas não confirmadas pela fonte original.
+Construído a partir de documento informativo de um provedor de soluções WhatsApp (março de 2026) e conferido em 01/11/2026 contra a documentação da Meta for Developers ("Business-scoped user IDs") e o changelog da Twilio. O que está marcado "confirmado" tem essa conferência; o que está [VERIFICAR] não foi confirmado em fonte oficial nesta data. Seções com [INFERÊNCIA] são conclusões lógicas, não declaradas pela fonte.
 
 ## NOTAS DA MIGRAÇÃO (2026-10-31)
 
-- [VERIFICAR] O cronograma (junho e agosto de 2026) é anterior a esta migração: confirmar o estado atual na documentação oficial da Meta antes de usar.
-- [VERIFICAR] Limite de 100 mil mensagens por dia para empresas verificadas.
+- Cronograma reescrito na v0.3.0 com o que se confirmou até 01/11/2026; o limite de 100 mil conversas por dia para empresas verificadas continua [VERIFICAR].

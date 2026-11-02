@@ -2,10 +2,13 @@
 id: ref-analytics-google-tag-manager
 tipo: referencia
 origem: KB_GTM_MasterReference.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: Google tag com Measurement ID, triggers de Consent Initialization e Initialization, template oficial do Meta, Tag Assistant atual)
 ---
 
 # Knowledge Base: Google Tag Manager (GTM) - Master Reference
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 > Fontes: Analytics Mania (analyticsmania.com) + Métricas Boss (metricasboss.com.br)
 > Compilado: Abril 2026 | 47 artigos AM + 17 artigos MB analisados
@@ -72,11 +75,11 @@ Exemplos:
 
 ### Tags de Pageview e Eventos GA4
 
-A tag GA4 Configuration (tipo Google Tag) é obrigatória e deve disparar em All Pages. Event tags referenciam a configuração e enviam eventos específicos.
+A tag **Google tag** (que substituiu a "GA4 Configuration" em setembro de 2023) com o Measurement ID `G-XXXXXXX` é obrigatória e dispara em **Initialization - All Pages** (antes das outras tags da página). As tags **Google Analytics: GA4 Event** apontam para o mesmo Measurement ID e enviam eventos específicos (fonte: Google Tag Manager Help, "Set up the Google tag in Tag Manager", verificado em 01/11/2026).
 
 ```
 Tag Type: Google Analytics: GA4 Event
-Configuration Tag: {{GA4 Config}}
+Measurement ID: G-XXXXXXX (o mesmo da Google tag)
 Event Name: purchase (ou evento customizado)
 Event Parameters:
   transaction_id: {{DL - transaction_id}}
@@ -101,7 +104,9 @@ Transaction ID: {{DL - transaction_id}}
 
 **Fonte:** Analytics Mania - Google Ads Conversion Tracking with GTM
 
-### Meta Pixel via GTM (Custom HTML)
+### Meta Pixel via GTM
+
+Preferir o template oficial **Facebook Pixel** da galeria de templates da comunidade (publicado pelo facebookincubator): tem configuração de consentimento nativa (Consent Settings do GTM), aceita `eventID` para deduplicar com a CAPI e evita Custom HTML na página (fonte: GTM Community Template Gallery, verificado em 01/11/2026 [VERIFICAR o nome exato do template na galeria]). O Custom HTML abaixo fica como fallback quando a galeria não está disponível; nele, o consentimento precisa ser configurado à mão na aba Consent Settings da tag.
 
 ```html
 <script>
@@ -147,7 +152,9 @@ window.dataLayer.push({
 
 | Tipo | Quando Dispara | Uso Típico |
 |------|---------------|------------|
-| Page View | Container Loaded, DOM Ready, Window Loaded | Tags de config, pageview |
+| Consent Initialization | antes de qualquer outro trigger, só para default de consentimento | CMP e `gtag('consent', 'default')` |
+| Initialization | antes dos demais, depois do consent | Google tag e outras tags de configuração |
+| Page View | Container Loaded, DOM Ready, Window Loaded | pageview e tags que dependem do DOM |
 | Click - All Elements | Qualquer clique na página | Botões, elementos genéricos |
 | Click - Just Links | Clique em `<a>` | Outbound links, downloads |
 | Form Submission | Envio de formulário | Lead capture |
@@ -374,13 +381,14 @@ O Preview Mode exibe um painel de debug com:
 - **Variables Tab:** valores resolvidos de cada variável
 - **Data Layer Tab:** estado completo do dataLayer naquele momento
 
-### 5 Eventos Padrão na Timeline
+### Eventos Padrão na Timeline
 
-1. **Container Loaded** - GTM carregou
-2. **DOM Ready** - DOM parseado
-3. **Window Loaded** - tudo carregou (imagens, scripts)
-4. **Click** - clique detectado
-5. **Form Submit** - formulário enviado
+1. **Consent Initialization** - primeiro de todos; só para o default de consentimento
+2. **Initialization** - tags de configuração (Google tag) antes do resto
+3. **Container Loaded** - GTM carregou (`gtm.js`)
+4. **DOM Ready** - DOM parseado (`gtm.dom`)
+5. **Window Loaded** - tudo carregou, imagens e scripts (`gtm.load`)
+6. **Click**, **Form Submit** e os demais, conforme os listeners ativados
 
 ### Troubleshooting Matrix
 
@@ -398,7 +406,7 @@ O Preview Mode exibe um painel de debug com:
 
 ### Chrome Extensions Recomendadas
 
-- **Tag Assistant Legacy** - visualiza tags disparadas
+- **Tag Assistant** (tagassistant.google.com, integrado ao Preview do GTM) - a extensão "Tag Assistant Legacy" foi descontinuada; a extensão **Tag Assistant Companion** só conecta o Preview a outras abas (verificado em 01/11/2026)
 - **Adswerve dataLayer Inspector** - inspeciona dataLayer em tempo real
 - **WASP** (Web Analytics Solution Profiler) - análise completa de tags
 - **Omnibug** - monitora requests de analytics

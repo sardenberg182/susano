@@ -2,10 +2,13 @@
 id: ref-analytics-tracking-snippets
 tipo: referencia
 origem: KB_Tracking_Snippets_Library.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: page_view duplicado, ecommerce null, YouTube com enablejsapi e nomes do Enhanced Measurement, Meta Purchase com aspas, eventID e checagem de fbq, Google tag no checklist)
 ---
 
 # Knowledge Base: Tracking Snippets Library
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 > Fontes: Analytics Mania + Métricas Boss | Compilado: Abril 2026
 > Todos os snippets prontos para uso em GTM Custom HTML tags ou Custom JS Variables
@@ -30,12 +33,14 @@ dataLayer.push({
 **Uso:** Inserir no `<head>` antes do GTM para dados disponíveis no primeiro page view.
 **Fonte:** Analytics Mania - Data Layer in GTM
 
-### 1.2 Page View com Dados de Página
+### 1.2 Dados de Página no dataLayer
+
+Não empurrar um evento chamado `page_view`: a Google tag já envia `page_view` sozinha em cada carregamento, e um push com o mesmo nome ligado a uma tag de evento duplica a contagem de páginas no GA4. Empurrar os dados da página como variáveis (sem `event`, ou com um nome próprio como `page_data`) antes do snippet do GTM.
 
 ```javascript
 window.dataLayer = window.dataLayer || [];
 dataLayer.push({
-  'event': 'page_view',
+  'event': 'page_data',
   'page': {
     'title': document.title,
     'url': window.location.href,
@@ -48,7 +53,10 @@ dataLayer.push({
 
 ### 1.3 E-commerce: View Item
 
+Antes de cada push de e-commerce, limpar o objeto anterior com `dataLayer.push({ ecommerce: null })`: sem isso, itens de um evento vazam para o seguinte (recomendação da documentação de e-commerce do GA4 para GTM, verificado em 01/11/2026). Vale para todos os eventos de e-commerce deste arquivo.
+
 ```javascript
+dataLayer.push({ ecommerce: null });
 dataLayer.push({
   event: "view_item",
   ecommerce: {
@@ -160,6 +168,8 @@ window.addEventListener("message", function(event){
 
 ### 2.2 Calendly Tracking (com deduplicação)
 
+Versão única dos listeners de Typeform e Calendly do método: `pixels.md` aponta para cá e não repete o código.
+
 ```html
 <script>
 var lastCalendlyEvent = null;
@@ -239,6 +249,8 @@ for (var i = 0; i < videos.length; i++) {
 
 ### 2.4 YouTube IFrame API Tracking
 
+O iframe do YouTube precisa de `enablejsapi=1` na URL (`https://www.youtube.com/embed/ID?enablejsapi=1`) para expor a API; sem isso nem o trigger nativo "YouTube Video" do GTM nem o script abaixo recebem eventos. Nomes de evento alinhados aos do Enhanced Measurement do GA4 (`video_start`, `video_progress`, `video_complete`), para não duplicar com a medição nativa: se o Enhanced Measurement de vídeo estiver ligado, não usar este script.
+
 ```html
 <script>
 var tag = document.createElement('script');
@@ -252,7 +264,7 @@ function onYouTubeIframeAPIReady() {
     var player = new YT.Player(iframe, {
       events: {
         'onStateChange': function(event) {
-          var states = { 0: 'complete', 1: 'play', 2: 'pause' };
+          var states = { 0: 'complete', 1: 'start' };  // 2 (pause) não entra: não é evento do Enhanced Measurement
           var state = states[event.data];
           if (state) {
             window.dataLayer.push({
@@ -295,16 +307,18 @@ fbq('track', 'PageView');
 
 ```html
 <script>
-fbq('track', 'Purchase', {
-  value: {{DL - ecommerce.value}},
-  currency: {{DL - ecommerce.currency}},
-  content_ids: {{DL - ecommerce.item_ids}},
-  content_type: 'product',
-  num_items: {{DL - ecommerce.items.length}}
-});
+if (typeof fbq === 'function') {
+  fbq('track', 'Purchase', {
+    value: Number({{DL - ecommerce.value}}),
+    currency: '{{DL - ecommerce.currency}}',
+    content_ids: {{DL - ecommerce.item_ids}},   // variável que devolve um array de strings
+    content_type: 'product',
+    num_items: {{DL - ecommerce.items.length}}
+  }, { eventID: '{{DL - ecommerce.transaction_id}}' });  // mesmo event_id enviado pela CAPI, para deduplicar
+}
 </script>
 ```
-**Trigger:** Custom Event = purchase
+**Trigger:** Custom Event = purchase. Variáveis de texto precisam de aspas no HTML; números entram sem aspas; `eventID` tem que ser idêntico ao `event_id` do evento server-side (fonte: Meta for Developers, "Handling duplicate pixel and Conversions API events", verificado em 01/11/2026).
 
 ---
 
@@ -462,7 +476,7 @@ bash -c "$(curl -fsSL https://googletagmanager.com/static/serverjs/setup.sh)"
 - [ ] Criar conta GTM + container web
 - [ ] Instalar snippet GTM no `<head>` e `<body>`
 - [ ] Criar propriedade GA4 + data stream web
-- [ ] Tag GA4 Configuration no GTM (All Pages)
+- [ ] Google tag com o Measurement ID `G-XXXXXXX` no GTM (trigger Initialization - All Pages)
 - [ ] Consent Mode v2 (default denied + update on consent)
 - [ ] Enhanced Measurement ativado
 - [ ] Conversion Linker tag (All Pages)

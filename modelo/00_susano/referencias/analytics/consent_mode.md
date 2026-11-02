@@ -2,12 +2,15 @@
 id: ref-analytics-consent-mode
 tipo: referencia
 origem: KB_ConsentMode_Privacy.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: stub do gtag, trigger de Consent Initialization, chaves de dataLayer corrigidas, UET só ad_storage, Chrome mantém cookies de terceiros, perdas sem fonte viraram [LACUNA])
 ---
 
 # Knowledge Base: Consent Mode e Privacidade
 
-> Fontes: Analytics Mania + Métricas Boss | Compilado: Abril 2026
+> Fontes: Analytics Mania + Métricas Boss | Compilado: Abril 2026 | Fatos conferidos na documentação oficial em 01/11/2026 onde indicado
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 ---
 
@@ -30,7 +33,12 @@ Obrigatório para anúncios no EEA (European Economic Area) desde março 2024. P
 
 **Passo 1: Default State (ANTES de qualquer tag)**
 
+O comando `gtag('consent', ...)` precisa do stub do gtag antes de qualquer tag; sem ele, `gtag` não existe e o default nunca é registrado. No GTM, esse bloco vai numa tag Custom HTML (ou no template da CMP) disparada pelo trigger **Consent Initialization - All Pages**, o único que roda antes de todas as outras tags (fonte: Google Tag Manager Help, "Consent configuration", e Google tag developer docs, "Manage consent settings", verificado em 01/11/2026).
+
 ```javascript
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+
 gtag('consent', 'default', {
   'ad_storage': 'denied',
   'analytics_storage': 'denied',
@@ -63,16 +71,20 @@ No GTM, configurar Built-in Consent em cada tag:
 
 ### Implementação via dataLayer
 
+Não existe chave própria de consentimento no dataLayer: as tags do Google leem o estado de consentimento só pelos comandos `gtag('consent', 'default' | 'update', {...})`, que empurram um objeto `arguments` no dataLayer. Chaves inventadas (`consent_analytics`, `consent_ads`) não são lidas por nenhuma tag. O que vale como alternativa ao gtag direto é o template de CMP da galeria do GTM (Cookiebot, Usercentrics, OneTrust, Didomi etc.), que chama a API de consentimento do GTM por baixo; ou, num template custom, a API `setDefaultConsentState` e `updateConsentState` dos templates (fonte: Google Tag Manager developer docs, "Consent APIs", verificado em 01/11/2026).
+
 ```javascript
-// Via dataLayer push (alternativa ao gtag):
+// Alternativa correta sem CMP: o mesmo comando, chamado quando o usuário decide
 window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  'event': 'consent_update',
-  'consent_analytics': 'granted',
-  'consent_ads': 'granted',
-  'consent_ad_user_data': 'granted',
-  'consent_ad_personalization': 'granted'
+function gtag(){ dataLayer.push(arguments); }
+gtag('consent', 'update', {
+  'ad_storage': 'granted',
+  'analytics_storage': 'granted',
+  'ad_user_data': 'granted',
+  'ad_personalization': 'granted'
 });
+// Opcional: um evento para disparar tags que esperam o consentimento
+window.dataLayer.push({ 'event': 'consent_updated' });
 ```
 
 ---
@@ -104,8 +116,8 @@ Ordem de disparo incorreta: tag GA4/Ads dispara ANTES do consent default ser con
 Similar ao Google Consent Mode, mas para Microsoft Advertising (Bing Ads). Requer implementação separada no GTM.
 
 **Sinais Microsoft:**
-- `ad_storage` - cookies de ads Microsoft
-- `analytics_storage` - cookies de analytics Microsoft
+- `ad_storage` é o único sinal que a tag UET lê (granted ou denied); o parâmetro `asc` em cada evento UET mostra o estado enviado. Consentimento obrigatório para tráfego do EEA, Reino Unido e Suíça desde 05/05/2025 (fonte: Microsoft Advertising Help, "UET Consent Mode", via documentação de CMPs; verificado em 01/11/2026).
+- `analytics_storage` não é lido pelo UET; é o Microsoft Clarity que usa `ad_Storage` e `analytics_Storage` na sua Consent API v2 [VERIFICAR a grafia e a data de enforcement do Clarity na documentação oficial].
 
 ### Implementação
 
@@ -145,7 +157,7 @@ function setCookie(name, value, days) {
 | Aspecto | First-Party | Third-Party |
 |---------|-------------|-------------|
 | Domínio | Mesmo do site | Domínio externo |
-| Browsers | Aceitos | Bloqueados (Safari, Firefox, Chrome 2025+) |
+| Browsers | Aceitos | Bloqueados por padrão em Safari, Firefox e Brave; no Chrome continuam permitidos por padrão (Google manteve os cookies de terceiros e desistiu do prompt em 22/04/2025; bloqueio só no modo anônimo), fonte: Privacy Sandbox blog, "Next steps for Privacy Sandbox and tracking protections in Chrome", 22/04/2025, verificado em 01/11/2026 |
 | Server-Side | Fortalece | N/A |
 | Duração | Até 400 dias (server-set) | 7 dias (Safari ITP) |
 | Uso | Analytics, preferências | Remarketing cross-site |
@@ -177,7 +189,7 @@ A LGPD (Lei Geral de Proteção de Dados) exige:
 Com consent mode em `denied`:
 - GA4 coleta dados anonimizados (sem cookies)
 - Google modela conversões usando Behavioral Modeling
-- Perda estimada de dados: **20-40%** em cenários de compliance rigoroso
+- Perda de dados sem consentimento: depende da taxa de aceite do banner e da cobertura da modelagem; [LACUNA] a faixa de 20% a 40% citada nas fontes não tem base publicada; medir na própria frente (sessões com consentimento ÷ sessões totais) antes de citar número
 - Server-side tracking ajuda a mitigar parte da perda
 
 **Fonte:** Métricas Boss - LGPD no GA4 + Como a LGPD afeta o rastreamento web
@@ -214,9 +226,11 @@ Quando `analytics_storage` está em `denied`, GA4 usa machine learning para mode
 
 ### Métricas de Impacto
 
-| Cenário | Perda Estimada de Dados |
+| Cenário | Efeito esperado (direção, não número) |
 |---------|------------------------|
-| Sem consent mode, sem server-side | 30-50% |
-| Com consent mode, sem server-side | 15-25% |
-| Com consent mode + server-side | 5-15% |
-| Com consent mode + server-side + CAPI | 3-10% |
+| Sem consent mode, sem server-side | maior perda: nada é coletado de quem recusa e não há modelagem |
+| Com consent mode, sem server-side | pings sem cookie permitem modelagem de conversões e comportamento no GA4 e no Google Ads (modo avançado) |
+| Com consent mode + server-side | cookies first-party de maior duração e menos bloqueio; ganho de cobertura dos consentidos, não dos que recusaram |
+| Com consent mode + server-side + CAPI | melhor correspondência de eventos no Meta (Event Match Quality) e deduplicação com o pixel |
+
+[LACUNA] As faixas percentuais de perda que circulavam nesta tabela (30% a 50%, 15% a 25%, 5% a 15%, 3% a 10%) não têm fonte publicada; saíram na v0.3.0. O número certo é o da frente: sessões ou conversões com consentimento contra o total, antes e depois de cada camada.

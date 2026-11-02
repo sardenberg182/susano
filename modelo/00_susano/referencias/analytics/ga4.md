@@ -2,10 +2,13 @@
 id: ref-analytics-ga4
 tipo: referencia
 origem: KB_GA4_MasterReference.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: limites de dimensões custom pela documentação oficial, DebugView sem parâmetro de URL, grupos de canal marcados)
 ---
 
 # Knowledge Base: Google Analytics 4 (GA4) - Master Reference
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 > Fontes: Analytics Mania (analyticsmania.com) + Métricas Boss (metricasboss.com.br)
 > Compilado: Abril 2026 | Baseado em ~64 artigos analisados
@@ -82,7 +85,7 @@ dataLayer.push({
 3. Parameter name = exatamente como está no dataLayer
 4. Aguardar 24h para propagação
 
-**Limites:** 25 event-scoped, 25 user-scoped, 25 item-scoped (varia por plano)
+**Limites (propriedade padrão / GA4 360):** 50 / 125 dimensões custom de evento, 25 / 100 de usuário, 10 / 25 de item, 50 / 125 métricas custom, 5 / 50 métricas calculadas (fonte: Google Analytics Help, "[GA4] About custom dimensions and metrics", support.google.com/analytics/answer/10075209, verificado em 01/11/2026)
 
 **Fonte:** Analytics Mania - Custom Dimensions in GA4
 
@@ -176,7 +179,7 @@ https://seusite.com/landing-page?utm_source=qr_code&utm_medium=offline&utm_campa
 - Condições baseadas em `utm_source` e `utm_medium`
 - Avaliadas sequencialmente (primeira match ganha)
 - Suporta regex patterns
-- Retroativo desde a data de criação
+- Mudanças em grupos de canal custom se aplicam também aos dados históricos nos relatórios [VERIFICAR na página oficial "[GA4] Custom channel groups" antes de prometer ao cliente; a versão anterior deste arquivo dizia "retroativo desde a data de criação", que se contradiz]
 - Útil para agrupar tráfego de parceiros, affiliates, etc.
 
 **Fonte:** Analytics Mania - Custom Channel Groups in GA4
@@ -307,7 +310,7 @@ Envio de eventos offline via API HTTP diretamente para GA4. Útil para conversõ
 ### DebugView Not Working
 
 **Soluções:**
-- Garantir `debug_mode: true` no evento (via GTM ou URL parameter `?debug_mode=true`)
+- Garantir `debug_mode: true` nos eventos: no gtag, `gtag('config', 'G-XXXX', { debug_mode: true })`; no GTM, campo `debug_mode = true` na tag ou o próprio modo Preview; ou a extensão Google Analytics Debugger. Não existe parâmetro de URL `?debug_mode=true` (fonte: Google Analytics Help, "[GA4] Monitor events in DebugView", verificado em 01/11/2026)
 - Testar em janela anônima
 - Verificar se IP não está filtrado
 - Aguardar alguns segundos (não é instantâneo)
