@@ -1,8 +1,10 @@
 # Changelog do modelo Susano
 
-## v0.4.0 (02/11/2026: plano de melhorias SUS01 a SUS12, o que faz sentido executado, o que não faz registrado com motivo)
+## v0.4.0 (02/11/2026: plano de melhorias SUS01 a SUS12, o que faz sentido executado, o que não faz registrado com motivo; casos de decisão: plugin 25 concordam e 1 parcial, template 26 concordam)
 
-Origem: plano de melhorias do Susano (auditoria técnica e de privacidade sobre a v0.3.0, commit c83cd0c), analisado pelo Raijin e entregue ao Sarden em 02/11/2026. Pedido do Sarden no mesmo dia: "plano de ação para executar o que faz sentido; o que não faz sentido, não opera. Sobe uma nova versão para o Git." Branch `v0.4`.
+Origem: plano de melhorias do Susano (auditoria técnica e de privacidade sobre a v0.3.0, commit c83cd0c), analisado pelo Raijin e entregue ao Sarden em 02/11/2026. Branch `v0.4`, PR #10.
+
+Autorização para distribuir: Sarden, 02/11/2026, no chat de manutenção do Raijin: "Quero que vocês façam um plano de ação para executar o que faz sentido e as coisas que você não faz, que você não acredita que fazem sentido, não opera. Sobe uma nova versão para o Git." A aprovação editorial de cada texto segue à parte (frontmatter `aprovado:`).
 
 ### Prevenção (SUS02, SUS03, SUS04)
 
@@ -29,11 +31,13 @@ Origem: plano de melhorias do Susano (auditoria técnica e de privacidade sobre 
 
 - `AGENTS.md` da raiz: lista completa de testes, separação entre teste mecânico, avaliação com modelo e instalação real; autorização do Sarden registrada no CHANGELOG antes do merge (mesma conta no GitHub para agente e dono); autoria pública dos commits e `ferramentas/conferir_autoria.py` no CI. `CONTRIBUTING.md` do projeto nomeia o check a exigir (`validar`).
 - Revisão editorial: inventário dos 61 textos em `revisao_pendente` (25 novos, 29 edições, 7 aprovados com acréscimo) em `pendentes.md` e no `audit`; distribuir não é aprovar. Convenção `verificado_em` para referência volátil.
-- Casos parciais da issue #8: linhas novas em `situacoes.md` (ideia sem gargalo, GTM pedido como campanha, termo vetado no pedido), troca de vocabulário aplicada no texto (`calibracao.md` e estilo) e onboarding de frente no núcleo do plugin.
+- Casos parciais da issue #8: linhas novas em `situacoes.md` (ideia sem gargalo, GTM pedido como campanha, termo vetado no pedido), troca de vocabulário aplicada no texto (`calibracao.md` e estilo), onboarding de frente no núcleo do plugin e, depois da primeira rodada, "Route first" nas skills performance e gtm (GTM é arquitetura de receita antes de campanha; carrega só quando a skill é chamada).
 
 ### Testes desta versão
 
-- `testar_camada.py`: 108 casos (eram 62), também no Python 3.9.25. `testar_modelo.sh`, `testar_atualizacao.sh` (v0.3.0 para a candidata), `testar_plugin.sh`, `testar_pacote_chat.sh` e `varrer --perfil publico` no repositório inteiro: OK em 02/11/2026, nesta máquina. live_tested: false para o CI no GitHub até o PR rodar.
+- Mecânicos: `testar_camada.py` com 109 casos (eram 62), também no Python 3.9.25; `testar_modelo.sh` (projeto padrão e de nomes longos), `testar_atualizacao.sh` (v0.3.0 para a candidata), `testar_plugin.sh` (quatro caminhos), `testar_pacote_chat.sh`, `testar_geradores.sh` e `varrer --perfil publico` no repositório inteiro: OK em 02/11/2026. CI do PR #10 no GitHub: `testes`, `compatibilidade (ubuntu-latest, Python 3.9)` e `compatibilidade (macos-latest, Python 3.13)` verdes; a primeira rodada achou o Ubuntu 26.04 sem Python 3.9 no setup-python, e o Python da matriz passou a vir do uv.
+- Travas integradas, no Claude Code 2.1.278 do Sarden, num projeto gerado da branch: guarda de mensagem com import quebrado barrou a mensagem; guarda de escrita com erro interno barrou a escrita, citando só o tipo do erro; restaurada a guarda, a escrita limpa passou; a abertura avisou o CLI abaixo do mínimo. O settings.json com `onFailure` não derrubou os hooks nessa versão. [VERIFICAR] timeout e falha ao iniciar barrando: só a partir do 2.1.295 (o CLI do Sarden pede `claude update`).
+- Casos de decisão (`testes/casos_decisao.md`, roteiro `rodar_casos.py`, Mac do Sarden, modelo padrão dele): variante plugin 24 concordam, 1 parcial (C-19) e 1 diverge (C-18, entregou estrutura de campanhas); variante template 25 concordam e 1 parcial (C-18). Com o roteamento nas skills, o C-18 refeito concorda nas duas. Final: plugin 25 e 1 parcial (C-19: troca o termo, mas oferece manter "associado" se a rede se chamar assim; pergunta aberta ao Sarden), template 26. Das 4 parciais da issue #8, três fecham nas duas variantes e a C-19 fecha no template.
 
 ### Não entra (com motivo; o Sarden pode reabrir qualquer item)
 
