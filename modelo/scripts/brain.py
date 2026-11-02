@@ -2,7 +2,10 @@
 """brain.py: validação e manutenção de um repositório gerado pelo modelo Susano.
 
 Comandos de projeto:
-  validate      estrutura, travessão, segredos, frontmatter, esqueleto do método, links, pessoas/ e orçamento de tokens
+  validate      privacidade de todo arquivo, estrutura, travessão, frontmatter, esqueleto do método, links, pessoas/ e
+                orçamento de tokens
+  varrer        só a inspeção de privacidade: repositório inteiro, caminhos dados (pacotes) ou, com --staged, o índice do
+                Git (o pre-commit); --perfil publico também barra contato e formato não inspecionado
   susano-check  confere os arquivos gerenciados contra 00_susano/MANIFEST.sha256 (e 00_pessoal/, se existir)
   audit         achados mecânicos para o brain audit mensal (estado frio, projeto parado, revisão vencida)
   novo <slug>   cria a pasta de uma frente em 20_<frente>/<slug>/ a partir de _templates/
@@ -23,10 +26,13 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import gzip
 import hashlib
+import io
 import re
 import subprocess
 import sys
+import zipfile
 from datetime import date, datetime
 from pathlib import Path
 
@@ -144,13 +150,25 @@ def pasta_por_prefixo(raiz: Path, prefixo: str):
     return achadas[0] if achadas else None
 
 
+FALHA_GUARDAS = []
+
+
 def carregar_guardas(raiz: Path):
-    sys.path.insert(0, str(raiz / ".claude" / "hooks"))
-    try:
-        import guardas  # type: ignore
-        return guardas
-    except ImportError:
-        return None
+    """Biblioteca das guardas (.claude/hooks/guardas.py) do projeto; na falta, a que acompanha este brain.py.
+
+    Sem ela a inspeção de privacidade não roda: quem chama registra erro (FALHA_GUARDAS diz o motivo), nunca sucesso.
+    """
+    for pasta in (raiz / ".claude" / "hooks", Path(__file__).resolve().parent.parent / ".claude" / "hooks"):
+        if (pasta / "guardas.py").is_file():
+            sys.path.insert(0, str(pasta))
+            try:
+                import guardas  # type: ignore
+                return guardas
+            except Exception as exc:  # import quebrado é falha da trava, não sucesso
+                FALHA_GUARDAS.append(f"{type(exc).__name__} ao importar {pasta / 'guardas.py'}")
+                return None
+    FALHA_GUARDAS.append(".claude/hooks/guardas.py ausente")
+    return None
 
 
 def sha256(p: Path) -> str:
@@ -177,6 +195,234 @@ class Relatorio:
         return 0 if not self.erros else 1
 
 
+# privacidade ---------------------------------------------------------------
+# Inspeção de privacidade separada da checagem de estrutura: todo arquivo do repositório, qualquer extensão,
+# inclusive 90_arquivo/ e arquivo sem extensão; ZIP (e .xlsx, .docx, que são ZIP) e gzip abertos por dentro;
+# o que não dá para ler (imagem, PDF, cifrado, grande demais) vira condição visível, nunca sucesso silencioso.
+# Perfil projeto: segredo, cartão e CPF são erro; contato e formato não inspecionado são aviso (pessoas/: erro).
+# Perfil publico (o repositório susano e os pacotes de distribuição): contato e formato não inspecionado também são erro.
+# Exceção: só regra de contato ou binário, num arquivo exato, com motivo. Segredo, cartão e CPF nunca têm exceção:
+# fixture de teste monta o valor em tempo de execução.
+
+EXCECOES_ARQUIVO = "PRIVACIDADE_EXCECOES.md"
+REGRAS_COM_EXCECAO = ("telefone", "e-mail", "binario")
+# Exceções do próprio modelo, por arquivo canônico (vale também nas cópias do mesmo arquivo em modelo/ e plugin/).
+EXCECOES_GERENCIADAS = [
+    ("telefone", "00_susano/referencias/landing_pages/playbook_construtor_html.md",
+     "placeholder fictício do campo de WhatsApp no HTML de exemplo"),
+]
+TEXTO_MAX = 5_000_000
+ZIP_MEMBRO_MAX = 10_000_000
+ZIP_TOTAL_MAX = 100_000_000
+ZIP_PROFUNDIDADE = 2
+MAGICOS_BINARIOS = (b"%PDF", b"\x89PNG", b"\xff\xd8\xff", b"GIF8", b"RIFF", b"\xd0\xcf\x11\xe0", b"SQLite format 3",
+                    b"7z\xbc\xaf", b"Rar!", b"\x00\x00\x01\x00", b"OggS", b"ID3", b"fLaC", b"wOFF", b"wOF2")
+
+
+def _texto_ou_none(dados: bytes):
+    """Texto quando o conteúdo é texto (UTF-8, UTF-16 com BOM ou legado de 8 bits); None quando é binário."""
+    if dados.startswith((b"\xff\xfe", b"\xfe\xff")):
+        try:
+            return dados.decode("utf-16")
+        except UnicodeDecodeError:
+            return None
+    if dados.startswith(MAGICOS_BINARIOS) or b"\x00" in dados[:8192]:
+        return None
+    try:
+        return dados.decode("utf-8")
+    except UnicodeDecodeError:
+        return dados.decode("cp1252", errors="replace")  # exportação legada (CSV do Excel): ainda é texto
+
+
+def inspecionar_bytes(dados: bytes, nome: str, guardas, profundidade: int = 0):
+    """[(nome, linha, tipo, nivel, trecho)]; nivel 'revisar' quando o conteúdo não pôde ser inspecionado."""
+    achados = []
+    if dados.startswith(b"PK\x03\x04") or dados.startswith(b"PK\x05\x06"):
+        if profundidade >= ZIP_PROFUNDIDADE:
+            return [(nome, 0, "binario", "revisar", "ZIP dentro de ZIP além do limite de profundidade")]
+        try:
+            pacote = zipfile.ZipFile(io.BytesIO(dados))
+        except zipfile.BadZipFile:
+            return [(nome, 0, "binario", "revisar", "ZIP ilegível")]
+        total = 0
+        for info in pacote.infolist():
+            if info.is_dir():
+                continue
+            membro = f"{nome}!{info.filename}"
+            if info.flag_bits & 0x1:
+                achados.append((membro, 0, "binario", "revisar", "membro cifrado"))
+                continue
+            if info.file_size > ZIP_MEMBRO_MAX or total + info.file_size > ZIP_TOTAL_MAX:
+                achados.append((membro, 0, "binario", "revisar", "membro grande demais para inspecionar"))
+                continue
+            try:
+                conteudo = pacote.read(info)
+            except Exception as exc:
+                achados.append((membro, 0, "binario", "revisar", f"membro ilegível ({type(exc).__name__})"))
+                continue
+            total += len(conteudo)
+            achados += inspecionar_bytes(conteudo, membro, guardas, profundidade + 1)
+        return achados
+    if dados.startswith(b"\x1f\x8b"):
+        try:
+            with gzip.GzipFile(fileobj=io.BytesIO(dados)) as g:
+                conteudo = g.read(TEXTO_MAX + 1)
+        except (OSError, EOFError):
+            return [(nome, 0, "binario", "revisar", "gzip ilegível")]
+        if len(conteudo) > TEXTO_MAX:
+            return [(nome, 0, "binario", "revisar", "gzip grande demais para inspecionar")]
+        return inspecionar_bytes(conteudo, nome + "!", guardas, profundidade + 1)
+    if len(dados) > TEXTO_MAX:
+        return [(nome, 0, "binario", "revisar", "arquivo grande demais para inspecionar")]
+    texto = _texto_ou_none(dados)
+    if texto is None:
+        return [(nome, 0, "binario", "revisar", "formato binário sem leitura de texto (imagem, PDF, banco)")]
+    for a in guardas.analisar(texto, nome):
+        if "travessao" in a.tipo:
+            continue  # travessão é regra de estilo, checada à parte nos .md
+        achados.append((nome, a.linha, a.tipo, a.nivel, a.trecho))
+    return achados
+
+
+def ler_excecoes(raiz: Path, rel: Relatorio):
+    """Exceções do arquivo PRIVACIDADE_EXCECOES.md (tabela: regra | caminho | motivo) mais as do modelo."""
+    excecoes = [(regra, caminho, motivo, True) for regra, caminho, motivo in EXCECOES_GERENCIADAS]
+    p = raiz / EXCECOES_ARQUIVO
+    if not p.is_file():
+        return excecoes
+    for n, linha in enumerate(ler(p).splitlines(), 1):
+        if not linha.startswith("|"):
+            continue
+        celulas = [c.strip().strip("`") for c in linha.strip().strip("|").split("|")]
+        if len(celulas) != 3 or celulas[0].lower() == "regra" or set(celulas[0]) <= set("-: "):
+            continue
+        regra, caminho, motivo = celulas
+        if regra not in REGRAS_COM_EXCECAO:
+            rel.erro(f"{EXCECOES_ARQUIVO}:{n}: regra {regra or '(vazia)'} não aceita exceção (só {', '.join(REGRAS_COM_EXCECAO)})")
+        elif not caminho or any(c in caminho for c in "*?[") or caminho.endswith("/") or (raiz / caminho).is_dir():
+            rel.erro(f"{EXCECOES_ARQUIVO}:{n}: exceção precisa de um arquivo exato, nunca pasta ou curinga")
+        elif not motivo:
+            rel.erro(f"{EXCECOES_ARQUIVO}:{n}: exceção sem motivo")
+        else:
+            if not (raiz / caminho.split("!", 1)[0]).exists():
+                rel.aviso(f"{EXCECOES_ARQUIVO}:{n}: exceção para {caminho}, que não existe mais (remova a linha)")
+            excecoes.append((regra, caminho, motivo, False))
+    return excecoes
+
+
+def coberto(achado, excecoes) -> bool:
+    nome, _, tipo, nivel, _ = achado
+    regra = "binario" if nivel == "revisar" else tipo
+    for r, caminho, _, gerenciada in excecoes:
+        if r == regra and (nome == caminho or (gerenciada and nome.endswith("/" + caminho))):
+            return True
+    return False
+
+
+def arquivos_preparados(raiz: Path):
+    """[(rel, bytes)] da versão que vai para o commit (índice do Git): adicionados, alterados, renomeados e copiados."""
+    r = subprocess.run(["git", "diff", "--cached", "--name-only", "-z", "--diff-filter=ACMR"], cwd=raiz,
+                       capture_output=True, timeout=60)
+    if r.returncode != 0:
+        raise RuntimeError("git diff --cached falhou: rode dentro de um repositório Git")
+    mudados = {x.decode("utf-8", "surrogateescape") for x in r.stdout.split(b"\0") if x}
+    if not mudados:
+        return []
+    r = subprocess.run(["git", "ls-files", "-s", "-z"], cwd=raiz, capture_output=True, timeout=60)
+    entradas = []
+    for item in r.stdout.split(b"\0"):
+        if not item:
+            continue
+        meta, caminho = item.split(b"\t", 1)
+        modo, sha, estagio = meta.decode().split()
+        caminho = caminho.decode("utf-8", "surrogateescape")
+        if caminho in mudados and modo != "160000" and estagio in ("0", "2"):
+            entradas.append((caminho, sha))
+    if not entradas:
+        return []
+    lote = subprocess.run(["git", "cat-file", "--batch"], cwd=raiz, input="".join(s + "\n" for _, s in entradas).encode(),
+                          capture_output=True, timeout=300)
+    saida, pos, blobs = lote.stdout, 0, []
+    for caminho, sha in entradas:
+        fim = saida.index(b"\n", pos)
+        cabeca = saida[pos:fim].split()
+        tamanho = int(cabeca[2]) if len(cabeca) == 3 else 0
+        blobs.append((caminho, saida[fim + 1:fim + 1 + tamanho]))
+        pos = fim + 1 + tamanho + 1
+    return blobs
+
+
+def ignorados_rastreados(raiz: Path):
+    try:
+        r = subprocess.run(["git", "ls-files", "-z", "--cached", "--ignored", "--exclude-standard"], cwd=raiz,
+                           capture_output=True, text=True, timeout=30)
+        return [x for x in r.stdout.split("\0") if x] if r.returncode == 0 else []
+    except (OSError, subprocess.SubprocessError):
+        return []
+
+
+def privacidade(raiz: Path, rel: Relatorio, perfil: str = "projeto", staged: bool = False, caminhos=None) -> int:
+    """Roda a inspeção e registra erros e avisos em `rel`. Devolve quantos arquivos foram inspecionados."""
+    guardas = carregar_guardas(raiz)
+    if guardas is None:
+        rel.erro("inspeção de privacidade não rodou: " + "; ".join(FALHA_GUARDAS[-1:]) + " (sem a trava, nada passa)")
+        return 0
+    excecoes = ler_excecoes(raiz, rel)
+    publico = perfil == "publico"
+    if staged:
+        itens = ((r, lambda d=d: d) for r, d in arquivos_preparados(raiz))
+    elif caminhos:
+        lista = []
+        for c in caminhos:
+            p = Path(c) if Path(c).is_absolute() else raiz / c
+            alvos = [p] if p.is_file() else sorted(x for x in p.rglob("*") if x.is_file() and ".git" not in x.parts)
+            for x in alvos:
+                nome = x.relative_to(raiz).as_posix() if raiz in x.resolve().parents else x.as_posix()
+                lista.append((nome, x.read_bytes))
+        itens = iter(lista)
+    else:
+        itens = ((r, p.read_bytes) for r, p in arquivos(raiz))
+    n, nao_lidos = 0, []
+    for nome, ler_bytes in itens:
+        if "__pycache__" in nome:
+            continue
+        n += 1
+        for achado in inspecionar_bytes(ler_bytes(), nome, guardas):
+            if coberto(achado, excecoes):
+                continue
+            arq, linha, tipo, nivel, trecho = achado
+            onde = f"{arq}:{linha}" if linha else arq
+            if nivel == "revisar":
+                (rel.erro if publico else nao_lidos.append)(f"{onde}: não inspecionado: {trecho}"
+                                                              + ("" if not publico else f" (exceção: regra binario em {EXCECOES_ARQUIVO})"))
+            elif nivel == guardas.BLOQUEAR:
+                rel.erro(f"{onde}: {tipo} ({trecho})")
+            elif publico:
+                rel.erro(f"{onde}: {tipo} ({trecho}): repositório público não leva contato (exceção só com motivo em {EXCECOES_ARQUIVO})")
+            elif not re.match(r"^10_[a-z0-9-]+/pessoas/", arq):  # em pessoas/, o validate já trata como erro
+                rel.aviso(f"{onde}: {tipo} ({trecho}): confirme que não é dado pessoal")
+    if nao_lidos:
+        mostrar = "; ".join(nao_lidos[:8]) + (f"; mais {len(nao_lidos) - 8}" if len(nao_lidos) > 8 else "")
+        rel.aviso(f"{len(nao_lidos)} conteúdo(s) sem inspeção de privacidade (revise antes de publicar ou mova para fora do Git): {mostrar}")
+    if not staged and not caminhos:
+        for r in ignorados_rastreados(raiz):
+            msg = f"{r}: rastreado pelo Git apesar do .gitignore (adicionado à força?): confirme que pode estar no repositório"
+            (rel.erro if publico else rel.aviso)(msg)
+    return n
+
+
+def cmd_varrer(raiz: Path, perfil: str, staged: bool, caminhos) -> int:
+    rel = Relatorio()
+    try:
+        n = privacidade(raiz, rel, perfil, staged, caminhos)
+    except (RuntimeError, OSError, subprocess.SubprocessError, ValueError) as exc:
+        rel.erro(f"inspeção de privacidade não rodou: {type(exc).__name__}: {exc}")
+        n = 0
+    escopo = "índice do Git (o que vai para o commit)" if staged else (", ".join(caminhos) if caminhos else "repositório inteiro")
+    print(f"varrer (perfil {perfil}, {escopo}): {n} arquivo(s) inspecionado(s)")
+    return rel.fechar("varrer")
+
+
 # validate ------------------------------------------------------------------
 
 def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
@@ -192,6 +438,8 @@ def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
     if p_pend.is_file():
         pendentes = set(re.findall(r"`([a-z0-9_]+\.md)`", ler(p_pend)))
 
+    # privacidade: todo arquivo, qualquer extensão e pasta (inclusive 90_arquivo/); estrutura e estilo vêm depois
+    privacidade(raiz, rel, "projeto")
     guardas = carregar_guardas(raiz)
     existentes = {r for r, _ in arquivos(raiz)}
     for r, p in arquivos(raiz):
@@ -201,12 +449,6 @@ def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
         if r.endswith(".md") and TRAVESSAO in texto:
             linha = next(i for i, l in enumerate(texto.splitlines(), 1) if TRAVESSAO in l)
             rel.erro(f"{r}:{linha}: travessão (troque por vírgula, dois-pontos ou seta)")
-        if guardas and not r.startswith(".claude/testes/"):
-            for a in guardas.analisar(texto, r):
-                if a.nivel == guardas.BLOQUEAR and "travessao" not in a.tipo:
-                    rel.erro(f"{r}:{a.linha}: {a.tipo} ({a.trecho})")
-                elif a.nivel == guardas.PERGUNTAR:
-                    rel.aviso(f"{r}:{a.linha}: {a.tipo} ({a.trecho}): confirme que não é dado pessoal")
         if not r.endswith(".md"):
             continue
         fm = frontmatter(texto)
@@ -794,7 +1036,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(prog="brain.py", description="Validação e manutenção do repositório Susano.")
     ap.add_argument("--raiz", default=".", help="raiz do repositório (padrão: pasta atual)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("validate", help="valida estrutura, travessão, segredos, frontmatter, esqueleto e links")
+    sub.add_parser("validate", help="valida privacidade (todo arquivo), estrutura, travessão, frontmatter, esqueleto e links")
+    v = sub.add_parser("varrer", help="inspeção de privacidade de todo arquivo (qualquer extensão; ZIP por dentro)")
+    v.add_argument("caminhos", nargs="*", help="arquivos ou pastas a inspecionar (padrão: o repositório inteiro)")
+    v.add_argument("--perfil", choices=("projeto", "publico"), default="projeto",
+                   help="publico: contato e formato não inspecionado também barram (repositório e pacotes públicos)")
+    v.add_argument("--staged", action="store_true", help="inspeciona o índice do Git (o que vai para o commit), não o disco")
     sub.add_parser("susano-check", help="confere os gerenciados contra o MANIFEST")
     sub.add_parser("audit", help="achados mecânicos do brain audit")
     n = sub.add_parser("novo", help="cria a pasta de uma frente")
@@ -822,6 +1069,8 @@ def main() -> int:
     raiz = Path(a.raiz).resolve()
     if a.cmd == "validate":
         return cmd_validate(raiz)
+    if a.cmd == "varrer":
+        return cmd_varrer(raiz, a.perfil, a.staged, a.caminhos)
     if a.cmd == "susano-check":
         return cmd_susano_check(raiz)
     if a.cmd == "audit":

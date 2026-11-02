@@ -1,4 +1,22 @@
+# gerados (o CI reconstrói e confere)
 dist/
 __pycache__/
 *.pyc
 .copier-answers.yml.bak
+# material bruto, privado, pessoal e credenciais: nunca no repositório público
+bruto/
+_privado/
+00_pessoal/
+CLAUDE.local.md
+.claude/settings.local.json
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.netrc
+# saídas locais da rodada de casos (respostas ficam na máquina de quem rodou)
+testes/respostas*/
+testes/sessao*/
+.DS_Store

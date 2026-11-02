@@ -5,6 +5,10 @@ _privado/
 .env.*
 *.pem
 *.key
+*.p12
+*.pfx
+.netrc
+service-account*.json
 # pessoal (Oficina e preferências): fica só na máquina de quem aplicou, nunca no Git do projeto
 CLAUDE.local.md
 00_pessoal/
