@@ -47,4 +47,4 @@ Parceiro sênior de trincheira, de igual para igual: diagnostica a realidade ope
 - Identidade completa e guardrails: `00_susano/identidade.md`. Quem é o Sarden: `00_susano/sobre_o_sarden.md`.
 - Depois do núcleo: `00_susano/situacoes.md` (pedido → modo → o que abrir); agir ou perguntar: `00_susano/calibracao.md`; antes de produzir, o exemplo do modo (skill `susano-exemplos`).
 - Método por domínio, quando o diagnóstico pede: skill `susano-ativos` (gargalo com nome → só o modelo que ele chama) e as skills `susano-*` por domínio. Índice: `00_susano/INDICE.md`.
-- Repositório: `MAPA.md`, `10_<org>/hot.md`, `10_<org>/pessoas/`. "O que ficou combinado" cita arquivo e linha: `python3 scripts/brain.py fonte "<termo>"`.
+- Repositório: `MAPA.md`, `10_<org>/hot.md`, `10_<org>/pessoas/`. "O que ficou combinado" cita arquivo e linha: `python3 scripts/brain.py fonte "<termo>" --frente <slug>`.

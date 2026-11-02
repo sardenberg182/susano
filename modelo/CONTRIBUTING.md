@@ -11,15 +11,17 @@
 As regras "nunca commit na `main`" e "o dono aprova" só viram trava real com a proteção da branch no GitHub; sem ela, são instrução para pessoas e agentes, não bloqueio. Ao criar o repositório:
 
 1. Proteger a `main`: exigir pull request, exigir revisão do CODEOWNERS, bloquear force push e exclusão da branch, incluir administradores.
-2. Exigir o check `brain` (o workflow em `.github/workflows/brain.yml`) antes do merge.
+2. Exigir o check `validar` (job do workflow `brain`, em `.github/workflows/brain.yml`) antes do merge: sem isso, o CI informa mas não barra.
 3. Em repositório público, deixar a execução de workflows de PR de fork exigindo aprovação (padrão do GitHub para colaboradores novos).
 
 ## Versão nova do modelo
 
-1. `copier check-update` mostra se há versão nova do `susano`.
-2. `copier update --vcs-ref vX.Y.Z` numa branch `susano-vX.Y.Z` (o Copier aplica a diferença entre a versão instalada e a nova; arquivos do projeto não são tocados).
-3. Resolver conflitos, se houver, rodar `validate` e `susano-check`, abrir o PR "susano vX.Y.Z". O dono do projeto aprova.
-4. Nunca editar `.copier-answers.yml` à mão.
+1. `copier check-update` mostra se há versão nova do `susano`. Leia o `CHANGELOG.md` dela antes.
+2. Numa branch `susano-vX.Y.Z` a partir da `main` limpa: `copier update --vcs-ref vX.Y.Z`. O Copier troca os gerenciados e não toca nos arquivos do projeto (`AGENTS.md`, frentes, `10_` a `90_`, `_templates/`).
+3. `python3 scripts/brain.py migrar`: aplica o contrato da versão ao que é do projeto (bloco gerenciado do `AGENTS.md`, arquivos obrigatórios de cada frente). Idempotente; nunca sobrescreve arquivo preenchido. AGENTS.md anterior ao bloco vai para `90_arquivo/` e a saída diz o que conferir.
+4. `validate` e `susano-check` sem erro; `git diff main` para ler o que mudou (gerenciados, AGENTS.md, arquivos criados). Conflito do Copier (`.rej` ou marcadores no arquivo) se resolve antes do PR, nunca apagando conteúdo do projeto.
+5. PR "susano vX.Y.Z"; o dono do projeto aprova. Desfazer: feche o PR e apague a branch; depois do merge, `git revert` do merge volta a versão anterior.
+6. Nunca editar `.copier-answers.yml` à mão.
 
 ## Arquivos gerenciados
 

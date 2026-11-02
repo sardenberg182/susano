@@ -4,7 +4,7 @@ O Susano é o jeito de trabalhar com este repositório pelo Claude Code. O repos
 
 ## O que você precisa
 
-- Assento no Claude com acesso ao Claude Code.
+- Assento no Claude com acesso ao Claude Code (2.1.295 ou mais novo: abaixo disso, as travas de privacidade podem liberar a escrita quando estouram o tempo; a abertura avisa).
 - Conta no GitHub com acesso a este repositório.
 - App desktop do Claude ou o navegador em claude.ai/code.
 
@@ -12,7 +12,7 @@ O Susano é o jeito de trabalhar com este repositório pelo Claude Code. O repos
 
 **Nuvem (recomendado para quem não programa):** no app do Claude, aba Code, ambiente Cloud, escolha este repositório. Na primeira vez, conecte o GitHub. Digite `/onboarding`.
 
-**Local:** git e Python 3.9 ou mais novo. Clone o repositório, abra a pasta raiz no app (Code → Local) ou rode `claude` na raiz, aceite o diálogo de confiança da pasta e rode `/onboarding`. Ele oferece instalar a checagem antes de cada commit.
+**Local:** git e Python 3.9 ou mais novo (sem Python, as travas barram a escrita em vez de liberar). Clone o repositório, abra a pasta raiz no app (Code → Local) ou rode `claude` na raiz, aceite o diálogo de confiança da pasta e rode `/onboarding`. Ele oferece instalar a checagem antes de cada commit.
 
 ## O dia a dia
 
@@ -25,7 +25,7 @@ O Susano é o jeito de trabalhar com este repositório pelo Claude Code. O repos
 
 ## Como o Susano carrega o método
 
-Na abertura entra só o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens) mais as regras deste repositório. O resto do método chega por skills, quando a tarefa pede: modelos ativos, DNA, biblioteca, performance, analytics, GTM, plataformas, rituais. Cada skill é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. `python3 scripts/brain.py tokens` mostra a estimativa da carga de abertura.
+Na abertura entra só o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens) mais as regras deste repositório: o pacote do modelo cabe em 6.500 tokens estimados e 1.500 ficam reservados ao que o projeto acrescenta. O resto do método chega por skills, quando a tarefa pede: modelos ativos, DNA, biblioteca, performance, analytics, GTM, plataformas, rituais. Cada skill é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. `python3 scripts/brain.py tokens` mostra a estimativa da carga de abertura.
 
 ## De onde vem o método
 
@@ -47,5 +47,6 @@ Na abertura entra só o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens) m
 | skills `susano-*` | o método por domínio (ativos, metodo, biblioteca, performance, analytics, gtm, plataformas, rituais): o Susano carrega a que a tarefa pede; você pode pedir pelo nome |
 | `python3 scripts/brain.py mapa` | gera `MAPA.md`: frentes, dono, data do estado, organização, projetos |
 | `python3 scripts/brain.py hot` | gera `10_<org>/hot.md`: estado quente agregado (14 dias) |
-| `python3 scripts/brain.py fonte "<termo>"` | arquivo e linha de qualquer combinado, decisão ou número |
+| `python3 scripts/brain.py fonte "<termo>" --frente <slug>` | arquivo e linha de qualquer combinado, decisão ou número da frente em foco (`--todas` só para comparar, com a origem em cada linha) |
+| `python3 scripts/brain.py migrar` | depois de um `copier update`: aplica o contrato da versão (bloco gerenciado do `AGENTS.md`, arquivos obrigatórios das frentes) |
 | `python3 scripts/brain.py pessoa <slug> ... --aprovado-por <dono>` | registra um stakeholder em `10_<org>/pessoas/` (só com OK do dono) |
