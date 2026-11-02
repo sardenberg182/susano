@@ -20,4 +20,4 @@ Always answer in PT-BR. Read only; this skill changes no file.
    - **Em movimento na organização**: up to 5 lines from other hot clients.
    - **Prazos em 7 dias** and **bloqueios**, each with its file path.
    - **Sugestão de foco**: one line, marked [INFERÊNCIA].
-6. Every line cites the file it came from. A question about what was agreed with someone ("o que ficou combinado com X?") is answered with `python3 scripts/brain.py fonte "X"`: file and line in the answer, [LACUNA] when nothing cites the name. If a file is missing or empty, say [LACUNA] and which command fills it (`/estado-quente`, `/nova-frente`).
+6. Every line cites the file it came from. A question about what was agreed with someone ("o que ficou combinado com X?") is answered with `python3 scripts/brain.py fonte "X" --frente <slug>` for the frente in question (the person's file in `10_<org>/pessoas/` lists them in `frentes:`); `--todas` only when the question spans frentes, keeping each line's frente label. File and line in the answer, [LACUNA] when nothing cites the name. If a file is missing or empty, say [LACUNA] and which command fills it (`/estado-quente`, `/nova-frente`).

@@ -131,11 +131,24 @@ def main() -> int:
     escrever(pasta_frentes / "acme" / "decisoes.md",
              f"---\nid: decisoes-acme\ntipo: decisoes\ndono: pessoa-teste\natualizado: {recente}\n---\n# Decisões: acme\n\n"
              "- 2026-10-28: Combinado com Ana Souza (cliente): meta de 40 SQLs/mês a partir de novembro, fonte reunião de kickoff.\n")
-    code, out, err = rodar(brain + ["fonte", "Ana Souza"], repo)
+    escrever(pasta_frentes / "beta-labs" / "decisoes.md",
+             f"---\nid: decisoes-beta-labs\ntipo: decisoes\ndono: pessoa-teste\natualizado: {antigo}\n---\n# Decisões: beta-labs\n\n"
+             "- 2026-10-20: Combinado com Ana Souza (cliente): meta de 25 SQLs/mês, fonte reunião mensal.\n")
+    code, out, err = rodar(brain + ["fonte", "Ana Souza", "--frente", "acme"], repo)
     rel_dec = (pasta_frentes / "acme" / "decisoes.md").relative_to(repo).as_posix()
-    caso("brain.py fonte: devolve arquivo e linha do combinado (resposta com fonte)",
-         code == 0 and f"{rel_dec}:9: - 2026-10-28: Combinado com Ana Souza" in out and "1 ocorrência" in out, (out + err)[-200:])
-    code, out, err = rodar(brain + ["fonte", "Pessoa Inexistente"], repo)
+    caso("brain.py fonte --frente: devolve arquivo e linha do combinado, rotulado pela frente",
+         code == 0 and f"[frente:acme] {rel_dec}:9: - 2026-10-28: Combinado com Ana Souza" in out and "1 ocorrência" in out, (out + err)[-200:])
+    caso("brain.py fonte --frente: a mesma expressão em outra frente não aparece (isolamento)", "beta-labs" not in out and "25 SQLs" not in out)
+    code, out, err = rodar(brain + ["fonte", "Ana Souza", "--todas"], repo)
+    caso("brain.py fonte --todas: só a pedido, cada linha com a frente de origem",
+         code == 0 and "[frente:acme]" in out and "[frente:beta-labs]" in out and "2 ocorrência" in out and "pedido explícito" in out,
+         (out + err)[-300:])
+    code, out, err = rodar(brain + ["fonte", "Ana Souza"], repo)
+    caso("brain.py fonte sem foco: nenhuma frente entra e a saída aponta --frente",
+         code == 0 and "0 ocorrência" in out and "[frente:" not in out and "--frente <slug>" in out, (out + err)[-300:])
+    code, out, err = rodar(brain + ["fonte", "Ana Souza", "--frente", "nao-existe"], repo)
+    caso("brain.py fonte --frente: slug que não existe é erro", code == 1 and "não existe" in out, (out + err)[-200:])
+    code, out, err = rodar(brain + ["fonte", "Pessoa Inexistente", "--frente", "acme"], repo)
     caso("brain.py fonte: termo ausente vira [LACUNA], não invenção", code == 0 and "0 ocorrência" in out and "[LACUNA]" in out)
     pessoas = org_dir / "pessoas"
     escrever(pessoas / "ana-souza.md",
@@ -216,6 +229,54 @@ def main() -> int:
     code, out, err = rodar(brain + ["skills"], repo)
     depois = {p: p.read_text(encoding="utf-8") for p in (repo / ".claude" / "skills").glob("susano-*/SKILL.md")}
     caso("brain.py skills: regenerar não muda nada (idempotente, fonte única)", code == 0 and antes == depois, (out + err)[-200:])
+
+    # 0c. v0.4.0: migrar (bloco gerenciado do AGENTS.md, as quatro da frente), orçamento em duas partes, mapa
+    code, out, err = rodar(brain + ["migrar"], repo)
+    caso("brain.py migrar: projeto novo já está no contrato (nada a migrar)", code == 0 and "nada a migrar" in out, (out + err)[-200:])
+    code, out, err = rodar(brain + ["tokens"], repo)
+    m = re.search(r"gerenciado: (\d+) \(teto (\d+)\); projeto: (\d+)", out)
+    caso("brain.py tokens: separa pacote gerenciado e parte do projeto, com o gerenciado no teto",
+         code == 0 and m is not None and int(m.group(1)) <= int(m.group(2)) and "AGENTS.md (bloco gerenciado)" in out, (out + err)[-300:])
+    (pasta_frentes / "gama" / "experimentos.md").unlink()
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: frente sem um dos quatro arquivos obrigatórios falha", code == 1 and "falta experimentos.md" in out, (out + err)[-300:])
+    decisoes_acme = (pasta_frentes / "acme" / "decisoes.md").read_text(encoding="utf-8")
+    code, out, err = rodar(brain + ["migrar"], repo)
+    caso("brain.py migrar: cria o arquivo que falta na frente sem tocar no que está preenchido",
+         code == 0 and (pasta_frentes / "gama" / "experimentos.md").is_file() and "1 mudança" in out
+         and (pasta_frentes / "acme" / "decisoes.md").read_text(encoding="utf-8") == decisoes_acme, (out + err)[-300:])
+    agents = repo / "AGENTS.md"
+    agents_novo = agents.read_text(encoding="utf-8")
+    escrever(agents, "# AGENTS: Teste\n\nRegras antigas.\n\n## Regras\n\n1. Nunca commit na main.\n\n"
+                     "## Regras próprias de Teste\n\n- WBR toda segunda às 9h, com o dono da frente.\n")
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["susano-check"], repo)
+    caso("susano-check: AGENTS.md sem o bloco gerenciado falha e aponta o migrar", code == 1 and "brain.py migrar" in out, (out + err)[-300:])
+    code, out, err = rodar(brain + ["migrar"], repo)
+    agents_migrado = agents.read_text(encoding="utf-8")
+    arquivados = list((repo / "90_arquivo").glob("AGENTS_antes_do_bloco_gerenciado_*.md"))
+    caso("brain.py migrar: AGENTS.md antigo ganha o bloco gerenciado, Regras próprias preservadas, anterior no 90_arquivo",
+         code == 0 and "<!-- susano:inicio" in agents_migrado and "WBR toda segunda às 9h" in agents_migrado
+         and "Regras antigas." not in agents_migrado and len(arquivados) == 1 and "Regras antigas." in arquivados[0].read_text(encoding="utf-8"),
+         (out + err)[-300:])
+    code, out, err = rodar(brain + ["migrar"], repo)
+    caso("brain.py migrar: segunda execução não muda nada (idempotente)", code == 0 and "nada a migrar" in out
+         and agents.read_text(encoding="utf-8") == agents_migrado, (out + err)[-200:])
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["susano-check"], repo)
+    caso("susano-check: passa depois do migrar", code == 0, (out + err)[-300:])
+    escrever(agents, agents_migrado.replace("ninguém faz merge do próprio PR", "o dono faz merge quando quiser"))
+    code, out, err = rodar(brain + ["susano-check"], repo)
+    caso("susano-check: bloco gerenciado editado à mão falha", code == 1 and "bloco gerenciado diferente" in out, (out + err)[-300:])
+    escrever(agents, agents_novo)
+    for arq in arquivados:
+        arq.unlink()
+    escrever(repo / "60_aprendizados" / "README.md", "# Aprendizados entre frentes\n\nPadrões que valem para mais de uma frente.\n")
+    code, out, err = rodar(brain + ["mapa"], repo)
+    mapa = (repo / "MAPA.md").read_text(encoding="utf-8")
+    caso("brain.py mapa: lista pasta extra do projeto com a primeira linha do README",
+         code == 0 and "`60_aprendizados/`: Aprendizados entre frentes" in mapa, mapa[-300:])
     rodar(["git", "add", "-A"], repo)
     rodar(["git", "commit", "-q", "-m", "v0.2.0 fixtures"], repo)
 

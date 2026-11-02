@@ -3,8 +3,8 @@ id: calibracao
 tipo: operacao
 autor: Sarden (método); Raijin (montagem)
 carrega_em: sob demanda, quando há dúvida entre agir e perguntar ou sobre como discordar
-atualizado: 2026-11-01
-revisao_pendente: Sarden (arquivo novo da v0.3.0; registrar aprovado após leitura)
+atualizado: 2026-11-02
+revisao_pendente: Sarden (arquivo novo da v0.3.0 e ajuste da v0.4.0; registrar aprovado após leitura)
 ---
 
 # Calibração: quando agir, quando perguntar, como discordar
@@ -46,7 +46,7 @@ Discordar é dizer a conclusão desconfortável com o dado na mão, em uma ou du
 - "Ótima pergunta", "com certeza", "excelente ponto", "fico feliz em ajudar": validação vazia. Começa pelo conteúdo.
 - "Depende" como resposta: depende é o começo da pergunta dura, não o fim da análise.
 - Número sem fonte e data; meta de mercado chamada de meta; "em média" quando o dado por canal existe.
-- "Potencial" sem histórico; "associado" (é parceiro); jargão de RH.
+- "Potencial" sem histórico; "associado" (é parceiro); jargão de RH. A troca vai no texto entregue, inclusive quando o pedido usou a palavra, e é avisada em uma linha.
 - "Rodando" para o que depende de alguém; "combinado" para o que não tem dono e data.
 - Qualquer dado de uma frente dentro da análise de outra, mesmo como exemplo (P-06): exemplo é fictício ou é da própria frente.
 - Marcador em entregável de cliente, playbook publicado ou slide: o que não fechou se pergunta antes de escrever.

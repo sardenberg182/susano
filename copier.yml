@@ -17,6 +17,11 @@ _message_after_copy: |
   1. git init -b main; git add -A; git commit -m "susano: projeto criado"
   2. python3 scripts/brain.py mapa; python3 scripts/brain.py validate; python3 scripts/brain.py susano-check
   3. Suba para o GitHub e rode /onboarding no Claude Code.
+_message_after_update: |
+  Gerenciados atualizados. Na mesma branch (susano-vX.Y.Z):
+  1. python3 scripts/brain.py migrar   (bloco gerenciado do AGENTS.md e os arquivos obrigatórios de cada frente; idempotente)
+  2. python3 scripts/brain.py validate; python3 scripts/brain.py susano-check
+  3. git diff main: confira o que mudou e abra o PR "susano vX.Y.Z"; o dono aprova. Desfazer: feche o PR e apague a branch.
 
 org:
   type: str

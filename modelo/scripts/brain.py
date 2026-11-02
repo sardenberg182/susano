@@ -12,7 +12,9 @@ Comandos de projeto:
   pessoa <slug> cria 10_<org>/pessoas/<slug>.md (stakeholder) com o gate do dono registrado em aprovado_por
   mapa          gera MAPA.md na raiz (frentes, dono, data do estado, organização, projetos, playbooks, referência)
   hot           gera 10_<org>/hot.md: estado quente agregado das frentes com estado.md dentro da janela de 14 dias
-  fonte <termo> lista arquivo:linha de cada ocorrência do termo (resposta com fonte)
+  fonte <termo> arquivo:linha de cada ocorrência, com a origem; --frente <slug> restringe à frente em foco (mais
+                organização, playbooks, referência e método); --todas só em comparação pedida; sem flag, nenhuma frente
+  migrar        aplica o contrato da versão instalada (bloco gerenciado do AGENTS.md, as quatro de cada frente); idempotente
   tokens        estima a carga de abertura (CLAUDE.md e imports, regras sempre ligadas, estilo, descrições de skills)
 
 Comandos do repositório susano (manutenção do modelo):
@@ -45,7 +47,12 @@ PROJETO_PARADO = 90
 CHARS_POR_TOKEN = 2.7
 # 2.000 na v0.2.0; 2.200 na v0.3.0: o Sarden manteve o tom (01/11/2026, 22:40) e o plano acrescentou regras ao núcleo.
 NUCLEO_TOKENS_MAX = 2200
+# v0.4.0: o teto de 8 mil passa a ter duas partes. O pacote gerenciado (CLAUDE.md, núcleo, bloco do AGENTS.md, regras
+# sempre ligadas, estilo, descrições) cabe em 6.500, igual em todo projeto; 1.500 ficam reservados ao que o projeto
+# acrescenta (cabeçalho com os nomes e Regras próprias do AGENTS.md, imports e regras locais). Nome longo não quebra mais.
 ABERTURA_TOKENS_MAX = 8000
+GERENCIADO_TOKENS_MAX = 6500
+PROJETO_TOKENS_MAX = 1500
 IMPORT_MAX_SALTOS = 5
 # Skills por domínio geradas de 00_susano/ (brain.py skills). (nome, descrição de quando usar, pastas de origem)
 # (nome, descrição da skill, caminhos em 00_susano/): pasta ou arquivo .md; prefixo "-" exclui um arquivo de uma pasta listada
@@ -439,6 +446,11 @@ def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
         pendentes = set(re.findall(r"`([a-z0-9_]+\.md)`", ler(p_pend)))
 
     # privacidade: todo arquivo, qualquer extensão e pasta (inclusive 90_arquivo/); estrutura e estilo vêm depois
+    for pasta in frentes_pastas(raiz):
+        faltam = [n for n in ARQUIVOS_FRENTE if not (pasta / n).is_file()]
+        if faltam:
+            rel.erro(f"{pasta.relative_to(raiz).as_posix()}/: falta {', '.join(faltam)} (contrato da frente; "
+                     "python3 scripts/brain.py migrar cria de _templates/)")
     privacidade(raiz, rel, "projeto")
     guardas = carregar_guardas(raiz)
     existentes = {r for r, _ in arquivos(raiz)}
@@ -515,9 +527,16 @@ def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
             rel.erro(f"00_susano/nucleo.md: {t} tokens estimados, acima do teto de {NUCLEO_TOKENS_MAX}")
     else:
         rel.erro("00_susano/nucleo.md: arquivo obrigatório ausente")
-    total = sum(t for _, t in carga_abertura(raiz))
+    s = somas_abertura(carga_abertura(raiz))
+    total = s["gerenciado"] + s["projeto"]
+    if s["gerenciado"] > GERENCIADO_TOKENS_MAX:
+        rel.erro(f"carga de abertura do modelo: {s['gerenciado']} tokens estimados, acima do teto de {GERENCIADO_TOKENS_MAX} "
+                 "(a versão do modelo precisa enxugar; brain.py tokens detalha)")
     if total > ABERTURA_TOKENS_MAX:
         rel.erro(f"carga de abertura: {total} tokens estimados, acima do teto de {ABERTURA_TOKENS_MAX} (brain.py tokens detalha)")
+    elif s["projeto"] > PROJETO_TOKENS_MAX:
+        rel.aviso(f"carga de abertura do projeto: {s['projeto']} tokens, acima da margem reservada de {PROJETO_TOKENS_MAX} "
+                  "(AGENTS.md fora do bloco, imports e regras locais); detalhe vai para 40_playbooks/ ou 10_<org>/")
     return rel.fechar("validate")
 
 
@@ -552,6 +571,15 @@ def cmd_susano_check(raiz: Path) -> int:
     for r, _ in arquivos(raiz):
         if casa(r, GERENCIADOS) and not casa(r, FORA_DO_MANIFESTO) and r not in listados:
             rel.aviso(f"{r}: arquivo em pasta gerenciada que não está em nenhum MANIFEST")
+    bloco = bloco_agents_esperado(raiz)
+    if bloco:
+        agents = raiz / "AGENTS.md"
+        m = BLOCO_AGENTS.search(ler(agents)) if agents.is_file() else None
+        if not m:
+            rel.erro("AGENTS.md sem o bloco gerenciado (marcadores susano:inicio e susano:fim): rode python3 scripts/brain.py migrar")
+        elif m.group(0) != bloco:
+            rel.erro("AGENTS.md: bloco gerenciado diferente da versão instalada; regra local vai em 'Regras próprias' "
+                     "(python3 scripts/brain.py migrar restaura o bloco)")
     print(f"gerenciados conferidos: {len(listados)}")
     return rel.fechar("susano-check")
 
@@ -585,19 +613,57 @@ def cmd_audit(raiz: Path) -> int:
             quando = ultima_mudanca(raiz, p.relative_to(raiz).as_posix())
             if quando and (hoje - quando).days > PROJETO_PARADO:
                 achados.append(f"projeto parado há mais de {PROJETO_PARADO} dias: {p.relative_to(raiz)} (avaliar 90_arquivo/)")
+    sem_verificacao, pendentes = [], {}
     for r, p in arquivos(raiz):
         if r.endswith(".md"):
             fm = frontmatter(ler(p))
             revisar = para_data(fm.get("revisar_ate", ""))
             if revisar and revisar < hoje:
                 achados.append(f"revisão vencida: {r} (revisar_ate {revisar})")
+            if fm.get("tipo") == "referencia" and not para_data(fm.get("verificado_em", "")):
+                sem_verificacao.append(r)
+            if r.startswith("00_susano/") and fm.get("revisao_pendente"):
+                grupo = ("texto aprovado com acréscimo pendente" if fm.get("aprovado") else
+                         "arquivo novo, à espera da primeira leitura" if "arquivo novo" in fm["revisao_pendente"] else
+                         "edição em texto existente")
+                pendentes.setdefault(grupo, []).append(r)
+    if sem_verificacao:
+        achados.append(f"referência sem verificado_em (data da conferência da fonte): {len(sem_verificacao)} arquivo(s), "
+                       + ", ".join(sem_verificacao[:5]) + (" ..." if len(sem_verificacao) > 5 else ""))
     print(f"audit {hoje.isoformat()}: {len(achados)} achado(s) mecânico(s)")
     for a in achados:
         print(f"- {a}")
+    if pendentes:
+        total = sum(len(v) for v in pendentes.values())
+        print(f"revisão editorial do método pendente (frontmatter revisao_pendente): {total} arquivo(s); distribuídos com o status visível, "
+              "aprovação editorial é do Sarden, texto a texto")
+        for grupo, lista in sorted(pendentes.items()):
+            print(f"  {grupo}: {len(lista)}")
+        print("  lista: grep -rl '^revisao_pendente:' 00_susano/")
     return 0
 
 
 # novo ----------------------------------------------------------------------
+
+ORIGEM_FRENTE = {"contexto.md": "contexto_projeto.md", "estado.md": "estado.md", "decisoes.md": "decisoes.md",
+                 "experimentos.md": "experimentos.md"}
+
+
+def criar_arquivo_frente(raiz: Path, destino: Path, slug: str, nome: str, dono: str) -> Path:
+    """Um dos quatro arquivos da frente, a partir de _templates/ (com frontmatter); nunca sobrescreve."""
+    hoje = date.today().isoformat()
+    modelo = raiz / "_templates" / ORIGEM_FRENTE[nome]
+    base = ler(modelo) if modelo.is_file() else (
+        "# Experimentos: {{SLUG}}\n\n| E-NN | data | hipótese (frase base) | alavanca | corte (número e prazo) | status | resultado | decisão e ref |\n|---|---|---|---|---|---|---|---|\n"
+        if nome == "experimentos.md" else "# " + nome + "\n")
+    base = base.replace("{{SLUG}}", slug).replace("{{DATA}}", hoje).replace("{{DONO}}", dono or "")
+    cabeca = f"---\nid: {nome[:-3]}-{slug}\ntipo: {nome[:-3]}\ndono: {dono}\natualizado: {hoje}\n---\n"
+    destino.mkdir(parents=True, exist_ok=True)
+    alvo = destino / nome
+    if not alvo.exists():
+        alvo.write_text(cabeca + base if not base.startswith("---\n") else base, encoding="utf-8")
+    return alvo
+
 
 def cmd_novo(raiz: Path, slug: str, dono: str) -> int:
     if not re.match(r"^[a-z0-9][a-z0-9-]*$", slug):
@@ -611,17 +677,8 @@ def cmd_novo(raiz: Path, slug: str, dono: str) -> int:
     if destino.exists():
         print(f"{destino.relative_to(raiz)} já existe")
         return 1
-    hoje = date.today().isoformat()
-    modelos = raiz / "_templates"
-    for nome, origem in (("contexto.md", "contexto_projeto.md"), ("estado.md", "estado.md"), ("decisoes.md", "decisoes.md"),
-                         ("experimentos.md", "experimentos.md")):
-        base = ler(modelos / origem) if (modelos / origem).is_file() else (
-            "# Experimentos: {{SLUG}}\n\n| E-NN | data | hipótese (frase base) | alavanca | corte (número e prazo) | status | resultado | decisão e ref |\n|---|---|---|---|---|---|---|---|\n"
-            if nome == "experimentos.md" else "# " + nome + "\n")
-        base = base.replace("{{SLUG}}", slug).replace("{{DATA}}", hoje).replace("{{DONO}}", dono or "")
-        cabeca = f"---\nid: {nome[:-3]}-{slug}\ntipo: {nome[:-3]}\ndono: {dono}\natualizado: {hoje}\n---\n"
-        (destino).mkdir(parents=True, exist_ok=True)
-        (destino / nome).write_text(cabeca + base if not base.startswith("---\n") else base, encoding="utf-8")
+    for nome in ARQUIVOS_FRENTE:
+        criar_arquivo_frente(raiz, destino, slug, nome, dono)
     (destino / "README.md").write_text(f"# {slug}\n\nDono: {dono or '[LACUNA]'}\n\nMapa: `contexto.md` (quem é), "
                                        "`estado.md` (o que está quente), `decisoes.md`, `experimentos.md` (hipótese, corte, resultado, decisão), `ledger/`, `analises/`, `reunioes/`.\n",
                                        encoding="utf-8")
@@ -647,12 +704,12 @@ atualizado: {hoje}
 
 [DADO PENDENTE] Contexto de trabalho em até 5 linhas: o que decide, o que espera da frente, como prefere receber entrega. Nada pessoal.
 
-Combinados e decisões: em `20_<frente>/<slug>/decisoes.md` e `ledger/` (`python3 scripts/brain.py fonte "{nome}"`).
+Combinados e decisões: em `20_<frente>/<slug>/decisoes.md` e `ledger/` (`python3 scripts/brain.py fonte "{nome}" --frente <slug>`).
 """
 
 PESSOAS_README = """# Pessoas (stakeholders)
 
-Um arquivo por stakeholder externo ao time (cliente, parceiro, fornecedor, conselheiro), criado com `python3 scripts/brain.py pessoa <slug> --nome ... --papel ... --relacao ... --aprovado-por <dono>`. Só papel e relação de trabalho; contato pessoal fica no sistema de origem. Entrada só com OK do dono, registrado em `aprovado_por` (o `validate` barra sem ele). O que ficou combinado com a pessoa mora em `decisoes.md` e `ledger/` da frente: `python3 scripts/brain.py fonte "<nome>"`.
+Um arquivo por stakeholder externo ao time (cliente, parceiro, fornecedor, conselheiro), criado com `python3 scripts/brain.py pessoa <slug> --nome ... --papel ... --relacao ... --aprovado-por <dono>`. Só papel e relação de trabalho; contato pessoal fica no sistema de origem. Entrada só com OK do dono, registrado em `aprovado_por` (o `validate` barra sem ele). O que ficou combinado com a pessoa mora em `decisoes.md` e `ledger/` da frente: `python3 scripts/brain.py fonte "<nome>" --frente <slug>`.
 """
 
 
@@ -686,6 +743,101 @@ def cmd_pessoa(raiz: Path, slug: str, nome: str, papel: str, relacao: str, frent
     return 0
 
 
+# migrar: contrato da versão instalada aplicado ao conteúdo do projeto -----------
+# O copier update troca os gerenciados e não toca no que é do projeto (AGENTS.md, frentes). O migrar fecha a diferença,
+# idempotente: reescreve só o bloco gerenciado do AGENTS.md e cria o arquivo obrigatório que falta numa frente, sem
+# sobrescrever nada preenchido. Projeto sem os marcadores (anterior à v0.4.0): cabeçalho novo, bloco gerenciado e a
+# seção "Regras próprias" preservada; o AGENTS.md inteiro anterior vai para 90_arquivo/ para conferência.
+
+AGENTS_BLOCO = "scripts/agents_gerenciado.md"
+AGENTS_CABECALHO = "scripts/agents_cabecalho.md"
+BLOCO_AGENTS = re.compile(r"<!-- susano:inicio.*?<!-- susano:fim -->", re.S)
+REGRAS_PROPRIAS = re.compile(r"^## Regras próprias\b.*", re.M | re.S)
+
+
+def respostas_copier(raiz: Path) -> dict:
+    """org, org_nome, frentes, dono e _commit do .copier-answers.yml; na falta, deduzidos das pastas e do CODEOWNERS."""
+    dados = {}
+    p = raiz / ".copier-answers.yml"
+    if p.is_file():
+        for linha in ler(p).splitlines():
+            m = re.match(r"^([A-Za-z_][\w]*):\s*(.*)$", linha)
+            if m:
+                dados[m.group(1)] = m.group(2).strip().strip('"').strip("'")
+    org, frentes = pasta_por_prefixo(raiz, "10_"), pasta_por_prefixo(raiz, "20_")
+    dados.setdefault("org", org.name[3:] if org else "org")
+    dados.setdefault("frentes", frentes.name[3:] if frentes else "frentes")
+    dados.setdefault("org_nome", dados["org"].capitalize())
+    if "dono" not in dados:
+        co = raiz / ".github" / "CODEOWNERS"
+        m = re.search(r"@([A-Za-z0-9-]+)", ler(co)) if co.is_file() else None
+        dados["dono"] = m.group(1) if m else "[DADO PENDENTE]"
+    return dados
+
+
+def renderizar(texto: str, dados: dict) -> str:
+    """Só {{ nome }} (o mesmo que o Copier faz nesses arquivos gerenciados, que não usam outra sintaxe Jinja)."""
+    return re.sub(r"\{\{\s*([A-Za-z_]\w*)\s*\}\}", lambda m: dados.get(m.group(1), m.group(0)), texto)
+
+
+def bloco_agents_esperado(raiz: Path):
+    p = raiz / AGENTS_BLOCO
+    return ler(p).rstrip("\n") if p.is_file() else None
+
+
+def frentes_pastas(raiz: Path):
+    pasta = pasta_por_prefixo(raiz, "20_")
+    if not pasta:
+        return []
+    return sorted(x for x in pasta.iterdir() if x.is_dir() and not x.name.startswith(("_", ".")))
+
+
+def cmd_migrar(raiz: Path) -> int:
+    feito, avisos = [], []
+    bloco = bloco_agents_esperado(raiz)
+    if bloco:
+        agents = raiz / "AGENTS.md"
+        texto = ler(agents) if agents.is_file() else ""
+        m = BLOCO_AGENTS.search(texto)
+        if m:
+            novo = texto[:m.start()] + bloco + texto[m.end():]
+        else:
+            dados = respostas_copier(raiz)
+            cabecalho = renderizar(ler(raiz / AGENTS_CABECALHO), dados).rstrip("\n") if (raiz / AGENTS_CABECALHO).is_file() else f"# AGENTS: {dados['org_nome']}"
+            proprias = REGRAS_PROPRIAS.search(texto)
+            resto = proprias.group(0).rstrip("\n") if proprias else (
+                f"## Regras próprias de {dados['org_nome']}\n\n[DADO PENDENTE] O que vale só para este projeto: rituais, glossário, donos por área.")
+            novo = f"{cabecalho}\n\n{bloco}\n\n{resto}\n"
+            if texto.strip():
+                versao = re.sub(r"[^A-Za-z0-9.-]", "", dados.get("_commit", "")) or date.today().isoformat()
+                arquivo = raiz / "90_arquivo" / f"AGENTS_antes_do_bloco_gerenciado_{versao}.md"
+                if not arquivo.exists():
+                    arquivo.parent.mkdir(parents=True, exist_ok=True)
+                    arquivo.write_text(f"<!-- AGENTS.md anterior ao bloco gerenciado, guardado por brain.py migrar em {date.today().isoformat()}. "
+                                       "Regra local que estava fora de 'Regras próprias' precisa ir para lá; o resto virou o bloco gerenciado. -->\n\n"
+                                       + texto, encoding="utf-8")
+                    feito.append(f"{arquivo.relative_to(raiz)}: AGENTS.md anterior guardado para conferência")
+                avisos.append("confira o diff do AGENTS.md: regra local que não estava em 'Regras próprias' saiu do arquivo "
+                              "(está no 90_arquivo/) e precisa voltar para essa seção")
+        if novo != texto:
+            agents.write_text(novo, encoding="utf-8")
+            feito.append("AGENTS.md: bloco gerenciado da versão instalada")
+    for pasta in frentes_pastas(raiz):
+        estado = pasta / "estado.md"
+        dono = frontmatter(ler(estado)).get("dono", "") if estado.is_file() else ""
+        for nome in ARQUIVOS_FRENTE:
+            if not (pasta / nome).exists():
+                criar_arquivo_frente(raiz, pasta, pasta.name, nome, dono)
+                feito.append(f"{(pasta / nome).relative_to(raiz)}: criado de _templates/ (contrato das quatro da frente)")
+    versao = respostas_copier(raiz).get("_commit", "?")
+    for f in feito:
+        print(f"- {f}")
+    for a in avisos:
+        print(f"AVISO {a}")
+    print(f"migrar (contrato da versão {versao}): " + (f"{len(feito)} mudança(s); rode validate e susano-check e confira o diff" if feito else "nada a migrar"))
+    return 0
+
+
 # tokens: carga de abertura ------------------------------------------------
 
 def estimar_tokens(texto: str) -> int:
@@ -708,47 +860,87 @@ def resolver_imports(p: Path, vistos=None, salto: int = 0):
     return achados
 
 
+def manifesto_gerenciado(raiz: Path) -> set:
+    m = raiz / "00_susano" / "MANIFEST.sha256"
+    return set(ler_manifesto(m)) if m.is_file() else set()
+
+
 def carga_abertura(raiz: Path):
-    """(componente, tokens estimados) de tudo que entra antes da primeira pergunta."""
+    """[(componente, tokens estimados, categoria)] do que entra antes da primeira pergunta.
+
+    Categorias: gerenciado (pacote do modelo, igual em todo projeto), projeto (o que o projeto acrescenta: cabeçalho e
+    Regras próprias do AGENTS.md, imports e regras locais), pessoal (CLAUDE.local.md, fora do Git e do teto).
+    """
+    listados = manifesto_gerenciado(raiz)
+
+    def categoria(p: Path) -> str:
+        r = p.relative_to(raiz).as_posix() if raiz in p.parents else str(p)
+        return "gerenciado" if (r in listados if listados else casa(r, GERENCIADOS)) else "projeto"
+
     itens = []
     for p in resolver_imports(raiz / "CLAUDE.md"):
-        itens.append((p.relative_to(raiz).as_posix() if raiz in p.parents else str(p), estimar_tokens(ler(p))))
+        nome = p.relative_to(raiz).as_posix() if raiz in p.parents else str(p)
+        texto = ler(p)
+        if nome == "AGENTS.md":
+            m = BLOCO_AGENTS.search(texto)
+            if m:
+                itens.append(("AGENTS.md (bloco gerenciado)", estimar_tokens(m.group(0)), "gerenciado"))
+                texto = texto[:m.start()] + texto[m.end():]
+            itens.append(("AGENTS.md (cabeçalho e Regras próprias)", estimar_tokens(texto), "projeto"))
+        else:
+            itens.append((nome, estimar_tokens(texto), categoria(p)))
+    for p in resolver_imports(raiz / "CLAUDE.local.md"):
+        nome = p.relative_to(raiz).as_posix() if raiz in p.parents else str(p)
+        itens.append((nome, estimar_tokens(ler(p)), "pessoal"))
     regras = raiz / ".claude" / "rules"
     if regras.is_dir():
         for p in sorted(regras.glob("*.md")):
             fm = FM.match(ler(p))
             if not fm or "paths:" not in fm.group(1):
-                itens.append((p.relative_to(raiz).as_posix(), estimar_tokens(ler(p))))
+                itens.append((p.relative_to(raiz).as_posix(), estimar_tokens(ler(p)), categoria(p)))
     ajustes = raiz / ".claude" / "settings.json"
     if ajustes.is_file():
         m = re.search(r'"outputStyle"\s*:\s*"([^"]+)"', ler(ajustes))
         if m:
             for p in sorted((raiz / ".claude" / "output-styles").glob("*.md")):
                 if frontmatter(ler(p)).get("name", "").lower() == m.group(1).lower():
-                    itens.append((p.relative_to(raiz).as_posix(), estimar_tokens(ler(p))))
-    descricoes = 0
+                    itens.append((p.relative_to(raiz).as_posix(), estimar_tokens(ler(p)), categoria(p)))
+    descricoes = {"gerenciado": 0, "projeto": 0}
     for p in sorted((raiz / ".claude" / "skills").glob("*/SKILL.md")):
         fm = frontmatter(ler(p))
-        descricoes += estimar_tokens(fm.get("name", "") + " " + fm.get("description", "") + " " + fm.get("when_to_use", ""))
+        if fm.get("disable-model-invocation", "").lower() in ("true", "yes", "on", "1"):
+            continue  # só o usuário chama: a descrição não entra no contexto (doc de skills, conferida em 02/11/2026)
+        descricoes[categoria(p)] += estimar_tokens(fm.get("name", "") + " " + fm.get("description", "") + " " + fm.get("when_to_use", ""))
     for p in sorted((raiz / ".claude" / "agents").glob("*.md")):
         fm = frontmatter(ler(p))
-        descricoes += estimar_tokens(fm.get("name", "") + " " + fm.get("description", ""))
-    if descricoes:
-        itens.append(("descrições de skills e subagentes (system prompt)", descricoes))
+        descricoes[categoria(p)] += estimar_tokens(fm.get("name", "") + " " + fm.get("description", ""))
+    for cat, n in descricoes.items():
+        if n:
+            itens.append((f"descrições de skills e subagentes ({cat})", n, cat))
     return itens
+
+
+def somas_abertura(itens) -> dict:
+    somas = {"gerenciado": 0, "projeto": 0, "pessoal": 0}
+    for _, n, cat in itens:
+        somas[cat] += n
+    return somas
 
 
 def cmd_tokens(raiz: Path) -> int:
     itens = carga_abertura(raiz)
-    for nome, t in itens:
-        print(f"{t:6d}  {nome}")
-    total = sum(t for _, t in itens)
+    for nome, n, cat in itens:
+        print(f"{n:6d}  {cat:10s}  {nome}")
+    s = somas_abertura(itens)
+    total = s["gerenciado"] + s["projeto"]
     nucleo = raiz / "00_susano" / "nucleo.md"
     if nucleo.is_file():
         print(f"núcleo: {estimar_tokens(ler(nucleo))} tokens (teto {NUCLEO_TOKENS_MAX})")
+    print(f"gerenciado: {s['gerenciado']} (teto {GERENCIADO_TOKENS_MAX}); projeto: {s['projeto']} (margem reservada {PROJETO_TOKENS_MAX}); "
+          f"pessoal: {s['pessoal']} (fora do teto, não vai para o Git)")
     print(f"abertura: {total} tokens estimados (teto {ABERTURA_TOKENS_MAX}; 1 token a cada {CHARS_POR_TOKEN:g} caracteres, "
           "base no glossário da Anthropic de 01/11/2026 [INFERÊNCIA para PT-BR]; a medição real é o /context na sessão)")
-    return 0 if total <= ABERTURA_TOKENS_MAX else 1
+    return 0 if total <= ABERTURA_TOKENS_MAX and s["gerenciado"] <= GERENCIADO_TOKENS_MAX else 1
 
 
 # mapa, hot e fonte -------------------------------------------------------------
@@ -818,10 +1010,21 @@ def cmd_mapa(raiz: Path) -> int:
                           ("Referência (`50_referencia/`)", raiz / "50_referencia")):
         itens = listar_md(pasta, raiz)
         linhas += [f"## {titulo}", ""] + (itens if itens else ["Vazio."]) + [""]
+    conhecidas = ("00_susano", "30_projetos", "40_playbooks", "50_referencia", "90_arquivo", "_templates", "scripts", "bruto",
+                  "_privado", "00_pessoal")
+    outras = sorted(d.name for d in raiz.iterdir() if d.is_dir() and not d.name.startswith(".") and d.name not in conhecidas
+                    and not d.name.startswith(("10_", "20_")))
+    if outras:
+        linhas += ["## Outras pastas do projeto", ""]
+        for nome in outras:
+            leia = raiz / nome / "README.md"
+            primeira = next((l.lstrip("# ").strip() for l in ler(leia).splitlines() if l.strip()), "") if leia.is_file() else ""
+            linhas.append(f"- `{nome}/`" + (f": {primeira[:120]}" if primeira else ""))
+        linhas.append("")
     linhas += ["## Método (`00_susano/`, gerenciado)", "",
                "- `00_susano/nucleo.md`: a sombra em 2 mil tokens; `00_susano/identidade.md`: completa.",
                "- `00_susano/INDICE.md`: todo o método; skills `susano-*` em `.claude/skills/` abrem cada domínio sob demanda.",
-               "- `python3 scripts/brain.py fonte \"<termo>\"`: arquivo e linha de qualquer combinado, decisão ou número.", ""]
+               "- `python3 scripts/brain.py fonte \"<termo>\" --frente <slug>`: arquivo e linha de qualquer combinado, decisão ou número da frente em foco (`--todas` só em comparação pedida).", ""]
     (raiz / "MAPA.md").write_text("\n".join(linhas).rstrip() + "\n", encoding="utf-8")
     print(f"MAPA.md: {len(lista)} frente(s), {len(linhas)} linhas")
     return 0
@@ -870,21 +1073,51 @@ def cmd_hot(raiz: Path) -> int:
     return 0
 
 
-def cmd_fonte(raiz: Path, termo: str, limite: int = 60) -> int:
+def origem_de(rel: str, prefixo_frentes: str) -> str:
+    """Rótulo de origem de um arquivo: frente:<slug>, org, projetos, playbooks, referência, método ou raiz."""
+    if prefixo_frentes and rel.startswith(prefixo_frentes) and "/" in rel[len(prefixo_frentes):]:
+        return "frente:" + rel[len(prefixo_frentes):].split("/", 1)[0]
+    topo = rel.split("/", 1)[0] if "/" in rel else ""
+    if topo.startswith("10_"):
+        return "org"
+    return {"00_susano": "método", "30_projetos": "projetos", "40_playbooks": "playbooks", "50_referencia": "referência"}.get(
+        topo, topo or "raiz")
+
+
+def cmd_fonte(raiz: Path, termo: str, limite: int = 60, frente: str = "", todas: bool = False) -> int:
+    """Arquivo e linha de cada ocorrência. Com foco (--frente), só a frente, a organização, playbooks, referência e o
+    método; entre frentes (--todas), só a pedido, cada linha com a origem. Sem flag, nenhuma pasta de frente entra."""
+    pasta_frentes = pasta_por_prefixo(raiz, "20_")
+    prefixo = pasta_frentes.relative_to(raiz).as_posix() + "/" if pasta_frentes else ""
+    if frente and not (re.match(r"^[a-z0-9][a-z0-9-]*$", frente) and pasta_frentes and (pasta_frentes / frente).is_dir()):
+        print(f"frente {frente!r} não existe em {prefixo or '20_<frentes>/'}: confira o slug (MAPA.md lista as frentes)")
+        return 1
+    permitidas_no_foco = ("org", "playbooks", "referência", "método")
     alvo = termo.casefold()
     achados = 0
+    if todas:
+        print("busca em todas as frentes (pedido explícito): cada linha traz a origem; número ou meta de uma frente nunca substitui o de outra")
     for r, p in arquivos(raiz):
-        if not r.endswith(".md") or r.startswith(("90_arquivo/", "bruto/", ".claude/", "00_susano/MANIFEST")):
+        if not r.endswith(".md") or r.startswith(("90_arquivo/", "bruto/", ".claude/", "scripts/", "00_susano/MANIFEST")):
+            continue
+        origem = origem_de(r, prefixo)
+        if origem.startswith("frente:"):
+            if not todas and origem != "frente:" + frente:
+                continue
+        elif frente and origem not in permitidas_no_foco:
             continue
         for n, linha in enumerate(ler(p).splitlines(), 1):
             if alvo in linha.casefold():
                 achados += 1
                 if achados <= limite:
                     trecho = re.sub(r"\s+", " ", linha.strip())
-                    print(f"{r}:{n}: {trecho[:160]}")
+                    print(f"[{origem}] {r}:{n}: {trecho[:160]}")
     if achados > limite:
         print(f"... mais {achados - limite} ocorrência(s): refine o termo")
-    print(f"fonte \"{termo}\": {achados} ocorrência(s)" + ("" if achados else " (nenhum arquivo cita o termo: é [LACUNA], não invente)"))
+    escopo = f"frente {frente}" if frente else ("todas as frentes" if todas else "organização, projetos, playbooks, referência e método")
+    print(f"fonte \"{termo}\" ({escopo}): {achados} ocorrência(s)" + ("" if achados else " (nenhum arquivo cita o termo: é [LACUNA], não invente)"))
+    if not frente and not todas and frentes_pastas(raiz):
+        print("frentes fora desta busca: --frente <slug> para a frente em foco; --todas só em comparação pedida")
     return 0
 
 
@@ -1056,9 +1289,13 @@ def main() -> int:
     pe.add_argument("--aprovado-por", default="", help="usuário do GitHub do dono que autorizou (obrigatório)")
     sub.add_parser("mapa", help="gera MAPA.md na raiz do repositório")
     sub.add_parser("hot", help="gera 10_<org>/hot.md (estado quente agregado, janela de 14 dias)")
-    f = sub.add_parser("fonte", help="arquivo:linha de cada ocorrência do termo")
+    f = sub.add_parser("fonte", help="arquivo:linha de cada ocorrência do termo, com a origem (frente, org, playbooks...)")
     f.add_argument("termo")
     f.add_argument("--limite", type=int, default=60)
+    escopo = f.add_mutually_exclusive_group()
+    escopo.add_argument("--frente", default="", help="só a frente em foco (mais organização, playbooks, referência e método)")
+    escopo.add_argument("--todas", action="store_true", help="todas as frentes: só em comparação pedida, cada linha rotulada")
+    sub.add_parser("migrar", help="aplica o contrato da versão instalada: bloco gerenciado do AGENTS.md e as quatro da frente")
     sub.add_parser("tokens", help="estima a carga de abertura")
     sub.add_parser("indice", help="gera INDICE.md e ATIVOS.md (repositório susano)")
     s = sub.add_parser("skills", help="gera as skills por domínio a partir de 00_susano/ (repositório susano)")
@@ -1084,7 +1321,9 @@ def main() -> int:
     if a.cmd == "hot":
         return cmd_hot(raiz)
     if a.cmd == "fonte":
-        return cmd_fonte(raiz, a.termo, a.limite)
+        return cmd_fonte(raiz, a.termo, a.limite, a.frente, a.todas)
+    if a.cmd == "migrar":
+        return cmd_migrar(raiz)
     if a.cmd == "tokens":
         return cmd_tokens(raiz)
     if a.cmd == "indice":
