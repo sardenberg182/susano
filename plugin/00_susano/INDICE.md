@@ -42,7 +42,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 - `00_susano/biblioteca/brunson/traffic_secrets.md`: Tráfego não é criado, já existe congregado em torno de pessoas e canais específicos (Dream 100). Para: Diagnóstico de estratégia de aquisição, identificação de canais de tráfego não explorados, estruturação de parcerias e afiliados, estratégi…
 - `00_susano/biblioteca/elad_gil/high_growth_handbook.md`: Guia tático para escalar de 10-20 para milhares de pessoas. Para: diagnóstico de problemas de scaling organizacional, aconselhamento sobre board management, estruturação de times executivos, decisões de M&…
 - `00_susano/biblioteca/erico_rocha/formula_lancamento.md`: Transformar venda em evento sequencial de entrega de valor é estruturalmente superior ao "Marketing da Esperança" (lança e torce). Para: Estruturar lançamento de produto digital ou mentoria; diagnosticar por que conversão em funil está baixa; orientar clientes com infoproduto…
-- `00_susano/biblioteca/fernando_miranda/arquitetura_conteudo_ia.md`: [LACUNA] O arquivo de origem não tem tese em uma linha; escrever na revisão. Para: Estruturação de estratégia de conteúdo orgânico para líderes e executivos, alinhamento de mindset de conteúdo focado em conversão, decisões…
+- `00_susano/biblioteca/fernando_miranda/arquitetura_conteudo_ia.md`: Conteúdo orgânico de líder é engenharia de roteiro com IA a serviço de conversão: viral fora do ICP é custo, não ativo. Para: Estruturação de estratégia de conteúdo orgânico para líderes e executivos, alinhamento de mindset de conteúdo focado em conversão, decisões…
 - `00_susano/biblioteca/g4/traction_growth_vendas.md`: Growth e vendas são um único sistema de seis camadas. Para: Diagnóstico de sistema de crescimento, estruturação ou revisão de operação comercial, definição de metas e incentivos, priorização de canai…
 - `00_susano/biblioteca/grove/high_output_management.md`: O output de um gestor não é o que ele faz, é o output da organização sob sua supervisão ou influência. Para: Diagnóstico de problemas de gestão e liderança, estruturação de processos de reunião e decisão, calibração de estilos de gestão, estruturaç…
 - `00_susano/biblioteca/grove/only_the_paranoid_survive.md`: Cedo ou tarde, algo fundamental no seu mundo de negócios vai mudar, não é questão de se, é questão de quando. Para: Diagnóstico estratégico de estagnação, avaliação de ameaças competitivas, discussões sobre quando pivotar vs. otimizar, planejamento em con…
@@ -82,24 +82,20 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 - `00_susano/referencias/analytics/tracking/pixels.md`: Knowledge Base: Pixels e Tracking de Plataformas de Ads
 - `00_susano/referencias/analytics/tracking/server_side.md`: Knowledge Base: Server-Side Tracking
 - `00_susano/referencias/analytics/tracking/snippets.md`: Knowledge Base: Tracking Snippets Library
-- `00_susano/referencias/benchmarks/panorama_2026.md`: SUSANO | BASE DE BENCHMARK E INSIGHTS: PANORAMA DE CONVERSAO 2026
-- `00_susano/referencias/go-to-market/analytics_preditivo_pipeline.md`: KB_GTM_PredictiveAnalytics_Pipeline
-- `00_susano/referencias/go-to-market/benchmarks_por_vertical.md`: Benchmarks por vertical e canal
-- `00_susano/referencias/go-to-market/experimentacao.md`: KB_GTM_Experimentation_Testing
-- `00_susano/referencias/go-to-market/ferramentas_templates_codigo.md`: KB_GTM_Tools_Code_Templates
-- `00_susano/referencias/go-to-market/growth_modeling_atribuicao.md`: KB_GTM_GrowthModeling_Attribution
-- `00_susano/referencias/go-to-market/modelos_estatisticos_sizing_segmentacao.md`: KB_GTM_StatModels_Sizing_Segmentation
-- `00_susano/referencias/go-to-market/relatorios_benchmark_2025.md`: KB_GTM_Benchmarks_Reports_2025
-- `00_susano/referencias/go-to-market/sql_ga4_bigquery.md`: SQL para GA4 + BigQuery
-- `00_susano/referencias/go-to-market/unit_economics.md`: KB_GTM_UnitEconomics_Metrics
+- `00_susano/referencias/benchmarks/panorama_2026.md`: Panorama de Geração de Leads 2026 (Leadster): base de benchmark e insights
+- `00_susano/referencias/go-to-market/auditoria_bp.md`: Auditoria de BP: as fórmulas certas, os erros clássicos e como ler a planilha
+- `00_susano/referencias/go-to-market/benchmarks_com_fonte.md`: Benchmarks com fonte
+- `00_susano/referencias/go-to-market/modelos_quantitativos.md`: Modelos quantitativos de GTM: sizing, scoring, forecasting, atribuição, experimentação e SQL
 - `00_susano/referencias/landing_pages/playbook_construtor_html.md`: PLAYBOOK OPERACIONAL | AGENTE CONSTRUTOR DE LANDING PAGE EM HTML
-- `00_susano/referencias/performance/checklist_diario_gestor.md`: Checklist diário do gestor de performance
+- `00_susano/referencias/performance/checklist_diario_gestor.md`: Checklist diário do gestor de performance (índice do Bloco 1 da rotina)
 - `00_susano/referencias/performance/fundamentos_anuncios_performance.md`: Fundamentos de anúncios de performance e marketing digital
+- `00_susano/referencias/performance/licoes_de_conta.md`: Lições de conta: Meta, Google e o que vale para os dois
 - `00_susano/referencias/performance/panorama_2026_guia_estrategico.md`: Panorama PRO 2026: guia estratégico de canais e geração de leads
+- `00_susano/referencias/performance/regua_criativos_leadgen.md`: Régua de criativos em lead gen: ROAS não mede criativo
 - `00_susano/referencias/performance/rotina_gestor_performance.md`: Rotina do gestor de performance: diário, semanal, periódico e gatilhos
 - `00_susano/referencias/performance/sistema_operacional_demanda_2026.md`: Sistema operacional de geração de demanda e performance 2026
 - `00_susano/referencias/plataformas/clevertap/contexto_master.md`: CLEVERTAP: BASE DE CONHECIMENTO MESTRA (SUSANO)
-- `00_susano/referencias/plataformas/hubspot/brasil_2026-05.md`: HubSpot no Brasil com foco técnico e estratégico
+- `00_susano/referencias/plataformas/crm/padrao_implementacao.md`: Padrão de implementação de CRM: pipes, cadência, atribuição e metas
 - `00_susano/referencias/plataformas/hubspot/dossie_mestre.md`: HubSpot: Dossiê Mestre de Domínio do Produto
 - `00_susano/referencias/plataformas/whatsapp/usernames_bsuid_2026.md`: WhatsApp Usernames & BSUID: Mudanças Estruturais 2026
 - `00_susano/referencias/social_organico/stories10x_manual_agente.md`: Stories 10X: manual operacional para agentes

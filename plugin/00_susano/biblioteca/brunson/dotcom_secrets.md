@@ -46,7 +46,7 @@ Empresas não têm problema de tráfego ou conversão, têm problema de funil. O
 
 - **Seinfeld Emails**: Emails diários pós-SOS sobre "nada" (vida do AC): 90% entretenimento, 10% conteúdo, 100% com oferta ligada. Parar de enviar = perda de receita diária.
 
-- **The Stack (fechamento em apresentação)**: A cada novo item apresentado, reexibir TUDO que foi apresentado antes acumulado (stacked). Última coisa que o prospect vê antes do preço = valor total do pacote completo, não apenas o último item. Aumenta fechamento de 5-10% para 20%+ em palco.
+- **The Stack (fechamento em apresentação)**: A cada novo item apresentado, reexibir TUDO que foi apresentado antes acumulado (stacked). Última coisa que o prospect vê antes do preço = valor total do pacote completo, não apenas o último item. Aumenta fechamento de 5-10% para 20%+ em palco. [CONTRADIÇÃO] Expert Secrets (`00_susano/biblioteca/brunson/expert_secrets.md`) cita 40%+ para a mesma técnica; citar o livro ao usar.
 
 - **Temperatura do tráfego (Hot/Warm/Cold) e bridges**: Hot (já te conhece), comunicação direta, email simples. Warm (conhece quem te indicou), lift letter/endorsement do parceiro. Cold (não sabe quem você é), bridge page que educa antes da oferta; linguagem adaptada (ex: "pessoas que visitam seu site" não "tráfego"). Cold traffic bem convertido = diferencial de escala.
 

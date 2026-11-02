@@ -4,6 +4,7 @@ tipo: referencia
 autor: Sarden
 origem: Notion do Sarden: 'Sistema Operacional de Geração de Demanda & Performance 2026' (documento operacional v1.0, 17/07/2026)
 atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: marcadores canônicos, rotinas do capítulo 12 como camada de liderança, FAQ corrigida, números do Panorama citados do benchmark)
 ---
 
 # Sistema operacional de geração de demanda e performance 2026
@@ -75,7 +76,6 @@ O benchmark serve para responder **“isso parece incomum?”** e para sugerir h
 | Panorama de Geração de Leads 2026, 194 páginas | benchmark quantitativo geral, B2B/B2C e 17 segmentos | taxas, recortes, exemplos e limitações, citados como **Panorama aberto, p. X** |
 | Panorama PRO 2026, 107 páginas | aprofundamento dos cinco canais sobre a mesma população | tendência, share, dispositivo e scorecards, citados como **Panorama PRO, p. X** |
 | Workshop PRO completo, 01:30:59 | interpretação qualitativa dos especialistas | mecanismos, ressalvas e recomendações, citados como **Workshop, HH:MM:SS–HH:MM:SS** |
-| Página MasterClass Product Engineer | referência estrutural de documentação | arquitetura da página, não evidência de marketing |
 | Dados internos da operação | verdade operacional primária | decisões de orçamento, metas, causalidade local e economia unitária |
 
 > O Panorama PRO não é uma segunda amostra. Ele aprofunda a mesma base do Panorama aberto. Portanto, números coincidentes entre os dois PDFs não são validação independente.
@@ -95,19 +95,16 @@ Os agentes devem usar a seguinte precedência:
 
 Quando duas fontes divergem, o agente deve abrir uma investigação de definição, janela, atribuição, amostra, moeda e estágio do funil. Tirar uma média entre métricas incompatíveis é um erro de método.
 
-### 2.3 Etiquetas epistemológicas
+### 2.3 Marcadores (os canônicos do método)
 
-Toda análise material deve identificar sua natureza:
+Toda análise material identifica a natureza de cada afirmação com os marcadores do método (`00_susano/nucleo.md`, Formato), sem taxonomia própria:
 
-- **[DADO INTERNO]**: medido na operação e reconciliado;
-- **[BENCHMARK PDF]**: explicitamente publicado nos Panoramas;
-- **[EVIDÊNCIA QUALITATIVA]**: interpretação do workshop;
-- **[CÁLCULO DERIVADO]**: cálculo reproduzível a partir de dados citados;
-- **[CASO DO FORNECEDOR]**: resultado comercial apresentado pelo realizador;
-- **[INFERÊNCIA]**: leitura plausível, mas não declarada como fato pela fonte;
-- **[HIPÓTESE]**: explicação que ainda precisa ser testada;
-- **[RECOMENDAÇÃO]**: ação proposta;
-- **[RISCO]**: limitação, viés ou efeito adverso possível.
+- **[DADO]**: medido na operação e reconciliado, ou publicado nos Panoramas (sempre com a página: "Panorama PRO, p. X" ou "Panorama aberto, p. X"; os números vivem em `00_susano/referencias/benchmarks/panorama_2026.md`);
+- **[INFERÊNCIA]**: leitura plausível não declarada como fato pela fonte, interpretação do workshop ou cálculo derivado reproduzível a partir de dados citados (dizer qual dos três);
+- **[VENDOR]**: resultado comercial apresentado pelo realizador do estudo ou por fornecedor de plataforma; direcional, com viés declarado;
+- **[VERIFICAR]**: afirmação que precisa de confirmação antes de decidir; **[LACUNA]**: o dado não existe na base; **[CONTRADIÇÃO]**: fontes em conflito, com os dois caminhos.
+
+Hipótese, recomendação e risco não são marcadores: hipótese vai na frase base com corte (`00_susano/dna/metodo/diagnostico_de_funil.md`), recomendação vira PA com ganho, dono e prazo, risco vai escrito como risco.
 
 ### 2.4 Escala de confiança
 
@@ -226,9 +223,11 @@ Cada transição precisa de definição, numerador, denominador, janela, respons
 
 ## 4. Panorama 2026: o sistema mudou, não apenas a taxa
 
+> Números do Panorama: `00_susano/referencias/benchmarks/panorama_2026.md`, por seção (régua oficial, série histórica, qualidade, participação, dispositivo, horário, scorecards, segmentos, cortes B2B/B2C e WhatsApp, inconsistências). Este capítulo é leitura e decisão; não repete tabela.
+
 ### 4.1 O que mudou
 
-A conversão mediana geral subiu de 2,98% para 3,07%, enquanto a alta performance foi de 7,27% para 7,90% e a baixa caiu de 1,07% para 1,02%. A distância entre topo e base aumentou. Ao mesmo tempo, o orgânico perdeu participação, o mobile concentrou quase três quartos do tráfego e novas jornadas assistidas passaram a aparecer no referral de IA. **[BENCHMARK PDF]** Panorama aberto, pp. 10, 21 e 23.
+A conversão mediana geral subiu de 2,98% para 3,07%, enquanto a alta performance foi de 7,27% para 7,90% e a baixa caiu de 1,07% para 1,02%. A distância entre topo e base aumentou. Ao mesmo tempo, o orgânico perdeu participação, o mobile concentrou quase três quartos do tráfego e novas jornadas assistidas passaram a aparecer no referral de IA. **[DADO]** Panorama aberto, pp. 10, 21 e 23.
 
 ### 4.2 Evidência
 
@@ -242,7 +241,7 @@ A conversão mediana geral subiu de 2,98% para 3,07%, enquanto a alta performanc
 | Tráfego orgânico | 27,91% | ainda é o maior entre os cinco canais do PRO, mas perde participação |
 | Tráfego de IA | 0,10% | sinal pequeno e emergente |
 
-O aumento de CVR pode ocorrer por melhora real, mas também porque tráfego orgânico de baixa intenção diminuiu. Se o denominador perde visitas menos propensas a converter, a taxa sobe mesmo sem crescimento do número de leads. **[BENCHMARK PDF]** Panorama aberto, p. 12; Panorama PRO, p. 12.
+O aumento de CVR pode ocorrer por melhora real, mas também porque tráfego orgânico de baixa intenção diminuiu. Se o denominador perde visitas menos propensas a converter, a taxa sobe mesmo sem crescimento do número de leads. **[DADO]** Panorama aberto, p. 12; Panorama PRO, p. 12.
 
 ### 4.3 Impacto operacional
 
@@ -298,9 +297,9 @@ O crescimento de canais de descoberta, a fragmentação da jornada e a expansão
 
 ### 5.2 Evidência
 
-Os 17 segmentos variam de 1,32% de conversão mediana em Imóveis a 5,42% em Jurídico. O canal de maior conversão também muda: Meta lidera em nove segmentos do recorte PRO; Google é a principal origem de volume em 15 dos 17; orgânico lidera qualidade no agregado; e IA tem alta taxa com volume mínimo. **[BENCHMARK PDF]** Panorama aberto, pp. 60–187; Panorama PRO, pp. 26 e 28.
+Os 17 segmentos variam de 1,32% de conversão mediana em Imóveis a 5,42% em Jurídico. O canal de maior conversão também muda: Meta lidera em nove segmentos do recorte PRO; Google é a principal origem de volume em 15 dos 17; orgânico lidera qualidade no agregado; e IA tem alta taxa com volume mínimo. **[DADO]** Panorama aberto, pp. 60–187; Panorama PRO, pp. 26 e 28.
 
-O workshop aprofunda a distinção entre **fit** e **intenção**: aderência ao ICP não garante momento de compra, e um sinal de intenção sem fit pode apenas acelerar desqualificação. **[EVIDÊNCIA QUALITATIVA]** Workshop, 00:14:20–00:16:48.
+O workshop aprofunda a distinção entre **fit** e **intenção**: aderência ao ICP não garante momento de compra, e um sinal de intenção sem fit pode apenas acelerar desqualificação. **[INFERÊNCIA]** Workshop, 00:14:20–00:16:48.
 
 Esse contraste mostra que “público” não pode ser apenas uma configuração da plataforma. Deve ser um contrato de valor conectado ao funil.
 
@@ -372,7 +371,7 @@ Os cinco canais analisados no PRO ocupam posições diferentes quando o critéri
 | LinkedIn Ads | 2,97% | 0,10% | 0,03% | 35,13% | alcance profissional e influência |
 | Busca orgânica | 2,39% | 27,91% | 16,11% | 44,51% | autoridade, educação e recorrência |
 
-**[BENCHMARK PDF]** Panorama PRO, pp. 43, 58, 70, 87 e 101. Os rankings só comparam esses cinco canais. “Qualificados” segue a régua de leadscore da fonte, não uma definição universal.
+**[DADO]** Panorama PRO, pp. 43, 58, 70, 87 e 101. Os rankings só comparam esses cinco canais. “Qualificados” segue a régua de leadscore da fonte, não uma definição universal.
 
 ### 6.3 Impacto
 
@@ -399,7 +398,7 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.5 Playbook: Google Ads
 
-**Mudança.** Google continua a principal origem de leads, embora sua participação em tráfego tenha recuado de 27,48% para 23,40% entre as edições 2025 e 2026. A conversão avançou para 3,41% e o canal liderou volume em 15 dos 17 segmentos. **[BENCHMARK PDF]** Panorama PRO, pp. 31, 37–39 e 43. O workshop contextualiza o papel do canal a partir de 00:41:26.
+**Mudança.** Google continua a principal origem de leads, embora sua participação em tráfego tenha recuado de 27,48% para 23,40% entre as edições 2025 e 2026. A conversão avançou para 3,41% e o canal liderou volume em 15 dos 17 segmentos. **[DADO]** Panorama PRO, pp. 31, 37–39 e 43. O workshop contextualiza o papel do canal a partir de 00:41:26.
 
 **Impacto.** A captura segue robusta, mas misturar marca, problema, categoria, concorrente e conteúdo esconde a economia de cada intenção.
 
@@ -413,9 +412,9 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.6 Playbook: Meta Ads
 
-**Mudança.** A participação de Meta cresceu de 5,11% para 9,48% do tráfego entre 2024 e 2026, e de 10,50% para 15,83% dos leads. Em 2026, a conversão chegou a 3,91%. Porém, o tráfego cresceu cerca de 52% na última comparação e os leads apenas cerca de 5%, comprimindo o proxy leads/share de tráfego. **[BENCHMARK PDF]** Panorama PRO, pp. 45, 50, 53 e 55. A leitura dos especialistas sobre o canal começa por volta de **Workshop, 00:48:25**.
+**Mudança.** A participação de Meta cresceu de 5,11% para 9,48% do tráfego entre 2024 e 2026, e de 10,50% para 15,83% dos leads. Em 2026, a conversão chegou a 3,91%. Porém, o tráfego cresceu cerca de 52% na última comparação e os leads apenas cerca de 5%, comprimindo o proxy leads/share de tráfego. **[DADO]** Panorama PRO, pp. 45, 50, 53 e 55. A leitura dos especialistas sobre o canal começa por volta de **Workshop, 00:48:25**.
 
-**Impacto.** A plataforma amplia descoberta, mas a escala torna o sinal de otimização e o suprimento criativo mais importantes. Em B2B, Meta converte 4,68%, mas apenas 26,8% dos leads aparecem qualificados. **[BENCHMARK PDF]** Panorama aberto, pp. 34 e 36.
+**Impacto.** A plataforma amplia descoberta, mas a escala torna o sinal de otimização e o suprimento criativo mais importantes. Em B2B, Meta converte 4,68%, mas apenas 26,8% dos leads aparecem qualificados. **[DADO]** Panorama aberto, pp. 34 e 36.
 
 **Decisão.** Usar Meta para alcançar quem ainda não busca, alimentar topo e meio, testar problema e proposta e operar reengajamento. Pensar duas vezes quando o decisor é extremamente nichado, o time não consegue produzir criativos ou o atendimento só responde em horário comercial.
 
@@ -427,13 +426,13 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.7 Playbook: LinkedIn Ads
 
-**Mudança.** O tráfego de LinkedIn cresceu de 0,07% para 0,10%, enquanto a participação em leads caiu de 0,18% para 0,03%. A conversão mediana reagiu de 1,88% para 2,97%. O relatório sugere papel assistido, mas não fornece desenho causal. **[BENCHMARK PDF]** Panorama PRO, pp. 60, 63, 65 e 67. O workshop introduz o canal em 00:57:26 e desenvolve o tripé **LinkedIn orgânico, Thought Leader Ads e prospecção** entre 01:03:10 e 01:05:06.
+**Mudança.** O tráfego de LinkedIn cresceu de 0,07% para 0,10%, enquanto a participação em leads caiu de 0,18% para 0,03%. A conversão mediana reagiu de 1,88% para 2,97%. O relatório sugere papel assistido, mas não fornece desenho causal. **[DADO]** Panorama PRO, pp. 60, 63, 65 e 67. O workshop introduz o canal em 00:57:26 e desenvolve o tripé **LinkedIn orgânico, Thought Leader Ads e prospecção** entre 01:03:10 e 01:05:06.
 
 **Impacto.** Last-click tende a subestimar um canal usado para alcançar cargo, empresa e conta antes da busca. Ao mesmo tempo, “influência” não pode virar desculpa para campanha sem evidência.
 
 **Decisão.** Usar em B2B de alto ticket, ciclo longo, ABM e audiência profissional valiosa. Pensar duas vezes em ticket baixo, orçamento curto ou quando a única definição de sucesso é volume de lead.
 
-**Execução.** Construir listas de contas; separar expansão, aquisição e cobertura; registrar engajamento por conta; sincronizar conteúdo e abordagem comercial; usar grupos de controle geográficos ou de contas quando possível; observar mobile, que concentra 89,59% do tráfego do canal, mas 64,58% dos leads. **[BENCHMARK PDF]** Panorama PRO, p. 69.
+**Execução.** Construir listas de contas; separar expansão, aquisição e cobertura; registrar engajamento por conta; sincronizar conteúdo e abordagem comercial; usar grupos de controle geográficos ou de contas quando possível; observar mobile, que concentra 89,59% do tráfego do canal, mas 64,58% dos leads. **[DADO]** Panorama PRO, p. 69.
 
 **Medição.** Contas alcançadas, cobertura de cargos, lift de busca de marca, reuniões em contas expostas, pipeline influenciado com regra explícita e teste incremental quando viável.
 
@@ -441,7 +440,7 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.8 Playbook: busca orgânica
 
-**Mudança.** Na série da ficha, o share orgânico caiu de 42,70% para 27,91% do tráfego, enquanto sua participação em leads foi de 24,20% para 16,11%. Em pontos de participação, o tráfego recuou mais; em volume absoluto, porém, acessos caíram de 62,9 milhões para 48,5 milhões (-23,00%) e leads de 842.737 para 546.988 (-35,09%). Portanto, a afirmação de que “audiência caiu mais que resultado” só vale para **share**, não para volume. A qualidade permaneceu a maior entre os canais, 44,51%. **[BENCHMARK PDF]** Panorama PRO, pp. 72, 74, 76, 79, 81 e 87. O workshop discute a mudança do papel do orgânico entre 01:16:58 e 01:19:26.
+**Mudança.** Na série da ficha, o share orgânico caiu de 42,70% para 27,91% do tráfego, enquanto sua participação em leads foi de 24,20% para 16,11%. Em pontos de participação, o tráfego recuou mais; em volume absoluto, porém, acessos caíram de 62,9 milhões para 48,5 milhões (-23,00%) e leads de 842.737 para 546.988 (-35,09%). Portanto, a afirmação de que “audiência caiu mais que resultado” só vale para **share**, não para volume. A qualidade permaneceu a maior entre os canais, 44,51%. **[DADO]** Panorama PRO, pp. 72, 74, 76, 79, 81 e 87. O workshop discute a mudança do papel do orgânico entre 01:16:58 e 01:19:26.
 
 **Impacto.** “Mais sessões orgânicas” deixa de ser objetivo suficiente. Conteúdo precisa ser gerido por função e influência: educação, comparação, decisão, navegação ou suporte.
 
@@ -455,7 +454,7 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.9 Playbook: referências de IA
 
-**Mudança.** A IA aparece com 7,80% de conversão, 0,10% do tráfego e 0,25% dos leads. Foram 170.486 visitas e 8.352 leads na base, com ChatGPT representando 78,36% do referral identificado. **[BENCHMARK PDF]** Panorama PRO, pp. 89, 91, 93 e 96. O contraste entre alta conversão e baixo volume é contextualizado no **Workshop, 00:08:00–00:13:56** e retomado em **01:19:28–01:24:32**.
+**Mudança.** A IA aparece com 7,80% de conversão, 0,10% do tráfego e 0,25% dos leads. Foram 170.486 visitas e 8.352 leads na base, com ChatGPT representando 78,36% do referral identificado. **[DADO]** Panorama PRO, pp. 89, 91, 93 e 96. O contraste entre alta conversão e baixo volume é contextualizado no **Workshop, 00:08:00–00:13:56** e retomado em **01:19:28–01:24:32**.
 
 **Impacto.** O visitante que clica após pesquisar em um assistente pode chegar com maior clareza de problema e comparação. O referral, porém, captura apenas a parte clicável da influência; taxa alta com share pequeno não autoriza previsão de escala.
 
@@ -469,7 +468,7 @@ O canal pode cumprir mais de uma função, mas sua métrica primária precisa co
 
 ### 6.10 Dispositivo como camada de canal
 
-Meta concentra 91,84% dos acessos e 98,42% dos leads no mobile. IA é a exceção: 83,66% dos acessos são desktop, mas os 16,34% mobile geram 38,01% dos leads do canal. No orgânico, mobile converte 2,51% e desktop 2,42%. **[BENCHMARK PDF]** Panorama PRO, pp. 56, 85–86 e 100.
+Meta concentra 91,84% dos acessos e 98,42% dos leads no mobile. IA é a exceção: 83,66% dos acessos são desktop, mas os 16,34% mobile geram 38,01% dos leads do canal. No orgânico, mobile converte 2,51% e desktop 2,42%. **[DADO]** Panorama PRO, pp. 56, 85–86 e 100.
 
 > Não existe “performance do canal” sem o corte canal × dispositivo × página × estágio. A mesma mídia pode estar criando interesse no mobile e convertendo no desktop, ou o inverso.
 
@@ -493,9 +492,9 @@ Em plataformas cada vez mais automatizadas, a unidade de controle migra de micro
 
 ### 7.2 Evidência
 
-Meta lidera conversão em vários segmentos, mas apresenta bolsões de baixa qualidade em Software, Tecnologia, Agência e Marketing. O PRO interpreta a evolução de automação da plataforma como mudança do trabalho do operador para o criativo; essa é **[EVIDÊNCIA QUALITATIVA]**, não benchmark causal. **[BENCHMARK PDF]** Panorama PRO, pp. 47–49.
+Meta lidera conversão em vários segmentos, mas apresenta bolsões de baixa qualidade em Software, Tecnologia, Agência e Marketing. O PRO interpreta a evolução de automação da plataforma como mudança do trabalho do operador para o criativo; essa é **[INFERÊNCIA]**, não benchmark causal. **[DADO]** Panorama PRO, pp. 47–49.
 
-No orgânico, a participação caiu enquanto a qualidade permaneceu líder. Isso favorece uma estratégia que diferencia tráfego útil de tráfego apenas volumoso. **[BENCHMARK PDF]** Panorama PRO, pp. 74, 76 e 87.
+No orgânico, a participação caiu enquanto a qualidade permaneceu líder. Isso favorece uma estratégia que diferencia tráfego útil de tráfego apenas volumoso. **[DADO]** Panorama PRO, pp. 74, 76 e 87.
 
 ### 7.3 Impacto
 
@@ -586,7 +585,7 @@ Mobile se aproximou do desktop em conversão geral e o lead passou a chegar cont
 - IA, orgânico e direto: aproximadamente 48% fora do expediente;
 - empresas com WhatsApp no geral: 3,20% de conversão, contra 2,66% sem; no B2B, 2,69% contra 2,12%; no B2C, a relação observada se inverte, 3,33% contra 3,60%.
 
-**[BENCHMARK PDF]** Panorama aberto, pp. 23, 25, 27, 29, 44 e 57. A comparação com/sem WhatsApp é observacional e não prova causalidade.
+**[DADO]** Panorama aberto, pp. 23, 25, 27, 29, 44 e 57. A comparação com/sem WhatsApp é observacional e não prova causalidade.
 
 ### 8.3 Impacto
 
@@ -655,11 +654,11 @@ A jornada atravessa canais, dispositivos e sessões, enquanto as plataformas obs
 
 ### 9.2 Evidência
 
-O PRO mostra tráfego crescente e queda de participação em leads last-click no LinkedIn, além de um referral de IA com share de leads 2,5 vezes maior que seu share de tráfego. Esses padrões são compatíveis com papéis diferentes, mas não provam influência. **[BENCHMARK PDF]** Panorama PRO, pp. 63, 65, 67, 91, 96 e 98.
+O PRO mostra tráfego crescente e queda de participação em leads last-click no LinkedIn, além de um referral de IA com share de leads 2,5 vezes maior que seu share de tráfego. Esses padrões são compatíveis com papéis diferentes, mas não provam influência. **[DADO]** Panorama PRO, pp. 63, 65, 67, 91, 96 e 98.
 
 A atribuição de LinkedIn, a necessidade de conectar mídia ao CRM e os limites do último clique são desenvolvidos no **Workshop, 00:34:12–00:40:10**. A fala é evidência qualitativa e orienta o diagnóstico; não substitui teste incremental.
 
-Em segmentos como Agência, “outros” chega a 48,17% dos leads. Quando uma categoria residual é material, a precisão aparente das demais categorias não autoriza redistribuição fina. **[BENCHMARK PDF]** Panorama aberto, p. 66.
+Em segmentos como Agência, “outros” chega a 48,17% dos leads. Quando uma categoria residual é material, a precisão aparente das demais categorias não autoriza redistribuição fina. **[DADO]** Panorama aberto, p. 66.
 
 ### 9.3 Impacto
 
@@ -1069,6 +1068,8 @@ O conjunto deve incluir casos fáceis, limites, dados conflitantes e tentativas 
 
 ## 12. Rotinas operacionais
 
+> Camada de liderança: estas rotinas são da liderança de growth e do sistema multiagente deste documento. A rotina do gestor de mídia (diário, semanal, periódico e gatilhos) está em `00_susano/referencias/performance/rotina_gestor_performance.md` e não se duplica aqui; quando as duas falam do mesmo passo, vale a rotina do gestor.
+
 ### 12.1 Diário: 15 minutos de saúde
 
 - incidentes de tracking;
@@ -1264,43 +1265,43 @@ Interromper ou reduzir o rollout se:
 
 ### 14.1 Perguntas frequentes
 
-**\**3,07% deve ser a nossa meta de conversão?\**
+**3,07% deve ser a nossa meta de conversão?**
 
 Não. É a mediana geral de uma amostra específica. Escolha primeiro o benchmark de mesmo segmento, modelo, canal e dispositivo; depois confronte com economia, qualidade e capacidade internas. Uma operação pode racionalmente ficar abaixo de 3,07% ao expandir alcance rentável, ou acima disso capturando apenas uma demanda estreita.
 
-**\**IA é o melhor canal porque converte 7,80%?\**
+**IA é o melhor canal porque converte 7,80%?**
 
 Não. Ela tem a maior mediana entre os canais listados, mas apenas 0,10% do tráfego e 0,25% dos leads. O pequeno volume, a seleção de visitantes de alta intenção e o referral incompleto limitam qualquer previsão. Instrumente, desenvolva conteúdo citável e acompanhe qualidade e receita. **Fonte:** Panorama PRO, pp. 89, 91 e 96; Workshop, 00:08:00–00:13:56.
 
-**\**Meta deve receber mais orçamento que Google?\**
+**Meta deve receber mais orçamento que Google?**
 
 Não existe resposta geral. Meta costuma criar demanda e apresenta CVR de 3,91%; Google captura intenção e lidera volume de leads, com 26,85%. Compare função, CPQL, oportunidade, receita incremental, horizonte e qualidade marginal. Se a campanha de Meta estiver otimizando lead raso, corrigi-la pode preceder qualquer escala.
 
-**\**Queda de tráfego orgânico significa fracasso de SEO?\**
+**Queda de tráfego orgânico significa fracasso de SEO?**
 
 Não necessariamente. A participação orgânica caiu mais rapidamente que a de leads e o canal manteve a maior qualificação. A cauda informacional pode ter encolhido sem perda proporcional de demanda valiosa. Analise clusters de intenção, páginas comerciais, pipeline assistido e receita, não apenas sessões.
 
-**\**Como tratar LinkedIn com poucos leads last-click?\**
+**Como tratar LinkedIn com poucos leads last-click?**
 
 Defina sua função. Se a campanha é ABM ou cobertura de decisores, avalie alcance por conta, busca de marca, visitas de retorno, reuniões e teste incremental. Não alegue influência sem método; tampouco conclua inutilidade apenas pelo último clique. **Fonte qualitativa:** Workshop, 00:34:12–00:40:10 e 00:57:26–01:05:06.
 
-**\**WhatsApp sempre aumenta conversão?\**
+**WhatsApp sempre aumenta conversão?**
 
 Não. A comparação do Panorama é observacional e no B2C a taxa dos usuários de WhatsApp é menor que a dos não usuários. Trate o canal como infraestrutura: contexto, SLA, roteamento, follow-up e experiência determinam seu valor.
 
-**\**Quando um agente pode recomendar escala?\**
+**Quando um agente pode recomendar escala?**
 
 Quando dados são utilizáveis, o mecanismo é plausível, a qualidade e a economia permanecem dentro dos guardrails, a capacidade suporta o volume, existe rollback e os agentes de Dados, Revenue e Experimentação não vetam. Escala material ainda exige o nível de aprovação humana definido pela organização.
 
-**\**O que fazer quando o benchmark e o dado interno divergem?\**
+**O que fazer quando o benchmark e o dado interno divergem?**
 
 Priorize o dado interno auditado e investigue diferenças de definição, amostra, estágio, mix, dispositivo, oferta, janela e atribuição. A divergência é informação: pode indicar vantagem real, problema local ou incomparabilidade. Não tire média entre eles.
 
-**\**Como saber se CVR maior é melhoria real?\**
+**Como saber se CVR maior é melhoria real?**
 
 Mostre volume de sessões e leads, mix de canais, qualidade, oportunidades e receita. Depois decomponha por página, dispositivo e ICP. Se o denominador perdeu tráfego de baixa intenção, a taxa pode subir por composição. Um teste controlado ou análise de coorte aumenta a confiança.
 
-**\**Qual é a automação mais valiosa para começar?\**
+**Qual é a automação mais valiosa para começar?**
 
 Normalmente, a que corrige um vazamento conhecido e reversível: instrumentação, resposta imediata, roteamento ou feedback de qualidade. A prioridade depende da árvore do funil. Automatizar compra de mídia antes de corrigir fonte e guardrails amplifica erro.
 
@@ -1398,7 +1399,7 @@ Use a tabela para escolher perguntas, não para definir meta automática. Segmen
 | Venda de Produtos | 247 | 3,01% | 6,75% | Google 2,40% | 36,1% | decidir por margem e valor do pedido/orçamento |
 | Venda de Serviços | 444 | 3,74% | 8,00% | Meta 4,54% | 46,2% | subsegmentar oferta e testar eventos de qualidade |
 
-**[BENCHMARK PDF]** Panorama aberto, pp. 60–187. “Maior CVR exibida” compara os canais apresentados em cada página; em alguns casos, a taxa geral é superior. As amostras de Consultoria, Energia, Logística, Marketing e Telefonia exigem cautela adicional.
+**[DADO]** Panorama aberto, pp. 60–187. “Maior CVR exibida” compara os canais apresentados em cada página; em alguns casos, a taxa geral é superior. As amostras de Consultoria, Energia, Logística, Marketing e Telefonia exigem cautela adicional.
 
 ---
 
@@ -1413,7 +1414,7 @@ Objetivo: responder a uma decisão de performance coordenando evidência, mídia
 
 Regras:
 1. Priorize dados internos auditados; use benchmark como contexto.
-2. Rotule [DADO INTERNO], [BENCHMARK PDF], [EVIDÊNCIA QUALITATIVA], [INFERÊNCIA], [HIPÓTESE], [RECOMENDAÇÃO] e [RISCO].
+2. Rotule [DADO], [DADO], [INFERÊNCIA], [INFERÊNCIA], Hipótese:, PA: e Risco:.
 3. Não invente números. Use n/d e declare a consequência da ausência.
 4. Não recomende escala apenas por CVR, CPL ou ROAS atribuído.
 5. Separe criação de demanda, captura de intenção e crédito técnico.
@@ -1588,8 +1589,8 @@ Ao recuperar conhecimento desta página, o agente deve citar:
 
 1. documento e página ou intervalo do PDF para números;
 2. timestamp do workshop para interpretações verbais;
-3. rótulo **[CÁLCULO DERIVADO]** para qualquer razão calculada;
-4. rótulo **[CASO DO FORNECEDOR]** para estudos comerciais;
+3. rótulo **[INFERÊNCIA]** para qualquer razão calculada;
+4. rótulo **[VENDOR]** para estudos comerciais;
 5. dado interno, consulta e período quando a conclusão for local.
 
 ### 16.5 Questões que o Panorama não resolve

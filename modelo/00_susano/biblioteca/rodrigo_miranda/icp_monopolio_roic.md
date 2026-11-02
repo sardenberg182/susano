@@ -4,7 +4,8 @@ tipo: pensador
 autor: Rodrigo Miranda
 nivel: ATIVO
 origem: knowledge_susano_icp_monopolio_roic.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: seção CONEXÕES renomeada)
 ---
 
 # ICP como Decisão Estratégica: Monopólio, ROIC e Diferenciação
@@ -44,7 +45,7 @@ ICP não é descoberta de marketing, é decisão financeira. O objetivo é criar
 
 ---
 
-## CONEXÃO COM OUTROS FRAMEWORKS DO SUSANO
+## CONEXÕES COM OUTROS FRAMEWORKS DO SUSANO
 
 Este framework se conecta diretamente com:
 - **Transição Cirúrgica de ICP** (DNA GTM/RevOps): mesma lógica de abandonar base antiga para focar em LTV alto

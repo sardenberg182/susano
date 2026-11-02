@@ -4,7 +4,8 @@ tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
 origem: knowledge_susano_road_to_100m_balfour.md + knowledge_susano_market_product_fit.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: auto-referência removida)
 ---
 
 # The Road to $100M Doesn't Start with Product (Artigo Completo)
@@ -63,7 +64,6 @@ O caminho para $100M começa pelo mercado, não pelo produto. A sequência corre
 
 ## CONEXÕES COM O KNOWLEDGE DO SUSANO
 
-- `00_susano/biblioteca/balfour/01_market_product_fit.md`, versão anterior; este artigo é muito mais completo e acionável
 - `00_susano/dna/metodo/acf_lab.md`, ACF_Lab do Sarden converge com Market Hypotheses Framework
 - `00_susano/biblioteca/rodrigo_miranda/icp_monopolio_roic.md`, ICP de Rodrigo Miranda = Who + Problems + Motivations de Balfour
 - `00_susano/biblioteca/bruno_nardon/growth.md`, Bruno Nardon e Balfour convergem em retenção flat como sinal primário

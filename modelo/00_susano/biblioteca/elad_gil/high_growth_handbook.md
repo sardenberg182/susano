@@ -4,7 +4,8 @@ tipo: pensador
 autor: Elad Gil (*High Growth Handbook*, Stripe Press, 2018)
 nivel: MISTO
 origem: knowledge_susano_high_growth_handbook.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: frases quebradas pela remoção do travessão reescritas)
 ---
 
 # High Growth Handbook
@@ -42,7 +43,7 @@ Guia tático para escalar de 10-20 para milhares de pessoas. Começa onde os out
 
 - **6 traits de executivos (Elad Gil)**: functional expertise, ability to build team, collegiality, communication (cross-functional empathy), owner mentality, strategic thinking. O executivo ideal pensa 6-12 meses à frente da curva, já está resolvendo amanhã enquanto todos ainda vivem hoje. Gatilho: diagnóstico de executivo não funcionando.
 
-- **Sinais de executivo não funcionando**: passividade/não toma ownership de decisões; pessoas circumnavigando para o CEO com problemas; ninguém indo à mesa dessa pessoa espontaneamente (o oposto de executivos bons a esses têm filas de pessoas buscando ajuda). Normalmente visível em 30-60 dias.
+- **Sinais de executivo não funcionando**: passividade/não toma ownership de decisões; pessoas circumnavigando para o CEO com problemas; ninguém indo à mesa dessa pessoa espontaneamente (o oposto de executivos bons: esses têm filas de pessoas buscando ajuda). Normalmente visível em 30-60 dias.
 
 - **Cofounder dynamics**: três endpoints: IC role, executivo sênior, saída. Cofounders iguais são o mito. A maioria das maiores empresas teve um cofundador dominante (Amazon, Apple, Facebook, LinkedIn, Microsoft). Gatilho: cliente navegando conflito entre cofundadores.
 
@@ -58,7 +59,7 @@ Guia tático para escalar de 10-20 para milhares de pessoas. Começa onde os out
 
 - **IPO como acelerador (não obstáculo)**: Keith Rabois: "Companies should go public as soon as they can." Retenção melhora, M&A currency fica disponível, fiscal discipline aumenta (Facebook só priorizou monetização com pressão pública). Os argumentos contra são geralmente excuses baseados em experiências atípicas. Gatilho: cliente adiando indefinidamente o IPO.
 
-- **Cultura como evolução deliberada (Patrick Collison)**: "You do not want to preserve culture; you want to collectively steer the right evolution of the culture." Culturas que tentam preservar o passado ficam estagnadas. Ser explícito sobre mudanças culturais desejadas (ex.: ao contratar novo head of sales a dizer "ela vai mudar a cultura, e essa mudança é o objetivo"). Gatilho: cliente com resistência de old-timers a mudanças culturais.
+- **Cultura como evolução deliberada (Patrick Collison)**: "You do not want to preserve culture; you want to collectively steer the right evolution of the culture." Culturas que tentam preservar o passado ficam estagnadas. Ser explícito sobre mudanças culturais desejadas (ex.: ao contratar novo head of sales, dizer "ela vai mudar a cultura, e essa mudança é o objetivo"). Gatilho: cliente com resistência de old-timers a mudanças culturais.
 
 ---
 
@@ -71,7 +72,7 @@ Guia tático para escalar de 10-20 para milhares de pessoas. Começa onde os out
 - O CEO não delega cultura: é uma das 5 responsabilidades inegociáveis
 - Board management é trabalho ativo, não passivo; vácuos de liderança são preenchidos pelo board de forma destrutiva
 - "Valuation is temporary. Control is forever", nunca dar veto individual por série
-- M&A começa a fazer sentido em $1B+ valuation; maioria das empresas usa tarde demais
+- M&A começa a fazer sentido em $1B+ valuation; maioria das empresas usa tarde demais. [VERIFICAR] O livro usa $1B+ como entry point (também na linha de tipos de M&A); a faixa $5M a $500M é o tamanho de um product buy, não o threshold de valuation; não misturar os dois números.
 - Comprometer em cultura para fechar uma vaga é quase sempre um erro que o fundador vai se arrepender
 - Demitir bad culture fits mais rápido do que low performers
 - Efeitos de rede "unwind just as fast": não é o único ou melhor moat

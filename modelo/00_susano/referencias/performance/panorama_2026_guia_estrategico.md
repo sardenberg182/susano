@@ -4,11 +4,12 @@ tipo: referencia
 autor: Sarden
 origem: Notion do Sarden: 'Panorama PRO 2026, Guia Estratégico de Canais e Geração de Leads' (documento executivo e operacional v1.0, 07/2026)
 atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: tabelas migradas para o benchmark, que vira fonte única; narrativa e plano de 30 dias mantidos)
 ---
 
 # Panorama PRO 2026: guia estratégico de canais e geração de leads
 
-> Uso: Leitura estratégica do Sarden sobre o Panorama de Geração de Leads PRO 2026 (Leadster): posição e trajetória de cada canal (Google Ads, Meta Ads, LinkedIn Ads, busca orgânica, IA), dispositivo e horário, matriz de 17 segmentos, decisões de portfólio e plano de 30 dias. Fonte única declarada: o PDF do estudo, com página citada. Tabelas de benchmark em `00_susano/referencias/benchmarks/panorama_2026.md`.
+> Uso: Leitura estratégica do Sarden sobre o Panorama de Geração de Leads PRO 2026 (Leadster), sem tabelas (os números vivem em `00_susano/referencias/benchmarks/panorama_2026.md`): posição e trajetória de cada canal (Google Ads, Meta Ads, LinkedIn Ads, busca orgânica, IA), dispositivo e horário, matriz de 17 segmentos, decisões de portfólio e plano de 30 dias. Fonte única declarada: o PDF do estudo, com página citada. Tabelas de benchmark em `00_susano/referencias/benchmarks/panorama_2026.md`.
 
 > **Documento executivo e operacional | versão 1.0 | julho de 2026**
 >
@@ -130,62 +131,25 @@ Uma taxa maior de qualificados não equivale automaticamente a maior receita. O 
 
 ### 4.1 Conversão mediana por canal em 2026
 
-| Canal | Baixa performance | Mediana | Alta performance | Leitura principal |
-|---|---|---|---|---|
-| IA | 5,54% | **7,80%** | 13,52% | maior conversão, volume mínimo |
-| Meta Ads | 0,94% | **3,91%** | 13,70% | maior mediana entre os canais pagos consolidados |
-| Google Ads | 1,27% | **3,41%** | 8,02% | escala com conversão consistente |
-| Geral | 1,02% | **3,07%** | 7,90% | referência agregada |
-| LinkedIn Ads | 0,15% | **2,97%** | 18,30% | maior dispersão entre piso e topo |
-| Busca orgânica | 0,81% | **2,39%** | 6,03% | conversão estável, com qualidade superior |
-| Acesso direto | 0,57% | **1,74%** | 5,64% | menor mediana da comparação geral |
-
-Fonte: Panorama PRO 2026, p. 9.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Régua oficial por canal". Os números vivem só lá; este guia é a leitura.
 
 A tabela rejeita duas leituras apressadas. Primeiro, IA e LinkedIn apresentam topo muito alto, mas isso não basta para inferir escala reproduzível. Segundo, Meta e Google têm medianas próximas, mas papéis distintos: Meta opera descoberta e Google captura intenção. A escolha precisa considerar o objetivo antes de comparar apenas 3,91% contra 3,41%.
 
 ### 4.2 Evolução das medianas de 2024 a 2026
 
-| Canal | 2024 | 2025 | 2026 | Movimento 2025-2026 |
-|---|---|---|---|---|
-| Meta Ads | 3,69% | 3,40% | 3,91% | recuperação |
-| Google Ads | 3,22% | 3,28% | 3,41% | terceira alta anual |
-| Geral | 3,15% | 2,98% | 3,07% | reação moderada |
-| LinkedIn Ads | 2,32% | 1,88% | 2,97% | maior salto percentual |
-| Busca orgânica | 2,37% | 2,32% | 2,39% | estabilidade |
-| Acesso direto | 2,39% | 2,08% | 1,74% | queda contínua |
-
-Fonte: Panorama PRO 2026, p. 11.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Série histórica de conversão". Os números vivem só lá; este guia é a leitura.
 
 O relatório afirma que todos os canais listados, exceto acesso direto, melhoraram de 2025 para 2026. O dado deve ser lido com a ressalva de composição: a saída de visitas menos propensas a converter pode elevar a taxa, mesmo sem ganho equivalente em eficácia dentro de cada empresa. (Panorama PRO 2026, pp. 11-12)
 
 ### 4.3 Qualidade dos leads
 
-| Canal | Desqualificados | Medianos | Qualificados |
-|---|---|---|---|
-| Busca orgânica | 28,8% | 26,7% | **44,5%** |
-| Geral | 27,7% | 29,4% | **42,9%** |
-| IA | 24,4% | 35,4% | **40,2%** |
-| Google Ads | 33,1% | 26,8% | **40,1%** |
-| Meta Ads | 27,0% | 33,3% | **39,7%** |
-| Acesso direto | 28,3% | 34,0% | **37,7%** |
-| LinkedIn Ads | 40,2% | 24,7% | **35,1%** |
-
-Fonte: Panorama PRO 2026, p. 13. Valores exibidos com uma casa decimal conforme a visão geral.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Qualidade dos leads por canal". Os números vivem só lá; este guia é a leitura.
 
 O orgânico lidera a proporção de leads qualificados, enquanto a IA apresenta a menor taxa de desqualificados. LinkedIn fica por último em qualificação agregada, apesar da precisão de segmentação que caracteriza a plataforma. Os especialistas do relatório apontam que diferenças na definição de “qualificado” podem alterar o ranking, sobretudo quando empresas que usam determinado canal aplicam réguas mais exigentes. (Panorama PRO 2026, pp. 13-15 e 61-62)
 
 ### 4.4 Participação em acessos e leads
 
-| Canal | Participação nos acessos | Participação nos leads | Relação observada |
-|---|---|---|---|
-| Busca orgânica | 27,91% | 16,11% | maior peso em acesso do que em lead |
-| Google Ads | 23,40% | 26,85% | participação em leads supera a de acessos |
-| Meta Ads | 9,48% | 15,83% | forte diferença favorável a leads |
-| IA | 0,10% | 0,25% | fatia de leads 2,5 vezes a de acessos |
-| LinkedIn Ads | 0,10% | 0,03% | participação em leads abaixo da de acessos |
-
-Fonte: Panorama PRO 2026, p. 19.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seções "Distribuição de tráfego por canal" e "Distribuição de leads por canal". Os números vivem só lá; este guia é a leitura.
 
 Essa comparação é um indicador descritivo de eficiência de entrada, não uma medida de rentabilidade. Ela não considera custo por clique, custo por lead, qualificação posterior ou receita. Ainda assim, mostra por que um canal pode parecer pequeno em tráfego e relevante em geração de leads - ou o contrário.
 
@@ -242,14 +206,7 @@ Essas quatro leituras decorrem diretamente da matriz e das participações publi
 
 ### 6.1 Posição no panorama
 
-| Indicador | Resultado 2026 | Posição no scorecard do estudo |
-|---|---|---|
-| Conversão mediana | 3,41% | 3º de 5; líder de conversão em 7 de 17 segmentos |
-| Participação no tráfego | 23,40% | 2º de 5 |
-| Participação nos leads | 26,85% | 1º de 5; líder de volume em 15 de 17 segmentos |
-| Leads qualificados | 40,08% | 3º de 5; líder de qualidade em 6 de 17 segmentos |
-
-Fonte: Panorama PRO 2026, p. 43.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Scorecards por canal" (Google Ads). Os números vivem só lá; este guia é a leitura.
 
 O Google é descrito como a base segura da aquisição. Seu principal atributo não é vencer todas as métricas, mas combinar uma conversão acima da mediana geral com a maior participação de leads entre os canais analisados. A fatia de leads supera a de acessos, 26,85% contra 23,40%, o que indica que o canal gera resultado acima do próprio peso de entrada na amostra. (Panorama PRO 2026, pp. 19, 39 e 43)
 
@@ -291,14 +248,7 @@ O scorecard recomenda Google quando há demanda procurando o produto, é necess�
 
 ### 7.1 Posição no panorama
 
-| Indicador | Resultado 2026 | Posição no scorecard do estudo |
-|---|---|---|
-| Conversão mediana | 3,91% | 2º de 5; líder em 9 de 17 segmentos |
-| Participação no tráfego | 9,48% | 3º de 5 |
-| Participação nos leads | 15,83% | 3º de 5; líder de volume em 1 de 17 segmentos |
-| Leads qualificados | 39,72% | 4º de 5; líder de qualidade em 6 de 17 segmentos |
-
-Fonte: Panorama PRO 2026, p. 58.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Scorecards por canal" (Meta Ads). Os números vivem só lá; este guia é a leitura.
 
 Meta combina duas características: alcança quem ainda não está em busca ativa e converte uma parcela de visitas maior do que seu peso no tráfego sugeriria. Em 2026, 9,48% dos acessos produziram 15,83% dos leads. Isso não demonstra rentabilidade, pois o relatório não padroniza custo, mas confirma eficiência relativa na passagem observada de acesso a lead. (Panorama PRO 2026, pp. 19 e 53-55)
 
@@ -344,14 +294,7 @@ O estudo posiciona Meta para alcance de pessoas que ainda não buscam, alimenta�
 
 ### 8.1 Posição no panorama
 
-| Indicador | Resultado 2026 | Posição no scorecard do estudo |
-|---|---|---|
-| Conversão mediana | 2,97% | 4º de 5 |
-| Participação no tráfego | 0,10% | 4º de 5 |
-| Participação nos leads | 0,03% | 5º de 5 |
-| Leads qualificados | 35,13% | 5º de 5 |
-
-Fonte: Panorama PRO 2026, p. 70.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Scorecards por canal" (LinkedIn Ads). Os números vivem só lá; este guia é a leitura.
 
 O LinkedIn é descrito como um canal de precisão cara para B2B. Ele não compete com Google em volume nem com Meta em escala, mas permite segmentar cargo, empresa e setor. O valor proposto está na exatidão do público, especialmente em produtos de ticket alto, ciclos longos e campanhas por conta. (Panorama PRO 2026, pp. 59 e 70)
 
@@ -385,14 +328,7 @@ LinkedIn é indicado no relatório para B2B de ticket alto, ciclo longo, segment
 
 ### 9.1 Posição no panorama
 
-| Indicador | Resultado 2026 | Posição no scorecard do estudo |
-|---|---|---|
-| Conversão mediana | 2,39% | 5º de 5; líder em 1 de 17 segmentos |
-| Participação no tráfego | 27,91% | 1º de 5; liderança setorial indicada em 3 de 17 no scorecard |
-| Participação nos leads | 16,11% | 2º de 5; líder em 1 de 17 segmentos |
-| Leads qualificados | 44,51% | 1º de 5; scorecard indica liderança em 4 de 17 |
-
-Fonte: Panorama PRO 2026, p. 87. As divergências entre o scorecard e páginas internas são tratadas na seção 15.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Scorecards por canal" (busca orgânica). Os números vivem só lá; este guia é a leitura.
 
 O orgânico mantém um papel de autoridade e qualidade, mas deixou de ser a máquina de volume que já foi. A conversão permaneceu praticamente estável, enquanto tráfego e leads perderam participação. O estudo interpreta esse movimento como troca de volume por qualidade e como migração de parte da educação do cliente para ambientes de IA. (Panorama PRO 2026, pp. 71-72, 76, 79, 81 e 87)
 
@@ -434,14 +370,7 @@ O estudo recomenda orgânico quando o setor ainda depende do canal, a empresa j�
 
 ### 10.1 Posição no panorama
 
-| Indicador | Resultado 2026 | Posição no scorecard do estudo |
-|---|---|---|
-| Conversão mediana | 7,80% | 1º de 5 |
-| Participação no tráfego | 0,10% | 5º de 5 |
-| Participação nos leads | 0,25% | 4º de 5 |
-| Leads qualificados | 40,22% | 2º de 5; líder em 1 de 17 segmentos |
-
-Fonte: Panorama PRO 2026, p. 101.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Scorecards por canal" (IA). Os números vivem só lá; este guia é a leitura.
 
 A IA estreia como o canal de maior contraste: converte mais que o dobro da mediana geral, mas representa apenas uma fração da aquisição. Sua faixa baixa é 5,54%, a mediana 7,80% e a alta 13,52%. A comparação deve permanecer proporcional: taxa excepcional sobre 170.486 acessos e 8.352 leads não substitui a escala de Google, Meta ou orgânico. (Panorama PRO 2026, pp. 89, 91 e 96)
 
@@ -483,15 +412,7 @@ Canal não é uma experiência única. O Panorama mostra que a origem pode ter c
 
 ### 11.1 Participação mobile em acessos e leads
 
-| Canal | Acessos mobile | Leads mobile | O que chama atenção |
-|---|---|---|---|
-| Meta Ads | 91,84% | 98,42% | quase toda a geração de leads está no celular |
-| LinkedIn Ads | 89,59% | 64,58% | acesso e lead tornaram-se majoritariamente mobile |
-| Google Ads | 83,18% | 72,32% | desktop pesa mais em leads do que em acessos |
-| Busca orgânica | 66,15% | 50,12% | mobile assume, pela primeira vez, a maioria dos leads |
-| IA | 16,34% | 38,01% | único canal dominado pelo desktop, mas mobile gera leads acima de seu peso |
-
-Fonte: Panorama PRO 2026, pp. 41, 56, 69, 85 e 100.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Dispositivo (2026)". Os números vivem só lá; este guia é a leitura.
 
 A tabela sugere três experiências diferentes. Meta é mobile de ponta a ponta. Google e orgânico têm escala mobile, mas o desktop continua desproporcional na geração de leads. IA começa no computador e termina com uma contribuição mobile maior do que a participação em acessos indicaria. Por isso, “otimizar para mobile” não significa aplicar o mesmo desenho a todos os canais; significa entender a função que a tela exerce em cada origem.
 
@@ -503,14 +424,7 @@ Dois cruzamentos merecem atenção. Google converte melhor no desktop, embora re
 
 ### 11.3 Leads fora do expediente
 
-| Origem | Leads fora do expediente | Leads dentro do expediente |
-|---|---|---|
-| IA | 47,98% | 52,02% |
-| Busca orgânica | 47,76% | 52,24% |
-| Acesso direto | 47,54% | 52,46% |
-| Geral | 43,80% | 56,20% |
-| Tráfego pago agregado | 42,69% | 57,31% |
-| Referência | 42,59% | 57,41% |
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Horário". Os números vivem só lá; este guia é a leitura.
 
 O estudo define fora do expediente como o período entre 18h e 8h e os fins de semana. A tabela mostra quando os leads foram gerados; ela não informa se esses leads converteram em venda, qual foi o tempo efetivo de resposta ou quanto custaram. (Panorama PRO 2026, pp. 23 e 99)
 
@@ -533,27 +447,7 @@ A matriz geral identifica, para cada segmento, quem lidera volume de leads, conv
 
 ### 12.1 Matriz publicada
 
-| Segmento | Maior volume de leads | Maior conversão | Mais qualidade |
-|---|---|---|---|
-| Agências | Google 27,4% | Meta 6,7% | Google 40,1% |
-| Consultorias | Meta 56,4% | Google 2,7% | Google 75,1% |
-| Educacional | Orgânico 45,5% | Google 2,7% | Google 75,5% |
-| Energia | Google 43,8% | Google 6,6% | Google 67,6% |
-| Financeiro | Google 24,5% | Meta 6,4% | Orgânico 68,0% |
-| Imóveis | Google 25,0% | Direto 2,2% | Meta 73,8% |
-| Indústria e Fabricação | Google 34,3% | Meta 5,0% | Direto 44,7% |
-| Jurídico | Google 39,1% | Meta 10,1% | Meta 41,8% |
-| Logística e Transporte | Google 40,3% | Google 4,3% | Google 23,9% |
-| Marketing e Publicidade | Google 48,2% | Orgânico 3,3% | Google 54,5% |
-| Seguros | Google 28,6% | Direto 7,8% | Meta 55,2% |
-| Serviços Médicos e Saúde | Google 34,1% | Google 4,8% | Meta 57,4% |
-| Software | Google 34,5% | Meta 4,3% | Orgânico 38,0% |
-| Tecnologia e TI | Google 32,1% | Meta 5,7% | Orgânico 48,8% |
-| Telefonia e Internet | Google 30,9% | Google 2,8% | Google 67,4% |
-| Venda de Produtos | Google 29,7% | Google 2,4% | Meta 45,4% |
-| Venda de Serviços | Google 26,6% | Meta 4,5% | Meta 51,4% |
-
-Fonte: Panorama PRO 2026, p. 28. Conflitos com páginas específicas dos canais são preservados e explicados na seção 15.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Tabela mestra: líder por segmento". Os números vivem só lá; este guia é a leitura.
 
 ### 12.2 Quatro padrões de leitura
 
@@ -583,15 +477,7 @@ Depois, compare essas hipóteses com a realidade da empresa. Se o negócio já s
 
 Os scorecards do Panorama permitem organizar os canais por trabalho principal. A tabela abaixo é uma síntese operacional da fonte, não um modelo causal.
 
-| Objetivo dominante | Canal candidato | Evidência no Panorama | Principal guardrail |
-|---|---|---|---|
-| Capturar demanda e gerar volume previsível | Google Ads | 26,85% dos leads; liderança de volume em 15 segmentos | confirmar qualidade e economia interna |
-| Criar descoberta e alimentar topo/meio | Meta Ads | 15,83% dos leads com 9,48% dos acessos | controlar qualidade e capacidade criativa |
-| Construir autoridade e colher qualidade | Busca orgânica | 44,51% qualificados; 27,91% do tráfego | não ignorar queda de volume e share |
-| Alcançar decisor B2B específico | LinkedIn Ads | segmentação por cargo, empresa e setor; uso recomendado para ABM | não justificar tudo como influência assistida |
-| Ser citado e receber demanda emergente | IA | 7,80% de conversão e 40,22% qualificados | escala mínima e atribuição incompleta |
-
-Fonte: Panorama PRO 2026, pp. 43, 58, 70, 87 e 101.
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Síntese operacional por objetivo". Os números vivem só lá; este guia é a leitura.
 
 ### 13.1 Cinco decisões que o estudo habilita
 
@@ -716,23 +602,13 @@ Não. O número descreve quando os leads foram gerados. O estudo não apresenta 
 
 ### 15.2 Inconsistências internas preservadas
 
-| Tema | O que a fonte apresenta | Tratamento neste guia |
-|---|---|---|
-| Tráfego orgânico em 2024 | p. 17 menciona 41,47%; gráficos das pp. 35, 50, 63 e 76 mostram 42,70% | usar 42,70% nas séries e registrar o conflito |
-| Liderança de tráfego do Google | p. 36 diz 13 de 17; scorecard da p. 43 diz 14 de 17 | não escolher silenciosamente; citar a página usada |
-| Liderança de qualidade do orgânico | p. 74 nomeia 3 segmentos; scorecard da p. 87 informa 4 de 17 | manter ambos e sinalizar a divergência |
-| Meta como “maior conversão” | abertura da p. 44 usa essa formulação; p. 9 e capítulo de IA mostram 7,80% para IA e 3,91% para Meta | interpretar Meta como maior entre canais pagos consolidados, não no conjunto completo |
-| Matriz geral omite IA | a legenda da p. 28 inclui Google, Meta, orgânico e direto, mas não IA | não tratar a matriz como comparação completa dos cinco canais |
-| Qualidade em Venda de Serviços | p. 28 aponta Meta com 51,4%; p. 90 mostra IA com 52,46% e afirma liderança de IA | preservar o conflito e considerar que IA foi omitida da matriz geral |
-| Qualidade em Energia | p. 28 aponta Google com 67,6%; p. 49 mostra Meta com 87,97% | registrar como conflito real sem eleger vencedor |
-| Participação de “outros” nos leads de 2026 | p. 18 exibe 34,18%; pp. 37 e 79 exibem 33,91%, valor compatível com a soma das demais categorias | usar o número apenas com a página citada; não reconciliar silenciosamente |
-| Total de acessos | metodologia arredonda para 173 milhões; p. 91 usa 173,6 milhões | tratar como arredondamento de apresentação |
+Tabela em `00_susano/referencias/benchmarks/panorama_2026.md`, seção "Inconsistências internas do estudo". Os números vivem só lá; este guia é a leitura.
 
 Essas divergências não anulam o estudo, mas limitam a precisão de rankings muito próximos. Sempre que uma decisão depender de um desses pontos, retorne à página específica e confirme com dados internos.
 
 ### 15.3 Fonte única
 
-**Leadster.*****Panorama de Geração de Leads 2026**
+**Leadster, Panorama de Geração de Leads 2026** (edição aberta e PRO). No método, os números do estudo vivem em um arquivo só: `00_susano/referencias/benchmarks/panorama_2026.md`. Este guia não repete tabela; cita a seção.
 
 (vídeo do Notion não migrado: Panorama_de_Geracao_de_Leads_PRO_2026_｜_Workshop_completo.mp4)
 

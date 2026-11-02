@@ -44,28 +44,31 @@ IMPORT_MAX_SALTOS = 5
 # Skills por domínio geradas de 00_susano/ (brain.py skills). (nome, descrição de quando usar, pastas de origem)
 # (nome, descrição da skill, caminhos em 00_susano/): pasta ou arquivo .md; prefixo "-" exclui um arquivo de uma pasta listada
 DOMINIOS = [
-    ("metodo", "Sarden's DNA: ACF fundamentals of RevOps, media architecture, copy and headlines, leadership beliefs, "
-               "growth engineering, GTM and RevOps, hackizinhos, M&A and valuation. Use before any external framework when "
-               "the task asks how Sarden would diagnose, structure or decide.",
+    ("metodo", "Sarden's DNA: master principles, anti-patterns, funnel diagnosis, data integrity, dictionary, ACF fundamentals "
+               "of RevOps, media architecture, copy and headlines, leadership beliefs, growth engineering, GTM and RevOps, "
+               "hackizinhos, M&A and valuation. Use before any external framework when the task asks how Sarden would diagnose, "
+               "structure or decide.",
      ["dna/metodo"]),
     ("biblioteca", "Thinkers summarized in Sarden's method: Balfour's fits, Hormozi, Brunson, Aaron Ross, Sean Ellis, Elad Gil, "
                    "Grove, Horowitz, Winning by Design, G4, Ladeira and others. Use when a named framework is needed (fit, offer, "
                    "funnel, launch, sales process, management).",
      ["biblioteca"]),
-    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, media manager routine and "
-                    "daily checklist, the 2026 demand operating system, Panorama 2026 benchmarks, Stories 10x, the landing page lens "
-                    "(17-field brief, device protocol, pre-traffic QA) and the HTML builder playbook. Use for ads audits, scaling, "
-                    "CPL/CAC diagnosis, routines, organic social and landing pages.",
+    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, account lessons (Meta, "
+                    "Google), lead-gen creative score, media manager routine and checklist, 2026 demand operating system, Panorama "
+                    "2026, Stories 10x, landing page lens (17-field brief, device protocol, pre-traffic QA) and HTML builder playbook. "
+                    "Use for ads audits, scaling, CPL/CAC diagnosis, creatives, routines, organic social and landing pages.",
      ["referencias/performance", "referencias/benchmarks", "referencias/social_organico", "referencias/landing_pages",
       "instrucoes/landing_pages.md"]),
     ("analytics", "Web analytics and tracking: GA4, Google Tag Manager, consent mode, pixels, server-side and snippets. Use for "
                   "measurement, tagging, event naming, data quality and tracking audits.",
      ["referencias/analytics"]),
-    ("gtm", "Go-to-market analytics: unit economics, sizing and segmentation, growth modeling and attribution, experimentation, "
-            "benchmarks by vertical, SQL for GA4 in BigQuery. Use for TAM/SAM/SOM, CAC/LTV/payback math, forecast and experiment design.",
+    ("gtm", "Go-to-market analytics: BP audit (formulas, classic spreadsheet errors), quantitative models (sizing, scoring, "
+            "forecasting, churn, attribution, MMM, experimentation, GA4 SQL) and benchmarks with source. Use for TAM/SAM/SOM, "
+            "CAC/LTV/payback math, forecast, test sizing and market references.",
      ["referencias/go-to-market"]),
-    ("plataformas", "Platform references: HubSpot (dossier and Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, "
-                    "automation, CDP and WhatsApp implementation or audit questions.",
+    ("plataformas", "Platform references: the CRM implementation standard (pipes, cadence, attribution with inheritance, goals), "
+                    "HubSpot (dossier with the Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, automation, CDP and WhatsApp "
+                    "implementation or audit questions.",
      ["referencias/plataformas"]),
     ("rituais", "Management rituals, operations and intake: WBR (status rule, structure, reading lens, complete PA), GP and BP guide, "
                 "brief and proposal reading, operation and team rules, frente onboarding. Use when preparing or reading a WBR, GP, "
