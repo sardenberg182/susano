@@ -47,7 +47,7 @@ atualizado: AAAA-MM-DD
 ---
 ```
 
-Arquivos de `10_`, `30_`, `40_` e `50_` levam `id`, `tipo`, `atualizado` e, quando expiram, `revisar_ate: AAAA-MM-DD`. Arquivos do método (`00_susano/`) levam `id` e `tipo` (`identidade`, `metodo`, `pensador`, `instrucao`, `procedimento`, `referencia`, `exemplo`). Um `exemplo` tem as seções ENTRADA, SAÍDA e POR QUE ASSIM. O tipo `resumo` não existe mais: é `pensador` (com o esqueleto) ou `referencia`.
+Arquivos de `10_`, `30_`, `40_` e `50_` levam `id`, `tipo`, `atualizado` e, quando expiram, `revisar_ate: AAAA-MM-DD`. Arquivos do método (`00_susano/`) levam `id` e `tipo` (`identidade`, `operacao` para `situacoes.md` e `calibracao.md`, `metodo`, `pensador`, `instrucao`, `procedimento`, `referencia`, `exemplo`). Um `exemplo` tem as seções ENTRADA, SAÍDA e POR QUE ASSIM. O tipo `resumo` não existe mais: é `pensador` (com o esqueleto) ou `referencia`.
 
 ## Esqueleto dos pensadores (`tipo: pensador`)
 
@@ -81,9 +81,10 @@ Gate: a pessoa entra só com OK explícito do dono, registrado em `aprovado_por`
 
 ## Validação
 
-- `python3 scripts/brain.py validate`: arquivos obrigatórios, travessão, segredos e dados pessoais (via `.claude/hooks/guardas.py`), frontmatter das frentes, frontmatter e esqueleto do método, links e caminhos citados, frontmatter de `pessoas/`, orçamento de tokens (`nucleo.md` até 2 mil, abertura até 5 mil, estimados).
+- `python3 scripts/brain.py validate`: arquivos obrigatórios, travessão, segredos e dados pessoais (via `.claude/hooks/guardas.py`), frontmatter das frentes, frontmatter e esqueleto do método, links e caminhos citados, frontmatter de `pessoas/`, orçamento de tokens (`nucleo.md` até 2.200, abertura até 8 mil, estimados; `brain.py tokens` detalha).
 - `python3 scripts/brain.py mapa`, `hot`, `fonte "<termo>"`, `tokens`: mapa do repositório, estado quente agregado, arquivo e linha de um termo, carga de abertura.
 - `python3 scripts/brain.py susano-check`: arquivos gerenciados iguais ao `00_susano/MANIFEST.sha256` da versão instalada.
 - `python3 scripts/brain.py audit`: achados mecânicos do brain audit.
 - O CI roda `validate` e `susano-check` em todo PR. Em sessão local, o pre-commit (`bash .claude/hooks/instalar_precommit.sh`, instalado por padrão no `/onboarding`) roda o `validate` antes de cada commit.
 - Branches: `salve/AAAA-MM-DD-<tema>` (trabalho de sessão), `estado-quente/AAAA-MM-DD` (refresh semanal), `susano-vX.Y.Z` (versão do modelo).
+- Antes de cada versão do modelo, o mantenedor roda `testes/casos_decisao.md` (repositório `susano`) no agente e registra a concordância; é a medida de "executa como o Susano".

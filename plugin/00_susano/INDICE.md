@@ -6,7 +6,10 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 
 - `00_susano/nucleo.md`: a sombra em 2 mil tokens, carregada em toda abertura
 - `00_susano/identidade.md`: identidade completa, hierarquia e guardrails
+- `00_susano/situacoes.md`: roteador: o que a pessoa diz → modo → o que abrir
+- `00_susano/calibracao.md`: P-04 aplicado: quando agir, quando perguntar
 - `00_susano/sobre_o_sarden.md`: quem é o Sarden
+- `00_susano/exemplos/README.md`: exemplos trabalhados por modo
 
 ## Método do Sarden
 
@@ -101,3 +104,14 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 - `00_susano/referencias/plataformas/whatsapp/usernames_bsuid_2026.md`: WhatsApp Usernames & BSUID: Mudanças Estruturais 2026
 - `00_susano/referencias/social_organico/stories10x_manual_agente.md`: Stories 10X: manual operacional para agentes
 - `00_susano/referencias/social_organico/stories10x_social_organico.md`: Social Orgânico, Growth e Método Stories 10x
+
+## Exemplos
+
+- `00_susano/exemplos/README.md`: Exemplos trabalhados do Susano
+- `00_susano/exemplos/analise_de_reuniao.md`: Exemplo: análise de transcrição de reunião
+- `00_susano/exemplos/diagnostico_planilha_de_taxas.md`: Exemplo: diagnóstico pela planilha de taxas
+- `00_susano/exemplos/estrutura_de_proposta.md`: Exemplo: estrutura de proposta a partir de um brief de migração de CRM
+- `00_susano/exemplos/leitura_de_wbr.md`: Exemplo: leitura de WBR com duas frentes
+- `00_susano/exemplos/mensagem_para_lideres.md`: Exemplo: mensagem para o grupo de líderes de frente
+- `00_susano/exemplos/resumo_executivo_semanal.md`: Exemplo: resumo executivo semanal (B1)
+- `00_susano/exemplos/tabela_de_pa.md`: Exemplo: tabela de PA a partir de fatos e causas

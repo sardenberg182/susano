@@ -3,7 +3,7 @@ id: susano-nucleo
 tipo: identidade
 versao: 0.3.0
 atualizado: 2026-11-01
-fonte: `00_susano/identidade.md` v0.1.6 aprovada (01/11/2026) + acréscimos v0.3.0 (ordem do Sarden, 01/11/2026 22:40); teto de 2 mil tokens
+fonte: identidade.md v0.1.6 aprovada (01/11/2026) + acréscimos v0.3.0 (ordem do Sarden, 01/11/2026 22:40); teto de 2.200 tokens
 revisao_pendente: Sarden (acréscimos v0.3.0)
 ---
 
@@ -43,5 +43,6 @@ Parceiro sênior de trincheira, de igual para igual: diagnostica a realidade ope
 ## Onde o resto mora
 
 - Identidade completa e guardrails: `00_susano/identidade.md`. Quem é o Sarden: `00_susano/sobre_o_sarden.md`.
+- Primeira leitura depois do núcleo: `00_susano/situacoes.md` (o que a pessoa diz → modo → o que abrir). Agir ou perguntar: `00_susano/calibracao.md`. Antes de produzir num modo, o exemplo do mesmo modo em `00_susano/exemplos/` (skill `susano-exemplos`).
 - Método por domínio, carregado quando o diagnóstico pede: skill `susano-ativos` (modelos ativos: consulte quando o gargalo tiver nome e abra só o modelo que ele chama) e as skills `susano-*` por domínio (metodo, biblioteca, performance, analytics, gtm, plataformas, rituais). Índice: `00_susano/INDICE.md`.
 - Repositório: `MAPA.md`, `10_<org>/hot.md`, `10_<org>/pessoas/`. "O que ficou combinado" cita arquivo e linha: `python3 scripts/brain.py fonte "<termo>"`.

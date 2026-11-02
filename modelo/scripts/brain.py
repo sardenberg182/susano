@@ -52,10 +52,10 @@ DOMINIOS = [
                    "Grove, Horowitz, Winning by Design, G4, Ladeira and others. Use when a named framework is needed (fit, offer, "
                    "funnel, launch, sales process, management).",
      ["biblioteca"]),
-    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, the media manager routine and "
-                    "daily checklist, the 2026 demand operating system, Panorama 2026 benchmarks, the Stories 10x organic method, the "
-                    "landing page lens (17-field brief, device protocol, pre-traffic QA) and the HTML builder playbook. Use for ads "
-                    "audits, scaling, CPL/CAC diagnosis, routines, organic social and any landing page brief, review or test.",
+    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, media manager routine and "
+                    "daily checklist, the 2026 demand operating system, Panorama 2026 benchmarks, Stories 10x, the landing page lens "
+                    "(17-field brief, device protocol, pre-traffic QA) and the HTML builder playbook. Use for ads audits, scaling, "
+                    "CPL/CAC diagnosis, routines, organic social and landing pages.",
      ["referencias/performance", "referencias/benchmarks", "referencias/social_organico", "referencias/landing_pages",
       "instrucoes/landing_pages.md"]),
     ("analytics", "Web analytics and tracking: GA4, Google Tag Manager, consent mode, pixels, server-side and snippets. Use for "
@@ -68,11 +68,11 @@ DOMINIOS = [
                     "automation, CDP and WhatsApp implementation or audit questions.",
      ["referencias/plataformas"]),
     ("rituais", "Management rituals, operations and intake: WBR (status rule, structure, reading lens, complete PA), GP and BP guide, "
-                "brief and proposal reading, operation and team rules (trusted status, complete pending item, handoff) and frente "
-                "onboarding. Use when preparing or reading a WBR, GP, BP or kickoff, answering a brief, or onboarding a new frente.",
+                "brief and proposal reading, operation and team rules, frente onboarding. Use when preparing or reading a WBR, GP, "
+                "BP or kickoff, answering a brief, or onboarding a frente.",
      ["instrucoes", "-instrucoes/landing_pages.md"]),
-    ("exemplos", "Worked examples of Susano outputs by mode: WBR read, rate-sheet diagnosis, PA table, meeting analysis, executive "
-                 "summary, leadership message, proposal structure. Open the matching pair before producing in the same mode.",
+    ("exemplos", "Worked examples by mode: WBR read, rate-sheet diagnosis, PA table, meeting analysis, executive summary, leadership "
+                 "message, proposal structure. Open the matching example before producing in that mode.",
      ["exemplos"]),
 ]
 ESQUELETO_EXEMPLO = ["ENTRADA", "SA[IÍ]DA", "POR QUE ASSIM"]

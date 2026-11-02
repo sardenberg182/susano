@@ -18,7 +18,7 @@ Depois: `/output-style Susano` ativa o estilo de resposta (opcional; o tom já v
 ## O que carrega quando
 
 - Sempre ligado: o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens), injetado na abertura da sessão pelo hook `hooks/abrir.py`, mais as descrições das skills e do subagente. `claude plugin details susano` mostra a projeção.
-- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção.
+- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais`, `susano-exemplos` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. Primeira leitura depois do núcleo: `00_susano/situacoes.md`.
 - Subagente `susano:pesquisador`: evidência com caminho, sobre o método e sobre os documentos do projeto.
 
 ## O que não vem no plugin
