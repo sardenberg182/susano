@@ -54,8 +54,12 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 
 ## Instruções
 
+- `00_susano/instrucoes/brief_e_proposta.md`: Brief e proposta: ler a demanda antes de responder
 - `00_susano/instrucoes/gp_bp.md`: GP/BP: Como o Susano Trabalha com Planejamento de Growth
-- `00_susano/instrucoes/onboarding_projeto.md`: Onboarding de Projeto: Como o Susano Cria Contexto de Novo Projeto
+- `00_susano/instrucoes/landing_pages.md`: Landing pages: a lente, a ficha e o QA antes do tráfego
+- `00_susano/instrucoes/onboarding_frente.md`: Onboarding de Frente: Como o Susano Cria o Contexto de uma Frente Nova
+- `00_susano/instrucoes/operacao_e_time.md`: Operação e time: status que se confia, pendência completa, passagem de bastão
+- `00_susano/instrucoes/wbr.md`: WBR: Weekly Business Review
 
 ## Segundo cérebro
 
@@ -85,6 +89,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 - `00_susano/referencias/go-to-market/relatorios_benchmark_2025.md`: KB_GTM_Benchmarks_Reports_2025
 - `00_susano/referencias/go-to-market/sql_ga4_bigquery.md`: SQL para GA4 + BigQuery
 - `00_susano/referencias/go-to-market/unit_economics.md`: KB_GTM_UnitEconomics_Metrics
+- `00_susano/referencias/landing_pages/playbook_construtor_html.md`: PLAYBOOK OPERACIONAL | AGENTE CONSTRUTOR DE LANDING PAGE EM HTML
 - `00_susano/referencias/performance/checklist_diario_gestor.md`: Checklist diário do gestor de performance
 - `00_susano/referencias/performance/fundamentos_anuncios_performance.md`: Fundamentos de anúncios de performance e marketing digital
 - `00_susano/referencias/performance/panorama_2026_guia_estrategico.md`: Panorama PRO 2026: guia estratégico de canais e geração de leads
