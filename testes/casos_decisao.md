@@ -2,7 +2,7 @@
 
 Versão: 1.0 | Data: 2026-11-01 | Dono: Sarden | Mantém: Raijin
 
-Esta é a única medida de "executa como o Susano". Cada caso é uma situação fictícia com a decisão que o método exige e a regra que a sustenta. Antes de cada tag, o agente (Claude Code com o plugin, ou o template gerado) roda os casos; a concordância é registrada no `CHANGELOG.md` da versão. Rodar à mão (um caso por mensagem, ou em lote de cinco) ou com `claude -p` em CI; na v0.3.0 a decisão do Sarden foi rodar à mão, na máquina dele, antes da tag (01/11/2026); em 02/11/2026 ele pediu ao Raijin para rodar por ele: `claude -p` no Mac do Sarden, com o plugin da branch, um caso por sessão nova, só ferramentas de leitura (escrita, shell, web, MCP e subagente bloqueados), pontuação do Raijin. Entrada descrita em vez de citada (C-09, C-10, C-15, C-26) vira material fictício montado no próprio roteiro de execução.
+Esta é a única medida de "executa como o Susano". Cada caso é uma situação fictícia com a decisão que o método exige e a regra que a sustenta. Antes de cada tag, o agente (Claude Code com o plugin, ou o template gerado) roda os casos; a concordância é registrada no `CHANGELOG.md` da versão. Rodar à mão (um caso por mensagem, ou em lote de cinco) ou com `claude -p` em CI; na v0.3.0 a decisão do Sarden foi rodar à mão, na máquina dele, antes da tag (01/11/2026); em 02/11/2026 ele pediu ao Raijin para rodar por ele: `claude -p` no Mac do Sarden, com o plugin da branch, um caso por sessão nova, só ferramentas de leitura (escrita, shell, web, MCP e subagente bloqueados), pontuação do Raijin. Entrada descrita em vez de citada (C-09, C-10, C-15, C-26) vira material fictício montado no roteiro `testes/rodar_casos.py`.
 
 Como pontuar: **concorda** (a decisão esperada e a regra aparecem na resposta, mesmo com outras palavras), **parcial** (decisão certa sem a regra, ou a regra sem a decisão) ou **diverge** (fez o que a armadilha descreve). Meta: zero divergência; parcial vira issue.
 
@@ -198,4 +198,5 @@ Formato de cada caso: situação · entrada (fictícia) · decisão esperada · 
 
 | Versão | Data | Quem rodou | Como | Concordam | Parciais | Divergem | Issues abertas |
 |---|---|---|---|---|---|---|---|
-| v0.3.0, rodada 1 | 02/11/2026 | Raijin, a pedido do Sarden | `claude -p` com o plugin da branch `v0.3-limpeza` (6352fc1), modelo padrão do Sarden, no Mac dele | 16 | 8 | 2 (C-15, C-25) | correção no núcleo antes da tag; as parciais viram issue |
+| v0.3.0, rodada 1 | 02/11/2026 | Raijin, a pedido do Sarden | `claude -p` com o plugin da branch `v0.3-limpeza` (6352fc1), modelo padrão do Sarden, no Mac dele | 16 | 8 | 2 (C-15, C-25) | correção no núcleo antes da tag (ordens do Sarden, 02/11/2026) |
+| v0.3.0, rodada 2 | 02/11/2026 | Raijin, a pedido do Sarden | `claude -p` com o plugin da branch `v0.3-limpeza` (fc67d38), roteiro `testes/rodar_casos.py`, no Mac do Sarden | 22 | 4 (C-11, C-13, C-18, C-19) | 0 | #8 |

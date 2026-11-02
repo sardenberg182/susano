@@ -35,7 +35,8 @@ Fechada na v0.1.4 (01/11/2026) com os 5 direcionais de performance do Notion do 
 - [VERIFICAR] Nomenclatura de produto marcada na v0.3.0: campanhas de vídeo do Google (antigo TrueView), Demand Gen (antigo Discovery), Message ads do LinkedIn (antigo Sponsored InMail), a sigla SPC da rotina; limite de 100 mil conversas por dia no WhatsApp; páginas internas do Panorama por segmento.
 - Contradições e números sem fonte ficam marcados nos próprios arquivos, com as duas fontes preservadas: decisão do Sarden (01/11/2026), ter vários exemplos de fontes e direcionais vale mais do que resolver a contradição no silêncio.
 - Skill `stories-10x` a partir do manual e da referência de social orgânico (`referencias/social_organico/`).
-- `testes/casos_decisao.md` (repositório do modelo): rodar os 26 casos antes da tag v0.3.0 e registrar a concordância na tabela do arquivo e no `CHANGELOG.md`.
+- Casos de decisão da v0.3.0: zero divergência na rodada 2 (02/11/2026); as 4 parciais (C-11, C-13, C-18, C-19) estão na issue #8 do repositório do modelo.
+- Pasta `pessoas/` do template: hoje guarda nome, papel e relação, com o OK do dono. Confirmar com o Sarden se, pela regra de 02/11/2026 ("nada de ninguém"), ela passa a guardar só o papel.
 
 ## Propostas abertas (issues do repositório `susano`)
 
