@@ -1,14 +1,15 @@
-# Política de dependências (v0.4.0): PR mensal do Dependabot para as actions (fixadas por SHA) e para o Copier fixado em
-# testes/requirements.txt. O claude CLI do CI (testes/claude_code_versao.txt) sobe à mão, a cada versão do modelo.
+# Política de dependências (v0.4.0): PR mensal do Dependabot para as actions (fixadas por SHA), para o Copier
+# (testes/requirements.txt) e para o uv (testes/requirements-compat.txt). O claude CLI do CI
+# (testes/claude_code_versao.txt) sobe à mão, a cada versão do modelo.
+# A entrada /modelo saiu: falhou na primeira rodada (02/11/2026) com "/modelo/<anything>.yml not found", porque
+# o Dependabot procura os .yml na pasta indicada. Um PR dele dentro de modelo/ ficaria vermelho até regenerar o
+# manifesto, então o workflow do template (modelo/.github/workflows/brain.yml) acompanha a raiz no mesmo PR do
+# Dependabot: o CI barra quando o actions/checkout dos dois diverge ou não aparece.
 # Nenhum PR do Dependabot entra sem os testes verdes e o OK do Sarden.
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
-    schedule:
-      interval: monthly
-  - package-ecosystem: github-actions
-    directory: /modelo
     schedule:
       interval: monthly
   - package-ecosystem: pip

@@ -27,6 +27,14 @@ jobs:
           python -m pip install --disable-pip-version-check -r testes/requirements.txt
           npm install -g "@anthropic-ai/claude-code@$(cat testes/claude_code_versao.txt)"
           python --version; git --version; copier --version; claude --version
+      - name: Mesma versão de actions/checkout na raiz e no template
+        run: |
+          raiz=$(grep -oE 'actions/checkout@[0-9a-f]{40}' .github/workflows/testes.yml | sort -u || true)
+          modelo=$(grep -oE 'actions/checkout@[0-9a-f]{40}' modelo/.github/workflows/brain.yml | sort -u || true)
+          if [ -z "$raiz" ] || [ "$raiz" != "$modelo" ]; then
+            echo "actions/checkout ausente ou divergente: raiz '$raiz', template '$modelo'. Fixe o mesmo SHA nos dois e regenere o manifesto."
+            exit 1
+          fi
       - name: Privacidade do repositório público (todo arquivo, perfil público)
         run: python modelo/scripts/brain.py --raiz . varrer --perfil publico
       - name: Geradores idempotentes (nada muda nem aparece)
@@ -46,6 +54,14 @@ jobs:
         env:
           BASE: ${{ github.base_ref }}
         run: python ferramentas/conferir_autoria.py "origin/$BASE..HEAD^2"
+      # Roda mesmo se um passo anterior falhar (só não roda com o job cancelado): o push seguinte não confere de novo
+      # estes commits.
+      - name: Autoria do que entrou na main, inclusive merge e rebase feitos pelo GitHub
+        if: ${{ !cancelled() && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000' }}
+        env:
+          ANTES: ${{ github.event.before }}
+          DEPOIS: ${{ github.sha }}
+        run: python ferramentas/conferir_autoria.py --com-merges "$ANTES..$DEPOIS"
 
   # Plataformas e versões declaradas: Python 3.9 (mínimo dos projetos) e macOS (máquina de quem usa).
   compatibilidade:
