@@ -67,7 +67,7 @@ DOMINIOS = [
             "CAC/LTV/payback math, forecast, test sizing and market references.",
      ["referencias/go-to-market"]),
     ("plataformas", "Platform references: the CRM implementation standard (pipes, cadence, attribution with inheritance, goals), "
-                    "HubSpot (dossier and Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, automation, CDP and WhatsApp "
+                    "HubSpot (dossier with the Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, automation, CDP and WhatsApp "
                     "implementation or audit questions.",
      ["referencias/plataformas"]),
     ("rituais", "Management rituals, operations and intake: WBR (status rule, structure, reading lens, complete PA), GP and BP guide, "

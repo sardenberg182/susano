@@ -96,7 +96,6 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão.
 - `00_susano/referencias/performance/sistema_operacional_demanda_2026.md`: Sistema operacional de geração de demanda e performance 2026
 - `00_susano/referencias/plataformas/clevertap/contexto_master.md`: CLEVERTAP: BASE DE CONHECIMENTO MESTRA (SUSANO)
 - `00_susano/referencias/plataformas/crm/padrao_implementacao.md`: Padrão de implementação de CRM: pipes, cadência, atribuição e metas
-- `00_susano/referencias/plataformas/hubspot/brasil_2026-05.md`: HubSpot no Brasil com foco técnico e estratégico
 - `00_susano/referencias/plataformas/hubspot/dossie_mestre.md`: HubSpot: Dossiê Mestre de Domínio do Produto
 - `00_susano/referencias/plataformas/whatsapp/usernames_bsuid_2026.md`: WhatsApp Usernames & BSUID: Mudanças Estruturais 2026
 - `00_susano/referencias/social_organico/stories10x_manual_agente.md`: Stories 10X: manual operacional para agentes
