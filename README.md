@@ -36,9 +36,11 @@ Sessão na nuvem (claude.ai/code) não carrega plugin instalado na máquina: lá
 ## Caminho 2: template
 
 ```
-pip install copier
+pipx install copier        (ou: uv tool install copier)
 copier copy --vcs-ref v0.3.0 gh:sardenberg182/susano meu-projeto
 ```
+
+`pip install copier` direto falha no Python do Homebrew e em outros ambientes gerenciados (PEP 668); `pipx` e `uv tool` instalam o Copier isolado. Requisitos: Python 3.10 ou mais novo (o Copier atual exige), git e Claude Code.
 
 O Copier pergunta: `org` (vira `10_<org>/`), `org_nome`, `frentes` (vira `20_<frentes>/`, padrão `clientes`), `dono` (usuário do GitHub que aprova os PRs) e `idioma`. Depois: `git init`, `python3 scripts/brain.py mapa`, `validate`, `susano-check`, suba para o GitHub e rode `/onboarding` no Claude Code. O `AGENTS.md` gerado explica a ordem de leitura para qualquer outro agente (Codex, Cursor, Gemini CLI, Copilot).
 
