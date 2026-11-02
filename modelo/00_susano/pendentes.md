@@ -16,6 +16,7 @@ Este arquivo registra o que está aprovado pelo Sarden, o que espera a leitura d
 - 01/11/2026, 16:54: os 8 DNAs originais de `00_susano/dna/metodo/`, lidos no chat ("Revisado pode seguir"); cada um leva a linha `aprovado:` no frontmatter. As seções ALERTAS OPERACIONAIS e os 5 DNAs novos da v0.3.0 estão em `revisao_pendente`.
 - 01/11/2026, 22:40: decisões da v0.3.0: tom do núcleo mantido com calibração a quem está na sessão; fusão dos arquivos do Notion (checklist → índice da rotina; Panorama fonte única); casos de decisão rodados à mão antes da tag; as duas fontes anexadas no chat.
 - 02/11/2026, 07:30: depois da rodada dos casos de decisão: nada pessoal de ninguém vai para arquivo ("Não pode gravar nada de ninguém nesse projeto, ele é público"); exemplo e case sempre fictícios, em contexto real, nunca com número real ("Sempre exemplos fictícios com contextos reais, nunca números reais"). As regras entram no núcleo, na identidade, no anti-padrão 18, no diagnóstico de funil, no exemplo de proposta e nas referências; o texto novo segue em `revisao_pendente`.
+- 02/11/2026, 07:59: a regra "nada de ninguém" vale para o repositório público do modelo; no projeto de quem usa, decide o dono ("quem aplica pode fazer o que quiser"). A pasta `pessoas/` do template segue como está: nome, papel e relação com o OK do dono; contato nunca, pelas guardas.
 
 ## Em revisão (aguardando a leitura do Sarden)
 
@@ -36,7 +37,6 @@ Fechada na v0.1.4 (01/11/2026) com os 5 direcionais de performance do Notion do 
 - Contradições e números sem fonte ficam marcados nos próprios arquivos, com as duas fontes preservadas: decisão do Sarden (01/11/2026), ter vários exemplos de fontes e direcionais vale mais do que resolver a contradição no silêncio.
 - Skill `stories-10x` a partir do manual e da referência de social orgânico (`referencias/social_organico/`).
 - Casos de decisão da v0.3.0: zero divergência na rodada 2 (02/11/2026); as 4 parciais (C-11, C-13, C-18, C-19) estão na issue #8 do repositório do modelo.
-- Pasta `pessoas/` do template: hoje guarda nome, papel e relação, com o OK do dono. Confirmar com o Sarden se, pela regra de 02/11/2026 ("nada de ninguém"), ela passa a guardar só o papel.
 
 ## Propostas abertas (issues do repositório `susano`)
 
