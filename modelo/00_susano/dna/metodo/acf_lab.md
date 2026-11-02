@@ -4,8 +4,9 @@ tipo: metodo
 autor: Sarden
 nivel: ATIVO
 origem: `00_susano/dna/metodo/acf_lab.md`
-atualizado: 2026-10-31
+atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
+revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)
 ---
 
 # DNA em Áudio: ACF_Lab: Fundamentos de RevOps
@@ -29,6 +30,15 @@ aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode segu
 
 - ICP baseado em características qualitativas sem critério de rentabilidade não é ICP, é perfil de cliente dos sonhos que não paga as contas.
 - O custo do desalinhamento conceitual entre times é maior do que o custo de dedicar tempo para nivelar fundamentos que todos presumem já dominar.
+
+## ALERTAS OPERACIONAIS
+
+Regras de decisão (a voz de autor fica fora do modelo; aqui só a regra):
+
+- Nunca autorizar modelagem de ICP ancorada só em suposição qualitativa: ICP se prende a métrica de caixa (LTV, churn, sustentação de pricing).
+- Nunca aceitar "depende" como critério de passagem entre etapas do funil: exigir o corte exato.
+- Nunca recomendar escala de aquisição sem verificar se todos os times usam a mesma definição de Lead, MQL e SQL (`dicionario.md`).
+- Nunca importar playbook de outro mercado sem adaptar à cultura local de captura e conversão.
 
 ## REFERÊNCIA RÁPIDA
 
