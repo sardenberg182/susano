@@ -3,7 +3,7 @@ id: bib-balfour-05-mover-de-mercado
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_moving_up_down_market.md
+origem: Moving Up or Down Market (Brian Balfour, artigo), resumo do Sarden
 atualizado: 2026-10-31
 ---
 
@@ -19,7 +19,7 @@ Mover up-market ou down-market falha porque as empresas tratam como problema de 
 ## MODELOS ATIVOS
 
 - **Análise Competitiva por Posição de Fits**: Competidores na mesma categoria com posições diferentes no espectro não são comparáveis. Mailchimp, HubSpot e Marketo vendem "email marketing" mas têm fits completamente distintos. Ao analisar competidores de um projeto, mapear a posição de cada um no espectro, não comparar por feature ou preço.
-- **Impacto em Cadeia ao Mover de Mercado**: Antes de qualquer expansão up-market (redes) ou down-market (mais bares independentes), mapear o impacto em cadeia nos 4 Fits. Mudança de produto exige mudança de canal, que exige mudança de modelo, que exige recalibrar o mercado. Fazer qualquer uma isoladamente quebra o sistema.
+- **Impacto em Cadeia ao Mover de Mercado**: Antes de qualquer expansão up-market (contas maiores, com mais exigência) ou down-market (muitas contas pequenas), mapear o impacto em cadeia nos 4 Fits. Mudança de produto exige mudança de canal, que exige mudança de modelo, que exige recalibrar o mercado. Fazer qualquer uma isoladamente quebra o sistema.
 - **Revisão Periódica dos 4 Fits**: Revisar os 4 Fits trimestralmente como prática preventiva. Identificar sinais de enfraquecimento antes de virar crise de crescimento.
 
 ---

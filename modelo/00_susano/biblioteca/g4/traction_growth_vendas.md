@@ -3,7 +3,7 @@ id: bib-g4-traction-growth-vendas
 tipo: pensador
 autor: João Vitor + Jonathan Souza
 nivel: ATIVO
-origem: knowledge_susano_g4_traction_growth_vendas.md
+origem: Traction: growth e vendas (G4 Educação), resumo do Sarden
 atualizado: 2026-11-01
 ---
 

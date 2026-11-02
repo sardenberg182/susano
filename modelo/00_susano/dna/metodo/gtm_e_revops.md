@@ -3,7 +3,7 @@ id: dna-gtm-e-revops
 tipo: metodo
 autor: Sarden
 nivel: ATIVO
-origem: `00_susano/dna/metodo/gtm_e_revops.md`
+origem: DNA do Sarden em áudio e vídeo, transcrito e destilado (v0.1, out/2026)
 atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
 revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)

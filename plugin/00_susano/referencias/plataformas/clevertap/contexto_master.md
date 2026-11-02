@@ -1,13 +1,13 @@
 ---
 id: ref-plataformas-clevertap-contexto-master
 tipo: referencia
-origem: clevertap_contexto_master.md
-atualizado: 2026-10-31
+origem: base de conhecimento de CleverTap consolidada pelo Sarden a partir de três análises e da documentação oficial (coleta de 13/06/2026)
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: ponteiros para arquivos locais do autor removidos; nota de migração sem setor)
 ---
 
 # CLEVERTAP: BASE DE CONHECIMENTO MESTRA (SUSANO)
 
-> **Arquivo:** `clevertap_contexto_master.md`
 > **Tipo:** Base de conhecimento consolidada para instâncias Susano (Claude Projects)
 > **Tema:** CleverTap (plataforma de Customer Engagement & Retention)
 > **Gerado em:** 2026-06-13
@@ -23,8 +23,8 @@ atualizado: 2026-10-31
 Este documento é a fonte única consolidada sobre a CleverTap para uso em Susanos. Ele triangula três pesquisas profundas independentes (cada uma com viés metodológico distinto) e extrai a referência técnica canônica de dois dumps de documentação oficial.
 
 **Aviso de escopo importante (ler antes de carregar):**
-- Os dois "masters" originais somam volume inviável para um único arquivo de Project: `clevertap_docs_master.md` tem cerca de 184 MB (876 páginas de docs em inglês) e `clevertap_pt_master.md` tem cerca de 4,5 MB (307 páginas do site PT-BR). Eles **não cabem** e **não devem** ser colados integralmente em um Claude Project.
-- Este arquivo captura a estrutura canônica, os fatos verificáveis e toda a inteligência estratégica dos três relatórios. Os dois masters seguem disponíveis como fonte bruta de consulta pontual (ver Anexo B).
+- As duas bases brutas de origem (documentação oficial em inglês, 876 páginas, e site oficial em PT-BR, 307 páginas, coletados em 13/06/2026) somam volume inviável para um único arquivo e ficam fora deste repositório. Eles **não cabem** e **não devem** ser colados integralmente em um Claude Project.
+- Este arquivo captura a estrutura canônica, os fatos verificáveis e toda a inteligência estratégica dos três relatórios. Para detalhe literal, a fonte é a documentação oficial ao vivo (ver Anexo B).
 - Onde os relatórios divergem, a divergência está marcada com `[CONTRADIÇÃO]` em vez de escolher um lado. Isso é proposital: o Susano deve apresentar a tensão, não mascará-la.
 
 **Regra de leitura das notas de usabilidade:** as notas de 1 a 5 em cada dimensão são `[INFERÊNCIA]` analítica dos autores das pesquisas, não métricas oficiais. Use-as como sinal direcional, não como dado duro.
@@ -33,13 +33,13 @@ Este documento é a fonte única consolidada sobre a CleverTap para uso em Susan
 
 ## INVENTÁRIO DE FONTES (5 documentos de origem)
 
-| # | Arquivo de origem | Natureza | Viés metodológico | Casos-âncora |
+| # | Fonte de origem (fora deste repositório) | Natureza | Viés metodológico | Casos-âncora |
 |---|---|---|---|---|
-| 1 | `1__Suma_rio_executivo.md` | Relatório de usabilidade (estilo Perplexity, citações inline) | Equilibrado, foco em review platforms globais | TMOV, baz/Banco Azteca, Paysend, MOVii, PayU, Brevistay |
-| 2 | `Ana_lise_Profunda_do_CleverTap.md` | Relatório analítico profundo (estilo Gemini, notas de rodapé) | Crítico, foco Brasil/LatAm e fricções técnicas | RecargaPay, Food To Save, SAF Botafogo, Beep Saúde, Cartão de Todos, Guru, Rei do Pitaco |
-| 3 | `deep-research-report.md` | Relatório de pesquisa (estilo Claude, citações verificadas) | Equilibrado, foco em triangulação e governança | TMOV, Banco Promerica, APLAZO, Albo, Circles.Life, HUFT, Eatigo, Rummy Passion, VieON |
-| 4 | `clevertap_docs_master.md` | Dump de documentação técnica (docs.clevertap.com + developer.clevertap.com) | Verbatim oficial, 876 páginas, EN | Referência de produto/SDK/API |
-| 5 | `clevertap_pt_master.md` | Dump do site institucional/produto PT-BR (clevertap.com/pt) | Verbatim oficial, 307 páginas, PT-BR | Posicionamento, planos, CleverAI, verticais |
+| 1 | F1: relatório de usabilidade (sumário executivo) | Relatório de usabilidade (estilo Perplexity, citações inline) | Equilibrado, foco em review platforms globais | TMOV, baz/Banco Azteca, Paysend, MOVii, PayU, Brevistay |
+| 2 | F2: relatório analítico profundo | Relatório analítico profundo (estilo Gemini, notas de rodapé) | Crítico, foco Brasil/LatAm e fricções técnicas | RecargaPay, Food To Save, SAF Botafogo, Beep Saúde, Cartão de Todos, Guru, Rei do Pitaco |
+| 3 | F3: relatório de pesquisa com citações verificadas | Relatório de pesquisa (estilo Claude, citações verificadas) | Equilibrado, foco em triangulação e governança | TMOV, Banco Promerica, APLAZO, Albo, Circles.Life, HUFT, Eatigo, Rummy Passion, VieON |
+| 4 | Documentação oficial (docs e developer) | Dump de documentação técnica (docs.clevertap.com + developer.clevertap.com) | Verbatim oficial, 876 páginas, EN | Referência de produto/SDK/API |
+| 5 | Site oficial em PT-BR | Dump do site institucional/produto PT-BR (clevertap.com/pt) | Verbatim oficial, 307 páginas, PT-BR | Posicionamento, planos, CleverAI, verticais |
 
 Todas as fontes foram coletadas em 13/06/2026. O inventário completo de URLs por tipo `[VENDOR]`/`[INDEPENDENT]` está no Anexo A.
 
@@ -112,7 +112,7 @@ Na prática, a complexidade funcional, os add-ons estruturais (ex.: exportação
 
 # PARTE II: ARQUITETURA E PRODUTO (referência técnica canônica)
 
-> Extraída dos dumps oficiais (`clevertap_docs_master.md`, `clevertap_pt_master.md`) e validada contra os três relatórios. Esta é a referência de "o que a plataforma é e faz".
+> Extraída da documentação e do site oficiais (coleta de 13/06/2026) e validada contra os três relatórios. Esta é a referência de "o que a plataforma é e faz".
 
 ## 6. TesseractDB (núcleo de dados)
 
@@ -542,25 +542,25 @@ A CleverTap tende a ser a escolha errada quando a operação é: `[INFERÊNCIA]`
 - Gartner Magic Quadrant (Personalization Engines 2026): analista. `[INDEPENDENT]`.
 - IsDown, StatusGator: monitoramento de incidentes de terceiros. `[INDEPENDENT]`.
 
-> Observação: as três análises trazem URLs específicas em seus corpos originais. Para auditoria fina de uma afirmação, abrir o relatório-fonte correspondente (F1/F2/F3) e seguir a citação inline.
+> Observação: as três análises de origem traziam URLs específicas; elas não estão neste repositório. Para auditoria fina de uma afirmação, conferir na documentação oficial da CleverTap ao vivo e registrar a data.
 
 # ANEXO B: SOBRE OS DOIS MASTERS BRUTOS (não embutidos)
 
 ## B.1 Por que não estão embutidos
 
-Os dois arquivos "master" são grandes demais para serem carregados integralmente num Projeto Claude/Susano:
-- `clevertap_docs_master.md`: documentação oficial verbatim, 876 páginas, ~328 mil linhas, em inglês.
-- `clevertap_pt_master.md`: site oficial em PT-BR verbatim, 307 páginas, ~61 mil linhas.
+As duas bases brutas de origem são grandes demais para qualquer contexto de agente e não estão no repositório:
+- documentação oficial verbatim, 876 páginas, cerca de 328 mil linhas, em inglês;
+- site oficial em PT-BR verbatim, 307 páginas, cerca de 61 mil linhas.
 
 Tentar colá-los inteiros estoura o contexto e degrada o desempenho do agente. Esta base mestra já extraiu deles a referência canônica de produto, técnica e de planos (PARTES I, II e o item 16).
 
 ## B.2 Como usá-los quando necessário
 
-Mantê-los fora do Projeto, como arquivos de consulta pontual ("lookup"). Quando o operador precisar de um detalhe muito específico (ex.: payload exato de um endpoint, comportamento de um SDK, texto literal de uma página de produto), abrir o master correspondente e fazer busca direcionada (grep/Ctrl+F) pelo termo. Não carregar o arquivo inteiro no agente.
+Consultar a documentação oficial ao vivo como fonte de detalhe ("lookup"). Quando o operador precisar de um detalhe muito específico (ex.: payload exato de um endpoint, comportamento de um SDK, texto literal de uma página de produto), abrir o master correspondente e fazer busca direcionada (grep/Ctrl+F) pelo termo. Não carregar o arquivo inteiro no agente.
 
 ## B.3 Avisos sobre o conteúdo bruto
 
-- O master EN contém, além das docs em inglês, blocos de conteúdo de marketing em PT e um blob grande de JavaScript minificado do widget "Ask AI". Ao buscar nomes de planos/preços, ignorar a região do blob de JS para evitar falsos positivos.
+- A coleta em inglês continha, além das docs, blocos de marketing em PT e um blob de JavaScript minificado de widget; ao buscar nomes de planos e preços na documentação, ignorar conteúdo de widget para evitar falsos positivos.
 - Ambos são verbatim e datados da coleta (13/06/2026). Funcionalidades e preços mudam; revalidar contra o site/docs ao vivo antes de decisões contratuais.
 
 ---
@@ -571,4 +571,4 @@ Mantê-los fora do Projeto, como arquivos de consulta pontual ("lookup"). Quando
 
 ## NOTAS DA MIGRAÇÃO (2026-11-01)
 
-- v0.1.6: um case de cooperativa financeira divulgado pelo fornecedor saiu das listas de casos por ordem do Sarden (nome ligado à operação dele). As listas seguem como prova social de fornecedor, `[VENDOR]`, sem dado de cliente do Sarden.
+- v0.1.6: um case divulgado pelo fornecedor saiu das listas de casos por ordem do Sarden (nome ligado à operação dele). As listas seguem como prova social de fornecedor, `[VENDOR]`, sem dado de cliente do Sarden.

@@ -3,7 +3,7 @@ id: bib-brunson-expert-secrets
 tipo: pensador
 autor: Russell Brunson
 nivel: MISTO (modelos ativos + frameworks passivos)
-origem: knowledge_susano_expert_secrets.md
+origem: Expert Secrets (Russell Brunson), resumo do Sarden
 atualizado: 2026-11-01
 ---
 

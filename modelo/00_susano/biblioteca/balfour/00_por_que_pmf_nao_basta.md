@@ -3,7 +3,7 @@ id: bib-balfour-00-por-que-pmf-nao-basta
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_why_pmf_isnt_enough.md
+origem: Why Product Market Fit Isn't Enough (Brian Balfour, artigo), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

@@ -3,7 +3,7 @@ id: bib-brunson-traffic-secrets
 tipo: pensador
 autor: Russell Brunson
 nivel: MISTO (modelos ativos + frameworks passivos)
-origem: knowledge_susano_traffic_secrets.md
+origem: Traffic Secrets (Russell Brunson), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: regras de comissão de afiliado unificadas)
 ---

@@ -3,7 +3,7 @@ id: instr-gp-bp
 tipo: instrucao
 autor: Sarden
 carrega_em: sob demanda (skill susano-rituais)
-origem: guia de GP/BP da operação do Sarden (2025 a 2026); nome antigo instrucao_susano_gp_bp.md
+origem: guia de GP/BP da operação do Sarden (2025 a 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: carga sob demanda, vocabulário de frente, marcadores canônicos, contexto nos arquivos da frente)
 ---

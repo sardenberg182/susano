@@ -3,7 +3,7 @@ id: bib-elad-gil-high-growth-handbook
 tipo: pensador
 autor: Elad Gil (*High Growth Handbook*, Stripe Press, 2018)
 nivel: MISTO
-origem: knowledge_susano_high_growth_handbook.md
+origem: High Growth Handbook (Elad Gil), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: frases quebradas pela remoção do travessão reescritas)
 ---

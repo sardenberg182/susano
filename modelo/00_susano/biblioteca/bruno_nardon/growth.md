@@ -3,7 +3,7 @@ id: bib-bruno-nardon-growth
 tipo: pensador
 autor: Bruno Nardon
 nivel: ATIVO
-origem: knowledge_susano_growth_bruno_nardon.md
+origem: conteúdos e palestras de Bruno Nardon sobre growth, resumo do Sarden
 atualizado: 2026-11-01
 ---
 

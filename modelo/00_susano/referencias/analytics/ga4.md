@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-ga4
 tipo: referencia
-origem: KB_GA4_MasterReference.md
+origem: referência mestra de GA4 compilada pelo Sarden (Analytics Mania, 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: limites de dimensões custom pela documentação oficial, DebugView sem parâmetro de URL, grupos de canal marcados)
 ---

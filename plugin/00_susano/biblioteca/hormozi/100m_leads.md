@@ -3,7 +3,7 @@ id: bib-hormozi-100m-leads
 tipo: pensador
 autor: Alex Hormozi (2023)
 nivel: ATIVO
-origem: knowledge_susano_100m_leads_hormozi.md
+origem: $100M Leads (Alex Hormozi), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

@@ -4,7 +4,7 @@ tipo: metodo
 autor: Sarden
 nivel: ATIVO
 origem: método de diagnóstico e crescimento da operação do Sarden (treinamento de alavancas, planilha de taxas, hipótese e plano de ação, mar a out/2026); exemplo numérico fictício
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 revisao_pendente: Sarden (arquivo novo da v0.3.0; registrar aprovado após leitura)
 ---
 
@@ -51,7 +51,7 @@ Frames que fazem a frase virar aposta:
 - **Alavanca**: nó da árvore que a hipótese move.
 - **Gargalo**: taxa ou volume, executado contra planejado pro-rata, em qual canal ou segmento. Granular, nunca média.
 - **Lado do filtro**: atrai errado ou trata mal.
-- **Observação e tipo de evidência**: dado próprio da frente, dado de outra frente (anonimizado, nunca a base), benchmark com fonte, teoria ou opinião.
+- **Observação e tipo de evidência**: dado próprio da frente, benchmark com fonte, teoria ou opinião; dado de outra frente não entra, nem anonimizado.
 - **Mede por**: métrica, fonte, KPI da etapa certa (nunca KPI de etapa misturada).
 - **Confiança**: dada pelo tipo de evidência, não por quem deu a ideia.
 - **Esforço**: horas do time, dependência do cliente ou de dev, reversível ou não.

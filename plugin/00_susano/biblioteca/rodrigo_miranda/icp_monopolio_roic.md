@@ -3,7 +3,7 @@ id: bib-rodrigo-miranda-icp-monopolio-roic
 tipo: pensador
 autor: Rodrigo Miranda
 nivel: ATIVO
-origem: knowledge_susano_icp_monopolio_roic.md
+origem: ICP, monopólio e ROIC (Rodrigo Miranda), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: seção CONEXÕES renomeada)
 ---

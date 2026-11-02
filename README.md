@@ -5,7 +5,7 @@ Repositório do Susano, a sombra do Sarden: o método, o DNA, a biblioteca, as r
 | Você quer | Use | Como |
 |---|---|---|
 | a sombra no projeto que você já tem (qualquer repositório, terminal, desktop ou IDE) | o **plugin** do Claude Code | `/plugin marketplace add sardenberg182/susano` e `/plugin install susano@susano` |
-| o segundo cérebro completo: estrutura de pastas, `brain.py`, guardas, CI, mapa e estado quente (funciona também na nuvem do claude.ai/code) | o **template** Copier | `copier copy --vcs-ref v0.2.1 gh:sardenberg182/susano meu-projeto` |
+| o segundo cérebro completo: estrutura de pastas, `brain.py`, guardas, CI, mapa e estado quente (funciona também na nuvem do claude.ai/code) | o **template** Copier | `copier copy --vcs-ref v0.3.0 gh:sardenberg182/susano meu-projeto` |
 | a sombra numa conversa, sem repositório (Project do claude.ai, GPT do ChatGPT, Gem do Gemini) | o **pacote de chat** | `python3 ferramentas/gerar_pacote_chat.py` e cole os dois arquivos gerados |
 
 O método é do Sarden; o contexto, os dados e as decisões de cada projeto ficam no próprio projeto. Nos três caminhos a abertura da sessão carrega só o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens); o resto do método chega por skills (ou pelo índice, no chat), quando a tarefa pede.
@@ -36,9 +36,11 @@ Sessão na nuvem (claude.ai/code) não carrega plugin instalado na máquina: lá
 ## Caminho 2: template
 
 ```
-pip install copier
-copier copy --vcs-ref v0.2.1 gh:sardenberg182/susano meu-projeto
+pipx install copier        (ou: uv tool install copier)
+copier copy --vcs-ref v0.3.0 gh:sardenberg182/susano meu-projeto
 ```
+
+`pip install copier` direto falha no Python do Homebrew e em outros ambientes gerenciados (PEP 668); `pipx` e `uv tool` instalam o Copier isolado. Requisitos: Python 3.10 ou mais novo (o Copier atual exige), git e Claude Code.
 
 O Copier pergunta: `org` (vira `10_<org>/`), `org_nome`, `frentes` (vira `20_<frentes>/`, padrão `clientes`), `dono` (usuário do GitHub que aprova os PRs) e `idioma`. Depois: `git init`, `python3 scripts/brain.py mapa`, `validate`, `susano-check`, suba para o GitHub e rode `/onboarding` no Claude Code. O `AGENTS.md` gerado explica a ordem de leitura para qualquer outro agente (Codex, Cursor, Gemini CLI, Copilot).
 
@@ -62,7 +64,7 @@ Regras do modo sem shell, que o próprio `SYSTEM_PROMPT.md` carrega: o Susano l�
 2. `python3 modelo/scripts/brain.py --raiz modelo indice`, `skills` e `manifesto`.
 3. `python3 ferramentas/construir_plugin.py`: regenera `plugin/` e `.claude-plugin/marketplace.json` e roda `claude plugin validate`.
 4. `bash testes/testar_modelo.sh` (gera projeto temporário: validate, susano-check, testar_camada) e `bash testes/testar_plugin.sh`.
-5. `testes/casos_decisao.md`: rodar os casos no agente (à mão ou `claude -p`) e registrar a concordância na tabela do arquivo e no `CHANGELOG.md`.
+5. `testes/casos_decisao.md`: rodar os casos no agente (à mão, ou `python3 testes/rodar_casos.py`, que usa `claude -p` com um caso por sessão e só ferramentas de leitura) e registrar a concordância na tabela do arquivo e no `CHANGELOG.md`.
 6. Merge, tag `vX.Y.Z`. O Raijin propõe, o Sarden aprova.
 
 Proposta de quem usa o modelo: issue "Proposta para o modelo" (template em `.github/ISSUE_TEMPLATE/`), sem dado de cliente; o Raijin revisa, o Sarden aprova.

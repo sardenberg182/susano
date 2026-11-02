@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-guia-profundo-web-analytics
 tipo: referencia
-origem: __Guia_Profundo_de_Web_Analytics.md
+origem: guia profundo de web analytics gerado por pesquisa assistida e revisado pelo Sarden (2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: nomenclatura única, estados de consentimento corretos, janelas de atribuição por plataforma, fontes erradas removidas, seção 17.2 fechada)
 ---
@@ -409,7 +409,7 @@ Boas práticas:
 - Definir convenções claras para `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`. Ex.:
   - `utm_source`: nome da plataforma (google, meta, linkedin, etc.).
   - `utm_medium`: tipo de canal (cpc, social, email, display, affiliate).
-  - `utm_campaign`: nome legível e padronizado por objetivo/período (ex.: `br_2026q2_launch_pix_credito`).
+  - `utm_campaign`: nome legível e padronizado por objetivo/período (ex.: `br_2026q2_lancamento_produto`).
 - Manter um **catálogo/planilha de UTMs oficiais**, com owner e datas, para evitar variações (“fb”, “facebook”, “meta” misturados).[12][8]
 
 ### 12.2 Integração GA4 ↔ Mídia

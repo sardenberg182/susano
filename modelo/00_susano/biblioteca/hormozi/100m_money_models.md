@@ -3,7 +3,7 @@ id: bib-hormozi-100m-money-models
 tipo: pensador
 autor: Alex Hormozi (2025)
 nivel: ATIVO
-origem: knowledge_susano_100m_money_models_hormozi.md
+origem: $100M Money Models (Alex Hormozi), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: hífen de intervalo normalizado)
 ---

@@ -3,7 +3,7 @@ id: bib-nardon-g4-kiso-sistema-completo-crescimento
 tipo: pensador
 autor: Bruno Nardon + G4 Traction + Rafael Kiso
 nivel: ATIVO
-origem: knowledge_susano_sistema_completo_crescimento.md
+origem: Sistema completo de crescimento (Bruno Nardon e G4 Kiso), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: frase quebrada pela remoção do travessão reescrita)
 ---

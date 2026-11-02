@@ -3,7 +3,7 @@ id: ref-perf-sistema-operacional-demanda-2026
 tipo: referencia
 autor: Sarden
 origem: Notion do Sarden: 'Sistema Operacional de Geração de Demanda & Performance 2026' (documento operacional v1.0, 17/07/2026)
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 revisao_pendente: Sarden (edição v0.3.0: marcadores canônicos, rotinas do capítulo 12 como camada de liderança, FAQ corrigida, números do Panorama citados do benchmark)
 ---
 
@@ -1029,7 +1029,7 @@ O agente passa quando identifica ambiguidade, solicita dado relevante, formula h
 
 ### 11.8 Conjunto dourado de avaliação
 
-Manter de 20 a 50 casos reais anonimizados, com:
+Manter de 20 a 50 casos fictícios em contexto real (nunca com número real de cliente), com:
 
 - pergunta original;
 - pacote de dados;

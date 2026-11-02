@@ -3,7 +3,7 @@ id: bib-balfour-03-channel-model-fit
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_arpu_cac_danger_zone_artigo.md + knowledge_susano_channel_model_fit.md
+origem: Channel Model Fit e The ARPU-CAC Danger Zone (Brian Balfour, artigos), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: auto-referência removida; modelos duplicados fundidos)
 ---

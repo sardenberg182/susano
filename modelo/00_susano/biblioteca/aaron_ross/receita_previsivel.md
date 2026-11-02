@@ -3,7 +3,7 @@ id: bib-aaron-ross-receita-previsivel
 tipo: pensador
 autor: Aaron Ross e Marylou Tyler (Predictable Revenue)
 nivel: MISTO (modelos centrais ATIVOS, frameworks específicos PASSIVOS)
-origem: knowledge_susano_receita_previsivel.md
+origem: Receita Previsível (Aaron Ross e Marylou Tyler), resumo do Sarden
 atualizado: 2026-10-31
 ---
 
