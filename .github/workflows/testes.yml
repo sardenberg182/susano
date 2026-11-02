@@ -9,16 +9,70 @@ permissions:
   contents: read
 
 jobs:
+  # Aceite da versão. É este o check a exigir na proteção da main (nome: testes).
   testes:
+    name: testes
     runs-on: ubuntu-latest
     steps:
       # actions/checkout v7.0.1, fixado por SHA (conferido em 01/11/2026)
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
-      - name: Copier
-        run: pipx install copier && copier --version
-      - name: Modelo (projeto temporário, validate, susano-check, testar_camada)
+      # actions/setup-python v7.1.0, fixado por SHA (tag conferida em 02/11/2026)
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.13"
+      - name: Ferramentas homologadas (versões fixas em testes/requirements.txt e testes/claude_code_versao.txt)
+        run: |
+          python -m pip install --disable-pip-version-check -r testes/requirements.txt
+          npm install -g "@anthropic-ai/claude-code@$(cat testes/claude_code_versao.txt)"
+          python --version; git --version; copier --version; claude --version
+      - name: Privacidade do repositório público (todo arquivo, perfil público)
+        run: python modelo/scripts/brain.py --raiz . varrer --perfil publico
+      - name: Geradores idempotentes (nada muda nem aparece)
+        run: bash testes/testar_geradores.sh
+      - name: Modelo (projeto padrão e com nomes longos; testar_camada)
         run: bash testes/testar_modelo.sh HEAD
-      - name: Plugin (build idempotente, hook de abertura, manifestos)
+      - name: Atualização (v0.3.0 para esta versão, com brain.py migrar)
+        run: bash testes/testar_atualizacao.sh v0.3.0 HEAD
+      - name: Plugin (build, hook em quatro caminhos, componentes, validação nativa obrigatória)
+        env:
+          SUSANO_EXIGIR_CLI: "1"
         run: bash testes/testar_plugin.sh
+      - name: Pacote de chat (arquivos, integridade, igualdade com a fonte, licenças, privacidade)
+        run: bash testes/testar_pacote_chat.sh
+      - name: Autoria dos commits do PR (endereço público escolhido)
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.base_ref }}
+        run: python ferramentas/conferir_autoria.py "origin/$BASE..HEAD^2"
+
+  # Plataformas e versões declaradas: Python 3.9 (mínimo dos projetos) e macOS (máquina de quem usa).
+  compatibilidade:
+    name: compatibilidade (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: "3.9"
+          - os: macos-latest
+            python: "3.13"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      # o Copier 9.19 exige Python 3.10+: instala no 3.13 e depois o python3 do PATH passa a ser o da matriz
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.13"
+      - name: Copier (versão fixa)
+        run: python -m pip install --disable-pip-version-check -r testes/requirements.txt
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Modelo (projeto padrão e com nomes longos; testar_camada no Python da matriz)
+        run: |
+          python3 --version; git --version; copier --version
+          bash testes/testar_modelo.sh HEAD

@@ -1,0 +1,17 @@
+# Política de dependências (v0.4.0): PR mensal do Dependabot para as actions (fixadas por SHA) e para o Copier fixado em
+# testes/requirements.txt. O claude CLI do CI (testes/claude_code_versao.txt) sobe à mão, a cada versão do modelo.
+# Nenhum PR do Dependabot entra sem os testes verdes e o OK do Sarden.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: github-actions
+    directory: /modelo
+    schedule:
+      interval: monthly
+  - package-ecosystem: pip
+    directory: /testes
+    schedule:
+      interval: monthly

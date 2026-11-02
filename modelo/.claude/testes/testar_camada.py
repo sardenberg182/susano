@@ -347,6 +347,8 @@ def main() -> int:
     caso("guarda_conteudo: Edit com e-mail pergunta (ask)", decisao == "ask")
     code, decisao, _, _ = guarda("Write", {"file_path": alvo, "content": "contato: " + email_pessoal + " [PUBLICO]"})
     caso("guarda_conteudo: e-mail com [PUBLICO] passa (sem decisão)", code == 0 and decisao == "")
+    code, decisao, _, _ = guarda("Write", {"file_path": alvo, "content": "remetente: noreply" + "@" + "plataforma-ficticia.com.br"})
+    caso("guarda_conteudo: endereço de sistema (noreply) não é contato de pessoa (sem decisão)", code == 0 and decisao == "")
     code, decisao, _, _ = guarda("Write", {"file_path": alvo, "content": "chave: " + token + " [PUBLICO]"})
     caso("guarda_conteudo: [PUBLICO] não libera segredo (deny)", code == 0 and decisao == "deny")
     code, decisao, _, _ = guarda("Write", {"file_path": alvo, "content": "CAC de R$ 182,40 em set/2026 [DADO: CRM]"})

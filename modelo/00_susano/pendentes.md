@@ -20,7 +20,9 @@ Este arquivo registra o que está aprovado pelo Sarden, o que espera a leitura d
 
 ## Em revisão (aguardando a leitura do Sarden)
 
-Todo arquivo novo ou alterado da v0.3.0 leva `revisao_pendente: Sarden` no frontmatter com o que mudou. Depois da leitura, a linha vira `aprovado: Sarden, AAAA-MM-DD`. Lista por PR no `CHANGELOG.md` (seção v0.3.0): núcleo e identidade (PR-1), DNAs (PR-2), instruções e playbook de LP (PR-3), situações, calibração e exemplos (PR-4), referências (PR-5).
+Todo arquivo novo ou alterado desde a v0.3.0 leva `revisao_pendente: Sarden` no frontmatter com o que mudou. Depois da leitura, a linha vira `aprovado: Sarden, AAAA-MM-DD`. Lista por PR no `CHANGELOG.md` (seção v0.3.0): núcleo e identidade (PR-1), DNAs (PR-2), instruções e playbook de LP (PR-3), situações, calibração e exemplos (PR-4), referências (PR-5).
+
+Inventário na v0.4.0 (02/11/2026), por `python3 scripts/brain.py audit`: 61 textos em revisão, em três grupos: 25 arquivos novos à espera da primeira leitura, 29 edições em texto que existia e 7 textos aprovados com acréscimo pendente (identidade e seis DNAs). Distribuir não é aprovar: a v0.4.0 sai com esse status visível no frontmatter de cada arquivo; a autorização de distribuir (merge e tag) é do Sarden, e a aprovação editorial segue texto a texto, na leitura dele. Nenhum `revisao_pendente` vira `aprovado` sem essa leitura.
 
 ## Arquivos de origem
 
@@ -36,7 +38,8 @@ Fechada na v0.1.4 (01/11/2026) com os 5 direcionais de performance do Notion do 
 - [VERIFICAR] Nomenclatura de produto marcada na v0.3.0: campanhas de vídeo do Google (antigo TrueView), Demand Gen (antigo Discovery), Message ads do LinkedIn (antigo Sponsored InMail), a sigla SPC da rotina; limite de 100 mil conversas por dia no WhatsApp; páginas internas do Panorama por segmento.
 - Contradições e números sem fonte ficam marcados nos próprios arquivos, com as duas fontes preservadas: decisão do Sarden (01/11/2026), ter vários exemplos de fontes e direcionais vale mais do que resolver a contradição no silêncio.
 - Skill `stories-10x` a partir do manual e da referência de social orgânico (`referencias/social_organico/`).
-- Casos de decisão da v0.3.0: zero divergência na rodada 2 (02/11/2026); as 4 parciais (C-11, C-13, C-18, C-19) estão na issue #8 do repositório do modelo.
+- Casos de decisão da v0.3.0: zero divergência na rodada 2 (02/11/2026); as 4 parciais (C-11, C-13, C-18, C-19) estão na issue #8 do repositório do modelo. A v0.4.0 acrescenta linhas em `situacoes.md`, a troca de vocabulário em `calibracao.md` e no estilo, e o onboarding de frente no núcleo do plugin; o resultado da reavaliação fica em `testes/casos_decisao.md` do repositório do modelo.
+- Referências voláteis sem `verificado_em` (25 na v0.4.0, listadas pelo `audit`): a data entra na próxima conferência de cada fonte, nunca retroativa sem conferir.
 
 ## Propostas abertas (issues do repositório `susano`)
 

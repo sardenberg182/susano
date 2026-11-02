@@ -321,8 +321,15 @@ def coberto(achado, excecoes) -> bool:
     nome, _, tipo, nivel, _ = achado
     regra = "binario" if nivel == "revisar" else tipo
     for r, caminho, _, gerenciada in excecoes:
-        if r == regra and (nome == caminho or (gerenciada and nome.endswith("/" + caminho))):
+        if r != regra:
+            continue
+        if nome == caminho:
             return True
+        if gerenciada:
+            # o mesmo arquivo canônico nas distribuições: modelo/, plugin/ e o nome achatado do pacote de chat
+            formas = (caminho, caminho.split("00_susano/", 1)[-1].replace("/", "__"))
+            if any(nome.endswith("/" + f) for f in formas):
+                return True
     return False
 
 

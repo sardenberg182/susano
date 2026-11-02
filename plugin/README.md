@@ -27,4 +27,4 @@ A estrutura de segundo cérebro (pastas de organização e frentes, `brain.py`, 
 
 ## Licença e autoria
 
-Conteúdo (método, DNA, biblioteca, referências) sob CC BY 4.0; código sob MIT. Copyright (c) 2026 Matheus Sardenberg (Sarden). Crédito ao usar: "Baseado no Susano, de Matheus Sardenberg (Sarden), CC BY 4.0. Adaptado." Versão 0.3.0.
+Conteúdo (método, DNA, biblioteca, referências) sob CC BY 4.0; código sob MIT. Copyright (c) 2026 Matheus Sardenberg (Sarden). Crédito ao usar: "Baseado no Susano, de Matheus Sardenberg (Sarden), CC BY 4.0. Adaptado." Versão 0.4.0.
