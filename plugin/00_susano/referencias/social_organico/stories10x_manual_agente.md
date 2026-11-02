@@ -1,12 +1,12 @@
 ---
-id: bib-ladeira-stories10x-manual-agente
-tipo: resumo
+id: ref-social-stories10x-manual
+tipo: referencia
 autor: Leandro Ladeira (Stories 10x)
-origem: stories10x_agente.md
+origem: material de curso e manual de agente do método Stories 10x (Leandro Ladeira), resumido pelo Sarden
 atualizado: 2026-10-31
 ---
 
-# Stories 10X --- Manual Operacional Para Agentes
+# Stories 10X: manual operacional para agentes
 
 ## VISÃO GERAL
 
@@ -15,14 +15,12 @@ de retenção.
 
 Objetivo: - Maximizar retenção - Gerar interação - Converter via inbox
 
----
 ## ALICERCE (CEE)
 
 Prioridade: 1. Produto 2. Modelo de negócio 3. Identidade 4. Conteúdo
 
 Erro: Começar pelo conteúdo.
 
----
 ## PILARES
 
 1.  Temas
@@ -32,7 +30,6 @@ Erro: Começar pelo conteúdo.
 5.  Crescimento
 6.  Inbox
 
----
 ## SEQUÊNCIAS
 
 Tamanho: 10--15 stories
@@ -43,7 +40,6 @@ com dispositivos - CTA no início
 Tipos: - Baixa cadência → engajamento - Alta cadência →
 venda/aquecimento
 
----
 ## ENGENHARIA SOCIAL
 
 Princípio: Empilhar dispositivos
@@ -54,7 +50,6 @@ Conexão → desabafo, história - Inteligência → BI, hotseat
 Dispositivos críticos: - Combustível extra - Psicologia reversa - Print
 valioso - Alerta para voltar - Compartilhamento - Levante a mão
 
----
 ## IDENTIDADES
 
 Comunicador: Valores claros
@@ -63,7 +58,6 @@ Produto: Nome próprio
 
 Consumidor: Perfil desejado
 
----
 ## ANÁLISE
 
 Após 24h
@@ -72,44 +66,38 @@ Métricas: - Retenção = último / primeiro - Interações
 
 Benchmark: - 16--20% bom - 34% excelente
 
----
 ## CRESCIMENTO
 
 Processo: 1. Criar conteúdo 2. Medir seguidores 3. Impulsionar
 
 Métrica: Custo por seguidor
 
----
 ## INBOX
 
 Filtro: Levantadas de mão
 
-SPIN: S --- Situação P --- Problema I --- Implicação N --- Necessidade
+SPIN: S: Situação P: Problema I: Implicação N: Necessidade
 
 Fechamento: Oferta ou call
 
 Regras: - Não suavizar dor - Não hesitar - Não insistir
 
----
 ## APP
 
 Fluxo: Planejar → estruturar → publicar → analisar
 
----
 ## PRINCÍPIOS
 
 -   Empilhamento
 -   Interação por story
 -   Conteúdo = teste
 
----
 ## RESULTADO
 
 -   Retenção alta
 -   Engajamento
 -   Vendas
 
----
 ## CHECKLIST
 
 -   Produto definido
@@ -121,5 +109,5 @@ Fluxo: Planejar → estruturar → publicar → analisar
 
 ## NOTAS DA MIGRAÇÃO (2026-10-31)
 
-- [CONTRADIÇÃO] Sequência de 10 a 15 stories aqui x "mínimo 15" em `00_susano/biblioteca/ladeira/social_organico_stories10x.md`.
+- [CONTRADIÇÃO] Sequência de 10 a 15 stories aqui x "mínimo 15" em `00_susano/referencias/social_organico/stories10x_social_organico.md`.
 - Candidato a skill (`stories-10x`) numa versão futura, junto com a referência.

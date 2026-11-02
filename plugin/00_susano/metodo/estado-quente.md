@@ -2,7 +2,7 @@
 id: metodo-estado-quente
 tipo: procedimento
 atualizado: 2026-10-31
-fonte: modelo de segundo cérebro (Okamoto) adaptado pelo Sarden; raio_doc9
+fonte: modelo de segundo cérebro adaptado pelo Sarden
 ---
 
 # Estado quente: a foto de 14 dias de cada frente

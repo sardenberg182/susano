@@ -2,7 +2,7 @@
 
 ## Fluxo de todo trabalho
 
-1. Branch a partir da `main` atualizada (`/salve` faz isso).
+1. Branch a partir da `main` atualizada, com a convenção única do método: `salve/AAAA-MM-DD-<tema>` para trabalho de sessão, `estado-quente/AAAA-MM-DD` para o refresh semanal, `susano-vX.Y.Z` para versão do modelo (`/salve` já faz isso; sessão na nuvem que nasceu numa branch `claude/...` mantém a dela).
 2. Mudanças com `brain.py validate` e `brain.py susano-check` sem erro.
 3. PR com resumo por frente; o dono no `.github/CODEOWNERS` aprova. Ninguém faz merge do próprio PR.
 

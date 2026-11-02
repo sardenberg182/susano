@@ -1,5 +1,21 @@
 # Changelog do modelo Susano
 
+## v0.3.0 (em construção na branch `v0.3`; tag só no fim do PR-6)
+
+Origem: plano de mudança v0.3.0 revisado pelo Raijin e decidido pelo Sarden em 01/11/2026 (22:40): tom do núcleo mantido com calibração; fusão dos arquivos do Notion aprovada; casos de decisão rodados à mão antes da tag.
+
+### PR-1 `v0.3-nucleo` (01/11/2026)
+
+- `nucleo.md` e `identidade.md`: P-05 passa a "o dado aponta o gargalo; o gargalo chama o modelo; modelo nunca entra antes do dado"; P-06 define frente (projeto, cliente, conta ou produto) e manda `/nova-frente` em vez de inventar contexto; "Sempre e nunca" ganha: editar só o pedido e sinalizar toda adição, pensar antes de perguntar (uma pergunta com default ou um lote por dimensão), marcador só em documento interno (entregável de cliente, playbook publicado e slide saem sem marcador), "rodando" só no ar sem dependência aberta, referência de mercado como [INFERÊNCIA] com fonte e data e nunca como target; tom mantido como aprovado, com a calibração a quem está na sessão em dois registros (decisão do Sarden, 22:40). Teto do núcleo passa de 2.000 para 2.200 tokens estimados (2.095 medidos). `revisao_pendente: Sarden` nos dois arquivos até ele ler os acréscimos.
+- `experimentos.md` como quarto arquivo canônico da frente (`_templates/experimentos.md`; `brain.py novo` cria; `validate` exige frontmatter e data; `salve`, `frente`, `segundo_cerebro.md` e `CONVENCOES.md` acompanham): hipótese com corte → resultado → decisão; "sistematizou" aponta para o playbook que nasceu.
+- Convenção única de branch: `salve/AAAA-MM-DD-<tema>`, `estado-quente/AAAA-MM-DD`, `susano-vX.Y.Z` (salve, estado-quente, rotina, CONTRIBUTING, CONVENCOES).
+- `brain.py`: domínio `exemplos` (skill `susano-exemplos`, gerada quando a pasta existir); `indice` ganha a seção "Operação"; `validate` barra tipo `resumo` (é `pensador` ou `referencia`), exige ENTRADA, SAÍDA e POR QUE ASSIM em tipo `exemplo` e trata `experimentos.md` como os outros três; `primeira_frase` não corta em "vs.", "ex.", "p.", "aprox."; `linhas_ativos` ignora sub-bullet; descrição da `susano-ativos` muda para "consult when the diagnosis names the gargalo".
+- Skill `analise` (template e plugin): marcador só em documento interno; "Atl4s" sai; notas de plataforma novas (export do Meta Ads Manager em XML Spreadsheet, CSV do Google Ads em utf-16, MCC e `customer_id` da conta folha, `search_term_view`, `conversion_action.primary_for_goal`, histórico de propriedade fora do MCP do HubSpot, BP só pelo `.xlsx`, dashboard em imagem por seção). Skill `frente` lê `experimentos.md` e lista cortes vencendo (a substituição de `$slug` por `$ARGUMENTS` proposta no plano não entra: `arguments:` com `$nome` é campo oficial do Claude Code, conferido na documentação em 01/11/2026). Estilo de saída e `CLAUDE.md`: calibração do tom, dado antes do modelo, os quatro arquivos da frente.
+- `AGENTS.md` do projeto: "Modo sem shell" para agente de chat (lê a mesma ordem, não roda `brain.py`, termina com a lista do que deveria ser salvo e onde); regra 5 separa valor de contrato de cliente (fora) de mecânica de pricing do método (pode entrar). Regras `seguranca`, `frentes` e `conhecimento` idem; `conhecimento` deixa de dizer que o `ATIVOS.md` é pré-carregado.
+- Os dois arquivos do Stories 10x saem de `biblioteca/ladeira/` para `referencias/social_organico/` como `tipo: referencia` (eram `resumo` sem o esqueleto de pensador); `[DADO AUSENTE]` vira `[LACUNA]`; restos de pandoc (`---`) limpos; o domínio `performance` passa a cobrir social orgânico. Proveniência interna (`raio_docN`) sai do `fonte:` dos procedimentos de `metodo/`.
+- `onboarding`: pre-commit vira padrão em sessão local; campo `preferencias` aceita convenções de leitura (voz ditada). Testes: 58 casos (5 novos: `experimentos.md` nasce com frontmatter, sem frontmatter barra, exemplo sem POR QUE ASSIM barra, tipo `resumo` barra, volta a passar).
+
+
 ## v0.2.1 (2026-11-01)
 
 - Publicação: repositório público `github.com/sardenberg182/susano` criado pelo Sarden (ordem de 01/11/2026, 19:00; só este repositório, nada da Oficina nem do tegrus-brain). README, catálogo e manifesto do plugin com o endereço real; instalação `claude plugin marketplace add sardenberg182/susano` e `copier copy gh:sardenberg182/susano`.

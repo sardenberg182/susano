@@ -2,7 +2,7 @@
 id: metodo-segundo-cerebro
 tipo: procedimento
 atualizado: 2026-10-31
-fonte: modelo de segundo cérebro (Okamoto) adaptado pelo Sarden; raio_doc9 e raio_doc16
+fonte: modelo de segundo cérebro adaptado pelo Sarden
 ---
 
 # Segundo cérebro: como este repositório pensa
@@ -18,12 +18,13 @@ fonte: modelo de segundo cérebro (Okamoto) adaptado pelo Sarden; raio_doc9 e ra
 1. **Bruto**: transcrições, exportações, planilhas. Fica no sistema de origem ou em `bruto/`, que o Git ignora.
 2. **Ledger**: fatos curtos e datados, sem interpretação, em `20_<frente>/<slug>/ledger/AAAA-MM-DD.md`. Colunas: `ts | fonte | quem | quem_tipo | trecho | ref`.
 3. **Curado**: o que se lê para decidir: `contexto.md`, `estado.md`, `decisoes.md`, análises e playbooks.
+4. **Experimentos**: hipótese → corte → resultado → decisão, em `experimentos.md` da frente. É o registro que fecha o ciclo de melhoria: o que matou sai da fila, o que sistematizou vira playbook.
 
 Nada sobe do bruto direto para o curado: passa pelo ledger, com referência à evidência.
 
 ## Regras
 
-- **Mapa em todo nível.** Cada pasta tem um `README.md` que diz o que mora ali; o método tem `INDICE.md` e `ATIVOS.md`.
+- **Mapa em todo nível.** Cada pasta tem um `README.md` que diz o que mora ali; o repositório tem `MAPA.md` e `10_<org>/hot.md` (gerados); o método tem `INDICE.md` e a skill `susano-ativos`.
 - **Estado quente de 14 dias.** `estado.md` mostra o que está aberto agora e o que fechou nos últimos 14 dias. Mais velho que isso vive no ledger e nas decisões.
 - **Uma fonte por assunto.** Duas versões do mesmo assunto viram uma; a substituída vai para `90_arquivo/` com ponteiro.
 - **Pastas são convenção, não isolamento.** O isolamento entre frentes é regra (`/frente`) mais revisão no PR.
@@ -43,7 +44,7 @@ Dado de cliente nunca entra no modelo `susano`.
 
 ## Escada de procedimento
 
-Executar uma vez na mão → escrever o procedimento → testar num segundo caso real → só então virar rotina. Rotina sem dois casos reais não entra.
+Executar uma vez na mão → escrever o procedimento → testar num segundo caso real → só então virar rotina. Rotina sem dois casos reais não entra. "Sistematizar" é o nome dessa decisão quando um experimento vira playbook ou processo.
 
 ## Ciclo de vida das skills
 

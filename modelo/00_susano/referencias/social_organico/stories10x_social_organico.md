@@ -1,8 +1,8 @@
 ---
-id: bib-ladeira-social-organico-stories10x
-tipo: resumo
+id: ref-social-stories10x
+tipo: referencia
 autor: Leandro Ladeira (Stories 10x)
-origem: susano_social_organico_growth.md
+origem: material de curso e manual de agente do método Stories 10x (Leandro Ladeira), resumido pelo Sarden
 atualizado: 2026-10-31
 ---
 
@@ -10,10 +10,9 @@ atualizado: 2026-10-31
 
 > **Tipo**: Documento de conhecimento estratégico
 > **Fontes**: Método Stories 10x (Leandro Ladeira) + Entrevista Fernando Miranda (G4 Podcast / Papo de Gestão)
-> **Última atualização**: Abril 2026
+> **Material de origem**: abril de 2026 (data do curso e do manual); `atualizado` no frontmatter é a data da migração para o método.
 > **Uso**: Base de referência para estratégia de social orgânico, retenção via Stories, crescimento de seguidores e monetização via inbox
 
----
 
 ## 1. Visão Macro: Social Orgânico como Motor de GTM
 
@@ -33,14 +32,13 @@ Analogia do aquário, por Leandro Ladeira:
 ### 1.3 Dinâmica das Plataformas
 
 | Plataforma | Foco | Dados-chave |
-|---|---|---|
+|:|:|:|
 | Instagram | Visual, viralidade B2C | Reels = 3x mais alcance; Carrosséis = 2x mais salvamentos; Stories = retenção diária |
 | LinkedIn | B2B, thought leadership | Perfis pessoais de fundadores geram 3x mais alcance que páginas de empresas |
 | TikTok | Geração Z, velocidade | Retenção acima de 75% explode alcance; exige ganchos de 0-3 segundos; 5-7 posts/dia; não ideal para vendas high-ticket |
 | Facebook | Alcance subestimado | Fernando Miranda tem 200k seguidores no Facebook e é uma das redes com maior número de visualizações, apesar de parecer "morto" |
 | YouTube | Longa duração, profundidade | Fernando Miranda: 0 a 323k inscritos em ~6 meses (fev a ago 2025) |
 
----
 
 ## 2. Algoritmo do Instagram (2025/2026)
 
@@ -73,7 +71,6 @@ Fernando Miranda: "Para mim, o que vejo como sinal de que foi um bom conteúdo �
 - Conteúdos baseados majoritariamente em textos estáticos sobre fundos animados e Reels "mutados" estão com alcance severamente reduzido.
 - Músicas em alta só impulsionam o alcance se o conteúdo for editado e sincronizado na batida.
 
----
 
 ## 3. Estratégia de Crescimento (Fernando Miranda)
 
@@ -123,7 +120,6 @@ Fernando usou o ChatGPT para encontrar os 10 canais mais virais de marketing nos
 
 Outra fonte de inspiração: Reddit, onde tendências surgem primeiro (early adopters). Monitorar quais subtópicos estão viralizando permite produzir conteúdo antes da onda chegar ao mainstream.
 
----
 
 ## 4. Método Stories 10x (Leandro Ladeira)
 
@@ -136,7 +132,7 @@ Inspirado na psicologia de aplicativos viciantes (livro Hooked). Abandona dicas 
 O conteúdo segue ordem lógica testada matematicamente, gerenciada pelo App Bumper:
 
 | Regra | Especificação |
-|---|---|
+|:|:|
 | Tamanho ideal | Mínimo 15 stories por sequência |
 | Story 1 obrigatório | Deve conter CTA (enquete, caixinha ou inbox) + idealmente um dispositivo de engenharia social |
 | Regra dos "pelo menos 5" | Em 15 stories: mínimo 5 com CTA + mínimo 5 com dispositivo atrelado |
@@ -147,7 +143,7 @@ O App Bumper sinaliza com alerta quando regras não são cumpridas.
 ### 4.3 Tipos de Sequências e Cadência
 
 | Tipo | Cadência | Objetivo |
-|---|---|---|
+|:|:|:|
 | Engajamento puro / Caixinha por tema | Baixa | Relacionamento e valor, sem venda |
 | Aquecimento / Pré-abertura | Alta | Preparar para pico de vendas, gerar antecipação e cultura de resultado |
 | Venda de produto | Alta | Conversão direta, abertura de carrinhos |
@@ -164,7 +160,6 @@ O App Bumper sinaliza com alerta quando regras não são cumpridas.
 
 O segredo não é usar um dispositivo por dia, mas empilhá-los em um único story. Um único texto pode conter: História com Gancho + Desabafo + Conversa sem Privacidade. Quanto mais dispositivos sobrepostos, mais irresistível e matematicamente eficiente a sequência se torna.
 
----
 
 ## 5. Os 38 Dispositivos de Engenharia Social
 
@@ -173,7 +168,7 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 ### Dispositivos 1-10 (Fundamentos de Engajamento e Cultura)
 
 | # | Nome | Descrição | Aplicação |
-|---|---|---|---|
+|:|:|:|:|
 | 1 | Combustível Extra | Trazer tráfego de fora (email, Telegram, live, palestra) direto para um story específico | "Buga" o algoritmo, que entende que o story é sucesso absoluto e entrega organicamente de forma massiva |
 | 2 | Desafio Curto com Promessa de Análise | Pedir algo prático (headline, foto) para analisar publicamente | Gera interação rápida e valor percebido |
 | 3 | Conversa Sem Privacidade | Postar prints do inbox (ocultando nomes) para debater ou educar | Gera polêmica, prova social e educação da audiência inteira |
@@ -188,7 +183,7 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 ### Dispositivos 11-20 (Ativação e Inteligência)
 
 | # | Nome | Descrição | Aplicação |
-|---|---|---|---|
+|:|:|:|:|
 | 11 | Abertura de Carrinho | Vender direto nos stories (ideal para produtos menores) | Gera pico massivo de acesso simultâneo que "buga" o Instagram |
 | 12 | Ative a Notificação | Criar mistério tão forte que a pessoa ativa o sino do perfil | Retenção permanente e orgânica |
 | 13 | Alerta para Voltar | Avisar para voltar a tela e reler conteúdo anterior | Instagram pontua positivamente retrocessos na tela |
@@ -203,7 +198,7 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 ### Dispositivos 21-30 (Curiosidade e Viralidade)
 
 | # | Nome | Descrição | Aplicação |
-|---|---|---|---|
+|:|:|:|:|
 | 21 | Peça Compartilhamento | Após valor, fornecer a copy exata no story seguinte ("Amiga, lembrei de você, assista isso") | Gatilhos de gratidão + efeito viral; usar apenas após sequências de valor, nunca de vendas |
 | 22 | Nomes Esquisitos | Batizar técnicas com nomes bizarros (ex: "Remarketing dos Sonhos", "Técnica do Golfinho", "Pegada do Sanduíche do McDonald's") | Gera curiosidade extrema e desacomoditiza o conteúdo |
 | 23 | Espetacularização | Exagerar rotinas comuns (ex: desenformar pudim) em entretenimento tenso ou cômico | Engajamento massivo e vendas a partir do cotidiano |
@@ -218,7 +213,7 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 ### Dispositivos 31-38 (Interação e Triagem)
 
 | # | Nome | Descrição | Aplicação |
-|---|---|---|---|
+|:|:|:|:|
 | 31 | Sete Erros | Postar imagem/texto e pedir para a audiência achar falhas ocultas | Gamificação visual que prende atenção |
 | 32 | Diário | Escrever pensamentos crus e íntimos do dia, sem filtro de "agradar a todos" | Vulnerabilidade pura e conexão genuína |
 | 33 | Crítica | Abrir espaço para o público bater em atitude/fato/pessoa em alta | Alivia tensões da audiência via reclamação exposta |
@@ -228,7 +223,6 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 | 37 | Indicação Pretensiosa | Inverter papéis e pedir conselho ao público ("Me indique uma série") | Afaga o ego e ativa gratidão por ajudar |
 | 38 | Levante a Mão (Triagem) | Pedir abertamente DDD + WhatsApp no inbox para quem tiver interesse | Filtro direto para vendas High Ticket (mentorias de R$ 2k a R$ 35k) |
 
----
 
 ## 6. App Bumper: Fluxo Operacional
 
@@ -254,7 +248,6 @@ Embora a nomenclatura geral fale em "37 dispositivos", Leandro Ladeira apresenta
 3. Preencher: views do primeiro story, views do último story (cálculo automático de retenção), total de respostas no inbox, quantidade de cliques/CTR se houve link
 4. O app salva histórico para identificar sequências campeãs para reciclagem
 
----
 
 ## 7. Análise Pragmática (Debriefing)
 
@@ -265,7 +258,7 @@ A análise dos números só deve ser feita após 24 horas completas da publicaç
 ### 7.2 Métricas
 
 | Métrica | Cálculo | Benchmark |
-|---|---|---|
+|:|:|:|
 | Taxa de Retenção | Views do último story / Views do primeiro story | 16-20% = bom; 34% = excepcional |
 | Interações Totais | Soma de cliques + respostas de inbox da sequência inteira | [DADO AUSENTE: benchmarks numéricos específicos] |
 | ROPE (Return on Post Engagement) | Receita gerada por post ou engajamento | [DADO AUSENTE: benchmark] |
@@ -274,7 +267,6 @@ A análise dos números só deve ser feita após 24 horas completas da publicaç
 
 Se uma sequência ou resposta gerou muitas reações ou cliques, converter em: anúncio de carrossel, vídeo no YouTube, tema para Live. O Instagram orgânico é o maior laboratório de testes.
 
----
 
 ## 8. Crescimento Acelerado de Seguidores
 
@@ -296,7 +288,6 @@ Seguidor em si não paga conta. O que paga é o brandlift: desde que Fernando co
 
 Fernando Miranda: ~40 milhões de views/mês. Todo dia 1 milhão de pessoas veem sua cara. Isso ajuda na conversão lá na frente.
 
----
 
 ## 9. Inbox Lucrativo: Método SPIN "Ladeira Way"
 
@@ -309,7 +300,7 @@ Identificar "levantadas de mão": seguidores qualificados que escrevem textos lo
 Princípio: ouvir 80% do tempo, falar 20%.
 
 | Etapa | O que fazer | Perguntas exemplo |
-|---|---|---|
+|:|:|:|
 | **S** (Situação) | Diagnóstico sincero do contexto | "Qual é a sua renda hoje?", "Quais métodos você usa?", "Qual dieta já tentou?" |
 | **P** (Problema) | Colocar o dedo na ferida | "Por que você acha que suas tentativas anteriores falharam?", "Como você se sente com isso?" |
 | **I** (Implicação) | Levar a dor para o futuro, agravar consequência da inércia | "O que vai acontecer em 10 anos se você continuar neste ritmo?", "Qual será seu patrimônio se mantiver esse ritmo?" |
@@ -322,14 +313,13 @@ Princípio: ouvir 80% do tempo, falar 20%.
 2. **Não tenha vergonha de vender com firmeza**: oferecer a solução é servir.
 3. **Não insista demais**: se a pessoa disse que não é o momento, encerre e preserve a relação. Foque nos leads qualificados.
 
----
 
 ## 10. Caso Fernando Miranda: Dados Operacionais
 
 ### 10.1 Números (referência: meados 2025)
 
 | Plataforma | Seguidores |
-|---|---|
+|:|:|
 | Instagram | ~551.000 |
 | YouTube | ~323.000 (iniciado fev 2025) |
 | TikTok | ~300.000 |
@@ -340,7 +330,7 @@ Engajamento: ~10x acima da média do mercado (média do mercado ~0,38%).
 ### 10.2 Equipe e Custo
 
 | Função | Modelo | Custo total |
-|---|---|---|
+|:|:|:|
 | Roteirista (usa IA/Claude) | Terceirizado (PJ) | Incluído nos R$ 9.000/mês |
 | Editor de vídeo | Terceirizado | Incluído nos R$ 9.000/mês |
 | Social mídia | Terceirizado | Incluído nos R$ 9.000/mês |
@@ -363,7 +353,6 @@ Incentivo para o roteirista: todo o dinheiro do YouTube (AdSense) vai para ele c
 - "Errar não é um problema. Errar é a consequência de fazer algo novo. O problema é não errar nunca, porque significa que não está fazendo nada de novo. O negócio é errar pequeno e não errar duas vezes." (André Esteves, via Fernando Miranda)
 - Gestão em uma palavra: "Priorização."
 
----
 
 ## 11. Três Identidades (Ladeira)
 
@@ -379,7 +368,6 @@ Dar nomes próprios e únicos a cada técnica, fase ou ferramenta do método/ser
 
 Mapear as características dos clientes desejados (agem rápido, anotam tudo, compartilham) e condenar os indesejados (vitimistas, reclamadores). Investir tempo e atenção apenas em pessoas com "fit".
 
----
 
 ## 12. Conteúdo Orgânico como Laboratório de Testes
 
@@ -398,19 +386,17 @@ Mapear as características dos clientes desejados (agem rápido, anotam tudo, co
 - **Reddit**: Early adopter hub; monitorar subtópicos em ascensão
 - **Engenharia reversa dos próprios dados**: Autópsia de 3 camadas (Sinais + Veículo + Psicologia)
 
----
 
 ## 13. Lacunas e Notas
 
 - [LACUNA] Métricas exatas de benchmark para interações totais por sequência de Stories
 - [LACUNA] Detalhamento técnico completo do App Bumper (interface, funcionalidades além do descrito)
 - [LACUNA] Taxa de conversão inbox > venda por nicho/ticket
-- [DADO AUSENTE] Benchmarks numéricos de ROPE (Return on Post Engagement)
+- [LACUNA] Benchmarks numéricos de ROPE (Return on Post Engagement)
 - [INFERÊNCIA] O formato "programa de TV" de Fernando Miranda é validado empiricamente por ele e referenciado no Mr. Beast, mas não há estudo formal citado
-- [DADO AUSENTE] Custo por seguidor médio por nicho no impulsionamento via botão do Instagram
-- [DADO AUSENTE] Stage: faturamento exato no momento da aquisição (NDA mencionado por Fernando Miranda)
+- [LACUNA] Custo por seguidor médio por nicho no impulsionamento via botão do Instagram
+- [LACUNA] Stage: faturamento exato no momento da aquisição (NDA mencionado por Fernando Miranda)
 
----
 
 ## 14. Referências Citadas
 

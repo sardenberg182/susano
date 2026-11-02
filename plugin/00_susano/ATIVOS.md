@@ -180,7 +180,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 - **Pessoas → Produtos → Lucros**: Cuidar das pessoas cria o ambiente que permite produtos excelentes que geram lucros.
 - **CEO de Paz vs. CEO de Guerra**: Dois modos opostos de liderança, paz constrói e negocia, guerra sobrevive e decide rápido.
 - **Contratar por Forças**: Definir a força mais crítica para o papel e filtrar por ela, não pela ausência de fraquezas.
-- **Tipo Certo de Ambição**: Mentalidade de "equipe" vs.
+- **Tipo Certo de Ambição**: Mentalidade de "equipe" vs. "eu" na contratação.
 - **Treinamento como ROI Máximo**: Investir em treinamento retorna mais do que qualquer outra atividade de gestão, aumenta produtividade, reduz rotativida…
 - **Critérios de M&A (Quando Vender)**: Lógicos: tamanho do mercado e potencial de ser o número um; se mercado é significativamente maior que a exploração atua…
 
