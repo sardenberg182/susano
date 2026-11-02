@@ -4,7 +4,7 @@ tipo: exemplo
 modo: 3
 situacao: "brief de migração", "proposta para o decisor"
 autor: Raijin (forma); método do Sarden
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 revisao_pendente: Sarden (arquivo novo da v0.3.0; registrar aprovado após leitura)
 ---
 
@@ -41,7 +41,7 @@ Cruzando com o anexo: o contrato vence em fevereiro e o brief pede março. Ou se
 
 1. **O problema, com os números deles**: dois sistemas, planilha no meio, follow-up perdido em qual etapa e quanto isso custa em pipeline parado [a frente precisa desses números do cliente antes da versão final; sem eles, a seção fica como oportunidade descrita, não quantificada].
 2. **O processo**: semana zero de instrumentação (fotografia do funil atual nos dois sistemas e nas planilhas) → desenho do modelo único (objetos, pipelines, propriedades, os 23 relatórios mapeados um a um para a fonte nova) → migração em duas ondas (comercial até a data do contrato, pós-venda depois) → automações só do que o desenho pediu → treinamento por papel → operação assistida por 30 dias. Variável, se houver, só sobre o que for atribuído depois do kickoff.
-3. **A prova**: método e governança (ritual semanal, dono de cada relatório, critério de pronto por onda), não "mais mãos". Caso anterior entra só se o cliente autorizar e com número confirmado.
+3. **A prova**: método e governança (ritual semanal, dono de cada relatório, critério de pronto por onda), não "mais mãos". Caso de outro cliente não entra, nem anonimizado: a prova usa exemplo fictício em contexto real, nunca número real.
 
 **Três opções, a mesma matemática em formatos diferentes**
 

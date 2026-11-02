@@ -3,7 +3,7 @@ id: ref-lp-playbook-construtor-html
 tipo: referencia
 autor: Sarden
 origem: playbook operacional do agente construtor de landing page em HTML, v3.0 (16/10/2026), da operação do Sarden; camada de craft Impeccable 4.6 (pbakaus/impeccable, Apache-2.0); casos internos anonimizados para o modelo
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 revisao_pendente: Sarden (arquivo novo no modelo na v0.3.0; registrar aprovado após leitura)
 ---
 
@@ -68,7 +68,7 @@ Quando o design system contraria um racional de conversão (cor de botão sem co
 
 ### 0.5 Origem das regras (legenda)
 
-`[K]` knowledge do Susano (livro ou método) · `[P]` dado primário de mercado ou padrão técnico público · `[V]` dado de vendor, direcional · `[I]` caso interno da operação do Sarden (cliente e número ficam fora deste repositório) · `[IMP]` regra do Impeccable, com o id da regra quando ele existe no kit · sem marca = regra operacional deste playbook, definida pelo método
+`[K]` knowledge do Susano (livro ou método) · `[P]` dado primário de mercado ou padrão técnico público · `[V]` dado de vendor, direcional · `[I]` lição da operação do Sarden: contexto real, sem cliente e sem número real · `[IMP]` regra do Impeccable, com o id da regra quando ele existe no kit · sem marca = regra operacional deste playbook, definida pelo método
 
 ### 0.6 Fluxo em uma linha
 
@@ -447,7 +447,7 @@ Nenhuma fileira de cards iguais (ícone + título + texto) como estrutura de pá
 | LCP | até 2,5 s (meta interna 1,5 s no mobile) | `[P]` Core Web Vitals, web.dev |
 | INP | até 200 ms | `[P]` Core Web Vitals, web.dev |
 | CLS | até 0,1 | `[P]` Core Web Vitals, web.dev |
-| PageSpeed Insights mobile | performance 90 ou mais antes da entrega | `[I]` caso interno: levar a performance mobile de abaixo de 40 para acima de 90 derrubou o custo por formulário |
+| PageSpeed Insights mobile | performance 90 ou mais antes da entrega | `[I]` lição de contexto real: LP lenta no mobile perde formulário; acelerar antes de subir verba derrubou o custo por formulário |
 
 `[P]` Google/Deloitte, Milliseconds Make Millions (2020): 0,1 s a menos no mobile aumentou 21,6% a progressão para a página de envio de formulário em sites de lead gen.
 
@@ -573,7 +573,7 @@ Referências `[P]`: formulário de 1 campo converte 18,2%, 2 campos 13,0%, 3 cam
 
 - Link no formato oficial `https://wa.me/55DDDNUMERO?text=MENSAGEM` com o número em formato internacional sem símbolos e a mensagem codificada por URL `[P]` WhatsApp, "Como usar o clique para conversar".
 - Mensagem pré-preenchida carrega a campanha em linguagem natural ("Olá! Vim pela página {nome} e quero {deliverable}."), para o atendente ou o bot identificarem a origem.
-- `target="_blank"` e `rel="noopener"`; clique dispara `whatsapp_click` (etapa). A conversão é `whatsapp_conversation_started`, medida pelo webhook do bot ou pelo CRM, nunca pelo clique. `[I]` caso interno.
+- `target="_blank"` e `rel="noopener"`; clique dispara `whatsapp_click` (etapa). A conversão é `whatsapp_conversation_started`, medida pelo webhook do bot ou pelo CRM, nunca pelo clique. `[I]` lição de contexto real.
 - Especificar: (a) mensagem pré-preenchida, (b) perguntas do bot de pré-qualificação, (c) campos que chegam no CRM, (d) SLA de resposta humana. Nunca comparar funil de WhatsApp com funil de formulário como se fossem o mesmo.
 - Formulário e WhatsApp na mesma página só com medição separada e decisão registrada na ficha.
 
@@ -611,7 +611,7 @@ Tracking vem antes de tráfego. `[K]` KB Tracking Snippets Library, KB GTM Maste
 
 ### 7.3 Regras
 
-- Conversão dispara no envio confirmado (thank-you com `event_id`). Nunca no clique do botão. Acesso direto a `obrigado.html` sem `event_id` não dispara nada. `[I]` pixel 2,1x o CRM quando o evento disparou fora da submissão.
+- Conversão dispara no envio confirmado (thank-you com `event_id`). Nunca no clique do botão. Acesso direto a `obrigado.html` sem `event_id` não dispara nada. `[I]` lição de contexto real: pixel muito acima do CRM quando o evento disparava fora da submissão.
 - Pixel e CAPI com deduplicação por `event_id`.
 - Conversion Linker e Enhanced Conversions ativos no Google Ads.
 - UTMs conforme o catálogo do projeto (`utm_source, utm_medium, utm_campaign, utm_content, utm_term`), em minúsculas, sem variações ("fb", "facebook" e "meta" não podem coexistir). `[K]` Guia de Web Analytics, KB GA4.

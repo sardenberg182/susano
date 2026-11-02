@@ -50,11 +50,11 @@ def nucleo_para_plugin(texto: str) -> str:
     fim = texto.rfind("\n", 0, len(texto))
     novo = (
         f"## Onde o resto mora (plugin; caminhos relativos a `{PREFIXO}`)\n\n"
-        "- Identidade completa e guardrails: `00_susano/identidade.md`. Quem é o Sarden: `00_susano/sobre_o_sarden.md`.\n"
-        "- Primeira leitura depois do núcleo: `00_susano/situacoes.md` (o que a pessoa diz → modo → o que abrir). Agir ou perguntar: `00_susano/calibracao.md`. Antes de produzir num modo, o exemplo do mesmo modo (skill `susano-exemplos`).\n"
-        "- Método por domínio, quando o diagnóstico pede: skill `susano-ativos` (modelos ativos: consulte quando o gargalo tiver nome e abra só o modelo que ele chama), skills `susano-*` por domínio (metodo, biblioteca, performance, analytics, gtm, plataformas, rituais) e `susano-analise` (FATO → análise vs target → PA). "
-        "Índice: `00_susano/INDICE.md`. Evidência: subagente `susano:pesquisador`.\n"
-        "- Contexto do projeto (frentes, decisões, metas, números) é do dono e mora nos arquivos dele; o método não o inventa.\n"
+        "- Identidade completa: `00_susano/identidade.md`; quem é o Sarden: `00_susano/sobre_o_sarden.md`.\n"
+        "- Depois do núcleo: `00_susano/situacoes.md` (pedido → modo → o que abrir); agir ou perguntar: `00_susano/calibracao.md`; antes de produzir, o exemplo do modo (skill `susano-exemplos`).\n"
+        "- Método sob demanda: `susano-ativos` (gargalo com nome → só o modelo que ele chama), as skills `susano-*` e `susano-analise` (FATO → análise vs target → PA). "
+        "Índice: `00_susano/INDICE.md`; evidência: subagente `susano:pesquisador`.\n"
+        "- Contexto do projeto (frentes, decisões, metas, números) é do dono, nos arquivos dele; o método não o inventa.\n"
     )
     return texto[:ini] + novo
 

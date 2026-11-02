@@ -1,7 +1,7 @@
 ---
 id: susano-pendentes
 tipo: procedimento
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 ---
 
 # Pendências do modelo
@@ -15,6 +15,7 @@ Este arquivo registra o que está aprovado pelo Sarden, o que espera a leitura d
 - 01/11/2026, 16:43: `00_susano/sobre_o_sarden.md`, texto do próprio Sarden.
 - 01/11/2026, 16:54: os 8 DNAs originais de `00_susano/dna/metodo/`, lidos no chat ("Revisado pode seguir"); cada um leva a linha `aprovado:` no frontmatter. As seções ALERTAS OPERACIONAIS e os 5 DNAs novos da v0.3.0 estão em `revisao_pendente`.
 - 01/11/2026, 22:40: decisões da v0.3.0: tom do núcleo mantido com calibração a quem está na sessão; fusão dos arquivos do Notion (checklist → índice da rotina; Panorama fonte única); casos de decisão rodados à mão antes da tag; as duas fontes anexadas no chat.
+- 02/11/2026, 07:30: depois da rodada dos casos de decisão: nada pessoal de ninguém vai para arquivo ("Não pode gravar nada de ninguém nesse projeto, ele é público"); exemplo e case sempre fictícios, em contexto real, nunca com número real ("Sempre exemplos fictícios com contextos reais, nunca números reais"). As regras entram no núcleo, na identidade, no anti-padrão 18, no diagnóstico de funil, no exemplo de proposta e nas referências; o texto novo segue em `revisao_pendente`.
 
 ## Em revisão (aguardando a leitura do Sarden)
 

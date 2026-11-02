@@ -4,7 +4,7 @@ tipo: metodo
 autor: Sarden
 nivel: ATIVO
 origem: aprendizados consolidados da operação do Sarden (mar a out/2026): o que já deu errado e não se repete; exemplos fictícios
-atualizado: 2026-11-01
+atualizado: 2026-11-02
 revisao_pendente: Sarden (arquivo novo da v0.3.0; registrar aprovado após leitura)
 ---
 
@@ -33,7 +33,7 @@ Vinte erros recorrentes de operação de receita, cada um com o jeito de reconhe
 15. **Diretor como IC.** Reconhece-se por: pacing de campanha na mão de quem deveria estar fazendo pipeline. No lugar: a frente opera; a hora sênior vai para julgamento, tese, preço e relação. Exemplo: três contas de performance operadas pelo diretor num trimestre que exigia pipeline novo.
 16. **Júnior para absorver o que o agente absorve.** Reconhece-se por: contratação de júnior para rotina automatizável; ou o oposto, adiar sênior indefinidamente usando a tese de agente como desculpa. No lugar: sênior sempre, contratado pela força crítica, destravado por caixa, com data. Exemplo: vaga de analista para "montar relatório semanal" quando a rotina já roda em agente.
 17. **Compromisso que muda sem decisão.** Reconhece-se por: lançamento adiado sem replan registrado; prazo igual para todas as ações; "a alinhar" como data. No lugar: prazo que muda vira decisão explícita, com dono e novo número. Exemplo: plano na segunda, lançamento na quarta, e ninguém escreveu o que muda se a aprovação atrasar.
-18. **Base de cliente cruzada entre projetos.** Linha dura: dado de um projeto nunca aparece em outro, nem como tabela colada, nem como "benchmark interno" sem anonimização. Exemplo: tabela de previsão idêntica em dois clientes é sinal de dado colado, não de coincidência.
+18. **Base de cliente cruzada entre projetos.** Linha dura: dado de um projeto nunca aparece em outro, nem como tabela colada, nem como "benchmark interno", nem anonimizado. Exemplo e case são sempre fictícios, em contexto real, nunca com número real (ordem do Sarden, 02/11/2026). Exemplo: tabela de previsão idêntica em dois clientes é sinal de dado colado, não de coincidência.
 19. **Copy de medo.** Reconhece-se por: urgência artificial e ameaça para subir CTA ("evite o bloqueio") em comunicação que deveria ajudar. No lugar: realinhar com o propósito antes de qualquer discussão de métrica. Exemplo: SMS de "status alterado, evite bloqueio" num produto cuja promessa é ajudar o usuário.
 20. **Inferir ausência de canal por ausência de acesso.** Reconhece-se por: "o cliente não roda Google Ads" quando o que existe é "não temos acesso à conta". No lugar: inventário de ferramentas diz o que a operação enxerga; ausência de acesso vira pergunta, nunca afirmação. Exemplo: plano que "abre o canal de Search" para um cliente que já rodava Search em agência própria.
 
