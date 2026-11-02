@@ -2,14 +2,24 @@
 """Roda os casos de decisão do Susano com `claude -p`, um caso por sessão nova.
 
 Uso:
-  python3 rodar_casos.py CASOS_MD PLUGIN_DIR SESSAO_DIR SAIDA_DIR [--so C-01,C-02] [--paralelo 3] [--dry-run]
+  python3 rodar_casos.py CASOS_MD ALVO SESSAO_DIR SAIDA_DIR [--variante plugin|template] [--so C-01,C-02]
+                         [--paralelo 3] [--modelo <id>] [--forcar] [--dry-run]
 
-- Cada caso roda numa sessão nova (equivale ao /clear entre casos), com o plugin carregado por --plugin-dir.
-- Ferramentas só de leitura (Read, Glob, Grep, Skill); escrita, shell, web e MCP ficam fora, para não haver efeito no disco.
-- Idempotente: caso com resposta salva é pulado; status por execução em SAIDA_DIR/_status.tsv.
-- Saída por caso: C-XX.md (entrada, ferramentas usadas, resposta) e C-XX.jsonl (stream bruto).
+- Variante plugin (padrão): ALVO é a pasta plugin/ da branch, carregada por --plugin-dir; a sessão roda em SESSAO_DIR vazio.
+- Variante template: ALVO é um projeto gerado da branch (copier copy); a sessão roda na raiz dele, com CLAUDE.md,
+  AGENTS.md, regras, estilo, skills e hooks do próprio projeto. O chat (claude.ai Projects) não roda por aqui: é teste
+  manual, registrado à parte.
+- Cada caso roda numa sessão nova (equivale ao /clear entre casos). Ferramentas só de leitura (Read, Glob, Grep, Skill);
+  escrita, shell, web, MCP e subagente ficam fora, para não haver efeito no disco.
+- Reaproveita uma resposta só quando a chave bate: hash da entrada, hash do método (a árvore do ALVO), variante,
+  versão do CLI, modelo pedido e ferramentas. Mudou o método, a entrada ou a configuração, o caso roda de novo.
+  --forcar roda tudo de novo.
+- Saída por caso: C-XX.md (metadados, entrada, ferramentas usadas, resposta), C-XX.json (metadados e chave) e
+  C-XX.jsonl (stream bruto); status por execução em SAIDA_DIR/_status.tsv. A avaliação (concorda, parcial, diverge)
+  é humana ou do mantenedor, registrada em testes/casos_decisao.md: execução bem-sucedida não é comportamento correto.
 """
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -124,14 +134,44 @@ def extrair(stream):
     return resultado, ferramentas, custo, modelo, eventos_hook
 
 
+def hash_arvore(pasta: Path) -> str:
+    """sha256 do conteúdo de todos os arquivos da pasta (caminho e bytes), fora .git, cache e ajustes locais."""
+    h = hashlib.sha256()
+    for p in sorted(x for x in pasta.rglob("*") if x.is_file()):
+        rel = p.relative_to(pasta).as_posix()
+        if rel.startswith(".git/") or "__pycache__" in rel or rel.endswith("settings.local.json"):
+            continue
+        h.update(rel.encode() + b"\0" + p.read_bytes() + b"\0")
+    return h.hexdigest()
+
+
+def versao_cli(claude: str) -> str:
+    try:
+        r = subprocess.run([claude, "--version"], capture_output=True, text=True, timeout=30, stdin=subprocess.DEVNULL)
+        return r.stdout.strip() or "?"
+    except (OSError, subprocess.SubprocessError):
+        return "?"
+
+
+def commit_de(pasta: Path) -> str:
+    try:
+        r = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=pasta, capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() if r.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("casos_md")
-    ap.add_argument("plugin")
-    ap.add_argument("sessao")
+    ap.add_argument("alvo", help="pasta plugin/ (variante plugin) ou raiz de um projeto gerado (variante template)")
+    ap.add_argument("sessao", help="pasta de trabalho da sessão na variante plugin (ignorada na template)")
     ap.add_argument("saida")
+    ap.add_argument("--variante", choices=("plugin", "template"), default="plugin")
     ap.add_argument("--so", default="")
     ap.add_argument("--paralelo", type=int, default=3)
+    ap.add_argument("--modelo", default="", help="modelo do claude -p (padrão: o do usuário)")
+    ap.add_argument("--forcar", action="store_true", help="roda de novo mesmo com resposta de mesma chave")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -146,9 +186,25 @@ def main():
     claude = shutil.which("claude")
     if not claude:
         raise SystemExit("claude não encontrado no PATH")
-    saida, sessao = Path(args.saida), Path(args.sessao)
+    alvo = Path(args.alvo).resolve()
+    saida = Path(args.saida)
     saida.mkdir(parents=True, exist_ok=True)
-    sessao.mkdir(parents=True, exist_ok=True)
+    if args.variante == "plugin":
+        cwd = Path(args.sessao)
+        cwd.mkdir(parents=True, exist_ok=True)
+        base_cmd = ["--plugin-dir", str(alvo), "--add-dir", str(alvo)]
+    else:
+        if not (alvo / "CLAUDE.md").is_file() or not (alvo / "00_susano").is_dir():
+            raise SystemExit(f"{alvo}: não parece um projeto gerado pelo modelo (CLAUDE.md e 00_susano/)")
+        cwd = alvo
+        base_cmd = []
+    if args.modelo:
+        base_cmd += ["--model", args.modelo]
+    metodo = hash_arvore(alvo)
+    cli = versao_cli(claude)
+    config = {"variante": args.variante, "cli": cli, "modelo_pedido": args.modelo or "padrão do usuário",
+              "permitidas": FERRAMENTAS_LEITURA, "bloqueadas": FERRAMENTAS_FORA, "hash_metodo": metodo,
+              "commit_alvo": commit_de(alvo)}
     trava = threading.Lock()
 
     def registrar(*campos):
@@ -156,17 +212,23 @@ def main():
             f.write("\t".join(str(c) for c in campos) + "\n")
 
     def rodar(cid):
-        md = saida / f"{cid}.md"
-        if md.exists() and md.stat().st_size > 0:
-            registrar(cid, "pulado")
-            return
         prompt = casos[cid]
-        cmd = [claude, "-p", prompt, "--plugin-dir", args.plugin, "--add-dir", args.plugin,
-               "--allowedTools", FERRAMENTAS_LEITURA, "--disallowedTools", FERRAMENTAS_FORA,
-               "--strict-mcp-config", "--output-format", "stream-json", "--verbose"]
+        hash_entrada = hashlib.sha256(prompt.encode()).hexdigest()
+        chave = hashlib.sha256(json.dumps(dict(config, caso=cid, hash_entrada=hash_entrada), sort_keys=True).encode()).hexdigest()
+        md, meta_p = saida / f"{cid}.md", saida / f"{cid}.json"
+        if not args.forcar and md.exists() and meta_p.exists():
+            try:
+                if json.loads(meta_p.read_text(encoding="utf-8")).get("chave") == chave:
+                    registrar(cid, "pulado (mesma chave)", chave[:12])
+                    return
+            except json.JSONDecodeError:
+                pass
+        cmd = [claude, "-p", prompt] + base_cmd + ["--allowedTools", FERRAMENTAS_LEITURA, "--disallowedTools", FERRAMENTAS_FORA,
+                                                   "--strict-mcp-config", "--output-format", "stream-json", "--verbose"]
         t0 = time.time()
+        inicio = time.strftime("%Y-%m-%d %H:%M:%S")
         try:
-            r = subprocess.run(cmd, cwd=sessao, capture_output=True, text=True, timeout=900, stdin=subprocess.DEVNULL)
+            r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=900, stdin=subprocess.DEVNULL)
         except subprocess.TimeoutExpired:
             registrar(cid, "timeout", round(time.time() - t0))
             return
@@ -176,11 +238,17 @@ def main():
             (saida / f"{cid}.err").write_text(r.stderr[-4000:], encoding="utf-8")
             registrar(cid, f"erro rc={r.returncode}", round(time.time() - t0))
             return
+        meta = dict(config, caso=cid, hash_entrada=hash_entrada, chave=chave, modelo=modelo, inicio=inicio,
+                    duracao_s=round(time.time() - t0), custo_usd=custo, ferramentas_usadas=len(ferramentas), eventos_hook=hooks)
+        meta_p.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         lista = "\n".join(f"- {f}" for f in ferramentas) or "- nenhuma"
-        md.write_text(f"# {cid}\n\n## Entrada\n\n{prompt}\n\n## Ferramentas usadas\n\n{lista}\n\n"
+        cabeca = (f"variante {args.variante}; método {metodo[:12]} (commit {config['commit_alvo'] or '?'}); entrada {hash_entrada[:12]}; "
+                  f"modelo {modelo}; CLI {cli}; início {inicio}")
+        md.write_text(f"# {cid}\n\n{cabeca}\n\n## Entrada\n\n{prompt}\n\n## Ferramentas usadas\n\n{lista}\n\n"
                       f"## Resposta\n\n{resultado}\n", encoding="utf-8")
-        registrar(cid, "ok", round(time.time() - t0), custo, modelo, len(ferramentas), hooks)
+        registrar(cid, "ok", round(time.time() - t0), custo, modelo, len(ferramentas), hooks, chave[:12])
 
+    registrar("inicio", time.strftime("%Y-%m-%d %H:%M:%S"), args.variante, metodo[:12], cli)
     with ThreadPoolExecutor(max_workers=args.paralelo) as ex:
         list(ex.map(rodar, sorted(casos)))
     registrar("fim", time.strftime("%Y-%m-%d %H:%M:%S"))

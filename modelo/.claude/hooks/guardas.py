@@ -7,6 +7,7 @@ continua sendo o `scripts/brain.py validate` no CI do repositorio.
 Niveis:
 - bloquear: segredo, cartao (Luhn), CPF valido, travessao. A escrita e recusada.
 - perguntar: telefone e e-mail. A pessoa confirma que e contato profissional necessario.
+  Endereco de sistema sem caixa de pessoa (noreply@, no-reply@) e dominios de exemplo nao perguntam.
   Linha com o marcador [PUBLICO] (ou [PÚBLICO]) e contato que o dono decidiu publicar: nao pergunta.
   O marcador nunca libera um bloqueio (segredo, cartao, CPF, travessao).
 """
@@ -72,6 +73,7 @@ _TELEFONE = re.compile(
 )
 _EMAIL = re.compile(r"(?<![\w.+\-])[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}")
 _EMAIL_PERMITIDOS = ("example.com", "example.org", "exemplo.com", "exemplo.com.br", "users.noreply.github.com")
+_EMAIL_SEM_CAIXA = ("noreply", "no-reply", "donotreply", "do-not-reply")
 _PUBLICO = ("[PUBLICO]", "[P\u00daBLICO]")
 
 
@@ -134,7 +136,9 @@ def analisar(texto: str, caminho: str = "") -> List[Achado]:
             for m in _TELEFONE.finditer(linha):
                 achados.append(Achado("telefone", PERGUNTAR, i, _mascara(m.group(0))))
             for m in _EMAIL.finditer(linha):
-                dominio = m.group(0).rsplit("@", 1)[1].lower()
+                local, dominio = m.group(0).lower().rsplit("@", 1)
+                if local in _EMAIL_SEM_CAIXA:
+                    continue  # endereço de sistema (noreply), não é de pessoa
                 if not any(dominio == d or dominio.endswith("." + d) for d in _EMAIL_PERMITIDOS):
                     achados.append(Achado("e-mail", PERGUNTAR, i, _mascara(m.group(0))))
         if TRAVESSAO in linha:

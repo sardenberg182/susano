@@ -1,5 +1,50 @@
 # Changelog do modelo Susano
 
+## v0.4.0 (02/11/2026: plano de melhorias SUS01 a SUS12, o que faz sentido executado, o que não faz registrado com motivo)
+
+Origem: plano de melhorias do Susano (auditoria técnica e de privacidade sobre a v0.3.0, commit c83cd0c), analisado pelo Raijin e entregue ao Sarden em 02/11/2026. Pedido do Sarden no mesmo dia: "plano de ação para executar o que faz sentido; o que não faz sentido, não opera. Sobe uma nova versão para o Git." Branch `v0.4`.
+
+### Prevenção (SUS02, SUS03, SUS04)
+
+- Travas que bloqueiam quando falham: guardas de escrita e de mensagem saem 2 em entrada inválida, import quebrado ou erro interno, com mensagem que cita só o tipo do erro; `run.sh --bloqueante` sai 2 sem Python; `settings.json` com `"onFailure": "block"` nas duas guardas (timeout e falha ao iniciar também barram; Claude Code 2.1.295+, doc de hooks conferida em 02/11/2026) e matcher com MultiEdit. A abertura de sessão segue informativa e passa a alertar Claude Code abaixo do mínimo. `CONVENCOES.md` ganha a tabela "Proteções: o que barra, onde e quando" (guardas, pre-commit, CI e o que cada um não cobre).
+- `brain.py varrer`: inspeção de privacidade separada da estrutura, sobre todo arquivo (qualquer extensão, `90_arquivo/`, sem extensão, `.env` forçado, `.ipynb`, CSV), com ZIP, `.xlsx`, `.docx` e gzip abertos por dentro; formato não inspecionável vira aviso visível no projeto e erro no perfil público; arquivo rastreado apesar do `.gitignore` aparece. `--staged` lê o índice do Git; `--perfil publico` barra contato. Exceção só de contato ou binário, por arquivo exato e com motivo (`PRIVACIDADE_EXCECOES.md` e `EXCECOES_GERENCIADAS`); segredo, cartão e CPF nunca têm exceção. `validate` usa a mesma inspeção e falha quando a biblioteca de guardas não carrega.
+- Pre-commit: inspeciona o índice antes do `validate`; hook anterior preservado e executado antes, com a falha dele barrando o commit; reinstalar não muda nem duplica a cadeia. `.gitignore` da raiz e do modelo reforçados.
+
+### Atualização, contexto e busca (SUS06, SUS08, SUS10)
+
+- `AGENTS.md` do projeto em três partes: cabeçalho com os nomes, bloco gerenciado (`scripts/agents_gerenciado.md`, conferido pelo `susano-check`) e Regras próprias do dono, que prevalecem sobre os padrões do bloco, nunca para liberar credencial, CPF, cartão ou contato pessoal (decisão do Sarden de 02/11/2026: no projeto de quem aplica, decide o dono).
+- `brain.py migrar` (idempotente): reescreve só o bloco gerenciado; `AGENTS.md` sem marcadores ganha cabeçalho e bloco, com as Regras próprias preservadas e o anterior em `90_arquivo/`; cria o arquivo obrigatório que falta em cada frente, sem tocar no que está preenchido. `validate` barra frente sem um dos quatro arquivos. `copier.yml` (mensagem depois do update) e `CONTRIBUTING.md` com o caminho: branch, update, migrar, validate, diff, PR, como desfazer.
+- Orçamento de abertura em duas partes: pacote gerenciado até 6.500 tokens estimados (erro) e 1.500 reservados ao projeto (aviso), total 8 mil. `CLAUDE.md`, estilo e regra de segurança sem repetir núcleo e `AGENTS.md`; descrições de skills contadas só quando entram no contexto (`disable-model-invocation` fica fora, doc de skills conferida em 02/11/2026). Projeto padrão: 6.300 + 200; projeto com todos os nomes no limite: 6.300 + 335, válido.
+- `brain.py fonte`: `--frente <slug>` restringe à frente em foco (mais organização, playbooks, referência e método); `--todas` só a pedido, cada linha rotulada pela origem; sem flag, nenhuma frente entra. Chamadores atualizados em todas as distribuições do template (núcleo, `AGENTS.md`, skills `frente` e `cerebro`, regra de pessoas, situações, SUSANO, CONVENCOES, modelos de pessoa).
+- Regra de segurança: contrato, fee e financeiro de cliente ficam fora salvo se as Regras próprias liberarem (repositório privado); `mapa` lista pastas extras do projeto; `audit` lista referência sem `verificado_em` e o inventário da revisão editorial.
+
+### Plugin, chat e aceite (SUS07, SUS09, SUS12)
+
+- `testar_plugin.sh`: núcleo medido antes de expandir caminhos, hook rodado em quatro caminhos de instalação (curto, longo, com espaço, com acento) com a mesma saída normalizada (6.016 caracteres, teto 6.500), caminhos citados conferidos, as 10 skills, subagente, estilo, licenças e arquivo novo não rastreado detectado. `SUSANO_EXIGIR_CLI=1` faz a falta do `claude` CLI falhar o aceite. O núcleo do plugin sai sem frontmatter (2.153 tokens estimados).
+- Pacote de chat refeito para o destino suportado (Project do claude.ai): `INSTRUCOES_DO_PROJETO.md` com 6,5 mil caracteres (era 26 mil), `essencial/` (cerca de 90 mil tokens estimados) e `completo/` (cerca de 430 mil) com nome achatado e `MAPA_DE_ARQUIVOS.md`, `LEIA-ME.md` com procedimento, limites com fonte e data e quatro perguntas de recuperação, licenças, `MANIFEST.sha256` e ZIP. `testar_pacote_chat.sh` confere arquivos, ZIP, MANIFEST, igualdade byte a byte com a fonte, licenças, tamanho e privacidade, inclusive um segredo plantado numa cópia do ZIP.
+- CI (`testes.yml`): Copier 9.19.1 fixado (`testes/requirements.txt`), Claude Code 2.1.316 fixado (`testes/claude_code_versao.txt`), actions fixadas por SHA, versões impressas; job `testes` com privacidade do repositório inteiro no perfil público, geradores idempotentes (arquivo novo também falha), modelo (projeto padrão e de nomes longos), atualização v0.3.0 para a candidata, plugin com validação nativa obrigatória, pacote de chat e autoria dos commits do PR; job `compatibilidade` com Python 3.9 no Ubuntu e macOS. `.github/dependabot.yml` mensal para actions e Copier.
+- `testes/rodar_casos.py`: variantes plugin e template; resposta reaproveitada só com a mesma chave (hash da entrada, hash do método, variante, CLI, modelo e ferramentas); `--forcar`; metadados por caso.
+
+### Governança (SUS01, SUS05, SUS11)
+
+- `AGENTS.md` da raiz: lista completa de testes, separação entre teste mecânico, avaliação com modelo e instalação real; autorização do Sarden registrada no CHANGELOG antes do merge (mesma conta no GitHub para agente e dono); autoria pública dos commits e `ferramentas/conferir_autoria.py` no CI. `CONTRIBUTING.md` do projeto nomeia o check a exigir (`validar`).
+- Revisão editorial: inventário dos 61 textos em `revisao_pendente` (25 novos, 29 edições, 7 aprovados com acréscimo) em `pendentes.md` e no `audit`; distribuir não é aprovar. Convenção `verificado_em` para referência volátil.
+- Casos parciais da issue #8: linhas novas em `situacoes.md` (ideia sem gargalo, GTM pedido como campanha, termo vetado no pedido), troca de vocabulário aplicada no texto (`calibracao.md` e estilo) e onboarding de frente no núcleo do plugin.
+
+### Testes desta versão
+
+- `testar_camada.py`: 108 casos (eram 62), também no Python 3.9.25. `testar_modelo.sh`, `testar_atualizacao.sh` (v0.3.0 para a candidata), `testar_plugin.sh`, `testar_pacote_chat.sh` e `varrer --perfil publico` no repositório inteiro: OK em 02/11/2026, nesta máquina. live_tested: false para o CI no GitHub até o PR rodar.
+
+### Não entra (com motivo; o Sarden pode reabrir qualquer item)
+
+1. Reescrita do histórico para tirar o e-mail dos 8 merges (SUS05, item 4): o endereço está só em merges feitos pelo GitHub com o e-mail da conta; reescrever pede force push na `main`, quebra a tag v0.3.0, clones e o plugin instalado, e não apaga cópias que já existem. Recomendação do Raijin: não reescrever, fechar a origem (e-mail privado na conta) e conferir os commits novos no CI. A decisão é do Sarden.
+2. Ferramenta externa de segredos no CI (SUS02, item 2): em repositório público, o secret scanning e o push protection do próprio GitHub cobrem os padrões de provedores sem binário de terceiro no pipeline; a inspeção do `brain.py` cobre o resto (CPF, cartão, contato, formatos). [VERIFICAR] em Settings, Code security, que os dois estão ligados.
+3. Destinos de chat além do Project do claude.ai (SUS09): GPT e Gem ficam fora da lista de suportados até haver como testar a recuperação neles.
+4. Teste automático de recuperação no chat (SUS09): o Project do claude.ai não tem API para isso; vira roteiro manual de quatro perguntas no `LEIA-ME.md` do pacote, registrado por destino.
+5. Aprovação dos 61 textos e `verificado_em` retroativo (SUS11): aprovação é leitura do Sarden e data de conferência sem conferir seria inventar; entram o inventário, a convenção e o `audit`.
+6. Configuração do GitHub (SUS01 e SUS05): check exigido, revisão, e-mail privado e secret scanning pedem permissão de administração, que o Raijin não tem (API 403); o passo a passo vai no PR para o Sarden aplicar.
+7. Banco vetorial, servidor ou captura contínua (rotina de valor): o próprio plano condiciona a um problema demonstrado no piloto de valor, que vem depois desta versão.
+
 ## v0.3.0 (02/11/2026: casos de decisão com zero divergência na rodada 2; merge em `main` e tag com o OK do Sarden)
 
 Origem: plano de mudança v0.3.0 revisado pelo Raijin e decidido pelo Sarden em 01/11/2026 (22:40): tom do núcleo mantido com calibração; fusão dos arquivos do Notion aprovada; casos de decisão rodados à mão antes da tag.
