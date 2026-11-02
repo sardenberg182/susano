@@ -3,7 +3,7 @@ id: instr-onboarding-frente
 tipo: instrucao
 autor: Sarden
 carrega_em: sob demanda (skill susano-rituais; a skill /nova-frente chama esta instrução)
-origem: instrução de onboarding de projeto da operação do Sarden (2025 a 2026); nome antigo instrucao_susano_onboarding_projeto.md
+origem: instrução de onboarding de projeto da operação do Sarden (2025 a 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: renomeado de onboarding_projeto, vocabulário de frente, entrega nos quatro arquivos da frente)
 ---

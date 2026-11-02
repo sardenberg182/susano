@@ -3,7 +3,7 @@ id: bib-horowitz-lado-dificil
 tipo: pensador
 autor: Ben Horowitz (2014)
 nivel: ATIVO
-origem: knowledge_susano_lado_dificil_horowitz.md
+origem: O Lado Difícil das Situações Difíceis (Ben Horowitz), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

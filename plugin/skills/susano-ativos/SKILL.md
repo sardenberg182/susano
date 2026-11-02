@@ -112,7 +112,7 @@ Data comes before model: the diagnosis names the gargalo, the gargalo calls the 
 
 ## `${CLAUDE_PLUGIN_ROOT}/00_susano/biblioteca/balfour/05_mover_de_mercado.md` (Brian Balfour (Reforge))
 - **Análise Competitiva por Posição de Fits**: Competidores na mesma categoria com posições diferentes no espectro não são comparáveis.
-- **Impacto em Cadeia ao Mover de Mercado**: Antes de qualquer expansão up-market (redes) ou down-market (mais bares independentes), mapear o impacto em cadeia nos …
+- **Impacto em Cadeia ao Mover de Mercado**: Antes de qualquer expansão up-market (contas maiores, com mais exigência) ou down-market (muitas contas pequenas), mape…
 - **Revisão Periódica dos 4 Fits**: Revisar os 4 Fits trimestralmente como prática preventiva.
 
 ## `${CLAUDE_PLUGIN_ROOT}/00_susano/biblioteca/bruno_nardon/growth.md` (Bruno Nardon)

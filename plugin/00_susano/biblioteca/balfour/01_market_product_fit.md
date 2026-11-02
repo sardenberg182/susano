@@ -3,7 +3,7 @@ id: bib-balfour-01-market-product-fit
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_road_to_100m_balfour.md + knowledge_susano_market_product_fit.md
+origem: Market Product Fit e The Road to a $100M Company (Brian Balfour, artigos), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: auto-referência removida)
 ---

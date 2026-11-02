@@ -3,7 +3,7 @@ id: bib-balfour-02-product-channel-fit
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_product_channel_fit_artigo.md + knowledge_susano_product_channel_fit.md
+origem: Product Channel Fit (Brian Balfour, artigo e versão curta), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: três modelos duplicados de roadmap por canal fundidos em um)
 ---

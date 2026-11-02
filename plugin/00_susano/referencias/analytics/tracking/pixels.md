@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-tracking-pixels
 tipo: referencia
-origem: KB_Pixels_TrackingSetup.md
+origem: base de configuração de pixels e tracking compilada pelo Sarden (2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: Typeform aponta para o snippet único, YouTube com enablejsapi e nomes do Enhanced Measurement)
 ---

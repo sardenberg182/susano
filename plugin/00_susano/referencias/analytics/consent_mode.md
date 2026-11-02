@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-consent-mode
 tipo: referencia
-origem: KB_ConsentMode_Privacy.md
+origem: base de conhecimento de consent mode e privacidade compilada pelo Sarden (Analytics Mania e Métricas Boss, abril de 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: stub do gtag, trigger de Consent Initialization, chaves de dataLayer corrigidas, UET só ad_storage, Chrome mantém cookies de terceiros, perdas sem fonte viraram [LACUNA])
 ---

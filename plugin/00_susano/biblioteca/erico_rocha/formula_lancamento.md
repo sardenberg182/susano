@@ -3,7 +3,7 @@ id: bib-erico-rocha-formula-lancamento
 tipo: pensador
 autor: Jeff Walker (*Launch*) + Érico Rocha (Workbook FL + 4 Fases do Lançamento Semente)
 nivel: MISTO (ativo para fundamentos, passivo para frameworks operacionais)
-origem: knowledge_susano_formula_lancamento.md
+origem: Fórmula de Lançamento (Erico Rocha), resumo do Sarden
 atualizado: 2026-11-01
 ---
 

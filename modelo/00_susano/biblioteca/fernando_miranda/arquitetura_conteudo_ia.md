@@ -3,7 +3,7 @@ id: bib-fernando-miranda-arquitetura-conteudo-ia
 tipo: pensador
 autor: Fernando Miranda
 nivel: ATIVO
-origem: entrevista de Fernando Miranda (G4 Podcast / Papo de Gestão) e material de arquitetura de conteúdo com IA, resumidos pelo Sarden; nome antigo knowledge_susano_arquitetura_conteudo_ia_organic.md
+origem: entrevista de Fernando Miranda (G4 Podcast / Papo de Gestão) e material de arquitetura de conteúdo com IA, resumidos pelo Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: tese escrita, frameworks passivos e conexões adicionados, pt-BR)
 ---

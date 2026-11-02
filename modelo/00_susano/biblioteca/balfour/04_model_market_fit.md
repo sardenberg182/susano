@@ -3,7 +3,7 @@ id: bib-balfour-04-model-market-fit
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_model_market_fit_artigo.md
+origem: Model Market Fit (Brian Balfour, artigo), resumo do Sarden
 atualizado: 2026-10-31
 ---
 
@@ -71,4 +71,4 @@ Todo modelo tem um teto matemático no mercado atual. CAC crescente crônico com
 
 ## NOTAS DA MIGRAÇÃO (2026-10-31)
 
-- A versão curta citada como `knowledge_susano_model_market_fit_threshold.md` nunca existiu na pasta Susano_3.8; as citações a ela agora apontam para este arquivo.
+- A versão curta do artigo, citada em arquivos antigos, nunca existiu_3.8; as citações a ela agora apontam para este arquivo.

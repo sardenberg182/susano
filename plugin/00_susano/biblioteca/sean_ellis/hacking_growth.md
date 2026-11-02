@@ -3,7 +3,7 @@ id: bib-sean-ellis-hacking-growth
 tipo: pensador
 autor: Sean Ellis + Morgan Brown (*Hacking Growth*, HSM, 2017)
 nivel: MISTO
-origem: knowledge_susano_hacking_growth.md
+origem: Hacking Growth (Sean Ellis e Morgan Brown), resumo do Sarden
 atualizado: 2026-11-01
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-tracking-snippets
 tipo: referencia
-origem: KB_Tracking_Snippets_Library.md
+origem: biblioteca de snippets de tracking compilada pelo Sarden (Analytics Mania, 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: page_view duplicado, ecommerce null, YouTube com enablejsapi e nomes do Enhanced Measurement, Meta Purchase com aspas, eventID e checagem de fbq, Google tag no checklist)
 ---

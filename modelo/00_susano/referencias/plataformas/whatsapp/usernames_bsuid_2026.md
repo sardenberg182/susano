@@ -1,7 +1,7 @@
 ---
 id: ref-plataformas-whatsapp-usernames-bsuid-2026
 tipo: referencia
-origem: whatsapp_usernames_bsuid_2026.md
+origem: documento informativo de provedor de soluções WhatsApp (março de 2026), conferido na documentação da Meta em 01/11/2026
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: cronograma conferido na documentação da Meta, formato e comportamento do BSUID, limites de envio marcados)
 ---

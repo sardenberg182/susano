@@ -5,7 +5,7 @@ Repositório do Susano, a sombra do Sarden: o método, o DNA, a biblioteca, as r
 | Você quer | Use | Como |
 |---|---|---|
 | a sombra no projeto que você já tem (qualquer repositório, terminal, desktop ou IDE) | o **plugin** do Claude Code | `/plugin marketplace add sardenberg182/susano` e `/plugin install susano@susano` |
-| o segundo cérebro completo: estrutura de pastas, `brain.py`, guardas, CI, mapa e estado quente (funciona também na nuvem do claude.ai/code) | o **template** Copier | `copier copy --vcs-ref v0.2.1 gh:sardenberg182/susano meu-projeto` |
+| o segundo cérebro completo: estrutura de pastas, `brain.py`, guardas, CI, mapa e estado quente (funciona também na nuvem do claude.ai/code) | o **template** Copier | `copier copy --vcs-ref v0.3.0 gh:sardenberg182/susano meu-projeto` |
 | a sombra numa conversa, sem repositório (Project do claude.ai, GPT do ChatGPT, Gem do Gemini) | o **pacote de chat** | `python3 ferramentas/gerar_pacote_chat.py` e cole os dois arquivos gerados |
 
 O método é do Sarden; o contexto, os dados e as decisões de cada projeto ficam no próprio projeto. Nos três caminhos a abertura da sessão carrega só o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens); o resto do método chega por skills (ou pelo índice, no chat), quando a tarefa pede.
@@ -37,7 +37,7 @@ Sessão na nuvem (claude.ai/code) não carrega plugin instalado na máquina: lá
 
 ```
 pip install copier
-copier copy --vcs-ref v0.2.1 gh:sardenberg182/susano meu-projeto
+copier copy --vcs-ref v0.3.0 gh:sardenberg182/susano meu-projeto
 ```
 
 O Copier pergunta: `org` (vira `10_<org>/`), `org_nome`, `frentes` (vira `20_<frentes>/`, padrão `clientes`), `dono` (usuário do GitHub que aprova os PRs) e `idioma`. Depois: `git init`, `python3 scripts/brain.py mapa`, `validate`, `susano-check`, suba para o GitHub e rode `/onboarding` no Claude Code. O `AGENTS.md` gerado explica a ordem de leitura para qualquer outro agente (Codex, Cursor, Gemini CLI, Copilot).

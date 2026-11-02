@@ -3,7 +3,7 @@ id: bib-brunson-dotcom-secrets
 tipo: pensador
 autor: Russell Brunson
 nivel: MISTO (modelos ativos + frameworks passivos)
-origem: knowledge_susano_dotcom_secrets.md
+origem: DotCom Secrets (Russell Brunson), resumo do Sarden
 atualizado: 2026-11-01
 ---
 

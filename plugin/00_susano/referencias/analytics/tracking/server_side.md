@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-tracking-server-side
 tipo: referencia
-origem: KB_ServerSide_Tracking.md
+origem: base de server-side tracking compilada pelo Sarden (Métricas Boss, Analytics Mania, 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: Google tag gateway descrito pelo que é (CDN, sem Workers), casos de CAPI separados do sGTM, preços com data e [VERIFICAR])
 ---

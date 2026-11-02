@@ -3,7 +3,7 @@ id: bib-grove-only-the-paranoid-survive
 tipo: pensador
 autor: Andrew S. Grove (1996)
 nivel: ATIVO
-origem: knowledge_susano_only_paranoid_survive_grove.md
+origem: Only the Paranoid Survive (Andrew Grove), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

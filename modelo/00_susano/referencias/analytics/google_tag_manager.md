@@ -1,7 +1,7 @@
 ---
 id: ref-analytics-google-tag-manager
 tipo: referencia
-origem: KB_GTM_MasterReference.md
+origem: referência mestra de Google Tag Manager compilada pelo Sarden (Analytics Mania, 2026)
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: Google tag com Measurement ID, triggers de Consent Initialization e Initialization, template oficial do Meta, Tag Assistant atual)
 ---

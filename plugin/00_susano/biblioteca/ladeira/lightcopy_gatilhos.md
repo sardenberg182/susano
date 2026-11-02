@@ -3,7 +3,7 @@ id: bib-ladeira-lightcopy-gatilhos
 tipo: pensador
 autor: Leandro Ladeira (*Apostila LightCopy 2023*) + Érico Rocha (*Os 10 Principais Gatilhos Mentais*)
 nivel: MISTO (ativos os princípios, passivos os frameworks operacionais)
-origem: knowledge_susano_lightcopy_gatilhos.md
+origem: Light Copy e gatilhos (Leandro Ladeira), resumo do Sarden
 atualizado: 2026-11-01
 revisao_pendente: Sarden (edição v0.3.0: frase quebrada pela remoção do travessão reescrita)
 ---
