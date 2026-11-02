@@ -18,6 +18,20 @@ Data comes before model: the diagnosis names the gargalo, the gargalo calls the 
 - **Isolamento de Variáveis**: Nunca altere mais de um elemento por vez numa campanha que não performa.
 - **Matemática do Leilão**: O vencedor não é quem tem o melhor anúncio: é quem tem o maior LTV e pode pagar o maior CAC.
 
+## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/copy_e_headline.md` (Sarden)
+- **Flecha central**: toda comunicação tem um tema sedutor único; cada frase, prova e CTA aponta para ele.
+- **Primeira frase irresistível**: a abertura precisa ser impossível de ignorar e criar a impressão de que o produto é irresistível.
+- **Estrutura de VSL**: abertura de impacto → identificação do problema → apresentação da solução → prova social → chamada para ação.
+- **Proposta e cliente**: problema antes da solução; "oportunidade" no lugar de culpa; refinar um bullet mantém sentido e tamanho (menos caracter…
+- **Ética de copy**: nada de urgência artificial nem medo para subir CTA em comunicação que deveria ajudar; CTA alto não justifica.
+
+## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/diagnostico_de_funil.md` (Sarden)
+- **A ordem do método**: árvore de alavancas do modelo → planilha de taxas por canal (executado × planejado) → hipótese estruturada → PA com gan…
+- **As sete checagens**: integridade de definição e tracking; pro-rata do mês; "quantos" separado de "quanto converte"; por canal, nunca média; …
+- **Hipótese com corte**: frase base mais os frames (alavanca, gargalo, lado do filtro, evidência, mede por, confiança, esforço, corte, risco col…
+- **Filtro do ponteiro**: o PA move CAC, LTV ou payback?
+- **Matar ou sistematizar**: a decisão ao fim do teste.
+
 ## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/engenharia_crescimento.md` (Sarden)
 - **Filtro Binário de Gargalo**: Diante de qualquer platô, audite apenas duas coisas primeiro.
 - **Filtro do Ponteiro (CAC/LTV)**: Antes de qualquer ação, pergunte: isso move o ponteiro do CAC ou do LTV?
@@ -33,10 +47,30 @@ Data comes before model: the diagnosis names the gargalo, the gargalo calls the 
 - **Frame Eterno do Funil Rede**: Convidar → analisar → fazer follow é eterno.
 - **Engenharia Social como Diferencial**: Volume é commoditizado pela automação.
 
+## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/integridade_do_dado.md` (Sarden)
+- **Checklist de sinal contaminado**: nove sintomas que obrigam a parar antes de ler (seção abaixo).
+- **Parar, conciliar, registrar, ler**: a ordem quando o sinal falha.
+- **Regra dos 60 dias**: quando o histórico não é confiável, os primeiros 60 dias são fundação (tracking, definições, contagem); qualquer KPI pr…
+- **Conversão é envio confirmado, nunca clique**: evento de lead no pixel e no CAPI com deduplicação; o lead cai no CRM com origem, campanha e etapa.
+
 ## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/ma_e_valuation.md` (Sarden)
 - **Teste do Ativo**: Se o CAC ou a entrega dependem do fundador, o múltiplo é zero.
 - **Valuation Anti-Ego**: Todo cálculo de valor de empresa se baseia na previsibilidade do caixa e na retenção (LTV).
 - **Alavancagem por Parceiros**: Escale via ecossistema (advogados, contadores, integradores) como originadores de negócio.
+
+## `${CLAUDE_PLUGIN_ROOT}/00_susano/dna/metodo/principios_mestre.md` (Sarden)
+- **O número só abre a conversa**: o que se julga é se o PA ataca o furo certo, com quanto de ganho e a que custo.
+- **Sem definição não tem previsão**: Lead, MQL, SQL, ICP e SLA no mesmo dicionário antes de qualquer plano (dicionario.md).
+- **Integridade do dado antes da leitura**: sinal de conversão contaminado invalida qualquer ROAS, CPL ou taxa, por mais bonito que o número pareça (integridade_do…
+- **Taxa vale mais que volume**: em quase todo diagnóstico a resposta está em "quanto converte", não em "quantos".
+- **O pipeline é a fonte da verdade, a plataforma é diagnóstico**: número de plataforma de mídia nunca entra na tabela de resultado; o que conta é o CRM, do lead ao ganho.
+- **Plano define preço; preço não define plano**: o escopo nasce da complexidade operacional, nunca do número que o cliente tem em mente.
+- **Problema antes da solução, processo antes de promessa**: em proposta e em conversa com decisor, o caos chega antes da ordem.
+- **Arroz com feijão (ACF)**: o básico bem feito ainda ganha da maioria.
+- **Estrutura antes de escala**: tagueamento ponta a ponta, MQL qualificado no formulário, CRM centralizado.
+- **Pensar e entender vêm antes da IA**: a IA acelera o que já foi entendido.
+- **Disciplina interno versus externo**: pricing, scoring, pisos de negociação, nota de calibração e marcador de incerteza nunca aparecem em material de cliente.
+- **Sênior sempre**: menos gente, mais sênior, concentrada onde é difícil; rotina para a máquina; contratação destravada por caixa, não por …
 
 ## `${CLAUDE_PLUGIN_ROOT}/00_susano/biblioteca/aaron_ross/receita_previsivel.md` (Aaron Ross e Marylou Tyler (Predictable Revenue))
 - **Sementes / Redes / Alvos**: Todo lead tem uma natureza diferente.

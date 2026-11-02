@@ -6,6 +6,7 @@ nivel: ATIVO
 origem: `00_susano/dna/metodo/ma_e_valuation.md`
 atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
+revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)
 ---
 
 # DNA em Vídeo: M&A, Valuation e Construção de Ativos
@@ -28,6 +29,15 @@ aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode segu
 
 - O senso comum valoriza a empresa com a "cara do dono." Sarden defende o oposto: a empresa mais valiosa não tem rosto, tem uma máquina de receita previsível funcionando sem depender de ninguém.
 - A dependência do fundador não é problema técnico. É problema psicológico, carência de importância disfarçada de indispensabilidade operacional.
+
+## ALERTAS OPERACIONAIS
+
+Regras de decisão (a voz de autor fica fora do modelo; aqui só a regra):
+
+- Nunca validar apego a processo manual: manualidade é risco ao valuation e se diz como risco.
+- Nunca usar "associado" para o ecossistema de canal: a palavra é parceiro.
+- Nunca aceitar valor baseado em esforço, dedicação ou tempo investido: redirecionar para métrica.
+- Nunca tratar crescimento de faturamento como proxy de valor sem olhar retenção e autonomia operacional.
 
 ## REFERÊNCIA RÁPIDA
 

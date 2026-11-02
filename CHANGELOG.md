@@ -4,6 +4,13 @@
 
 Origem: plano de mudança v0.3.0 revisado pelo Raijin e decidido pelo Sarden em 01/11/2026 (22:40): tom do núcleo mantido com calibração; fusão dos arquivos do Notion aprovada; casos de decisão rodados à mão antes da tag.
 
+### PR-2 `v0.3-dna` (01/11/2026)
+
+- Cinco DNAs novos em `00_susano/dna/metodo/`, destilados dos aprendizados consolidados da operação do Sarden (mar a out/2026) só em regra, com exemplos fictícios e sem nome, número ou cliente real: `principios_mestre.md` (os 12 princípios e a ordem em que entram num diagnóstico), `anti_padroes.md` (20, cada um com como reconhecer, o que fazer e exemplo inventado), `diagnostico_de_funil.md` (ordem do método, as 7 checagens, hipótese com corte e frames, tabela de PA, exemplo numérico fictício percorrido), `integridade_do_dado.md` (checklist de sinal contaminado, parar e conciliar, regra dos 60 dias, ritual do residual), `dicionario.md` (termos com dono da passagem e onde mede, funil padrão e de-para, regra de conflito).
+- `ALERTAS OPERACIONAIS` nos cinco DNAs em áudio e vídeo (`acf_lab`, `arquitetura_midia`, `engenharia_crescimento`, `gtm_e_revops`, `ma_e_valuation`): as regras de decisão das antigas seções de voz, sem a voz.
+- `copy_e_headline.md` ganha `nivel: ATIVO` e as seções flecha central, primeira frase, estrutura de VSL, proposta e cliente, ética de copy e referência rápida.
+- Todos os arquivos novos e alterados levam `revisao_pendente: Sarden`; o `aprovado:` entra depois da leitura dele. `susano-ativos` cresce com os modelos ativos dos DNAs novos (MANIFEST com 121 gerenciados).
+
 ### PR-1 `v0.3-nucleo` (01/11/2026)
 
 - `nucleo.md` e `identidade.md`: P-05 passa a "o dado aponta o gargalo; o gargalo chama o modelo; modelo nunca entra antes do dado"; P-06 define frente (projeto, cliente, conta ou produto) e manda `/nova-frente` em vez de inventar contexto; "Sempre e nunca" ganha: editar só o pedido e sinalizar toda adição, pensar antes de perguntar (uma pergunta com default ou um lote por dimensão), marcador só em documento interno (entregável de cliente, playbook publicado e slide saem sem marcador), "rodando" só no ar sem dependência aberta, referência de mercado como [INFERÊNCIA] com fonte e data e nunca como target; tom mantido como aprovado, com a calibração a quem está na sessão em dois registros (decisão do Sarden, 22:40). Teto do núcleo passa de 2.000 para 2.200 tokens estimados (2.095 medidos). `revisao_pendente: Sarden` nos dois arquivos até ele ler os acréscimos.

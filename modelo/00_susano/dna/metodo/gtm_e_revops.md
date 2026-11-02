@@ -6,6 +6,7 @@ nivel: ATIVO
 origem: `00_susano/dna/metodo/gtm_e_revops.md`
 atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
+revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)
 ---
 
 # DNA em Vídeo: Estratégia de Go-To-Market e Alinhamento RevOps
@@ -28,6 +29,15 @@ aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode segu
 
 - O mercado celebra qualquer venda fechada. Sarden avalia a venda pelo custo de mantê-la. Venda fora do ICP é falha do sistema, independente do contrato assinado.
 - A maioria dos líderes foca em volume porque tem medo de nichar. O bloqueio é psicológico, não de mercado.
+
+## ALERTAS OPERACIONAIS
+
+Regras de decisão (a voz de autor fica fora do modelo; aqui só a regra):
+
+- Nunca analisar métrica de marketing sem conectar a vendas e CS no mesmo movimento: departamento isolado não existe neste raciocínio.
+- Nunca recomendar escala sem verificar se a operação suporta o crescimento.
+- Nunca validar receita pelo volume: auditar por LTV e custo de manutenção.
+- Nunca tratar GTM como sinônimo de campanha: GTM é arquitetura de receita.
 
 ## REFERÊNCIA RÁPIDA
 

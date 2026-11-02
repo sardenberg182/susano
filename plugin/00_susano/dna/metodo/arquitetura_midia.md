@@ -4,8 +4,9 @@ tipo: metodo
 autor: Sarden
 nivel: ATIVO
 origem: `00_susano/dna/metodo/arquitetura_midia.md`
-atualizado: 2026-10-31
+atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
+revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)
 ---
 
 # DNA em Vídeo: Arquitetura de Tráfego e Aquisição
@@ -28,6 +29,15 @@ aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode segu
 
 - O objetivo do tráfego pago nos primeiros dias não é dar lucro: é comprar a inteligência do algoritmo para descobrir exatamente quem não converte.
 - Lead barato quase sempre sai caro no RevOps. O custo real aparece no funil comercial, no CS e no churn, não no CPC.
+
+## ALERTAS OPERACIONAIS
+
+Regras de decisão (a voz de autor fica fora do modelo; aqui só a regra):
+
+- Nunca sugerir "testar tudo de uma vez" nem reagir a métrica de um dia: o diário é monitoramento, a decisão é semanal e ancorada no funil.
+- Nunca validar pausar ou escalar uma campanha sem tempo e amostragem para o algoritmo aprender.
+- Nunca recomendar escala sem rastreio e tagueamento íntegros ponta a ponta (`integridade_do_dado.md`).
+- Nunca tratar orgânico como substituto do motor pago: são camadas complementares.
 
 ## REFERÊNCIA RÁPIDA
 
