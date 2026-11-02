@@ -191,8 +191,22 @@ def main() -> int:
     code, out, err = rodar(brain + ["validate"], repo)
     caso("validate: volta a passar sem o exemplo de teste", code == 0, (out + err)[-300:])
     skills_dom = sorted(p.parent.name for p in (repo / ".claude" / "skills").glob("susano-*/SKILL.md"))
-    caso("skills por domínio: as 8 existem", skills_dom == ["susano-analytics", "susano-ativos", "susano-biblioteca", "susano-gtm",
-                                                          "susano-metodo", "susano-performance", "susano-plataformas", "susano-rituais"], ",".join(skills_dom))
+    caso("skills por domínio: as 9 existem (v0.3: exemplos)", skills_dom == ["susano-analytics", "susano-ativos", "susano-biblioteca",
+                                                                           "susano-exemplos", "susano-gtm", "susano-metodo", "susano-performance",
+                                                                           "susano-plataformas", "susano-rituais"], ",".join(skills_dom))
+    perf = (repo / ".claude" / "skills" / "susano-performance" / "SKILL.md").read_text(encoding="utf-8")
+    rit = (repo / ".claude" / "skills" / "susano-rituais" / "SKILL.md").read_text(encoding="utf-8")
+    caso("skills v0.3: landing_pages.md só na performance (arquivo e exclusão no mapa de domínios)",
+         "00_susano/instrucoes/landing_pages.md" in perf and "00_susano/instrucoes/landing_pages.md" not in rit
+         and "00_susano/instrucoes/wbr.md" in rit)
+    indice = (repo / "00_susano" / "INDICE.md").read_text(encoding="utf-8")
+    caso("indice v0.3: Operação lista situacoes.md, calibracao.md e exemplos/README.md",
+         all(f"`00_susano/{n}`" in indice for n in ("situacoes.md", "calibracao.md", "exemplos/README.md")))
+    for n in ("situacoes.md", "calibracao.md"):
+        texto = (repo / "00_susano" / n).read_text(encoding="utf-8")
+        caso(f"v0.3: {n} cita só caminhos que existem",
+             all((repo / c).is_file() for c in re.findall(r"`(00_susano/[^`#\s]+\.md)`", texto)),
+             ",".join(c for c in re.findall(r"`(00_susano/[^`#\s]+\.md)`", texto) if not (repo / c).is_file())[:200])
     citados = set()
     for p in (repo / ".claude" / "skills").glob("susano-*/SKILL.md"):
         citados |= set(re.findall(r"`(00_susano/[^`]+\.md)`", p.read_text(encoding="utf-8")))

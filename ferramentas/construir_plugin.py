@@ -42,16 +42,19 @@ def versao_do_changelog() -> str:
 
 
 def nucleo_para_plugin(texto: str) -> str:
-    texto = texto.replace("Antes de executar, saiba a frente (`/frente <slug>`).",
-                          "Antes de executar, saiba a frente (cliente, conta ou produto); sem clareza, pergunte.")
+    alvo = "Saiba qual é antes de executar (`/frente <slug>`); sem pasta, `/nova-frente` ou onboarding, nunca contexto inventado."
+    if alvo not in texto:
+        raise SystemExit("nucleo_para_plugin: a frase de P-06 mudou no núcleo; ajuste a substituição do plugin")
+    texto = texto.replace(alvo, "Saiba qual é antes de executar; sem contexto da frente, pergunte, nunca invente.")
     ini = texto.index("## Onde o resto mora")
     fim = texto.rfind("\n", 0, len(texto))
     novo = (
-        "## Onde o resto mora (plugin)\n\n"
-        f"- Identidade completa e guardrails: `{PREFIXO}00_susano/identidade.md`. Quem é o Sarden: `{PREFIXO}00_susano/sobre_o_sarden.md`.\n"
-        "- Método por domínio, carregado quando o diagnóstico pede: skill `susano-ativos` (modelos ativos: consulte quando o gargalo tiver nome e abra só o modelo que ele chama), skills `susano-*` por domínio (metodo, biblioteca, performance, analytics, gtm, plataformas, rituais) e `susano-analise` (FATO → análise vs target → PA). "
-        f"Índice: `{PREFIXO}00_susano/INDICE.md`. Evidência: subagente `susano:pesquisador`.\n"
-        "- O contexto do projeto (frentes, decisões, metas, números) é do dono e mora nos arquivos dele; o método nunca o inventa. Segundo cérebro completo (pastas, `brain.py`, guardas, CI): o template Copier do mesmo repositório.\n"
+        f"## Onde o resto mora (plugin; caminhos relativos a `{PREFIXO}`)\n\n"
+        "- Identidade completa e guardrails: `00_susano/identidade.md`. Quem é o Sarden: `00_susano/sobre_o_sarden.md`.\n"
+        "- Primeira leitura depois do núcleo: `00_susano/situacoes.md` (o que a pessoa diz → modo → o que abrir). Agir ou perguntar: `00_susano/calibracao.md`. Antes de produzir num modo, o exemplo do mesmo modo (skill `susano-exemplos`).\n"
+        "- Método por domínio, quando o diagnóstico pede: skill `susano-ativos` (modelos ativos: consulte quando o gargalo tiver nome e abra só o modelo que ele chama), skills `susano-*` por domínio (metodo, biblioteca, performance, analytics, gtm, plataformas, rituais) e `susano-analise` (FATO → análise vs target → PA). "
+        "Índice: `00_susano/INDICE.md`. Evidência: subagente `susano:pesquisador`.\n"
+        "- Contexto do projeto (frentes, decisões, metas, números) é do dono e mora nos arquivos dele; o método não o inventa.\n"
     )
     return texto[:ini] + novo
 
@@ -178,7 +181,7 @@ Depois: `/output-style Susano` ativa o estilo de resposta (opcional; o tom já v
 ## O que carrega quando
 
 - Sempre ligado: o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens), injetado na abertura da sessão pelo hook `hooks/abrir.py`, mais as descrições das skills e do subagente. `claude plugin details susano` mostra a projeção.
-- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção.
+- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais`, `susano-exemplos` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. Primeira leitura depois do núcleo: `00_susano/situacoes.md`.
 - Subagente `susano:pesquisador`: evidência com caminho, sobre o método e sobre os documentos do projeto.
 
 ## O que não vem no plugin

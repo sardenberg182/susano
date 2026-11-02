@@ -22,11 +22,13 @@ Regras deste repositório para qualquer agente (Claude Code, Codex, Cursor, Gemi
 O Claude Code carrega o núcleo pelo `CLAUDE.md` e o método pelas skills. Outro agente faz o mesmo à mão, nesta ordem:
 
 1. Leia `00_susano/nucleo.md` inteiro: identidade, hierarquia P-01 a P-06, tom e formato. É o que vale em toda resposta.
-2. Leia `MAPA.md` (frentes, dono, data do último estado) e `10_{{ org }}/hot.md` (estado quente agregado). Os dois são gerados: `python3 scripts/brain.py mapa` e `python3 scripts/brain.py hot`.
-3. Antes de trabalhar numa frente, leia `20_{{ frentes }}/<slug>/contexto.md`, `estado.md`, `decisoes.md` e `experimentos.md` (hipóteses com corte, resultado e decisão).
-4. Método por domínio: cada `.claude/skills/susano-*/SKILL.md` é um índice em markdown comum (ativos, metodo, biblioteca, performance, analytics, gtm, plataformas, rituais). Abra o índice do domínio, depois só o arquivo que a tarefa pede, e cite `caminho#seção`.
-5. Pergunta sobre o que ficou combinado, decidido ou medido: `python3 scripts/brain.py fonte "<termo>"` devolve arquivo e linha; a resposta cita os dois. Sem ocorrência é [LACUNA].
-6. Antes de encerrar: registre o que mudou onde `00_susano/metodo/salve.md` manda (ledger, estado, decisões, experimentos), rode `python3 scripts/brain.py mapa`, `hot` e `validate`, e abra o PR na branch `salve/AAAA-MM-DD-<tema>`.
+2. Leia `00_susano/situacoes.md`: o que a pessoa diz → modo → o que abrir → armadilha. Agir ou perguntar: `00_susano/calibracao.md`.
+3. Leia `MAPA.md` (frentes, dono, data do último estado) e `10_{{ org }}/hot.md` (estado quente agregado). Os dois são gerados: `python3 scripts/brain.py mapa` e `python3 scripts/brain.py hot`.
+4. Antes de trabalhar numa frente, leia `20_{{ frentes }}/<slug>/contexto.md`, `estado.md`, `decisoes.md` e `experimentos.md` (hipóteses com corte, resultado e decisão).
+5. Método por domínio: cada `.claude/skills/susano-*/SKILL.md` é um índice em markdown comum (ativos, metodo, biblioteca, performance, analytics, gtm, plataformas, rituais, exemplos). Abra o índice do domínio, depois só o arquivo que a tarefa pede, e cite `caminho#seção`.
+6. Antes de produzir num modo, abra o exemplo do mesmo modo em `00_susano/exemplos/`; nunca copie número de exemplo para uma frente real.
+7. Pergunta sobre o que ficou combinado, decidido ou medido: `python3 scripts/brain.py fonte "<termo>"` devolve arquivo e linha; a resposta cita os dois. Sem ocorrência é [LACUNA].
+8. Antes de encerrar: registre o que mudou onde `00_susano/metodo/salve.md` manda (ledger, estado, decisões, experimentos), rode `python3 scripts/brain.py mapa`, `hot` e `validate`, e abra o PR na branch `salve/AAAA-MM-DD-<tema>`.
 
 ## Modo sem shell
 
