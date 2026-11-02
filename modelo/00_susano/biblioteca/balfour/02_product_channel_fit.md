@@ -3,8 +3,9 @@ id: bib-balfour-02-product-channel-fit
 tipo: pensador
 autor: Brian Balfour (Reforge)
 nivel: ATIVO
-origem: knowledge_susano_product_channel_fit_artigo.md + knowledge_susano_product_channel_fit.md
-atualizado: 2026-10-31
+origem: Product Channel Fit (Brian Balfour, artigo e versão curta), resumo do Sarden
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: três modelos duplicados de roadmap por canal fundidos em um)
 ---
 
 # Product-Channel Fit (Artigo Completo)
@@ -20,16 +21,14 @@ Produtos são construídos para tirar vantagem de canais específicos, não o co
 
 - **Filtro do Canal Dominante**: Identificar o canal onde o encaixe produto-canal é mais natural e concentrar esforço até dominá-lo. 70%+ do crescimento de empresas de $1B+ vem de um canal principal. Distribuir uniformemente é não dominar nenhum.
 - **Checklist de Product-Channel Fit**: Antes de escalar qualquer canal, verificar: (1) O produto tem as características que o canal exige nativamente? (2) O produto entrega valor dentro da janela de atenção que o canal oferece? Se ambas forem não, o canal está errado.
-- **Filtro de Roadmap por Canal**: Toda feature nova deve ter resposta clara para "qual canal isso alavanca nativamente?" Feature sem canal = custo sem retorno de distribuição.
+- **Filtro de Roadmap por Canal**: Toda feature nova (e toda aprovação de board) deve ter resposta clara para "qual canal isso alavanca nativamente?". O canal de distribuição é definido antes do desenvolvimento, não depois; feature sem canal é custo de manutenção sem retorno de aquisição.
 - **Filtro do Pino Quadrado**: Ao diagnosticar falha de conversão ou CAC estourado, auditar se o produto possui arquitetura correta (fricção, onboarding, time-to-value, gatilhos virais) para o canal escolhido antes de culpar o gestor de tráfego. Resultado esperado: alinhamento entre engenharia e marketing na raiz do problema. (da versão curta)
-- **Filtro de Board para Roadmap**: Nenhuma nova feature aprovada sem resposta clara para "qual canal isso alavanca nativamente?" O canal de distribuição é definido antes do desenvolvimento, não depois. (da versão curta)
 
 ---
 
 ## FRAMEWORKS PASSIVOS
 
 - **Monitoramento de Novos Canais como Sinal Competitivo**: Novos canais criam novas empresas com Product-Channel Fit nativo. Ativar em análise competitiva e planejamento estratégico, especialmente para canais emergentes no mercado do projeto (WhatsApp Business, marketplaces, etc.).
-- **Matriz de Construção Guiada por Canal**: Ativar em reuniões de roadmap. Feature sem canal definido vira custo de manutenção sem retorno de aquisição. (da versão curta)
 
 ---
 

@@ -3,7 +3,7 @@ id: bib-winning-by-design-revenue-architecture
 tipo: pensador
 autor: Winning by Design
 nivel: MISTO (princípios ATIVOS, modelos operacionais PASSIVOS)
-origem: knowledge_susano_revenue_architecture.md
+origem: Revenue Architecture (Winning by Design), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

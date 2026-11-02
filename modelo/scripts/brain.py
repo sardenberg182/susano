@@ -37,35 +37,49 @@ PROJETO_PARADO = 90
 # 01/11/2026]: nos modelos anteriores 1 token eram cerca de 3,5 caracteres em inglês e o tokenizer atual gera cerca de 30%
 # mais tokens; PT-BR tende a gastar mais [INFERÊNCIA]. A medição real é o /context numa sessão e `claude plugin details susano`.
 CHARS_POR_TOKEN = 2.7
-NUCLEO_TOKENS_MAX = 2000
+# 2.000 na v0.2.0; 2.200 na v0.3.0: o Sarden manteve o tom (01/11/2026, 22:40) e o plano acrescentou regras ao núcleo.
+NUCLEO_TOKENS_MAX = 2200
 ABERTURA_TOKENS_MAX = 8000
 IMPORT_MAX_SALTOS = 5
 # Skills por domínio geradas de 00_susano/ (brain.py skills). (nome, descrição de quando usar, pastas de origem)
+# (nome, descrição da skill, caminhos em 00_susano/): pasta ou arquivo .md; prefixo "-" exclui um arquivo de uma pasta listada
 DOMINIOS = [
-    ("metodo", "Sarden's DNA: ACF fundamentals of RevOps, media architecture, copy and headlines, leadership beliefs, "
-               "growth engineering, GTM and RevOps, hackizinhos, M&A and valuation. Use before any external framework when "
-               "the task asks how Sarden would diagnose, structure or decide.",
+    ("metodo", "Sarden's DNA: master principles, anti-patterns, funnel diagnosis, data integrity, dictionary, ACF fundamentals "
+               "of RevOps, media architecture, copy and headlines, leadership beliefs, growth engineering, GTM and RevOps, "
+               "hackizinhos, M&A and valuation. Use before any external framework when the task asks how Sarden would diagnose, "
+               "structure or decide.",
      ["dna/metodo"]),
     ("biblioteca", "Thinkers summarized in Sarden's method: Balfour's fits, Hormozi, Brunson, Aaron Ross, Sean Ellis, Elad Gil, "
                    "Grove, Horowitz, Winning by Design, G4, Ladeira and others. Use when a named framework is needed (fit, offer, "
                    "funnel, launch, sales process, management).",
      ["biblioteca"]),
-    ("performance", "Paid media and demand generation: ads fundamentals, the media manager routine and daily checklist, the 2026 "
-                    "demand operating system and Panorama 2026 benchmarks. Use for ads audits, scaling, CPL/CAC diagnosis and routines.",
-     ["referencias/performance", "referencias/benchmarks"]),
+    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, account lessons (Meta, "
+                    "Google), lead-gen creative score, media manager routine and checklist, 2026 demand operating system, Panorama "
+                    "2026, Stories 10x, landing page lens (17-field brief, device protocol, pre-traffic QA) and HTML builder playbook. "
+                    "Use for ads audits, scaling, CPL/CAC diagnosis, creatives, routines, organic social and landing pages.",
+     ["referencias/performance", "referencias/benchmarks", "referencias/social_organico", "referencias/landing_pages",
+      "instrucoes/landing_pages.md"]),
     ("analytics", "Web analytics and tracking: GA4, Google Tag Manager, consent mode, pixels, server-side and snippets. Use for "
                   "measurement, tagging, event naming, data quality and tracking audits.",
      ["referencias/analytics"]),
-    ("gtm", "Go-to-market analytics: unit economics, sizing and segmentation, growth modeling and attribution, experimentation, "
-            "benchmarks by vertical, SQL for GA4 in BigQuery. Use for TAM/SAM/SOM, CAC/LTV/payback math, forecast and experiment design.",
+    ("gtm", "Go-to-market analytics: BP audit (formulas, classic spreadsheet errors), quantitative models (sizing, scoring, "
+            "forecasting, churn, attribution, MMM, experimentation, GA4 SQL) and benchmarks with source. Use for TAM/SAM/SOM, "
+            "CAC/LTV/payback math, forecast, test sizing and market references.",
      ["referencias/go-to-market"]),
-    ("plataformas", "Platform references: HubSpot (dossier and Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, "
-                    "automation, CDP and WhatsApp implementation or audit questions.",
+    ("plataformas", "Platform references: the CRM implementation standard (pipes, cadence, attribution with inheritance, goals), "
+                    "HubSpot (dossier with the Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, automation, CDP and WhatsApp "
+                    "implementation or audit questions.",
      ["referencias/plataformas"]),
-    ("rituais", "Management rituals and project intake: the GP and BP guide and the project onboarding instruction. Use when "
-                "preparing a GP, BP, WBR or kickoff, or onboarding a new frente.",
-     ["instrucoes"]),
+    ("rituais", "Management rituals, operations and intake: WBR (status rule, structure, reading lens, complete PA), GP and BP guide, "
+                "brief and proposal reading, operation and team rules, frente onboarding. Use when preparing or reading a WBR, GP, "
+                "BP or kickoff, answering a brief, or onboarding a frente.",
+     ["instrucoes", "-instrucoes/landing_pages.md"]),
+    ("exemplos", "Worked examples by mode: WBR read, rate-sheet diagnosis, PA table, meeting analysis, executive summary, leadership "
+                 "message, proposal structure. Open the matching example before producing in that mode.",
+     ["exemplos"]),
 ]
+ESQUELETO_EXEMPLO = ["ENTRADA", "SA[IÍ]DA", "POR QUE ASSIM"]
+ARQUIVOS_FRENTE = ("estado.md", "contexto.md", "decisoes.md", "experimentos.md")
 GERENCIADOS = ["CLAUDE.md", "SUSANO.md", "CONVENCOES.md", "CONTRIBUTING.md",
                "00_susano/**", ".claude/**", "scripts/**", ".github/workflows/**"]
 FORA_DO_MANIFESTO = ["00_susano/MANIFEST.sha256", ".claude/settings.local.json", "**/__pycache__/**", "**/*.pyc"]
@@ -198,15 +212,21 @@ def cmd_validate(raiz: Path, pendentes_ok: bool = True) -> int:
         fm = frontmatter(texto)
         partes = r.split("/")
         # frentes: estado, contexto e decisoes com frontmatter e data
-        if re.match(r"^20_[a-z0-9-]+$", partes[0]) and len(partes) == 3 and partes[2] in ("estado.md", "contexto.md", "decisoes.md"):
+        if re.match(r"^20_[a-z0-9-]+$", partes[0]) and len(partes) == 3 and partes[2] in ARQUIVOS_FRENTE:
             if not fm:
                 rel.erro(f"{r}: sem frontmatter (veja CONVENCOES.md)")
             elif not para_data(fm.get("atualizado", "")):
                 rel.erro(f"{r}: campo atualizado ausente ou fora de AAAA-MM-DD")
         # método: frontmatter e esqueleto dos pensadores
-        if r.startswith("00_susano/") and partes[1] in ("biblioteca", "dna", "referencias", "instrucoes", "metodo"):
+        if r.startswith("00_susano/") and partes[1] in ("biblioteca", "dna", "referencias", "instrucoes", "metodo", "exemplos") and partes[-1].lower() != "readme.md":
             if not fm.get("id") or not fm.get("tipo"):
                 rel.erro(f"{r}: frontmatter do método sem id ou tipo")
+            if fm.get("tipo") == "resumo":
+                rel.erro(f"{r}: tipo resumo não existe mais; é pensador (com o esqueleto) ou referencia")
+            if fm.get("tipo") == "exemplo":
+                for secao in ESQUELETO_EXEMPLO:
+                    if not re.search(r"^#+\s*" + secao, texto, re.M | re.I):
+                        rel.erro(f"{r}: exemplo sem a seção obrigatória {secao.replace('[IÍ]', 'Í')}")
             if fm.get("tipo") == "pensador":
                 for secao in ESQUELETO_PENSADOR:
                     if not re.search(r"^#+\s*" + secao, texto, re.M | re.I):
@@ -351,19 +371,22 @@ def cmd_novo(raiz: Path, slug: str, dono: str) -> int:
         return 1
     hoje = date.today().isoformat()
     modelos = raiz / "_templates"
-    for nome, origem in (("contexto.md", "contexto_projeto.md"), ("estado.md", "estado.md"), ("decisoes.md", "decisoes.md")):
-        base = ler(modelos / origem) if (modelos / origem).is_file() else "# " + nome + "\n"
+    for nome, origem in (("contexto.md", "contexto_projeto.md"), ("estado.md", "estado.md"), ("decisoes.md", "decisoes.md"),
+                         ("experimentos.md", "experimentos.md")):
+        base = ler(modelos / origem) if (modelos / origem).is_file() else (
+            "# Experimentos: {{SLUG}}\n\n| E-NN | data | hipótese (frase base) | alavanca | corte (número e prazo) | status | resultado | decisão e ref |\n|---|---|---|---|---|---|---|---|\n"
+            if nome == "experimentos.md" else "# " + nome + "\n")
         base = base.replace("{{SLUG}}", slug).replace("{{DATA}}", hoje).replace("{{DONO}}", dono or "")
         cabeca = f"---\nid: {nome[:-3]}-{slug}\ntipo: {nome[:-3]}\ndono: {dono}\natualizado: {hoje}\n---\n"
         (destino).mkdir(parents=True, exist_ok=True)
         (destino / nome).write_text(cabeca + base if not base.startswith("---\n") else base, encoding="utf-8")
     (destino / "README.md").write_text(f"# {slug}\n\nDono: {dono or '[LACUNA]'}\n\nMapa: `contexto.md` (quem é), "
-                                       "`estado.md` (o que está quente), `decisoes.md`, `ledger/`, `analises/`, `reunioes/`.\n",
+                                       "`estado.md` (o que está quente), `decisoes.md`, `experimentos.md` (hipótese, corte, resultado, decisão), `ledger/`, `analises/`, `reunioes/`.\n",
                                        encoding="utf-8")
     for sub in ("ledger", "analises", "reunioes"):
         (destino / sub).mkdir(exist_ok=True)
         (destino / sub / ".gitkeep").write_text("", encoding="utf-8")
-    print(f"criada {destino.relative_to(raiz)}/ (contexto, estado, decisoes, ledger, analises, reunioes)")
+    print(f"criada {destino.relative_to(raiz)}/ (contexto, estado, decisoes, experimentos, ledger, analises, reunioes)")
     return 0
 
 
@@ -632,7 +655,8 @@ def secao(texto: str, titulo_rx: str) -> str:
 
 def primeira_frase(t: str, limite: int = 160) -> str:
     t = re.sub(r"\s+", " ", re.sub(r"[*`]", "", t)).strip()
-    corte = re.split(r"(?<=[.!?])\s", t, maxsplit=1)[0]
+    protegido = re.sub(r"\b(vs|ex|p|aprox|etc|Dr|Sr|Sra)\.", lambda m: m.group(1) + "\x00", t)
+    corte = re.split(r"(?<=[.!?])\s", protegido, maxsplit=1)[0].replace("\x00", ".")
     return (corte[: limite - 1] + "…") if len(corte) > limite else corte
 
 
@@ -665,7 +689,7 @@ def linhas_ativos(raiz: Path, prefixo: str = ""):
             fm = frontmatter(texto)
             rel = p.relative_to(raiz).as_posix()
             ativos = secao(texto, "MODELOS ATIVOS") or secao(texto, "FRAMEWORKS OPERACIONAIS")
-            itens = re.findall(r"^\s*[-*]\s+\*\*([^*]+)\*\*:?\s*(.*)$", ativos, re.M)
+            itens = re.findall(r"^[-*]\s+\*\*([^*]+)\*\*:?\s*(.*)$", ativos, re.M)
             if itens:
                 autor = fm.get("autor", "")
                 saida.append(f"## `{prefixo}{rel}`" + (f" ({autor})" if autor else ""))
@@ -684,8 +708,12 @@ def cmd_indice(raiz: Path) -> int:
                 "Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes modelos sempre que o contexto pedir, "
                 "ancorados na realidade da frente; o arquivo de cada um tem o detalhe e os frameworks passivos. "
                 "No Claude Code este conteúdo chega pela skill `susano-ativos`.", ""] + linhas_ativos(raiz)
+    operacao = [("nucleo.md", "a sombra em 2 mil tokens, carregada em toda abertura"), ("identidade.md", "identidade completa, hierarquia e guardrails"),
+                ("situacoes.md", "roteador: o que a pessoa diz → modo → o que abrir"), ("calibracao.md", "P-04 aplicado: quando agir, quando perguntar"),
+                ("sobre_o_sarden.md", "quem é o Sarden"), ("exemplos/README.md", "exemplos trabalhados por modo")]
+    linhas_i += ["## Operação", ""] + [f"- `00_susano/{n}`: {d}" for n, d in operacao if (base / n).is_file()] + [""]
     for area, titulo in (("dna", "Método do Sarden"), ("biblioteca", "Biblioteca de pensadores"),
-                         ("instrucoes", "Instruções"), ("metodo", "Segundo cérebro"), ("referencias", "Referências")):
+                         ("instrucoes", "Instruções"), ("metodo", "Segundo cérebro"), ("referencias", "Referências"), ("exemplos", "Exemplos")):
         pasta = base / area
         if not pasta.is_dir():
             continue
@@ -713,8 +741,14 @@ def cmd_skills(raiz: Path, destino: Path, prefixo: str = "") -> int:
     for nome, descricao, pastas in DOMINIOS:
         arquivos_md = []
         for pasta in pastas:
+            if pasta.startswith("-"):
+                continue
             if (base / pasta).is_dir():
                 arquivos_md += sorted((base / pasta).rglob("*.md"))
+            elif (base / pasta).is_file():
+                arquivos_md.append(base / pasta)
+        excluidos = {(base / pasta[1:]).resolve() for pasta in pastas if pasta.startswith("-")}
+        arquivos_md = [p for p in arquivos_md if p.resolve() not in excluidos]
         if not arquivos_md:
             continue
         linhas = ["---", f"name: susano-{nome}", f"description: {descricao}", "---", "", CABECA_SKILL, "",
@@ -727,11 +761,12 @@ def cmd_skills(raiz: Path, destino: Path, prefixo: str = "") -> int:
         (pasta_skill / "SKILL.md").write_text("\n".join(linhas).rstrip() + "\n", encoding="utf-8")
         gerados += 1
     ativos = ["---", "name: susano-ativos",
-              "description: Active models of Sarden's method, the ones that apply whenever the context calls for them, with the "
-              "file that holds each. Load before concluding any analysis, diagnosis, strategy or plan.",
+              "description: Active models of Sarden's method with the file that holds each. Consult when the diagnosis names the "
+              "gargalo; open only the model it calls; data comes before model.",
               "---", "", CABECA_SKILL, "",
-              "Apply these models whenever the context asks for them, anchored in the frente's reality; open the file for the "
-              "detail and the passive frameworks. Say when a model does not fit instead of forcing it.", ""] + linhas_ativos(raiz, prefixo)
+              "Data comes before model: the diagnosis names the gargalo, the gargalo calls the model. Open only the file the model "
+              "lives in, anchored in the frente's reality; the passive frameworks are in the same file. Say when a model does not fit "
+              "instead of forcing it.", ""] + linhas_ativos(raiz, prefixo)
     pasta_skill = destino / "susano-ativos"
     pasta_skill.mkdir(parents=True, exist_ok=True)
     (pasta_skill / "SKILL.md").write_text("\n".join(ativos).rstrip() + "\n", encoding="utf-8")

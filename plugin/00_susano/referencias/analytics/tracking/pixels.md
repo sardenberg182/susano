@@ -1,11 +1,14 @@
 ---
 id: ref-analytics-tracking-pixels
 tipo: referencia
-origem: KB_Pixels_TrackingSetup.md
-atualizado: 2026-10-31
+origem: base de configuração de pixels e tracking compilada pelo Sarden (2026)
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: Typeform aponta para o snippet único, YouTube com enablejsapi e nomes do Enhanced Measurement)
 ---
 
 # Knowledge Base: Pixels e Tracking de Plataformas de Ads
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 > Fontes: Analytics Mania + Métricas Boss | Compilado: Abril 2026
 
@@ -211,43 +214,11 @@ Custom HTML tag com o snippet do LinkedIn Insight Tag. Permite:
 
 ### TypeForm via GTM
 
-```javascript
-// Custom HTML Tag - postMessage listener
-window.addEventListener("message", function(event){
-  if (event.origin === "https://form.typeform.com" &&
-      (event.data.type === "form-started" ||
-       event.data.type === "form-submit")) {
-    window.dataLayer.push({
-      'event': event.data.type.replace("-", "_"),
-      'form_id': event.data.formId
-    });
-  }
-});
-```
-
-**Trigger:** All Pages (ou páginas com TypeForm embed)
-
-**Fonte:** Analytics Mania - Track Typeform with GTM
+Código único em `00_susano/referencias/analytics/tracking/snippets.md` (seção 2.1); este arquivo não repete o listener. Eventos: `form_started`, `form_submit`, com `form_id` e `form_response_id`.
 
 ### Calendly via GTM
 
-```javascript
-// Custom HTML Tag com deduplicação
-var lastCalendlyEvent = null;
-window.addEventListener('message', function(e) {
-  if (e.data.event && e.data.event.indexOf('calendly') === 0) {
-    var eventName = e.data.event.split('.')[1];
-    var allowed = ['event_type_viewed', 'date_and_time_selected', 'event_scheduled'];
-    if (allowed.includes(eventName) && eventName !== lastCalendlyEvent) {
-      lastCalendlyEvent = eventName;
-      window.dataLayer.push({
-        'event': 'calendly_' + eventName,
-        'calendly_event_type': eventName
-      });
-    }
-  }
-});
-```
+Código único em `00_susano/referencias/analytics/tracking/snippets.md` (seção 2.2, com deduplicação); este arquivo não repete o listener.
 
 **Eventos Calendly disponíveis:**
 - `calendly.event_type_viewed` - viu tipos de evento
@@ -267,6 +238,8 @@ Ativação automática: Admin → Data Streams → Enhanced Measurement → Vide
 
 ### YouTube via IFrame API (Customizado)
 
+O iframe precisa de `enablejsapi=1` na URL do embed; sem isso a API não dispara eventos. Nomes alinhados ao Enhanced Measurement do GA4 (`video_start`, `video_progress`, `video_complete`); com o Enhanced Measurement de vídeo ligado, não usar este script, para não duplicar.
+
 ```javascript
 var player;
 function onYouTubeIframeAPIReady() {
@@ -280,11 +253,11 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerStateChange(event) {
-  var states = { '-1': 'unstarted', '0': 'ended', '1': 'playing', '2': 'paused' };
+  var states = { '0': 'complete', '1': 'start' };  // pause não é evento do Enhanced Measurement
   var state = states[event.data];
-  if (state === 'playing' || state === 'paused' || state === 'ended') {
+  if (state) {
     window.dataLayer.push({
-      'event': 'video_' + (state === 'ended' ? 'complete' : state),
+      'event': 'video_' + state,
       'video_provider': 'youtube',
       'video_title': event.target.getVideoData().title,
       'video_duration': event.target.getDuration()

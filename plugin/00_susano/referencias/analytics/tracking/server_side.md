@@ -1,11 +1,14 @@
 ---
 id: ref-analytics-tracking-server-side
 tipo: referencia
-origem: KB_ServerSide_Tracking.md
-atualizado: 2026-10-31
+origem: base de server-side tracking compilada pelo Sarden (Métricas Boss, Analytics Mania, 2026)
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: Google tag gateway descrito pelo que é (CDN, sem Workers), casos de CAPI separados do sGTM, preços com data e [VERIFICAR])
 ---
 
 # Knowledge Base: Server-Side Tracking
+
+> Convenção deste arquivo desde a v0.3.0: `atualizado` no frontmatter é a data da última edição, não de verificação. Fato de produto vale pela data de verificação escrita ao lado dele ("verificado em DD/MM/AAAA"); sem essa data, é [VERIFICAR] antes de usar.
 
 > Fontes: Analytics Mania + Métricas Boss | Compilado: Abril 2026
 
@@ -46,7 +49,7 @@ Browser → GTM Client-Side → sGTM Server → Endpoints (GA4, Meta, Google Ads
 ### Google Cloud Run (Recomendado)
 
 **Vantagens sobre App Engine:**
-- **Scale-to-zero:** custo $0 sem tráfego (vs ~$120/mês fixo do App Engine)
+- **Scale-to-zero:** sem tráfego, o Cloud Run não cobra instância parada; o App Engine flexível mantinha instância mínima (cerca de US$ 120/mês na configuração padrão da época, [VERIFICAR] preço vigente na calculadora do Google Cloud; valor citado pela fonte em 2025)
 - Arquitetura separada: Produção e Preview isolados
 - Rollback de um clique via revisões
 - Melhor performance em picos de tráfego
@@ -87,7 +90,7 @@ Stape.io oferece hosting gerenciado para sGTM, eliminando necessidade de gerenci
 - Setup simplificado (sem conhecimento de GCP necessário)
 - Dashboard de monitoramento
 - Suporte técnico incluído
-- A partir de ~$20/mês
+- Plano de entrada na faixa de US$ 20/mês em 2025 [VERIFICAR a tabela de preços vigente em stape.io antes de citar]
 
 **Fonte:** Métricas Boss - Como configurar o Server-Side do GTM usando o Stape
 
@@ -170,14 +173,14 @@ Essencial quando usa Pixel (client-side) + CAPI (server-side) simultaneamente:
 
 ### Conceito
 
-Roteamento de requests de analytics através do Cloudflare CDN para first-party data collection.
+**Google tag gateway for advertisers** (lançado em 08/05/2025 com a Cloudflare como parceira de lançamento): o script da Google tag e os pings de medição passam a ser servidos e roteados pelo próprio domínio do site, via o reverse proxy da CDN, sem servidor próprio e sem Workers. A configuração é feita no Admin do Google Tag Manager (conectando a conta Cloudflare) ou no painel da Cloudflare, em poucos cliques; o snippet da página não muda (fonte: Cloudflare Blog, "First-party tags in seconds: Cloudflare integrates Google tag gateway for advertisers", 08/05/2025, e Google Tag Manager Help, verificado em 01/11/2026). Outros provedores de CDN foram sendo adicionados depois [VERIFICAR a lista atual na ajuda do Google].
 
 **Arquitetura:**
 ```
-Website → Cloudflare Workers → Google Analytics
+Website → seu domínio (reverse proxy da CDN, ex.: www.exemplo.com/metrics) → endpoints de coleta do Google
 ```
 
-Substitui requests diretos para domínios do Google, usando domínio próprio.
+O cookie passa a ser gravado pelo domínio do site (first-party) e o script deixa de vir de `googletagmanager.com`.
 
 ### Vantagens
 
@@ -187,9 +190,9 @@ Substitui requests diretos para domínios do Google, usando domínio próprio.
 
 ### Limitações
 
-- Requer domínio customizado + Cloudflare
-- Manutenção de Workers
-- Menos flexível que sGTM completo
+- Requer o domínio proxiado pela CDN participante (Cloudflare na largada; outras depois)
+- Só tags do Google: não roteia Meta, TikTok ou outros pixels
+- Sem transformação, enriquecimento ou envio para APIs de terceiros (isso é sGTM)
 
 ### Quando usar
 
@@ -220,7 +223,7 @@ Substitui requests diretos para domínios do Google, usando domínio próprio.
 
 - Melhoria de **10-30%** na captura de conversões (vs client-side only)
 - Resistência a **~30%** de ad blockers que bloqueiam tracking client-side
-- Cases reais mostram **+10-24% em vendas atribuídas** (Ray-Ban, Malásia Bottoms Lab)
+- [VENDOR] Casos divulgados pela Meta sobre a Conversions API (ganhos de vendas atribuídas na faixa de 10% a 24% em estudos de caso de anunciantes) referem-se à CAPI, não ao sGTM; direcionais, com viés de seleção do fornecedor
 - Melhor Event Match Quality Score no Meta → melhor otimização de campanhas
 
 ## NOTAS DA MIGRAÇÃO (2026-10-31)

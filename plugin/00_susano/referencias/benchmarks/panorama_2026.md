@@ -1,91 +1,80 @@
 ---
 id: ref-benchmarks-panorama-2026
 tipo: referencia
-origem: susano_benchmark_panorama_2026.md
-atualizado: 2026-10-31
+autor: Leadster (Panorama PRO de Geração de Leads 2026, com Reportei, Ramper e Staage); curadoria do Sarden
+origem: Panorama PRO de Geração de Leads 2026 (Leadster), edição publicada em 2026 com dados coletados em 2025; número de página por tabela conferido com o guia estratégico; fonte única dos números do Panorama no método desde a v0.3.0 (fusão aprovada pelo Sarden em 01/11/2026)
+atualizado: 2026-11-01
+revisar_ate: 2027-03-31
+revisao_pendente: Sarden (edição v0.3.0: fonte única, páginas por tabela, acentos, marcadores canônicos, inconsistências e cortes absorvidos)
 ---
 
-# SUSANO | BASE DE BENCHMARK E INSIGHTS: PANORAMA DE CONVERSAO 2026
+# Panorama de Geração de Leads 2026 (Leadster): base de benchmark e insights
 
-<metadados>
-- Arquivo: susano_benchmark_panorama_2026.md
-- Tipo: contexto dinamico compartilhado (cross-client), atualizacao anual
-- Fonte: Panorama PRO de Geracao de Leads 2026 (Leadster, com Reportei, Ramper e Staage)
-- Base do estudo: 2.425 sites brasileiros, 173,6 milhoes de acessos, 3,4 milhoes de leads. Dados coletados ao longo de 2025 via chatbot de marketing conversacional da Leadster e publicados na edicao 2026.
-- Vigencia: usar como referencia de mercado ate a publicacao do Panorama 2027
-- Protocolo de troca anual: quando a edicao 2027 for processada, este arquivo e removido do Project e substituido por susano_benchmark_panorama_2027.md com a mesma estrutura de blocos. Nenhum outro arquivo depende deste por referencia cruzada.
-</metadados>
+> Uso: a única fonte dos números do Panorama 2026 no método. O guia estratégico (`00_susano/referencias/performance/panorama_2026_guia_estrategico.md`) é a narrativa e o plano de 30 dias; o sistema operacional de demanda (`00_susano/referencias/performance/sistema_operacional_demanda_2026.md`) cita este arquivo por seção. Vale como referência de mercado até a edição 2027; quando ela for processada, este arquivo é substituído com a mesma estrutura.
 
-<instrucoes_de_uso>
-Como o Susano deve usar esta base ao analisar performance de clientes:
+## Sobre o estudo
 
-1. SEMPRE comparar em tres niveis, nesta ordem:
-   a) Metrica do cliente vs mediana do canal (referencia de mercado)
-   b) Metrica do cliente vs faixa do canal (baixa / media / alta performance)
-   c) Metrica do cliente vs mediana do segmento do cliente naquele canal (quando o segmento existir na base)
+- Base: 2.425 sites brasileiros, 173,6 milhões de acessos (a metodologia arredonda para 173 milhões), 3,4 milhões de leads, coletados ao longo de 2025 via chatbot de marketing conversacional da Leadster e publicados na edição 2026.
+- Conversão neste estudo = lead gerado ÷ acesso ao site (mediana). Não confundir com conversão de campanha em plataforma, que usa outros denominadores: ao comparar com dados de Meta Ads ou Google Ads, alinhar o denominador antes.
+- O que o estudo cobre: taxa de conversão de visitante em lead, participação de tráfego, participação de leads, qualificação por leadscore, dispositivo e horário. O que não cobre: CPC, CPL, CAC e investimento em reais. Benchmark de custo é [LACUNA] nesta base.
+- Dois volumes: Panorama de Geração de Leads 2026 (194 páginas, geral, B2B/B2C e 17 segmentos, citado como "Panorama aberto, p. X") e Panorama PRO 2026 (107 páginas, os cinco canais sobre a mesma população, citado como "Panorama PRO, p. X"). O PRO não é uma segunda amostra: números coincidentes entre os dois não são confirmação independente.
 
-2. Enquadramento por faixa (regua oficial do estudo):
-   - Acima da faixa de alta performance: usar como confirmacao de forca; investigar escalabilidade
-   - Entre media e alta: acima do mercado; otimizar incrementalmente
-   - Entre baixa e media: abaixo do mercado; sinal de ajuste em criativo, oferta ou pagina
-   - Abaixo da faixa de baixa performance: alerta estrutural; revisar estrategia do canal antes de otimizar taticamente
+## Como usar
 
-3. Ao citar benchmark em analise ou relatorio, SEMPRE nomear a fonte como "Panorama de Geracao de Leads 2026 (Leadster)" e indicar que a mediana e de mercado brasileiro, nao meta contratual.
+1. Comparar em três níveis, nesta ordem: métrica da frente contra a mediana do canal; contra a faixa do canal (baixa, média, alta performance); contra a mediana do segmento da frente naquele canal, quando o segmento existir na base.
+2. Enquadramento por faixa (régua do estudo): acima da alta performance, confirmação de força, investigar escalabilidade; entre média e alta, acima do mercado, otimizar incrementalmente; entre baixa e média, abaixo do mercado, sinal de ajuste em criativo, oferta ou página; abaixo da baixa performance, alerta estrutural, revisar a estratégia do canal antes de otimizar taticamente.
+3. Ao citar, nomear a fonte e a página ("Panorama PRO 2026, p. 9") e dizer que é mediana de mercado brasileiro, não meta. Na resposta, o número entra como [INFERÊNCIA] referência de mercado; a meta é só a da frente (`decisoes.md`).
+4. Nunca transformar mediana em meta sem ajuste de contexto (ticket, ciclo, maturidade de mídia, segmento). Segmento da frente fora dos 17 do estudo: usar só a régua geral do canal e declarar [LACUNA] de segmento.
+5. Canal IA: direcional. O próprio estudo marca amostras mínimas (n = 5 na matriz conversão × qualidade). Narrativa de tendência, nunca meta ou projeção.
+6. Antes de comparar qualidade (leadscore), conferir a definição de "qualificado" da frente: a régua é interna de cada empresa.
 
-4. NUNCA transformar mediana de mercado em meta de cliente sem ajuste de contexto (ticket, ciclo de venda, maturidade de midia, segmento). A mediana e ponto de comparacao, nao objetivo.
+## Limitações metodológicas
 
-5. Se a metrica do cliente nao tiver benchmark correspondente nesta base (ex.: CPL, CAC, ROAS), declarar [DADO AUSENTE NA BASE DE BENCHMARK] e nao inferir valor. Este estudo cobre: taxa de conversao de visitante em lead, participacao de trafego, participacao de leads, qualificacao por leadscore, dispositivo e horario.
+- Medição via chatbot instalado nos sites: a conversão reflete conversão assistida por marketing conversacional e tende a ser maior que a de sites que convertem só por formulário.
+- Atribuição last click por canal de origem do acesso: canais de topo de funil (LinkedIn, social orgânico) ficam subatribuídos; o próprio estudo discute isso no capítulo de LinkedIn.
+- Leadscore (0 a 5) definido por cada empresa; "qualificado" (faixa 4 a 5) não é régua uniforme entre empresas nem entre segmentos.
+- A fatia "outros" concentra 23,39% do tráfego e 33,91% dos leads de 2026 sem abertura por canal; os percentuais por canal são sobre o total incluindo essa fatia.
+- Meta Ads contabiliza só tráfego pago; alcance orgânico de Instagram e Facebook não entra.
+- Amostra 100% Brasil, enviesada para empresas que usam chatbot de conversão; não aplicar a operação internacional sem ressalva.
 
-6. Conversao neste estudo = lead gerado / acesso ao site (mediana). Nao confundir com conversao de campanha em plataforma (que usa denominadores diferentes). Ao comparar com dados de Meta Ads ou Google Ads extraidos via MCP ou API, alinhar o denominador antes de comparar.
+## Régua oficial por canal (mediana de conversão, faixas de performance, 2026)
 
-7. Dados do canal IA: tratar como direcionais. O proprio estudo marca amostras minimas (n=5 na matriz conversao x qualidade). Usar para narrativa de tendencia, nunca para meta ou projecao de cliente.
-</instrucoes_de_uso>
-
-<limitacoes_metodologicas>
-[LIMITACAO METODOLOGICA] Medicao via chatbot Leadster instalado nos sites: a taxa de conversao reflete conversao assistida por marketing conversacional, tendendo a ser maior que a de sites que convertem so por formulario.
-[LIMITACAO METODOLOGICA] Atribuicao last-click por canal de origem do acesso. Canais de topo de funil (LinkedIn, social organico) ficam subatribuidos. O proprio estudo discute isso no capitulo de LinkedIn.
-[LIMITACAO METODOLOGICA] Leadscore (0 a 5) definido por cada empresa. "Qualificado" (faixa 4-5) nao e regua uniforme entre empresas nem entre segmentos.
-[LIMITACAO METODOLOGICA] A fatia "outros" concentra 23,39% do trafego e 33,91% dos leads de 2026 sem abertura por canal. Percentuais por canal sao sobre o total incluindo essa fatia.
-[LIMITACAO METODOLOGICA] Meta Ads contabiliza apenas trafego pago. Alcance organico de Instagram e Facebook nao entra na conta.
-[LIMITACAO METODOLOGICA] Amostra 100% Brasil e enviesada para empresas que usam chatbot de conversao. Nao aplicar a operacoes internacionais sem ressalva.
-[DADO AUSENTE] O estudo nao publica CPC, CPL, CAC ou valores de investimento em reais nesta edicao extraida. Nao usar esta base para benchmark de custo.
-</limitacoes_metodologicas>
-
-<benchmark_geral_canais>
-## Regua oficial por canal (mediana de conversao, faixas de performance, 2026)
-
-| Canal | Baixa perf. | Mediana (media perf.) | Alta perf. |
+| Canal | Baixa perf. | Mediana (média perf.) | Alta perf. |
 |---|---|---|---|
 | IA | 5,54% | 7,80% | 13,52% |
 | Meta Ads | 0,94% | 3,91% | 13,70% |
 | Google Ads | 1,27% | 3,41% | 8,02% |
 | Geral (todos os canais) | 1,02% | 3,07% | 7,90% |
 | LinkedIn Ads | 0,15% | 2,97% | 18,30% |
-| Busca organica | 0,81% | 2,39% | 6,03% |
+| Busca orgânica | 0,81% | 2,39% | 6,03% |
 | Acesso direto | 0,57% | 1,74% | 5,64% |
 
-[DADO] Interpretacao central do estudo: a IA estreia como o canal de maior conversao (7,80%), o dobro da media geral. Entre canais consolidados, Meta Ads lidera (3,91%), seguido de Google Ads (3,41%).
+Fonte: Panorama PRO 2026, p. 9.
 
-## Serie historica de conversao (mediana, 2024 / 2025 / 2026)
+[DADO] Interpretação central do estudo: a IA estreia como o canal de maior conversão (7,80%), o dobro da média geral. Entre canais consolidados, Meta Ads lidera (3,91%), seguido de Google Ads (3,41%).
 
-| Canal | 2024 | 2025 | 2026 | Variacao 25-26 |
+## Série histórica de conversão (mediana, 2024 / 2025 / 2026)
+
+| Canal | 2024 | 2025 | 2026 | Variação 25-26 |
 |---|---|---|---|---|
 | IA | sem dado | sem dado | 7,80% | estreia |
 | Meta Ads | 3,69% | 3,40% | 3,91% | +15,00% |
 | Google Ads | 3,22% | 3,28% | 3,41% | +3,96% |
 | Geral | 3,15% | 2,98% | 3,07% | +3,02% |
 | LinkedIn Ads | 2,32% | 1,88% | 2,97% | +57,98% |
-| Busca organica | 2,37% | 2,32% | 2,39% | +3,02% |
+| Busca orgânica | 2,37% | 2,32% | 2,39% | +3,02% |
 | Acesso direto | 2,39% | 2,08% | 1,74% | -16,35% |
 
-[DADO] Serie longa da mediana geral desde 2022: 3,56% / 3,19% / 3,15% / 2,98% / 3,07%. Quatro anos de queda e reacao em 2026.
-[INFERENCIA - apontada pelo proprio estudo] Parte da alta de 2026 e efeito de composicao: o trafego organico de baixa intencao (cauda longa absorvida pela IA) saiu do denominador. Nao significa necessariamente que cada empresa converte melhor. Ao analisar cliente, nao usar "o mercado subiu" como explicacao unica.
+Fonte: Panorama PRO 2026, p. 11.
 
-## Qualidade dos leads por canal (leadscore, distribuicao 0-1 / 2-3 / 4-5)
+[DADO] Série longa da mediana geral desde 2022: 3,56% / 3,19% / 3,15% / 2,98% / 3,07%. Quatro anos de queda e reação em 2026.
+[INFERÊNCIA - apontada pelo próprio estudo] Parte da alta de 2026 e efeito de composição: o tráfego orgânico de baixa intenção (cauda longa absorvida pela IA) saiu do denominador. Não significa necessariamente que cada empresa converte melhor. Ao analisar cliente, não usar "o mercado subiu" como explicação única.
+
+## Qualidade dos leads por canal (leadscore, distribuição 0-1 / 2-3 / 4-5)
 
 | Canal | Desqualificado (0-1) | Mediano (2-3) | Qualificado (4-5) |
 |---|---|---|---|
-| Busca organica | 28,8% | 26,7% | 44,5% |
+| Busca orgânica | 28,8% | 26,7% | 44,5% |
 | Geral | 27,7% | 29,4% | 42,9% |
 | IA | 24,4% | 35,4% | 40,2% |
 | Google Ads | 33,1% | 26,8% | 40,1% |
@@ -93,14 +82,16 @@ Como o Susano deve usar esta base ao analisar performance de clientes:
 | Acesso direto | 28,3% | 34,0% | 37,7% |
 | LinkedIn Ads | 40,2% | 24,7% | 35,1% |
 
-[DADO] O canal que mais converte (IA, Meta) nao e o que mais qualifica (organica). A IA tem a menor taxa de desqualificados do estudo (24,4%).
-[ANOMALIA - apontada pelo estudo] Acesso direto com qualidade baixa contraria a expectativa (deveria ser trafego de marca). Explicacao dos especialistas: canal dificil de rastrear (links de WhatsApp, bio, login de plataforma contaminam a categoria).
+Fonte: Panorama PRO 2026, p. 13 (valores com uma casa decimal, como na visão geral).
 
-## Distribuicao de trafego por canal (fatia dos acessos totais)
+[DADO] O canal que mais converte (IA, Meta) não é o que mais qualifica (orgânica). A IA tem a menor taxa de desqualificados do estudo (24,4%).
+[VERIFICAR - apontada pelo estudo] Acesso direto com qualidade baixa contrária a expectativa (deveria ser tráfego de marca). Explicação dos especialistas: canal difícil de rastrear (links de WhatsApp, bio, login de plataforma contaminam a categoria).
+
+## Distribuição de tráfego por canal (fatia dos acessos totais)
 
 | Canal | 2024 | 2025 | 2026 | Volume 2026 |
 |---|---|---|---|---|
-| Busca organica | 42,70% | 33,86% | 27,91% | 48,5 mi |
+| Busca orgânica | 42,70% | 33,86% | 27,91% | 48,5 mi |
 | Google Ads | 25,20% | 27,48% | 23,40% | 40,6 mi |
 | Acesso direto | 12,09% | 13,90% | 15,72% | sem abertura |
 | Meta Ads | 5,11% | 6,50% | 9,48% | 16,5 mi |
@@ -108,279 +99,371 @@ Como o Susano deve usar esta base ao analisar performance de clientes:
 | IA | sem dado | sem dado | 0,10% | 170,5 mil |
 | LinkedIn Ads | 0,07% | 0,09% | 0,10% | 181,9 mil |
 
-## Distribuicao de leads por canal (fatia dos leads totais)
+Fonte: Panorama PRO 2026, p. 19.
+
+## Distribuição de leads por canal (fatia dos leads totais)
 
 | Canal | 2024 | 2025 | 2026 | Volume 2026 |
 |---|---|---|---|---|
 | Google Ads | 25,40% | 28,15% | 26,85% | 911,4 mil |
-| Busca organica | 24,20% | 19,40% | 16,11% | 547,0 mil |
+| Busca orgânica | 24,20% | 19,40% | 16,11% | 547,0 mil |
 | Meta Ads | 10,50% | 13,75% | 15,83% | 537,5 mil |
 | Acesso direto | 9,87% (aprox.) | 9% (aprox.) | 7,02% | sem abertura |
 | Outros | 29,85% | 29,66% | 33,91% | sem abertura |
 | IA | sem dado | 1,40% (aprox.) | 0,25% | 8.352 |
 | LinkedIn Ads | 0,18% | 0,05% | 0,03% | 1.183 |
 
-[VERIFICAR] Os valores de acesso direto e IA em 2024/2025 sairam com sobreposicao na extracao do grafico; os de 2026 e os volumes absolutos sao confiaveis.
-[DADO] Leitura de eficiencia (leads acima do peso de trafego em 2026): Google 23,40% do trafego e 26,85% dos leads; Meta 9,48% e 15,83%; IA 0,10% e 0,25% (2,5x o proprio peso). Organica faz o inverso: 27,91% do trafego e 16,11% dos leads (assinatura de topo de funil).
+Fonte: Panorama PRO 2026, pp. 18 e 19 (a fatia "outros" aparece como 34,18% na p. 18 e 33,91% nas pp. 37 e 79; ver inconsistências).
+
+[VERIFICAR] Os valores de acesso direto e IA em 2024/2025 saíram com sobreposição na extração do gráfico; os de 2026 e os volumes absolutos são confiáveis.
+[DADO] Leitura de eficiência (leads acima do peso de tráfego em 2026): Google 23,40% do tráfego e 26,85% dos leads; Meta 9,48% e 15,83%; IA 0,10% e 0,25% (2,5x o próprio peso). Orgânica faz o inverso: 27,91% do tráfego e 16,11% dos leads (assinatura de topo de funil).
 
 ## Dispositivo (2026)
 
-| Canal | Acessos mobile | Leads mobile | Conversao desktop | Conversao mobile |
+| Canal | Acessos mobile | Leads mobile | Conversão desktop | Conversão mobile |
 |---|---|---|---|---|
 | Meta Ads | 91,84% | 98,42% | 4,07% | 4,07% |
 | LinkedIn Ads | 89,59% | 64,58% | sem dado | sem dado |
 | Google Ads | 83,18% | 72,32% | 4,30% | 3,17% |
-| Busca organica | 66,15% | 50,12% | 2,42% | 2,51% |
+| Busca orgânica | 66,15% | 50,12% | 2,42% | 2,51% |
 | IA | 16,34% | 38,01% | 8,73% | sem dado |
 | Geral | ~74% | sem dado | 3,50% | 3,37% |
 
-[DADO] Tres viradas relevantes de 2026: (1) conversao mobile e desktop do Meta se igualaram em 4,07%; (2) organica converteu mais no mobile que no desktop pela primeira vez; (3) IA e o unico canal desktop-first (83,66% dos acessos no desktop, quase tudo ChatGPT no computador), mas o mobile da IA converte acima do proprio peso.
+Fonte: Panorama PRO 2026, pp. 41, 56, 69, 85 e 100 (scorecards por canal).
 
-## Horario (leads fora do expediente: 18h-8h e fins de semana)
+[DADO] Três viradas relevantes de 2026: (1) conversão mobile e desktop do Meta se igualaram em 4,07%; (2) orgânica converteu mais no mobile que no desktop pela primeira vez; (3) IA é o único canal desktop-first (83,66% dos acessos no desktop, quase tudo ChatGPT no computador), mas o mobile da IA converte acima do próprio peso.
 
-| Canal | Fora do horario comercial |
-|---|---|
-| IA | 47,98% |
-| Busca organica | 47,76% |
-| Acesso direto | 47,54% |
-| Geral | 43,8% |
-| Trafego pago (Meta + Google + LinkedIn + outros) | 42,69% |
+## Horário (leads fora do expediente: 18h-8h e fins de semana)
 
-[DADO] Quase metade do pipeline chega fora do expediente, liderado pelos canais de pesquisa ativa. Implicacao operacional padrao para diagnostico Susano: cliente sem atendimento ou automacao fora do horario esta perdendo a fatia de maior intencao.
-[DADO - claim promocional Leadster, usar com ressalva] Responder em ate 5 minutos converte 10x mais que responder em 1 hora; responder em 1 hora da 7x mais chance de qualificar. Numeros citados no material sem fonte metodologica aberta.
-</benchmark_geral_canais>
+| Origem | Leads fora do expediente | Leads dentro do expediente |
+|---|---|---|
+| IA | 47,98% | 52,02% |
+| Busca orgânica | 47,76% | 52,24% |
+| Acesso direto | 47,54% | 52,46% |
+| Geral | 43,80% | 56,20% |
+| Tráfego pago agregado | 42,69% | 57,31% |
+| Referência | 42,59% | 57,41% |
 
-<benchmark_por_segmento>
-## Tabela mestra: lider por segmento (volume de leads x conversao x qualidade)
+Fonte: Panorama PRO 2026, capítulo de horário [VERIFICAR página]. Fora do expediente = 18 h às 8 h e fins de semana. A tabela diz quando o lead foi gerado, não se converteu em venda.
 
-Fonte primaria para "qual canal ganha no segmento X". Percentual de volume = fatia dos leads do segmento vinda do canal lider; conversao e qualidade = valor do canal lider.
+[DADO] Quase metade do pipeline chega fora do expediente, liderado pelos canais de pesquisa ativa. Implicação operacional padrão para diagnóstico do Susano: cliente sem atendimento ou automação fora do horário está perdendo a fatia de maior intenção.
+[VENDOR] Responder em até 5 minutos converte 10x mais que responder em 1 hora; responder em 1 hora dá 7x mais chance de qualificar. Números citados no material sem fonte metodológica aberta.
 
-| Segmento | Mais volume de leads | Maior conversao | Mais qualidade |
+## Tabela mestra: líder por segmento (volume de leads x conversão x qualidade)
+
+Fonte primária para "qual canal ganha no segmento X". Percentual de volume = fatia dos leads do segmento vinda do canal líder; conversão e qualidade = valor do canal líder.
+
+| Segmento | Mais volume de leads | Maior conversão | Mais qualidade |
 |---|---|---|---|
-| Agencias | Google (27,4%) | Meta (6,7%) | Google (40,1%) |
+| Agências | Google (27,4%) | Meta (6,7%) | Google (40,1%) |
 | Consultorias | Meta (56,4%) | Google (2,7%) | Google (75,1%) |
-| Educacional | Organico (45,5%) | Google (2,7%) | Google (75,5%) |
+| Educacional | Orgânico (45,5%) | Google (2,7%) | Google (75,5%) |
 | Energia | Google (43,8%) | Google (6,6%) | Google (67,6%) |
-| Financeiro | Google (24,5%) | Meta (6,4%) | Organico (68,0%) |
-| Imoveis | Google (25,0%) | Direto (2,2%) | Meta (73,8%) |
-| Industria e Fabricacao | Google (34,3%) | Meta (5,0%) | Direto (44,7%) |
-| Juridico | Google (39,1%) | Meta (10,1%) | Meta (41,8%) |
-| Logistica e Transporte | Google (40,3%) | Google (4,3%) | Google (23,9%) |
-| Marketing e Publicidade | Google (48,2%) | Organico (3,3%) | Google (54,5%) |
+| Financeiro | Google (24,5%) | Meta (6,4%) | Orgânico (68,0%) |
+| Imóveis | Google (25,0%) | Direto (2,2%) | Meta (73,8%) |
+| Indústria e Fabricação | Google (34,3%) | Meta (5,0%) | Direto (44,7%) |
+| Jurídico | Google (39,1%) | Meta (10,1%) | Meta (41,8%) |
+| Logística e Transporte | Google (40,3%) | Google (4,3%) | Google (23,9%) |
+| Marketing e Publicidade | Google (48,2%) | Orgânico (3,3%) | Google (54,5%) |
 | Seguros | Google (28,6%) | Direto (7,8%) | Meta (55,2%) |
-| Servicos Medicos e Saude | Google (34,1%) | Google (4,8%) | Meta (57,4%) |
-| Software | Google (34,5%) | Meta (4,3%) | Organico (38,0%) |
-| Tecnologia e TI | Google (32,1%) | Meta (5,7%) | Organico (48,8%) |
+| Serviços Médicos e Saúde | Google (34,1%) | Google (4,8%) | Meta (57,4%) |
+| Software | Google (34,5%) | Meta (4,3%) | Orgânico (38,0%) |
+| Tecnologia e TI | Google (32,1%) | Meta (5,7%) | Orgânico (48,8%) |
 | Telefonia e Internet | Google (30,9%) | Google (2,8%) | Google (67,4%) |
 | Venda de Produtos | Google (29,7%) | Google (2,4%) | Meta (45,4%) |
-| Venda de Servicos | Google (26,6%) | Meta (4,5%) | Meta (51,4%) |
+| Venda de Serviços | Google (26,6%) | Meta (4,5%) | Meta (51,4%) |
 
-[DADO] Sintese: Google lidera volume em 15 de 17 segmentos (excecoes: Educacional para organico, Consultorias para Meta). Onde o Meta supera o Google em conversao, quase sempre e segmento B2B.
-[CONTRADICAO] Os cards-resumo de cada canal citam contagens ligeiramente diferentes desta tabela (ex.: card do Meta diz lider de conversao em 9/17 segmentos; a tabela mestra soma 7; card do Google diz qualidade em 6/17; a tabela soma 7). Em analise, usar a tabela mestra como fonte primaria e ignorar as contagens dos cards.
+Fonte: Panorama PRO 2026, p. 28 (a matriz publicada omite IA; conflitos com as páginas de canal estão na seção de inconsistências).
+
+[DADO] Síntese: Google lidera volume em 15 de 17 segmentos (exceções: Educacional para orgânico, Consultorias para Meta). Onde o Meta supera o Google em conversão, quase sempre é segmento B2B.
+[CONTRADIÇÃO] Os cards-resumo de cada canal citam contagens ligeiramente diferentes desta tabela (ex.: card do Meta diz líder de conversão em 9/17 segmentos; a tabela mestra soma 7; card do Google diz qualidade em 6/17; a tabela soma 7). Em análise, usar a tabela mestra como fonte primária e ignorar as contagens dos cards.
 
 ## Google Ads por segmento
 
-Conversao (mediana). Faixa do canal: 1,49% a 6,63%; mediana 3,41%.
+Conversão (mediana). Faixa do canal: 1,49% a 6,63%; mediana 3,41%.
 
-| Segmento | Conversao | Segmento | Conversao |
+| Segmento | Conversão | Segmento | Conversão |
 |---|---|---|---|
-| Imoveis | 1,49% | Agencia | 3,54% |
-| Marketing | 2,19% | Industria | 3,61% |
-| Software | 2,31% | Venda de Servicos | 4,05% |
-| Venda de Produtos | 2,40% | Logistica | 4,30% |
-| Tecnologia | 2,52% | Saude | 4,84% |
-| Financeiro | 2,69% | Juridico | 5,32% |
+| Imóveis | 1,49% | Agência | 3,54% |
+| Marketing | 2,19% | Indústria | 3,61% |
+| Software | 2,31% | Venda de Serviços | 4,05% |
+| Venda de Produtos | 2,40% | Logística | 4,30% |
+| Tecnologia | 2,52% | Saúde | 4,84% |
+| Financeiro | 2,69% | Jurídico | 5,32% |
 | Consultoria | 2,72% | Seguros | 5,93% |
 | Educacional | 2,72% | Energia | 6,63% |
 | Telefonia | 2,75% | GERAL | 3,41% |
 
-[DADO] Padrao apontado pelo estudo: ticket alto e jornada tecnica (Energia, Seguros, Juridico) convertem acima da media no Google; jornada longa e comparativa (Imoveis, Software) ficam abaixo.
+Fonte: Panorama PRO 2026, scorecard p. 43 e páginas internas do capítulo [VERIFICAR página de cada segmento antes de citar].
 
-Qualificacao (% de leads 4-5). Faixa: 19,53% a 75,55%; mediana 40,08%.
+[DADO] Padrão apontado pelo estudo: ticket alto e jornada técnica (Energia, Seguros, Jurídico) convertem acima da média no Google; jornada longa e comparativa (Imóveis, Software) ficam abaixo.
+
+Qualificação (% de leads 4-5). Faixa: 19,53% a 75,55%; mediana 40,08%.
 
 | Segmento | Qualif. | Segmento | Qualif. |
 |---|---|---|---|
 | Seguros | 19,53% | Financeiro | 40,85% |
-| Logistica | 23,89% | Venda de Servicos | 40,89% |
-| Tecnologia | 30,92% | Imoveis | 41,60% |
+| Logística | 23,89% | Venda de Serviços | 40,89% |
+| Tecnologia | 30,92% | Imóveis | 41,60% |
 | Venda de Produtos | 35,13% | Marketing | 54,51% |
-| Industria | 36,40% | Saude | 56,75% |
-| Juridico | 37,10% | Telefonia | 67,40% |
+| Indústria | 36,40% | Saúde | 56,75% |
+| Jurídico | 37,10% | Telefonia | 67,40% |
 | Software | 37,91% | Energia | 67,55% |
 | GERAL | 40,08% | Consultoria | 75,10% |
-| Agencia | 40,09% | Educacional | 75,55% |
+| Agência | 40,09% | Educacional | 75,55% |
 
-[DADO] Contraste-chave para diagnostico: Seguros esta entre os que mais convertem no Google (5,93%) e e o que menos qualifica (19,53%). Converter bem nao e trazer o lead certo.
+[DADO] Contraste-chave para diagnóstico: Seguros está entre os que mais convertem no Google (5,93%) e é o que menos qualifica (19,53%). Converter bem não é trazer o lead certo.
 
-Participacao no trafego do segmento (Google Ads): Marketing 47,76% | Financeiro 43,97% | Logistica 43,79% | Industria 41,42% | Agencia 41,01% | Juridico 40,30% | Telefonia 36,84% | Venda de Servicos 34,92% | Venda de Produtos 34,09% | Saude 31,64% | Tecnologia 31,33% | Energia 31,03% | Software 27,84% | Imoveis 27,22% | GERAL 23,40% | Seguros 17,07% | Consultoria 11,15% | Educacional 10,10%.
+Participação no tráfego do segmento (Google Ads): Marketing 47,76% | Financeiro 43,97% | Logística 43,79% | Indústria 41,42% | Agência 41,01% | Jurídico 40,30% | Telefonia 36,84% | Venda de Serviços 34,92% | Venda de Produtos 34,09% | Saúde 31,64% | Tecnologia 31,33% | Energia 31,03% | Software 27,84% | Imóveis 27,22% | GERAL 23,40% | Seguros 17,07% | Consultoria 11,15% | Educacional 10,10%.
 
-Participacao nos leads do segmento (Google Ads): ancoras confirmadas: Marketing 48,18% | Energia 43,85% | GERAL 26,85% | Consultoria 12,36% | Educacional 8,83%. Demais segmentos entre 24,46% e 40,32%. [VERIFICAR] Pareamento fino dos intermediarios nao validado na extracao; usar as ancoras e a tabela mestra para afirmacoes por segmento.
+Participação nos leads do segmento (Google Ads): âncoras confirmadas: Marketing 48,18% | Energia 43,85% | GERAL 26,85% | Consultoria 12,36% | Educacional 8,83%. Demais segmentos entre 24,46% e 40,32%. [VERIFICAR] Pareamento fino dos intermediários não validado na extração; usar as âncoras e a tabela mestra para afirmações por segmento.
 
-Trajetoria: trafego 25,20% (2024) -> 27,48% (2025) -> 23,40% (2026); leads 25,40% -> 28,15% -> 26,85%. Perde trafego, ganha eficiencia. Conversao desktop caiu de 4,95% para 4,30%; mobile subiu de 3,03% para 3,17% (menor folga da serie).
+Trajetória: tráfego 25,20% (2024) → 27,48% (2025) → 23,40% (2026); leads 25,40% → 28,15% → 26,85%. Perde tráfego, ganha eficiência. Conversão desktop caiu de 4,95% para 4,30%; mobile subiu de 3,03% para 3,17% (menor folga da série).
 
-Card oficial de uso (Google): usar quando precisa de volume previsivel, ha demanda ativa buscando o produto, fundo de funil. Pensar duas vezes: categoria nova sem busca, orcamento curto que exige CPC baixo, objetivo de criar demanda em vez de captura-la.
+Card oficial de uso (Google): usar quando precisa de volume previsível, há demanda ativa buscando o produto, fundo de funil. Pensar duas vezes: categoria nova sem busca, orçamento curto que exige CPC baixo, objetivo de criar demanda em vez de capturá-la.
 
 ## Meta Ads por segmento
 
-Conversao (mediana). 15 segmentos com dado; mediana do canal 3,91%.
+Conversão (mediana). 15 segmentos com dado; mediana do canal 3,91%.
 
-| Segmento | Conversao | Segmento | Conversao |
+| Segmento | Conversão | Segmento | Conversão |
 |---|---|---|---|
-| Consultoria | 1,23% | Venda de Servicos | 4,54% |
-| Imoveis | 1,60% | Industria | 4,97% |
+| Consultoria | 1,23% | Venda de Serviços | 4,54% |
+| Imóveis | 1,60% | Indústria | 4,97% |
 | Venda de Produtos | 1,77% | Tecnologia | 5,71% |
 | Educacional | 2,21% | Financeiro | 6,39% |
-| Marketing | 3,26% | Agencia | 6,65% |
+| Marketing | 3,26% | Agência | 6,65% |
 | GERAL | 3,91% | Seguros | 6,84% |
-| Saude | 4,25% | Juridico | 10,12% |
+| Saúde | 4,25% | Jurídico | 10,12% |
 | Software | 4,27% | | |
 
-[LACUNA] Energia, Logistica e Telefonia sem dado de conversao Meta nesta edicao.
+Fonte: Panorama PRO 2026, scorecard p. 58 e páginas internas do capítulo [VERIFICAR página de cada segmento antes de citar].
 
-Qualificacao (% de leads 4-5). Faixa: 10,00% a 87,97%; mediana 39,72%.
+[LACUNA] Energia, Logística e Telefonia sem dado de conversão Meta nesta edição.
+
+Qualificação (% de leads 4-5). Faixa: 10,00% a 87,97%; mediana 39,72%.
 
 | Segmento | Qualif. | Segmento | Qualif. |
 |---|---|---|---|
-| Marketing | 10,00% | Venda de Servicos | 51,41% |
-| Industria | 15,61% | Financeiro | 52,57% |
-| Agencia | 22,77% | Seguros | 55,22% |
-| Tecnologia | 23,61% | Saude | 57,35% |
+| Marketing | 10,00% | Venda de Serviços | 51,41% |
+| Indústria | 15,61% | Financeiro | 52,57% |
+| Agência | 22,77% | Seguros | 55,22% |
+| Tecnologia | 23,61% | Saúde | 57,35% |
 | Software | 24,05% | Educacional | 57,54% |
 | GERAL | 39,72% | Consultoria | 61,29% |
-| Juridico | 41,79% | Imoveis | 73,75% |
+| Jurídico | 41,79% | Imóveis | 73,75% |
 | Telefonia | 44,74% | Energia | 87,97% |
 | Venda de Produtos | 45,36% | | |
 
-[DADO] Ponto cego do Meta apontado pelo estudo: os segmentos onde ele mais converte (Software, Tecnologia, Agencia, Marketing) estao entre os que menos qualificam no canal.
+[DADO] Ponto cego do Meta apontado pelo estudo: os segmentos onde ele mais converte (Software, Tecnologia, Agência, Marketing) estão entre os que menos qualificam no canal.
 
-Participacao no trafego do segmento (Meta Ads): ancoras: Marketing 26,59% | Financeiro 16,87% | Venda de Servicos 12,49% | Venda de Produtos 12,18% | GERAL 9,48% | pisos: Energia 3,49% e Logistica 2,87%. Meta nao lidera trafego em nenhum segmento.
+Participação no tráfego do segmento (Meta Ads): âncoras: Marketing 26,59% | Financeiro 16,87% | Venda de Serviços 12,49% | Venda de Produtos 12,18% | GERAL 9,48% | pisos: Energia 3,49% e Logística 2,87%. Meta não lidera tráfego em nenhum segmento.
 
-Participacao nos leads do segmento (Meta Ads): ancoras: Consultoria 56,39% (unico segmento onde o Meta e o canal numero 1 em leads) | Venda de Servicos 23,79% | Software 21,78% | Financeiro 19,94% | Tecnologia 18,48% | GERAL 15,83% | pisos: Educacional 1,44% e Energia 2,18%.
+Participação nos leads do segmento (Meta Ads): âncoras: Consultoria 56,39% (único segmento onde o Meta é o canal número 1 em leads) | Venda de Serviços 23,79% | Software 21,78% | Financeiro 19,94% | Tecnologia 18,48% | GERAL 15,83% | pisos: Educacional 1,44% e Energia 2,18%.
 
-Trajetoria: trafego 5,11% (2024) -> 6,50% (2025) -> 9,48% (2026), mais que dobrou; leads 10,50% -> 13,75% -> 15,83%. Alerta 2026: trafego cresceu 52% no ano e leads apenas 5%; a folga leads/trafego caiu de 2x para 1,67x. Meta e canal quase 100% mobile (98,42% dos leads).
+Trajetória: tráfego 5,11% (2024) → 6,50% (2025) → 9,48% (2026), mais que dobrou; leads 10,50% → 13,75% → 15,83%. Alerta 2026: tráfego cresceu 52% no ano e leads apenas 5%; a folga leads/tráfego caiu de 2x para 1,67x. Meta e canal quase 100% mobile (98,42% dos leads).
 
-[DADO] Motores do amadurecimento do Meta segundo o estudo: APIs de conversao (CAPI, evento server-side devolvendo o dado que o pixel perdeu com iOS e cookies) e IA de campanha (Advantage+ e publicos amplos, segmentacao no algoritmo). Consequencia operacional: a alavanca controlavel do anunciante migrou para o criativo. Enviar evento de lead qualificado (nao lead bruto) de volta para a plataforma redireciona o algoritmo para o ICP.
+[DADO] Motores do amadurecimento do Meta segundo o estudo: APIs de conversão (CAPI, evento server-side devolvendo o dado que o pixel perdeu com iOS e cookies) e IA de campanha (Advantage+ e públicos amplos, segmentação no algoritmo). Consequência operacional: a alavanca controlável do anunciante migrou para o criativo. Enviar evento de lead qualificado (não lead bruto) de volta para a plataforma redireciona o algoritmo para o ICP.
 
-Card oficial de uso (Meta): usar quando quer alcancar quem ainda nao busca, alimentar topo e meio de funil, e a experiencia mobile esta pronta. Pensar duas vezes: decisor de nicho dificil de segmentar, time sem capacidade de produzir criativo, atendimento restrito ao horario comercial.
+Card oficial de uso (Meta): usar quando quer alcançar quem ainda não busca, alimentar topo e meio de funil, e a experiência mobile está pronta. Pensar duas vezes: decisor de nicho difícil de segmentar, time sem capacidade de produzir criativo, atendimento restrito ao horário comercial.
 
-## Busca organica por segmento
+## Busca orgânica por segmento
 
-Conversao (mediana). Faixa: 0,65% a 3,64%; mediana 2,39%.
+Conversão (mediana). Faixa: 0,65% a 3,64%; mediana 2,39%.
 
-| Segmento | Conversao | Segmento | Conversao |
+| Segmento | Conversão | Segmento | Conversão |
 |---|---|---|---|
 | Consultoria | 0,65% | Educacional | 2,49% |
-| Imoveis | 1,16% | Saude | 2,54% |
-| Logistica | 1,50% | Industria | 2,76% |
+| Imóveis | 1,16% | Saúde | 2,54% |
+| Logística | 1,50% | Indústria | 2,76% |
 | Software | 1,50% | Financeiro | 3,16% |
-| Telefonia | 1,74% | Venda de Servicos | 3,20% |
-| Juridico | 1,87% | Marketing | 3,30% |
+| Telefonia | 1,74% | Venda de Serviços | 3,20% |
+| Jurídico | 1,87% | Marketing | 3,30% |
 | Venda de Produtos | 2,12% | Seguros | 3,34% |
-| Tecnologia | 2,37% | Agencia | 3,64% |
+| Tecnologia | 2,37% | Agência | 3,64% |
 | GERAL | 2,39% | | |
 
-[DADO] Marketing e o unico segmento em que a organica lidera a conversao entre todos os canais.
-[DADO - vies analitico apontado pelo estudo] Consultoria, software, agencia e educacional produzem muito conteudo e indexam cauda longa; conversao organica baixa nesses segmentos nao significa site pior, significa mix de trafego informacional.
+Fonte: Panorama PRO 2026, scorecard p. 87 e páginas internas do capítulo [VERIFICAR página de cada segmento antes de citar].
 
-Qualificacao (% de leads 4-5). Faixa: 14,59% a 68,03%; mediana 44,51% (a maior entre todos os canais).
+[DADO] Marketing é o único segmento em que a orgânica lidera a conversão entre todos os canais.
+[DADO - viés analítico apontado pelo estudo] Consultoria, software, agência e educacional produzem muito conteúdo e indexam cauda longa; conversão orgânica baixa nesses segmentos não significa site pior, significa mix de tráfego informacional.
+
+Qualificação (% de leads 4-5). Faixa: 14,59% a 68,03%; mediana 44,51% (a maior entre todos os canais).
 
 | Segmento | Qualif. | Segmento | Qualif. |
 |---|---|---|---|
-| Logistica | 14,59% | Geral | 44,51% |
+| Logística | 14,59% | Geral | 44,51% |
 | Marketing | 16,12% | Telefonia | 46,54% |
-| Agencia | 18,48% | Tecnologia | 48,80% |
-| Imoveis | 29,35% | Saude | 49,18% |
-| Juridico | 30,05% | Energia | 59,06% |
+| Agência | 18,48% | Tecnologia | 48,80% |
+| Imóveis | 29,35% | Saúde | 49,18% |
+| Jurídico | 30,05% | Energia | 59,06% |
 | Venda de Produtos | 35,57% | Educacional | 61,63% |
 | Software | 37,97% | Consultoria | 64,99% |
-| Industria | 40,30% | Financeiro | 68,03% |
+| Indústria | 40,30% | Financeiro | 68,03% |
 | Seguros | 41,29% | | |
-| Venda de Servicos | 43,62% | | |
+| Venda de Serviços | 43,62% | | |
 
-Participacao no trafego do segmento (organica): topo: Educacional 55,70% | Consultoria 49,65% | Saude 37,70% | Juridico 33,47% [VERIFICAR pareamento do 33,47] | GERAL 27,91% | pisos: Financeiro 10,01% | Marketing 8,49% | Seguros 8,15%.
+Participação no tráfego do segmento (orgânica): topo: Educacional 55,70% | Consultoria 49,65% | Saúde 37,70% | Jurídico 33,47% [VERIFICAR pareamento do 33,47] | GERAL 27,91% | pisos: Financeiro 10,01% | Marketing 8,49% | Seguros 8,15%.
 
-Participacao nos leads do segmento (organica): topo: Educacional 45,46% (o dobro do segundo colocado) | Logistica 24,16% | GERAL 16,11% | pisos: Juridico 8,03% | Seguros 6,95% | Agencia 5,49%.
+Participação nos leads do segmento (orgânica): topo: Educacional 45,46% (o dobro do segundo colocado) | Logística 24,16% | GERAL 16,11% | pisos: Jurídico 8,03% | Seguros 6,95% | Agência 5,49%.
 
-Trajetoria: trafego 42,70% (2024) -> 33,86% (2025) -> 27,91% (2026), queda de quase 15 pontos e de 62,9 mi para 48,5 mi de acessos; leads cairam bem menos (24,20% -> 16,11%, 842 mil -> 547 mil). Conversao estavel ha tres anos (2,37 / 2,32 / 2,39). Leitura oficial: evaporou a cauda longa informacional que a IA absorveu; o que ficou e trafego de marca e intencao, com o lead mais qualificado do estudo.
+Trajetória: tráfego 42,70% (2024) → 33,86% (2025) → 27,91% (2026), queda de quase 15 pontos e de 62,9 mi para 48,5 mi de acessos; leads caíram bem menos (24,20% → 16,11%, 842 mil → 547 mil). Conversão estável há três anos (2,37 / 2,32 / 2,39). Leitura oficial: evaporou a cauda longa informacional que a IA absorveu; o que ficou e tráfego de marca e intenção, com o lead mais qualificado do estudo.
 
-Card oficial de uso (organica): usar quando o segmento ainda e dominado por organica (educacao, saude, juridico), ja existe investimento em marca e conteudo, e a empresa aceita abandonar metrica de trafego. Pensar duas vezes: necessidade de volume rapido e previsivel, dependencia de SEO de "como fazer" (absorvido pela IA), categoria nova sem demanda estabelecida.
+Card oficial de uso (orgânica): usar quando o segmento ainda é dominado por orgânica (educação, saúde, jurídico), já existe investimento em marca e conteúdo, e a empresa aceita abandonar métrica de tráfego. Pensar duas vezes: necessidade de volume rápido e previsível, dependência de SEO de "como fazer" (absorvido pela IA), categoria nova sem demanda estabelecida.
 
 ## LinkedIn Ads por segmento
 
-[DADO] Menor canal pago do estudo: 0,10% do trafego (181,9 mil acessos) e 0,03% dos leads (1.183). Acessos sobem tres anos seguidos (107,7 mil -> 144,5 mil -> 181,9 mil); leads atribuidos caem na mesma janela (6.194 -> 1.717 -> 1.183).
-[LIMITACAO METODOLOGICA] Last-click pune o LinkedIn: o estudo argumenta que o canal trabalha antes do clique final. Nao diagnosticar "LinkedIn nao entrega" para cliente B2B usando so esta base.
+[DADO] Menor canal pago do estudo: 0,10% do tráfego (181,9 mil acessos) e 0,03% dos leads (1.183). Acessos sobem três anos seguidos (107,7 mil → 144,5 mil → 181,9 mil); leads atribuídos caem na mesma janela (6.194 → 1.717 → 1.183).
+Limitação metodológica: Last-click pune o LinkedIn: o estudo argumenta que o canal trabalha antes do clique final. Não diagnosticar "LinkedIn não entrega" para cliente B2B usando só esta base.
 
-Qualificacao: mediana 35,13% (ultima entre os canais). Apenas 3 segmentos com dado: Financeiro 65,35% | Venda de Servicos 35,53% | Software 29,38%. [LACUNA] Demais segmentos sem amostra.
+Qualificação: mediana 35,13% (última entre os canais). Apenas 3 segmentos com dado: Financeiro 65,35% | Venda de Serviços 35,53% | Software 29,38%. [LACUNA] Demais segmentos sem amostra.
 
-Trafego por segmento (ancoras): Logistica 0,52% | Financeiro 0,46% | Marketing 0,40% | Telefonia 0,31% | demais entre 0,01% e 0,24%. Leads por segmento (ancora): Software 0,17%, distante dos demais (0,01% a 0,05%).
+Tráfego por segmento (âncoras): Logística 0,52% | Financeiro 0,46% | Marketing 0,40% | Telefonia 0,31% | demais entre 0,01% e 0,24%. Leads por segmento (âncora): Software 0,17%, distante dos demais (0,01% a 0,05%).
 
 Dispositivo: acesso 89,59% mobile; leads viraram mobile pela primeira vez em 2026 (64,58%).
 
-Card oficial de uso (LinkedIn): usar para B2B de ticket alto e ciclo longo, segmentacao por cargo/empresa/setor, ABM. Pensar duas vezes: ticket baixo (a conta nao fecha), orcamento curto, sucesso medido por volume de leads.
+Card oficial de uso (LinkedIn): usar para B2B de ticket alto e ciclo longo, segmentação por cargo/empresa/setor, ABM. Pensar duas vezes: ticket baixo (a conta não fecha), orçamento curto, sucesso medido por volume de leads.
+
+Fonte: Panorama PRO 2026, scorecard p. 70 e páginas internas do capítulo [VERIFICAR página de cada segmento antes de citar].
 
 ## IA (novo canal) por segmento
 
-[DADO] Estreia no Panorama: 0,10% do trafego (170,5 mil acessos), 0,25% dos leads (8.352), conversao mediana 7,80% (a maior do estudo), 2,5x acima do proprio peso de trafego. 78,36% dos acessos de IA vem do ChatGPT (Perplexity 8,42%, Gemini 5,87%, Copilot 3,77%, demais abaixo de 2%).
-[LIMITACAO METODOLOGICA] Volume minimo. A matriz conversao x qualidade do estudo marca n=5 para IA, com rotulo "direcional". Nunca usar valores de IA como meta de cliente.
+[DADO] Estreia no Panorama: 0,10% do tráfego (170,5 mil acessos), 0,25% dos leads (8.352), conversão mediana 7,80% (a maior do estudo), 2,5x acima do próprio peso de tráfego. 78,36% dos acessos de IA vêm do ChatGPT (Perplexity 8,42%, Gemini 5,87%, Copilot 3,77%, demais abaixo de 2%).
+Limitação metodológica: Volume mínimo. A matriz conversão x qualidade do estudo marca n=5 para IA, com rótulo "direcional". Nunca usar valores de IA como meta de cliente.
 
-Qualificacao por segmento (% de leads 4-5; mediana do canal 40,22%): Agencia 15,12% | Imoveis 35,16% | Software 35,22% | Marketing 36,11% | Saude 38,71% | Industria 38,94% | Juridico 39,33% | Venda de Produtos 39,66% | GERAL 40,22% | Tecnologia 45,00% | Financeiro 48,23% | Venda de Servicos 52,46% | Seguros 53,57% | Consultoria 59,21% | Educacional 60,42%.
+Qualificação por segmento (% de leads 4-5; mediana do canal 40,22%): Agência 15,12% | Imóveis 35,16% | Software 35,22% | Marketing 36,11% | Saúde 38,71% | Indústria 38,94% | Jurídico 39,33% | Venda de Produtos 39,66% | GERAL 40,22% | Tecnologia 45,00% | Financeiro 48,23% | Venda de Serviços 52,46% | Seguros 53,57% | Consultoria 59,21% | Educacional 60,42%.
 
-Trafego de IA por segmento (% dos acessos do segmento): topo: Energia 0,30% | Agencia 0,28% | Software 0,24% | Consultoria 0,24% | Tecnologia 0,22% | media 0,10% | pisos: Telefonia/Seguros/Marketing 0,06% | Financeiro 0,03%.
+Tráfego de IA por segmento (% dos acessos do segmento): topo: Energia 0,30% | Agência 0,28% | Software 0,24% | Consultoria 0,24% | Tecnologia 0,22% | média 0,10% | pisos: Telefonia/Seguros/Marketing 0,06% | Financeiro 0,03%.
 
-Leads de IA por segmento (% dos leads do segmento): topo: Energia 0,70% | Consultoria 0,48% | Industria 0,39% | Software e Tecnologia 0,37% | media 0,25% | pisos: Juridico 0,11% | Marketing 0,10% | Financeiro 0,07%.
+Leads de IA por segmento (% dos leads do segmento): topo: Energia 0,70% | Consultoria 0,48% | Indústria 0,39% | Software e Tecnologia 0,37% | média 0,25% | pisos: Jurídico 0,11% | Marketing 0,10% | Financeiro 0,07%.
 
-Dispositivo: unico canal desktop-first (83,66% dos acessos no desktop; ChatGPT no computador), mas mobile entrega 38,01% dos leads com 16,34% dos acessos. Horario: canal mais always-on do estudo (47,98% dos leads fora do expediente).
+Dispositivo: único canal desktop-first (83,66% dos acessos no desktop; ChatGPT no computador), mas mobile entrega 38,01% dos leads com 16,34% dos acessos. Horário: canal mais always-on do estudo (47,98% dos leads fora do expediente).
 
-Card oficial de uso (IA): usar para construir citacao e autoridade, lead de alta intencao que chega decidido, venda tecnica ou consultiva. Pensar duas vezes: necessidade de volume rapido, dependencia de atribuicao limpa, setor com baixa presenca em IA.
+Card oficial de uso (IA): usar para construir citação e autoridade, lead de alta intenção que chega decidido, venda técnica ou consultiva. Pensar duas vezes: necessidade de volume rápido, dependência de atribuição limpa, setor com baixa presença em IA.
+
+Fonte: Panorama PRO 2026, scorecard p. 101 e páginas internas do capítulo [VERIFICAR página de cada segmento antes de citar]; amostras mínimas, uso direcional.
 
 ## Acesso direto
 
-[DADO] 15,72% do trafego e 7,02% dos leads em 2026. Conversao mediana 1,74%, unico canal em queda (2,39% -> 2,08% -> 1,74%). Qualificados 37,7%.
-[ANOMALIA] Qualidade abaixo do esperado para canal de marca; categoria contaminada por links nao rastreados (WhatsApp, bio, login). Ao analisar cliente, tratar acesso direto como proxy imperfeito de marca e checar instrumentacao de UTM antes de concluir.
-</benchmark_por_segmento>
+[DADO] 15,72% do tráfego e 7,02% dos leads em 2026. Conversão mediana 1,74%, único canal em queda (2,39% → 2,08% → 1,74%). Qualificados 37,7%.
+[VERIFICAR] Qualidade abaixo do esperado para canal de marca; categoria contaminada por links não rastreados (WhatsApp, bio, login). Ao analisar cliente, tratar acesso direto como proxy imperfeito de marca e checar instrumentação de UTM antes de concluir.
 
-<insights_estrategicos_2026>
-Sinteses qualitativas do estudo e dos especialistas convidados (Leadster, Ramper, Reportei, Staage), parafraseadas. Usar como camada de narrativa em analises, sempre com atribuicao "segundo o Panorama 2026", nunca como dado do cliente.
+Fonte: Panorama PRO 2026 [VERIFICAR página antes de citar].
 
-1. TESE CENTRAL DO ANO: a hierarquia de canais que valeu por anos comecou a se mover. A IA estreia convertendo o dobro da media, o organico troca volume por qualidade, o Meta amadurece como canal de performance e o Google segue lider de volume mas perde participacao.
+## Scorecards por canal (Panorama PRO 2026, pp. 43, 58, 70, 87 e 101)
 
-2. IA COMO CANAL: a funcao da IA nao e mandar trafego, e responder na conversa; o pouco trafego que ela devolve chega decidido. O canal esta gratuito e aberto hoje, e a expectativa dos especialistas e que vire midia paga e cara quando consolidar. Construir presenca em recomendacao de IA agora (o que o mercado chama de GEO: ser a fonte citada pelo modelo) e aposta de custo baixo com janela de tempo.
+Posição de cada canal no scorecard do estudo, como o PRO apresenta (as contagens de "líder em N de 17 segmentos" dos scorecards divergem da tabela mestra em alguns casos; ver inconsistências).
 
-3. ORGANICA: a queda de trafego e real (15 pontos em dois anos), mas concentrada em cauda longa informacional que nao convertia. Estrategia de conteudo recomendada: migrar de "como fazer" (absorvido pela IA) para conteudo de dado proprietario e autoridade citavel; a regua de autoridade virou citacao pelos modelos. Marca, presenca do founder e canais relacionais ganham peso.
+### Google Ads
 
-4. META: dois motores explicam a maturidade: CAPI (evento de conversao server-side recuperando sinal perdido por iOS e cookies) e IA de campanha (Advantage+, publicos amplos). A variavel que o anunciante controla de fato virou o criativo. Pratica recomendada: devolver para a plataforma o evento de lead QUALIFICADO, nao de lead bruto, para o algoritmo otimizar contra o ICP.
+| Indicador | Resultado 2026 | Posição no scorecard do estudo |
+|---|---|---|
+| Conversão mediana | 3,41% | 3º de 5; líder de conversão em 7 de 17 segmentos |
+| Participação no tráfego | 23,40% | 2º de 5 |
+| Participação nos leads | 26,85% | 1º de 5; líder de volume em 15 de 17 segmentos |
+| Leads qualificados | 40,08% | 3º de 5; líder de qualidade em 6 de 17 segmentos |
 
-5. GOOGLE: perde participacao mas segue dominando mais de 50% do trafego de quase qualquer empresa com site (somando pago e organico, lidera trafego em 16 de 17 segmentos). Leitura de demanda importa: segmentos com categoria estabelecida e keyword expressa rendem no Google; demanda nao verbalizada rende no Meta. Alerta de especialista: 3,41% e baixo para canal de intencao; landing page fraca desperdicando trafego bom e hipotese diagnostica frequente.
+Fonte: Panorama PRO 2026, p. 43.
 
-6. LINKEDIN: paradoxo de atribuicao. Acessos sobem, leads last-click despencam, mas o canal trabalha topo e meio de funil em B2B de ciclo longo (jornadas de ate 24 meses citadas). Empresas que mais investem tendem a ter reguas de qualificacao mais duras, o que rebaixa o leadscore do canal. Diagnostico justo exige visao multi-touch.
+### Meta Ads
 
-7. JORNADA MOBILE E FORA DO EXPEDIENTE: a jornada saiu do horario comercial (43,8% dos leads fora do expediente, com pico citado de 18h-22h em B2B para empresarios) e do desktop (74% dos acessos mobile). Implicacoes de diagnostico: atendimento/qualificacao 24h (SDR de plantao, IA de atendimento) e experiencia mobile do site sao alavancas antes de escalar midia. Nao desligar campanha a noite sem teste: leilao mais barato quando concorrentes desligam.
+| Indicador | Resultado 2026 | Posição no scorecard do estudo |
+|---|---|---|
+| Conversão mediana | 3,91% | 2º de 5; líder em 9 de 17 segmentos |
+| Participação no tráfego | 9,48% | 3º de 5 |
+| Participação nos leads | 15,83% | 3º de 5; líder de volume em 1 de 17 segmentos |
+| Leads qualificados | 39,72% | 4º de 5; líder de qualidade em 6 de 17 segmentos |
 
-8. LEADSCORE E ICP: "qualificado" e regua interna de cada empresa. ICP largo infla a taxa de qualificacao sem melhorar qualidade real; regua apertada seca pipeline. Em diagnostico Susano, checar a definicao de leadscore do cliente antes de comparar com as medianas deste arquivo.
-</insights_estrategicos_2026>
+Fonte: Panorama PRO 2026, p. 58.
 
-<protocolo_de_analise_susano>
-Ao produzir analise de performance usando esta base, o Susano segue este formato de citacao:
+### LinkedIn Ads
 
-1. Declarar o dado do cliente com fonte e periodo.
-2. Declarar o benchmark com fonte fixa: "mediana de mercado (Panorama Leadster 2026)".
-3. Classificar na regua de faixas do canal (baixa / media / alta performance).
-4. Se houver benchmark do segmento do cliente, refinar a comparacao no nivel segmento x canal.
-5. Aplicar os marcadores padrao Susano quando couber: [DADO], [INFERENCIA], [CONTRADICAO], [LACUNA], [ANOMALIA], [VERIFICAR], [DADO AUSENTE], [LIMITACAO METODOLOGICA].
-6. Fechar com leitura acionavel: o que o desvio vs benchmark sugere testar primeiro.
+| Indicador | Resultado 2026 | Posição no scorecard do estudo |
+|---|---|---|
+| Conversão mediana | 2,97% | 4º de 5 |
+| Participação no tráfego | 0,10% | 4º de 5 |
+| Participação nos leads | 0,03% | 5º de 5 |
+| Leads qualificados | 35,13% | 5º de 5 |
 
-Exemplo de frase-padrao:
-"[DADO] A conversao de Meta Ads do cliente em junho foi 2,1% (fonte: Meta MCP). Contra a mediana de mercado de 3,91% (Panorama Leadster 2026), o cliente opera entre a faixa de baixa (0,94%) e media performance, no terco inferior do mercado. No segmento Juridico, a referencia sobe para 10,12%, ampliando o gap. [INFERENCIA] O padrao e compativel com criativo ou oferta desalinhados do ICP; prioridade de teste: criativo e evento de qualificacao via CAPI."
+Fonte: Panorama PRO 2026, p. 70.
 
-Regras rigidas:
-- Nao converter benchmark em meta sem contexto do cliente.
-- Nao usar dados de IA (canal) para metas ou projecoes.
-- Nao usar esta base para benchmark de custo (CPC/CPL/CAC): [DADO AUSENTE].
-- Ao detectar que o denominador do cliente difere do estudo (conversao de campanha vs conversao de site), normalizar ou declarar a diferenca.
-- Se o segmento do cliente nao mapear em nenhum dos 17 segmentos do estudo, usar apenas a regua geral do canal e declarar [LACUNA] de segmento.
-</protocolo_de_analise_susano>
+### Busca orgânica
 
-## NOTAS DA MIGRAÇÃO (2026-10-31)
+| Indicador | Resultado 2026 | Posição no scorecard do estudo |
+|---|---|---|
+| Conversão mediana | 2,39% | 5º de 5; líder em 1 de 17 segmentos |
+| Participação no tráfego | 27,91% | 1º de 5; liderança setorial indicada em 3 de 17 no scorecard |
+| Participação nos leads | 16,11% | 2º de 5; líder em 1 de 17 segmentos |
+| Leads qualificados | 44,51% | 1º de 5; scorecard indica liderança em 4 de 17 |
 
-- Troca anual: substituir quando sair a edição seguinte.
-- [LACUNA] Sem benchmark de custo de mídia paga (CPC, CPL, CAC): o próprio estudo declara.
+Fonte: Panorama PRO 2026, p. 87. As divergências entre o scorecard e páginas internas são tratadas na seção 15.
+
+### IA
+
+| Indicador | Resultado 2026 | Posição no scorecard do estudo |
+|---|---|---|
+| Conversão mediana | 7,80% | 1º de 5 |
+| Participação no tráfego | 0,10% | 5º de 5 |
+| Participação nos leads | 0,25% | 4º de 5 |
+| Leads qualificados | 40,22% | 2º de 5; líder em 1 de 17 segmentos |
+
+Fonte: Panorama PRO 2026, p. 101.
+
+## Síntese operacional por objetivo (Panorama PRO 2026, pp. 43, 58, 70, 87 e 101)
+
+Síntese operacional da fonte, não modelo causal: o canal candidato por objetivo dominante, com a evidência do estudo e o guardrail.
+
+| Objetivo dominante | Canal candidato | Evidência no Panorama | Principal guardrail |
+|---|---|---|---|
+| Capturar demanda e gerar volume previsível | Google Ads | 26,85% dos leads; liderança de volume em 15 segmentos | confirmar qualidade e economia interna |
+| Criar descoberta e alimentar topo/meio | Meta Ads | 15,83% dos leads com 9,48% dos acessos | controlar qualidade e capacidade criativa |
+| Construir autoridade e colher qualidade | Busca orgânica | 44,51% qualificados; 27,91% do tráfego | não ignorar queda de volume e share |
+| Alcançar decisor B2B específico | LinkedIn Ads | segmentação por cargo, empresa e setor; uso recomendado para ABM | não justificar tudo como influência assistida |
+| Ser citado e receber demanda emergente | IA | 7,80% de conversão e 40,22% qualificados | escala mínima e atribuição incompleta |
+
+Fonte: Panorama PRO 2026, pp. 43, 58, 70, 87 e 101.
+
+## Inconsistências internas do estudo (preservadas, nunca reconciliadas em silêncio)
+
+| Tema | O que a fonte apresenta | Tratamento no método |
+|---|---|---|
+| Tráfego orgânico em 2024 | p. 17 menciona 41,47%; gráficos das pp. 35, 50, 63 e 76 mostram 42,70% | usar 42,70% nas séries e registrar o conflito |
+| Liderança de tráfego do Google | p. 36 diz 13 de 17 segmentos; scorecard da p. 43 diz 14 de 17 | não escolher em silêncio; citar a página usada |
+| Liderança de qualidade do orgânico | p. 74 nomeia 3 segmentos; scorecard da p. 87 informa 4 de 17 | manter ambos e sinalizar a divergência |
+| Meta como "maior conversão" | abertura da p. 44 usa essa formulação; p. 9 e capítulo de IA mostram 7,80% para IA e 3,91% para Meta | Meta é a maior entre os canais pagos consolidados, não no conjunto completo |
+| Matriz geral omite IA | a legenda da p. 28 inclui Google, Meta, orgânico e direto, não IA | a matriz não é comparação completa dos cinco canais |
+| Qualidade em Venda de Serviços | p. 28 aponta Meta com 51,4%; p. 90 mostra IA com 52,46% e afirma liderança de IA | preservar o conflito; IA foi omitida da matriz geral |
+| Qualidade em Energia | p. 28 aponta Google com 67,6%; p. 49 mostra Meta com 87,97% | [CONTRADIÇÃO] real, sem eleger vencedor |
+| Participação de "outros" nos leads de 2026 | p. 18 exibe 34,18%; pp. 37 e 79 exibem 33,91%, compatível com a soma das demais categorias | usar o número só com a página citada |
+| Total de acessos | metodologia arredonda para 173 milhões; p. 91 usa 173,6 milhões | arredondamento de apresentação |
+
+Essas divergências não anulam o estudo, mas limitam a precisão de rankings muito próximos. Decisão que depende de um desses pontos volta à página específica e se confirma com dado interno.
+
+## Cortes B2B/B2C, WhatsApp e tempo de resposta (Panorama aberto)
+
+| Corte | Dado | Fonte |
+|---|---|---|
+| Meta Ads em B2B | conversão 4,68%; 26,8% dos leads qualificados | Panorama aberto, pp. 34 e 36 |
+| Empresas com WhatsApp, geral | 3,20% de conversão contra 2,66% sem WhatsApp | Panorama aberto, pp. 23, 25, 27, 29, 44 e 57 |
+| Empresas com WhatsApp, B2B | 2,69% contra 2,12% sem | idem |
+| Empresas com WhatsApp, B2C | 3,33% contra 3,60% sem (relação invertida) | idem |
+| Segmentos (17) | conversão mediana de 1,32% (Imóveis) a 5,42% (Jurídico) | Panorama aberto, pp. 60 a 187 |
+
+A comparação com e sem WhatsApp é observacional e não prova causalidade: no B2C o canal é infraestrutura e a presença não diferencia; no B2B pode reduzir fricção, dependendo de SLA e qualificação. O claim de tempo de resposta (responder em até 5 minutos converte muito mais que em 1 hora) é material promocional da Leadster: [VENDOR], usar com ressalva.
+
+## Insights estratégicos do estudo (síntese qualitativa, atribuir como "segundo o Panorama 2026")
+
+1. Tese do ano: a hierarquia de canais começou a se mover. A IA estreia convertendo o dobro da média, o orgânico troca volume por qualidade, o Meta amadurece como canal de performance e o Google segue líder de volume, perdendo participação.
+2. IA como canal: a função não é mandar tráfego, é responder na conversa; o pouco tráfego que devolve chega decidido. Hoje gratuito e aberto; a expectativa dos especialistas é que vire mídia paga quando consolidar.
+3. Orgânica: a queda de tráfego é real (15 pontos em dois anos), concentrada em cauda longa informacional que não convertia. Conteúdo migra de "como fazer" (absorvido pela IA) para dado proprietário e autoridade citável.
+4. Meta: CAPI (sinal server-side recuperando o que iOS e cookies tiraram) e IA de campanha (Advantage+, públicos amplos) explicam a maturidade; a variável que o anunciante controla virou o criativo, e o evento devolvido à plataforma precisa ser o lead qualificado, não o formulário.
+5. Google: perde participação, mas domina mais de 50% do tráfego de quase toda empresa com site (pago mais orgânico lidera tráfego em 16 de 17 segmentos). Demanda verbalizada rende no Google; demanda não verbalizada pede descoberta.
+6. LinkedIn: paradoxo de atribuição. Acessos sobem, leads last click despencam, mas o canal trabalha topo e meio de funil em B2B de ciclo longo (jornadas de até 24 meses citadas); quem mais investe tende a ter régua de qualificação mais dura, o que rebaixa o leadscore do canal.
+7. Jornada mobile e fora do expediente: 43,8% dos leads fora do expediente (pico citado de 18 h a 22 h em B2B) e 74% dos acessos no mobile. Implicação de diagnóstico: atendimento e qualificação fora do horário (plantão, automação) e experiência mobile como pré-requisito.
+8. Leadscore e ICP: "qualificado" é régua interna. ICP largo infla a taxa de qualificação sem melhorar qualidade real; régua apertada seca pipeline. Conferir a definição da frente antes de comparar com estas medianas.
+
+## Manutenção
+
+- Troca anual: a edição 2027 substitui este arquivo com a mesma estrutura (régua, série, qualidade, participação, dispositivo, horário, segmentos, inconsistências, cortes). `revisar_ate` marca o prazo.
+- Linha nova só com página; número sem página é [VERIFICAR].
+- Benchmark de custo (CPC, CPL, CAC) continua [LACUNA] nesta base; não usar para isso.

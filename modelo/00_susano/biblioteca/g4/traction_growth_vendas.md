@@ -3,7 +3,7 @@ id: bib-g4-traction-growth-vendas
 tipo: pensador
 autor: João Vitor + Jonathan Souza
 nivel: ATIVO
-origem: knowledge_susano_g4_traction_growth_vendas.md
+origem: Traction: growth e vendas (G4 Educação), resumo do Sarden
 atualizado: 2026-11-01
 ---
 
@@ -12,7 +12,7 @@ atualizado: 2026-11-01
 ---
 
 ## TESE EM UMA LINHA
-Growth e vendas são um único sistema de seis camadas. Crescimento não é talento isolado nem canal certo, é arquitetura. Começa no objetivo, passa pelo encaixe estrutural e só então chega na execução.
+Growth e vendas são um único sistema de seis camadas. [CONTRADIÇÃO] O sistema de Nardon e G4 Kiso (`00_susano/biblioteca/nardon_g4_kiso/sistema_completo_crescimento.md`) descreve cinco camadas: recortes diferentes de autores próximos, não o mesmo modelo; citar a fonte ao usar. Crescimento não é talento isolado nem canal certo, é arquitetura. Começa no objetivo, passa pelo encaixe estrutural e só então chega na execução.
 
 ---
 

@@ -17,7 +17,7 @@ Configuração para criar em claude.ai/code/routines (ou `/schedule` no Claude C
 You are running the weekly hot-state refresh of this repository as an unattended scheduled task. Work at the repository root.
 
 1. Run the /estado-quente skill exactly as written in .claude/skills/estado-quente/SKILL.md, for all active clients.
-2. Push to a claude/ branch and open a pull request to main with gh pr create when it is available; otherwise leave the branch pushed and finish by printing its name.
+2. Push to the branch `estado-quente/AAAA-MM-DD` (a cloud session keeps its claude/ branch) and open a pull request to main with gh pr create when it is available; otherwise leave the branch pushed and finish by printing its name.
 3. Never edit 40_playbooks/, .claude/, .github/ or scripts/. Never call external systems, never send messages, never merge.
 4. If nothing changed, do not open a pull request; finish with one line: estado quente sem mudanças.
 

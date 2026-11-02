@@ -3,8 +3,9 @@ id: bib-brunson-traffic-secrets
 tipo: pensador
 autor: Russell Brunson
 nivel: MISTO (modelos ativos + frameworks passivos)
-origem: knowledge_susano_traffic_secrets.md
-atualizado: 2026-10-31
+origem: Traffic Secrets (Russell Brunson), resumo do Sarden
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: regras de comissão de afiliado unificadas)
 ---
 
 # Traffic Secrets
@@ -60,7 +61,7 @@ Tráfego não é criado, já existe congregado em torno de pessoas e canais espe
 - Você é produtor de mídia, não consumidor. Máximo 15 min/dia de consumo social; o resto é produção.
 - Dominar uma plataforma antes de partir para a próxima. Presença fraca em 5 canais perde para presença forte em 1.
 - Cada plataforma tem linguagem nativa. Conteúdo copiado entre plataformas não performa, adaptar, não duplicar.
-- Pagar afiliados o máximo possível. Bons afiliados têm opções infinitas, quem paga mais, ganha.
+- Pagar afiliados o máximo possível. Bons afiliados têm opções infinitas, quem paga mais, ganha. (Regra única do livro, dita de três jeitos: no mínimo 50% do lucro do funil, acima do que os concorrentes pagam, e comissão baixa não promove.)
 - Publicar consistentemente por pelo menos 1 ano antes de avaliar. Os primeiros 45 episódios são ruins, é parte do processo.
 - O follow-up é onde 94% da receita potencial mora. Front-end sem follow-up deixa a maior parte do LTV na mesa.
 

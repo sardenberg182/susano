@@ -3,9 +3,10 @@ id: dna-engenharia-crescimento
 tipo: metodo
 autor: Sarden
 nivel: ATIVO
-origem: `00_susano/dna/metodo/engenharia_crescimento.md`
-atualizado: 2026-10-31
+origem: DNA do Sarden em áudio e vídeo, transcrito e destilado (v0.1, out/2026)
+atualizado: 2026-11-01
 aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode seguir")
+revisao_pendente: Sarden (seção ALERTAS OPERACIONAIS acrescentada na v0.3.0)
 ---
 
 # DNA em Vídeo: Reflexão sobre Escala, Métricas e Engenharia de Crescimento
@@ -28,6 +29,15 @@ aprovado: Sarden, 2026-11-01 16:54 (os 8 DNAs lidos no chat; "Revisado pode segu
 
 - O mercado venera a grande ideia criativa. Sarden trata marketing como linha de montagem de engenharia, hipótese, teste, dado, decisão. Criatividade existe mas é subordinada à matemática.
 - A maioria das empresas não falha por falta de produto. Falha por falta de maturidade emocional para aceitar que a tese inicial era ruim.
+
+## ALERTAS OPERACIONAIS
+
+Regras de decisão (a voz de autor fica fora do modelo; aqui só a regra):
+
+- Nunca entregar abstração sem aplicação financeira imediata: todo modelo desce até R$, CAC, LTV ou payback.
+- Nunca propor sacada isolada: sempre sequência de testes com hipótese e critério de corte (`diagnostico_de_funil.md`).
+- Nunca validar métrica de vaidade como proxy de crescimento real.
+- Nunca usar "eu acho" sem marcar como hipótese a testar.
 
 ## REFERÊNCIA RÁPIDA
 

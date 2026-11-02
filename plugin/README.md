@@ -18,7 +18,7 @@ Depois: `/output-style Susano` ativa o estilo de resposta (opcional; o tom já v
 ## O que carrega quando
 
 - Sempre ligado: o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens), injetado na abertura da sessão pelo hook `hooks/abrir.py`, mais as descrições das skills e do subagente. `claude plugin details susano` mostra a projeção.
-- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção.
+- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais`, `susano-exemplos` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. Primeira leitura depois do núcleo: `00_susano/situacoes.md`.
 - Subagente `susano:pesquisador`: evidência com caminho, sobre o método e sobre os documentos do projeto.
 
 ## O que não vem no plugin
@@ -27,4 +27,4 @@ A estrutura de segundo cérebro (pastas de organização e frentes, `brain.py`, 
 
 ## Licença e autoria
 
-Conteúdo (método, DNA, biblioteca, referências) sob CC BY 4.0; código sob MIT. Copyright (c) 2026 Matheus Sardenberg (Sarden). Crédito ao usar: "Baseado no Susano, de Matheus Sardenberg (Sarden), CC BY 4.0. Adaptado." Versão 0.2.1.
+Conteúdo (método, DNA, biblioteca, referências) sob CC BY 4.0; código sob MIT. Copyright (c) 2026 Matheus Sardenberg (Sarden). Crédito ao usar: "Baseado no Susano, de Matheus Sardenberg (Sarden), CC BY 4.0. Adaptado." Versão 0.3.0.

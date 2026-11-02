@@ -3,7 +3,7 @@ id: bib-grove-high-output-management
 tipo: pensador
 autor: Andrew S. Grove (1983)
 nivel: ATIVO
-origem: knowledge_susano_high_output_management_grove.md
+origem: High Output Management (Andrew Grove), resumo do Sarden
 atualizado: 2026-10-31
 ---
 

@@ -3,8 +3,9 @@ id: bib-hormozi-100m-money-models
 tipo: pensador
 autor: Alex Hormozi (2025)
 nivel: ATIVO
-origem: knowledge_susano_100m_money_models_hormozi.md
-atualizado: 2026-10-31
+origem: $100M Money Models (Alex Hormozi), resumo do Sarden
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: hífen de intervalo normalizado)
 ---
 
 # $100M Money Models
@@ -33,7 +34,7 @@ Um Money Model é uma sequência deliberada de ofertas que cobre o custo de aqui
 - **Rollover Upsell**: Credita compra anterior para próximo produto. "Como você já gastou $X, vou aplicar isso em direção ao plano anual." Ativar para converter compradores de trial/challenge em recorrentes.
 - **Trial With Penalty**: Começa de graça SE cumprir X, Y, Z. Se não cumprir, paga taxa. Os requisitos são as ações que criam clientes de alto valor. Sempre pegar cartão antes de explicar as penalidades. Ativar como downsell final quando tudo mais foi recusado.
 - **Feature Downsell**: Remove features de maior valor primeiro → muitas vezes faz o cliente "se auto-upsellar" de volta para o original. Nunca negocie preço sem remover algo. Ativar em vendas complexas onde o cliente quer pagar menos.
-- **Waived Fee Offer**: Taxa de setup para month-to-month (3x–5x valor mensal), dispensada com compromisso anual. "O custo de sair excede o custo de ficar." Ativar para produtos de serviço contínuo onde churn é o principal problema.
+- **Waived Fee Offer**: Taxa de setup para month-to-month (3x a 5x o valor mensal), dispensada com compromisso anual. "O custo de sair excede o custo de ficar." Ativar para produtos de serviço contínuo onde churn é o principal problema.
 
 ---
 
@@ -72,7 +73,7 @@ Um Money Model é uma sequência deliberada de ofertas que cobre o custo de aqui
 - Nunca implementar o Money Model completo de uma vez: perfeccionar uma oferta antes de avançar para a próxima.
 - Nunca usar Continuity como Attraction Offer em negócios bootstrap sem caixa, mata o fluxo antes de chegar na lucratividade.
 - Nunca negociar preço sem remover algo: descontos sem justificativa destroem percepção de valor.
-- Win Your Money Back só funciona se a taxa de refund for abaixo de 5%: se for maior, consertar o produto antes.
+- Win Your Money Back só funciona se a taxa de refund for abaixo de 5%: se for maior, consertar o produto antes. [CONTRADIÇÃO] O mesmo livro relata cerca de 10% de pedidos de devolução na experiência do autor com gyms (seção de modelos e a nota de evidência acima); os dois números ficam: abaixo de 5% é o alvo, perto de 10% rodou na prática do autor, acima disso é produto.
 - Scripts de Hormozi têm tom americano/agressivo: adaptar para contexto de vendas consultivas B2B brasileiras.
 
 ---

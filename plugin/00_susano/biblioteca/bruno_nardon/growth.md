@@ -3,7 +3,7 @@ id: bib-bruno-nardon-growth
 tipo: pensador
 autor: Bruno Nardon
 nivel: ATIVO
-origem: knowledge_susano_growth_bruno_nardon.md
+origem: conteúdos e palestras de Bruno Nardon sobre growth, resumo do Sarden
 atualizado: 2026-11-01
 ---
 
@@ -18,7 +18,7 @@ Growth não é canal nem tática, é um sistema que precisa encaixar. A pergunta
 
 ## MODELOS ATIVOS
 
-- **4 Fits**: Antes de qualquer escala, auditar os três encaixes: Mercado x Produto, Produto x Canal, Canal x Modelo. Fit frouxo em qualquer um desses torna escala equivalente a queimar caixa.
+- **4 Fits**: Antes de qualquer escala, auditar os quatro encaixes: Mercado x Produto, Produto x Canal, Canal x Modelo, Modelo x Mercado. Fit frouxo em qualquer um desses torna escala equivalente a queimar caixa.
 - **Maturidade como filtro**: O crescimento é limitado pelo elo mais fraco. Identificar qual área está travando o sistema antes de alocar recurso em qualquer frente.
 - **Retenção como prova de PMF**: Curva de retenção que estabiliza = base que acumula. Curva que tende a zero = reposição infinita de uma base que evapora. Auditar retenção antes de qualquer discussão de escala.
 - **LTV/CAC granularizado**: CAC médio não serve para decisão. Granularizar por canal, coorte e perfil. A média sempre engana.

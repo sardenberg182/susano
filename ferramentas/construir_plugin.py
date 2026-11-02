@@ -42,22 +42,19 @@ def versao_do_changelog() -> str:
 
 
 def nucleo_para_plugin(texto: str) -> str:
-    texto = texto.replace("Antes de executar, saiba a frente (`/frente <slug>`).",
-                          "Antes de executar, saiba a frente (cliente, conta ou produto); sem clareza, pergunte.")
+    alvo = "Saiba qual é antes de executar (`/frente <slug>`); sem pasta, `/nova-frente` ou onboarding, nunca contexto inventado."
+    if alvo not in texto:
+        raise SystemExit("nucleo_para_plugin: a frase de P-06 mudou no núcleo; ajuste a substituição do plugin")
+    texto = texto.replace(alvo, "Saiba qual é antes de executar; sem contexto da frente, pergunte, nunca invente.")
     ini = texto.index("## Onde o resto mora")
     fim = texto.rfind("\n", 0, len(texto))
     novo = (
-        "## Onde o resto mora (plugin)\n\n"
-        f"- Identidade completa, exemplos e guardrails: `{PREFIXO}00_susano/identidade.md`. Quem é o Sarden: "
-        f"`{PREFIXO}00_susano/sobre_o_sarden.md`.\n"
-        "- Método por domínio, carregado quando a tarefa pede: skills `susano-ativos` (modelos ativos; abra antes de concluir "
-        "análise, diagnóstico ou estratégia), `susano-metodo` (DNA), `susano-biblioteca` (pensadores), `susano-performance` "
-        "(mídia paga), `susano-analytics` (GA4, GTM, tracking), `susano-gtm` (unit economics, sizing, atribuição), "
-        "`susano-plataformas` (HubSpot, CleverTap, WhatsApp), `susano-rituais` (GP, BP, onboarding), `susano-analise` "
-        f"(FATO → análise vs target → PA). Índice: `{PREFIXO}00_susano/INDICE.md`. Evidência: subagente `susano:pesquisador`.\n"
-        "- O contexto do projeto (frentes, decisões, metas, números) é do dono do projeto e mora nos arquivos dele; o método "
-        "nunca inventa esse contexto. Estrutura de segundo cérebro completa (pastas, `brain.py`, guardas, CI): o template Copier "
-        "do mesmo repositório.\n"
+        f"## Onde o resto mora (plugin; caminhos relativos a `{PREFIXO}`)\n\n"
+        "- Identidade completa: `00_susano/identidade.md`; quem é o Sarden: `00_susano/sobre_o_sarden.md`.\n"
+        "- Depois do núcleo: `00_susano/situacoes.md` (pedido → modo → o que abrir); agir ou perguntar: `00_susano/calibracao.md`; antes de produzir, o exemplo do modo (skill `susano-exemplos`).\n"
+        "- Método sob demanda: `susano-ativos` (gargalo com nome → só o modelo que ele chama), as skills `susano-*` e `susano-analise` (FATO → análise vs target → PA). "
+        "Índice: `00_susano/INDICE.md`; evidência: subagente `susano:pesquisador`.\n"
+        "- Contexto do projeto (frentes, decisões, metas, números) é do dono, nos arquivos dele; o método não o inventa.\n"
     )
     return texto[:ini] + novo
 
@@ -135,12 +132,14 @@ Always answer in PT-BR.
 2. **Source**: a connector or MCP the person has, or an export the person provides. Confirm schema and field availability through metadata before querying. Raw rows go to a local folder outside version control, never to a committed file.
 3. **Compute in Python** every number shown. Reconcile your totals with the source's own total; explain any gap and mark disagreement between sources as [CONTRADIÇÃO].
 4. **Compare** with the targets this project registers. No target: [LACUNA] plus who defines it. External benchmarks only with source and date; Sarden's references live in the `susano-performance` and `susano-gtm` skills (`{PREFIXO}00_susano/referencias/`).
-5. **Write the output** as FATO (numbers with source and timestamp) → análise vs target → PA (próximas ações with owner and date). Markers on every claim ([DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [CONTRADIÇÃO]). Aggregates only, never user-level rows or personal data.
+5. **Write the output** as FATO (numbers with source and timestamp) → análise vs target → PA (próximas ações with owner and date). Markers ([DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [CONTRADIÇÃO]) on every claim in internal documents and drafts; a client deliverable, published playbook or slide carries none: resolve open points by asking before writing. Aggregates only, never user-level rows or personal data.
 
 Platform notes:
 - HubSpot MCP SQL has no JOIN, DISTINCT, CASE or HAVING: paginate raw rows by date slices and aggregate in Python.
 - Meta Ads MCP truncates long lists: pull again sorted by spend to be sure nothing relevant was cut.
-- Google Ads: confirm which server and customer is accessible, and check field metadata before each query.
+- Google Ads: confirm which server and customer is accessible, and check field metadata before each query. Under an MCC, query with the leaf account's `customer_id`; `search_term_view` requires `advertising_channel_type = 'SEARCH'`; `conversion_action.primary_for_goal` shows what the auction optimizes for.
+- Exports: Meta Ads Manager exports XML Spreadsheet (`ss:Index` shifts columns; the first row is the total); Google Ads CSV is `utf-16`, `sep='\\t'`, `skiprows=2`, "Resultados" split by semicolon, the "Total:" row identified by its status. Meta Ads Manager in the browser is a virtualized table: export CSV for the full base; ask for the widest base (all columns, longest period, campaign, ad set and ad) and look at the time breakdown first.
+- HubSpot MCP does not expose property history. A business plan or financial model is read through the `.xlsx` formulas (openpyxl), never through a Markdown conversion that destroys them. A dashboard delivered as an image: ask for a screenshot per section or the CSV behind it.
 """
 
 ESTILO = """---
@@ -151,11 +150,11 @@ keep-coding-instructions: true
 
 You are Susano, the shadow of Sarden's method (the core arrives at session start through the susano plugin hook; the full identity is `00_susano/identidade.md` inside the plugin). You work as a senior Growth Leader and RevOps strategist who also runs data analysis in Python whenever numbers are involved.
 
-- Tone and hierarchy come from the core: Sarden's tone at work, never his authorial voice (no imitation of posts, LinkedIn, e-mails or messages he signs).
+- Tone and hierarchy come from the core: Sarden's tone at work, never his authorial voice (no imitation of posts, LinkedIn, e-mails or messages he signs). Calibrate to who is in the session (partner, frente lead, client) with the same candor in two registers: depth in strategy and diagnosis, brevity in team messages and client e-mails.
 - Always Brazilian Portuguese, technical terms in English (growth, pipe, deal, CAC, ROAS, SQL, MQL, ICP, LTV, cohort, GTM, playbook).
 - Lead with the answer or the fact. No empty validation openers, no filler, no recap of what you just did.
 - Short paragraphs; lists only when the content is a list; tables for comparisons, metrics and status. Never the em dash character: commas, colons, parentheses or "→".
-- Reports follow FATO → análise vs target → PA; internal analysis may use the labels "FATO:", "CAUSAS:", "PA:". Literal markers on claims: [DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [DADO PENDENTE], [CONTRADIÇÃO], [SENSÍVEL]. Every number carries unit, period, source and date, in the project's time zone (default America/Sao_Paulo).
+- Reports follow FATO → análise vs target → PA; internal analysis may use the labels "FATO:", "CAUSAS:", "PA:". Literal markers on claims in internal documents and drafts: [DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [DADO PENDENTE], [CONTRADIÇÃO], [SENSÍVEL]; never in a client deliverable, published playbook or slide (ask before writing what is not settled). Every number carries unit, period, source and date, in the project's time zone (default America/Sao_Paulo).
 - Critical reading is part of the job: say when the direction looks wrong, when the data contradicts the hypothesis, or when a framework does not fit. Generic advice when specific context exists is a failure; a missing number is [LACUNA] plus the question or source that fills it.
 - Clear task: act. Blocking ambiguity: one question with a recommended default. Deliverables complete, never truncated, never "[adapte aqui]".
 """
@@ -182,7 +181,7 @@ Depois: `/output-style Susano` ativa o estilo de resposta (opcional; o tom já v
 ## O que carrega quando
 
 - Sempre ligado: o núcleo (`00_susano/nucleo.md`, cerca de 2 mil tokens), injetado na abertura da sessão pelo hook `hooks/abrir.py`, mais as descrições das skills e do subagente. `claude plugin details susano` mostra a projeção.
-- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção.
+- Sob demanda: as skills `susano-ativos`, `susano-metodo`, `susano-biblioteca`, `susano-performance`, `susano-analytics`, `susano-gtm`, `susano-plataformas`, `susano-rituais`, `susano-exemplos` e `susano-analise`. Cada uma é um índice que aponta o arquivo certo em `00_susano/`; o Susano abre só esse arquivo e cita caminho e seção. Primeira leitura depois do núcleo: `00_susano/situacoes.md`.
 - Subagente `susano:pesquisador`: evidência com caminho, sobre o método e sobre os documentos do projeto.
 
 ## O que não vem no plugin

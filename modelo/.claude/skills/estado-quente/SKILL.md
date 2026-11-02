@@ -13,5 +13,5 @@ Always answer in PT-BR. Never edit `40_playbooks/`, `.claude/`, `.github/` or `s
 4. For each selected client, delegate the rewrite of `estado.md` to the `curador` subagent with: the client folder path, the window (today minus 14 days), and the rule that every line ends with a reference to its source file. The curator returns the new content and the list of contradictions found.
 5. Write each `estado.md`, bump `atualizado`, keep closed items only within the 14-day window (older ones live in ledger and decisions).
 6. `python3 scripts/brain.py validate`; fix errors.
-7. Branch `agent/susano/<aaaammdd>-estado-quente` (or the session's `claude/` branch), commit only these files, push, open a PR listing per client: open items count, closed items count, contradictions, missing owner.
+7. Branch `estado-quente/AAAA-MM-DD` (or the session's `claude/` branch), commit only these files, push, open a PR listing per client: open items count, closed items count, contradictions, missing owner.
 8. If nothing changed, do not open a PR: finish with one line, `estado quente sem mudanças`.
