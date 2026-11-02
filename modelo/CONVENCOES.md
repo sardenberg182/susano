@@ -26,6 +26,7 @@ Arquivos gerenciados (sobrescritos por `copier update`, conferidos pelo `susano-
   contexto.md    quem é (modelo: _templates/contexto_projeto.md)
   estado.md      o que está quente (00_susano/metodo/estado-quente.md)
   decisoes.md    decisões com data e dono; substituídas marcadas, nunca apagadas
+  experimentos.md hipótese com corte → resultado → decisão (modelo: _templates/experimentos.md)
   ledger/        AAAA-MM-DD.md, uma linha por fato: ts | fonte | quem | quem_tipo | trecho | ref
   analises/      AAAA-MM-DD_<tema>.md
   reunioes/      AAAA-MM-DD_<tema>.md
@@ -35,18 +36,18 @@ Crie com `python3 scripts/brain.py novo <slug> --dono <usuário>`.
 
 ## Frontmatter
 
-`estado.md`, `contexto.md` e `decisoes.md` de cada frente começam com:
+`estado.md`, `contexto.md`, `decisoes.md` e `experimentos.md` de cada frente começam com:
 
 ```
 ---
 id: <tipo>-<slug>
-tipo: estado | contexto | decisoes
+tipo: estado | contexto | decisoes | experimentos
 dono: <usuário do GitHub>
 atualizado: AAAA-MM-DD
 ---
 ```
 
-Arquivos de `10_`, `30_`, `40_` e `50_` levam `id`, `tipo`, `atualizado` e, quando expiram, `revisar_ate: AAAA-MM-DD`. Arquivos do método (`00_susano/`) levam `id` e `tipo` (`identidade`, `metodo`, `pensador`, `instrucao`, `procedimento`, `referencia`).
+Arquivos de `10_`, `30_`, `40_` e `50_` levam `id`, `tipo`, `atualizado` e, quando expiram, `revisar_ate: AAAA-MM-DD`. Arquivos do método (`00_susano/`) levam `id` e `tipo` (`identidade`, `metodo`, `pensador`, `instrucao`, `procedimento`, `referencia`, `exemplo`). Um `exemplo` tem as seções ENTRADA, SAÍDA e POR QUE ASSIM. O tipo `resumo` não existe mais: é `pensador` (com o esqueleto) ou `referencia`.
 
 ## Esqueleto dos pensadores (`tipo: pensador`)
 
@@ -75,7 +76,7 @@ Gate: a pessoa entra só com OK explícito do dono, registrado em `aprovado_por`
 
 - Slugs em minúsculas, sem acento, com hífen. Datas em ISO (AAAA-MM-DD), fuso America/Sao_Paulo.
 - Número sempre com unidade, período, fonte e data. Meta sem registro é [LACUNA].
-- Marcadores literais: [DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [DADO PENDENTE], [CONTRADIÇÃO], [SENSÍVEL]. [PÚBLICO] marca contato (e-mail, telefone) que o dono decidiu publicar: as guardas não perguntam; nunca libera segredo, cartão ou CPF.
+- Marcadores literais: [DADO], [INFERÊNCIA], [VERIFICAR], [LACUNA], [DADO PENDENTE], [CONTRADIÇÃO], [SENSÍVEL], [VENDOR] (caso ou número divulgado pelo fornecedor da plataforma). Marcador é de documento interno e rascunho; entregável de cliente, playbook publicado e slide saem sem marcador. [PÚBLICO] marca contato (e-mail, telefone) que o dono decidiu publicar: as guardas não perguntam; nunca libera segredo, cartão ou CPF.
 - O caractere travessão é proibido em todo arquivo `.md`: use vírgula, dois-pontos ou "→".
 
 ## Validação
@@ -84,4 +85,5 @@ Gate: a pessoa entra só com OK explícito do dono, registrado em `aprovado_por`
 - `python3 scripts/brain.py mapa`, `hot`, `fonte "<termo>"`, `tokens`: mapa do repositório, estado quente agregado, arquivo e linha de um termo, carga de abertura.
 - `python3 scripts/brain.py susano-check`: arquivos gerenciados iguais ao `00_susano/MANIFEST.sha256` da versão instalada.
 - `python3 scripts/brain.py audit`: achados mecânicos do brain audit.
-- O CI roda `validate` e `susano-check` em todo PR.
+- O CI roda `validate` e `susano-check` em todo PR. Em sessão local, o pre-commit (`bash .claude/hooks/instalar_precommit.sh`, instalado por padrão no `/onboarding`) roda o `validate` antes de cada commit.
+- Branches: `salve/AAAA-MM-DD-<tema>` (trabalho de sessão), `estado-quente/AAAA-MM-DD` (refresh semanal), `susano-vX.Y.Z` (versão do modelo).

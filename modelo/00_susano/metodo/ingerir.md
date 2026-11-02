@@ -2,7 +2,7 @@
 id: metodo-ingerir
 tipo: procedimento
 atualizado: 2026-10-31
-fonte: modelo de segundo cérebro (Okamoto) adaptado pelo Sarden; raio_doc9
+fonte: modelo de segundo cérebro adaptado pelo Sarden
 ---
 
 # Ingerir: de material bruto a conhecimento

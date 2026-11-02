@@ -2,7 +2,7 @@
 id: metodo-migrar-frente
 tipo: procedimento
 atualizado: 2026-10-31
-fonte: raio_doc14 e raio_doc16 (migração do Susano antigo)
+fonte: modelo de segundo cérebro adaptado pelo Sarden
 ---
 
 # Migrar uma frente: do contexto antigo para a pasta da frente

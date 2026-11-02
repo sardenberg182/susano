@@ -84,9 +84,11 @@ def main() -> int:
     pasta_frentes = frentes[0]
     for slug in ("acme", "beta-labs", "gama"):
         code, out, err = rodar(brain + ["novo", slug, "--dono", "pessoa-teste"], repo)
-    caso("brain.py novo: cria a frente com contexto, estado e decisoes",
-         code == 0 and all((pasta_frentes / "gama" / n).is_file() for n in ("contexto.md", "estado.md", "decisoes.md")),
+    caso("brain.py novo: cria a frente com contexto, estado, decisoes e experimentos",
+         code == 0 and all((pasta_frentes / "gama" / n).is_file() for n in ("contexto.md", "estado.md", "decisoes.md", "experimentos.md")),
          (out + err)[-200:])
+    exp = (pasta_frentes / "gama" / "experimentos.md").read_text(encoding="utf-8") if (pasta_frentes / "gama" / "experimentos.md").is_file() else ""
+    caso("experimentos.md: nasce com frontmatter (tipo experimentos) e a tabela E-NN", exp.startswith("---\nid: experimentos-gama\ntipo: experimentos") and "| E-NN |" in exp, exp[:120])
     datar(pasta_frentes / "acme" / "estado.md", recente)
     datar(pasta_frentes / "beta-labs" / "estado.md", antigo)
     datar(pasta_frentes / "gama" / "estado.md", recente)
@@ -168,6 +170,26 @@ def main() -> int:
     code, out, err = rodar(brain + ["mapa"], repo)
     mapa = (repo / "MAPA.md").read_text(encoding="utf-8")
     caso("brain.py mapa: conta pessoas e aponta o hot.md gerado", code == 0 and "2 stakeholder(s)" in mapa and "hot.md`: estado quente agregado (gerado em" in mapa)
+    # v0.3.0: experimentos sem frontmatter barra; tipo exemplo exige as 3 seções; tipo resumo não existe mais
+    escrever(pasta_frentes / "gama" / "experimentos.md", "# Experimentos: gama\n\n| E-NN | data |\n|---|---|\n")
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: experimentos.md sem frontmatter barra", code == 1 and "experimentos.md: sem frontmatter" in out, (out + err)[-200:])
+    escrever(pasta_frentes / "gama" / "experimentos.md",
+             f"---\nid: experimentos-gama\ntipo: experimentos\ndono: pessoa-teste\natualizado: {recente}\n---\n# Experimentos: gama\n\n| E-NN | data |\n|---|---|\n")
+    escrever(repo / "00_susano" / "exemplos" / "teste_exemplo.md",
+             "---\nid: ex-teste\ntipo: exemplo\nmodo: 1\natualizado: 2026-11-01\n---\n# Exemplo de teste\n\n## ENTRADA\n\nx\n\n## SAÍDA\n\ny\n")
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: exemplo sem POR QUE ASSIM barra", code == 1 and "POR QUE ASSIM" in out, (out + err)[-200:])
+    escrever(repo / "00_susano" / "exemplos" / "teste_exemplo.md",
+             "---\nid: ex-teste\ntipo: resumo\natualizado: 2026-11-01\n---\n# Exemplo de teste\n\n## ENTRADA\n\nx\n\n## SAÍDA\n\ny\n\n## POR QUE ASSIM\n\nz\n")
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: tipo resumo não existe mais (erro)", code == 1 and "tipo resumo" in out, (out + err)[-200:])
+    (repo / "00_susano" / "exemplos" / "teste_exemplo.md").unlink()
+    rodar(["git", "add", "-A"], repo)
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: volta a passar sem o exemplo de teste", code == 0, (out + err)[-300:])
     skills_dom = sorted(p.parent.name for p in (repo / ".claude" / "skills").glob("susano-*/SKILL.md"))
     caso("skills por domínio: as 8 existem", skills_dom == ["susano-analytics", "susano-ativos", "susano-biblioteca", "susano-gtm",
                                                           "susano-metodo", "susano-performance", "susano-plataformas", "susano-rituais"], ",".join(skills_dom))
