@@ -1,0 +1,24 @@
+name: testes
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout v7.0.1, fixado por SHA (conferido em 01/11/2026)
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - name: Copier
+        run: pipx install copier && copier --version
+      - name: Modelo (projeto temporário, validate, susano-check, testar_camada)
+        run: bash testes/testar_modelo.sh HEAD
+      - name: Plugin (build idempotente, hook de abertura, manifestos)
+        run: bash testes/testar_plugin.sh
