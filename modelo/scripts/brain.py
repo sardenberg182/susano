@@ -42,6 +42,7 @@ NUCLEO_TOKENS_MAX = 2200
 ABERTURA_TOKENS_MAX = 8000
 IMPORT_MAX_SALTOS = 5
 # Skills por domínio geradas de 00_susano/ (brain.py skills). (nome, descrição de quando usar, pastas de origem)
+# (nome, descrição da skill, caminhos em 00_susano/): pasta ou arquivo .md; prefixo "-" exclui um arquivo de uma pasta listada
 DOMINIOS = [
     ("metodo", "Sarden's DNA: ACF fundamentals of RevOps, media architecture, copy and headlines, leadership beliefs, "
                "growth engineering, GTM and RevOps, hackizinhos, M&A and valuation. Use before any external framework when "
@@ -51,10 +52,12 @@ DOMINIOS = [
                    "Grove, Horowitz, Winning by Design, G4, Ladeira and others. Use when a named framework is needed (fit, offer, "
                    "funnel, launch, sales process, management).",
      ["biblioteca"]),
-    ("performance", "Paid media, organic social and demand generation: ads fundamentals, the media manager routine and daily checklist, "
-                    "the 2026 demand operating system, Panorama 2026 benchmarks and the Stories 10x organic method. Use for ads audits, "
-                    "scaling, CPL/CAC diagnosis, routines and organic social.",
-     ["referencias/performance", "referencias/benchmarks", "referencias/social_organico"]),
+    ("performance", "Paid media, organic social, demand generation and landing pages: ads fundamentals, the media manager routine and "
+                    "daily checklist, the 2026 demand operating system, Panorama 2026 benchmarks, the Stories 10x organic method, the "
+                    "landing page lens (17-field brief, device protocol, pre-traffic QA) and the HTML builder playbook. Use for ads "
+                    "audits, scaling, CPL/CAC diagnosis, routines, organic social and any landing page brief, review or test.",
+     ["referencias/performance", "referencias/benchmarks", "referencias/social_organico", "referencias/landing_pages",
+      "instrucoes/landing_pages.md"]),
     ("analytics", "Web analytics and tracking: GA4, Google Tag Manager, consent mode, pixels, server-side and snippets. Use for "
                   "measurement, tagging, event naming, data quality and tracking audits.",
      ["referencias/analytics"]),
@@ -64,9 +67,10 @@ DOMINIOS = [
     ("plataformas", "Platform references: HubSpot (dossier and Brazil chapter), CleverTap and WhatsApp Business. Use for CRM, "
                     "automation, CDP and WhatsApp implementation or audit questions.",
      ["referencias/plataformas"]),
-    ("rituais", "Management rituals and project intake: the GP and BP guide and the project onboarding instruction. Use when "
-                "preparing a GP, BP, WBR or kickoff, or onboarding a new frente.",
-     ["instrucoes"]),
+    ("rituais", "Management rituals, operations and intake: WBR (status rule, structure, reading lens, complete PA), GP and BP guide, "
+                "brief and proposal reading, operation and team rules (trusted status, complete pending item, handoff) and frente "
+                "onboarding. Use when preparing or reading a WBR, GP, BP or kickoff, answering a brief, or onboarding a new frente.",
+     ["instrucoes", "-instrucoes/landing_pages.md"]),
     ("exemplos", "Worked examples of Susano outputs by mode: WBR read, rate-sheet diagnosis, PA table, meeting analysis, executive "
                  "summary, leadership message, proposal structure. Open the matching pair before producing in the same mode.",
      ["exemplos"]),
@@ -734,8 +738,14 @@ def cmd_skills(raiz: Path, destino: Path, prefixo: str = "") -> int:
     for nome, descricao, pastas in DOMINIOS:
         arquivos_md = []
         for pasta in pastas:
+            if pasta.startswith("-"):
+                continue
             if (base / pasta).is_dir():
                 arquivos_md += sorted((base / pasta).rglob("*.md"))
+            elif (base / pasta).is_file():
+                arquivos_md.append(base / pasta)
+        excluidos = {(base / pasta[1:]).resolve() for pasta in pastas if pasta.startswith("-")}
+        arquivos_md = [p for p in arquivos_md if p.resolve() not in excluidos]
         if not arquivos_md:
             continue
         linhas = ["---", f"name: susano-{nome}", f"description: {descricao}", "---", "", CABECA_SKILL, "",
