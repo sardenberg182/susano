@@ -31,7 +31,7 @@ Growth hacking é experimentação multifuncional acelerada para crescer, substi
 
 - **Ciclo do growth hacking**: 4 fases em loop semanal: Análise → Ideação → Priorização (ICE) → Teste → volta à Análise. Reunião de crescimento semanal de 1 hora. Quando usar: estrutura operacional padrão para qualquer projeto de growth. A cadência do ciclo é o que diferencia growth hacking de "tentativa e erro".
 
-- **Desejo – Atrito = Taxa de Conversão**: reduzir atrito é geralmente mais fácil do que aumentar desejo. Quando usar: diagnóstico de qualquer funil com drop-off alto. Primeira hipótese sempre deve ser "onde está o atrito?".
+- **Desejo menos Atrito = Taxa de Conversão**: reduzir atrito é geralmente mais fácil do que aumentar desejo. Quando usar: diagnóstico de qualquer funil com drop-off alto. Primeira hipótese sempre deve ser "onde está o atrito?".
 
 - **Análise de coorte**: dividir usuários por data de aquisição (ou canal, ou produto) e monitorar retenção/receita ao longo do tempo. Revela problemas mascarados por crescimento de novos usuários. Quando usar: análise mensal de retenção para clientes com base ativa.
 
@@ -52,11 +52,11 @@ Growth hacking é experimentação multifuncional acelerada para crescer, substi
 
 - **NUX (New User Experience)**: tratar como produto separado. Três funções da landing page inicial: relevância + valor + CTA claro. Testar SSO, inversão do funil (produto antes do cadastro), questionário de onboarding, gamificação. Gatilho: ativar ao redesenhar processo de onboarding de cliente.
 
-- **3 fases da retenção (Brian Balfour)**: inicial (dias/semanas a garantir chegada ao Aha), intermediária (transformar em hábito a modelo Hook), longo prazo (continuar entregando mais valor a evitar feature bloat). Cada fase tem hacks diferentes.
+- **3 fases da retenção (Brian Balfour)**: inicial (dias ou semanas: garantir a chegada ao Aha), intermediária (transformar em hábito: modelo Hook), longo prazo (continuar entregando mais valor: evitar feature bloat). Cada fase tem hacks diferentes.
 
 - **Funil de monetização**: mapear onde receita é gerada + "pinch points" onde potencial escapa. Benchmarks: e-commerce, menos de 3% finalizam compra (Monetate 2016). SaaS, churn anual típico 5-20%. Gatilho: usar quando cliente foca só em novos usuários mas tem LTV baixo.
 
-- **Pricing psicológico**: charm price (terminar em 9/99) → média +24% em vendas. Relatividade de preços (opção intermediária como chamariz leva a mais compras do premium a experimento The Economist de Ariely). Perguntar ao cliente: ponto de "muito caro", "caro mas considerável", "bom custo-benefício", "tão barato que questiona qualidade". Gatilho: usar ao revisar estratégia de pricing de cliente.
+- **Pricing psicológico**: charm price (terminar em 9/99) → média +24% em vendas. Relatividade de preços (opção intermediária como chamariz leva a mais compras do premium: experimento The Economist, de Ariely). Perguntar ao cliente: ponto de "muito caro", "caro mas considerável", "bom custo-benefício", "tão barato que questiona qualidade". Gatilho: usar ao revisar estratégia de pricing de cliente.
 
 - **6 princípios de Cialdini para monetização**: reciprocidade (dar antes de pedir), compromisso/coerência (ação pequena leva a ação maior), validação social (mostrar o que outros fazem), autoridade, afinidade, escassez. Gatilho: ao desenhar CTAs, landing pages de conversão, programas de fidelidade.
 

@@ -1926,7 +1926,7 @@ components:
 - `00_susano/referencias/analytics/tracking/snippets.md`, `00_susano/referencias/analytics/google_tag_manager.md`, `00_susano/referencias/analytics/tracking/pixels.md`, `00_susano/referencias/analytics/tracking/server_side.md`, `00_susano/referencias/analytics/ga4.md`, `00_susano/referencias/analytics/guia_profundo_web_analytics.md`: dataLayer antes do GTM, 7 métodos de form tracking, custom event no callback de sucesso, UTMs case-sensitive, CAPI com event_id, Enhanced Conversions
 - `00_susano/referencias/plataformas/hubspot/dossie_mestre.md`: form shortening, propriedades, atribuição
 - `00_susano/dna/metodo/diagnostico_de_funil.md` e `00_susano/referencias/performance/fundamentos_anuncios_performance.md`: sequência de diagnóstico
-- `00_susano/referencias/go-to-market/experimentacao.md`: power analysis, testes de página
+- `00_susano/referencias/go-to-market/modelos_quantitativos.md`: power analysis (seção 10), testes de página
 
 ### E.2 Impeccable (camada de craft)
 - Repositório: https://github.com/pbakaus/impeccable (Apache-2.0; versão lida: 4.6.0)

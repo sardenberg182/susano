@@ -4,7 +4,8 @@ tipo: pensador
 autor: Bruno Nardon + G4 Traction + Rafael Kiso
 nivel: ATIVO
 origem: knowledge_susano_sistema_completo_crescimento.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: frase quebrada pela remoção do travessão reescrita)
 ---
 
 # Sistema Completo de Crescimento: Growth + Sales + Data
@@ -12,7 +13,7 @@ atualizado: 2026-10-31
 ---
 
 ## TESE EM UMA LINHA
-Crescimento é um sistema de cinco camadas que transforma atenção qualificada em receita previsível. Não existe mágica, existe lógica mapeável, testável e otimizável.
+Crescimento é um sistema de cinco camadas que transforma atenção qualificada em receita previsível. [CONTRADIÇÃO] O Traction do G4 (`00_susano/biblioteca/g4/traction_growth_vendas.md`) descreve seis camadas: recortes diferentes de autores próximos, não o mesmo modelo; citar a fonte ao usar. Não existe mágica, existe lógica mapeável, testável e otimizável.
 
 ---
 
@@ -20,7 +21,7 @@ Crescimento é um sistema de cinco camadas que transforma atenção qualificada 
 
 - **5 Camadas do Sistema**: Ao diagnosticar qualquer problema de crescimento, percorrer em sequência, Estrutura (ICP + encaixe) → Aquisição (canal + frequência + timing) → Conversão (mensagem + jornada + oferta) → Retenção (experiência + relacionamento) → Dados (medir + decidir + iterar). Falha em qualquer camada contamina as demais.
 - **Pirâmide do Conhecimento**: Dado → Informação → Insight → Decisão. Toda análise deve subir até o nível de decisão. Dado sem recomendação de ação é dado desperdiçado.
-- **5 Alavancas de Mídia**: Alcance (público certo), Frequência (2x/semana captura 95% da lembrança a principal driver de ROAS), Horário (timing como multiplicador), Retenção de atenção (atenção é o ativo mais escasso), Indicadores por etapa (KPI diferente para cada fase).
+- **5 Alavancas de Mídia**: Alcance (público certo), Frequência (2x por semana captura 95% da lembrança: o principal driver de ROAS), Horário (timing como multiplicador), Retenção de atenção (atenção é o ativo mais escasso), Indicadores por etapa (KPI diferente para cada fase).
 - **Funil + Loop**: Funil mostra onde você perde. Loop mostra como você escala. Aquisição → Receita → Reinvestimento → Indicação. Empresa que opera só com funil precisa injetar esforço infinito.
 - **Matemática de Alavancas**: Receita = tráfego × conversão × ticket × retenção. Abrir a equação antes de qualquer recomendação. Qual variável está quebrando?
 

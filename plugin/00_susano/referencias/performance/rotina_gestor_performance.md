@@ -4,17 +4,20 @@ tipo: referencia
 autor: Sarden
 origem: Notion do Sarden: 'Guia Operacional Performace' (playbook, 28/03/2026)
 atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: nota de defaults, papéis genéricos, CRM genérico com anexo HubSpot, dicionário citado, nomenclatura de produto marcada)
 ---
 
 # Rotina do gestor de performance: diário, semanal, periódico e gatilhos
 
 > Uso: O método operacional do Sarden para gestão de mídia paga: o funil completo por canal (impressão até Won) como ferramenta de decisão, o pipeline (CRM) como fonte da verdade, e quatro blocos de rotina. Usar para montar a rotina de um gestor, auditar uma operação ou diagnosticar queda. O bloco diário em formato de checklist está em `00_susano/referencias/performance/checklist_diario_gestor.md`.
 
+> Todos os thresholds deste arquivo (frequência, discrepância pixel × CRM, LTV:CAC, passo de escala, view rate, taxas por etapa) são **defaults operacionais do método**, a calibrar por frente e registrar em `20_<frente>/<slug>/decisoes.md`; nenhum é benchmark de mercado. Definições de lead, MQL, SQL, CAC e CPL: `00_susano/dna/metodo/dicionario.md`. Papéis: "gestor da frente" e "liderança de growth" são os papéis de escalonamento do método; cada organização mapeia para os seus em `10_<org>/time/`. CRM: o método vale para qualquer CRM; o específico de CRM fica no anexo do fim.
+
 > **🚨 O funil completo por canal : [Impressão até Won] essa é ferramenta de decisão. Tudo começa ali, da contexto e conclusão.**
 >
 > → O gestor que não sabe responder "onde está a maior queda no funil de cada canal essa semana?" Não está operando.
 >
-> → A fonte de verdade não é a plataforma É O PIPELINE [Hubspot].
+> → A fonte de verdade não é a plataforma, É O PIPELINE no CRM.
 
 ## 1. POR QUE ESSA ROTINA EXISTE
 
@@ -108,7 +111,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 **Google Pmax/Display/YouTube**
 
 - [ ] **Display: CPM + posicionamentos**: CPM subindo pode ser posicionamento ruim entrando
-- [ ] **YouTube: view rate**: abaixo de 15% em TrueView = hook morreu nos primeiros 5s
+- [ ] **YouTube: view rate**: abaixo de 15% em campanha de vídeo (antigo TrueView) = hook morreu nos primeiros 5 s [VERIFICAR nomenclatura e métrica atuais do Google Ads, 01/11/2026]
 - [ ] Pmax: verificar se gasto não está concentrando em Search branded canibalizando orgânico
 
 **TikTok, Métrica primária: completion rate**
@@ -151,7 +154,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 - [ ] Campaign Manager → Account Assets → Insight Tag: disparando?
 - [ ] Se não dispara, conversões offline param de ser reportadas
 
-**HubSpot (validação cruzada)**
+**CRM (validação cruzada)**
 
 - [ ] Filtrar contacts criados nas últimas 24h por source = paid
 - [ ] Volume bate com volume reportado nas plataformas?
@@ -164,14 +167,14 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 ---
 
-### 2.4 Checar volume de leads, MQL's, SQL's e Clientes no HubSpot (20 min)
+### 2.4 Checar volume de leads, MQLs, SQLs e clientes no CRM (20 min)
 
 > 💡 **Por que:** o gestor precisa saber se o dinheiro investido ontem está gerando receita e quanto de receito, além do tempo. É para analisar pipeline, é para detectar discrepância.
 
 - [ ] Contacts criados ontem por source = paid, olhar por canal
 - [ ] Volume coerente com investimento?
 - [ ] Se ciclo curto: olhar deals novos. Se ciclo longo: deals são análise semanal
-- [ ] Leads de paid estão sendo trabalhados pelo comercial? Se parados → escalar para GP
+- [ ] Leads de paid estão sendo trabalhados pelo comercial? Se parados → escalar para o gestor da frente
 
 - [ ] Volume de MQL's
 
@@ -219,7 +222,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 **Briefs, Google Display/YouTube**
 
 - [ ] Display: banners estáticos em múltiplos tamanhos
-- [ ] YouTube TrueView: hook em 5 segundos. Produção mais elaborada que TikTok
+- [ ] YouTube (campanha de vídeo, antigo TrueView): hook em 5 segundos. Produção mais elaborada que TikTok
 - [ ] YouTube Bumper (6s): mensagem única, puro impacto
 - [ ] Brief referencia: view rate + completion rate dos vídeos anteriores
 
@@ -271,8 +274,8 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 | Visita → Engajamento baixa | LP não entrega o que o ad prometeu | Alinhar mensagem ad → LP |
 | Engajamento → Lead baixa | Oferta fraca, formulário com fricção | Testar oferta, reduzir fricção |
 | Lead → MQL baixa | Tráfego de baixa qualidade | Ajustar público, evento de otimização |
-| MQL → SQL baixa | Handoff marketing-vendas | Escalar para GP |
-| SQL → Won baixa | Problema comercial ou de oferta | Escalar para Growth Direct |
+| MQL → SQL baixa | Handoff marketing-vendas | Escalar para o gestor da frente |
+| SQL → Won baixa | Problema comercial ou de oferta | Escalar para a liderança de growth |
 
 **📊 Benchmarks esperados por canal (referência)**
 
@@ -323,7 +326,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 1. **Expansão de público** → Algoritmo expandiu para fora do ICP? Verificar Search terms insights
 2. **Asset Groups** → Quais assets performam? Algum concentrando spend sem converter?
-3. **Canais** → Pmax mistura Search, Display, YouTube, Discovery, Gmail. Problema pode estar em um canal específico
+3. **Canais** → Pmax mistura Search, Display, YouTube, Demand Gen (antigo Discovery) e Gmail [VERIFICAR a lista atual de inventário, 01/11/2026]. Problema pode estar em um canal específico
 4. **Branded cannibalization** → Capturando buscas branded que o orgânico já traria?
 
 **TikTok**
@@ -338,7 +341,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 **LinkedIn**
 
 1. **Audiência (esgotamento)** → Volume de impressões caiu? Público pequeno saturou?
-2. **Formato (saturação)** → Message ads saturaram? InMail aberto caindo?
+2. **Formato (saturação)** → Message ads saturaram? Message ads (antigo Sponsored InMail) com abertura caindo? [VERIFICAR nomenclatura atual do LinkedIn, 01/11/2026]
 3. **Oferta/mensagem** → Proposta de valor não ressoa com o seniority?
 4. **Segmentação** → Cargo/indústria certo mas senioridade errada?
 
@@ -346,9 +349,9 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 ---
 
-### 3.3 Análise de pipeline no HubSpot [Continuação do Funil]
+### 3.3 Análise de pipeline no CRM [Continuação do Funil]
 
-> 💡 **Por que:** o funil não termina no lead. O HubSpot mostra a segunda metade, e é onde o dinheiro aparece (ou não).
+> 💡 **Por que:** o funil não termina no lead. O CRM mostra a segunda metade, e é onde o dinheiro aparece (ou não).
 
 **Velocidade do pipeline por canal**
 
@@ -388,7 +391,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 - [ ] Olhar o funil completo de cada canal (passo 3.1)
 - [ ] Identificar: qual canal tem a maior queda em qual transição?
 - [ ] Definir 1 a 3 hipóteses testáveis para a próxima semana
-- [ ] Cada hipótese com: variável isolada + critério plataforma + critério HubSpot + tempo mínimo
+- [ ] Cada hipótese com: variável isolada + critério plataforma + critério CRM + tempo mínimo
 - [ ] Decidir para cada campanha: **escalar / manter / pausar**: justificativa em dado
 - [ ] Decidir realocação de budget entre canais (CPA Real + pipeline ROI)
 
@@ -401,7 +404,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 ---
 
-### 3.5 Feedback loop: HubSpot → Plataformas
+### 3.5 Feedback loop: CRM → plataformas
 
 > ⚠️ **Por que:** o algoritmo otimiza para o evento que você manda. Se manda "lead" (formulário), ele aprende a trazer quem preenche formulário [não necessariamente quem compra].
 
@@ -431,9 +434,9 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 - [ ] Funil por canal (tabela do passo 3.1 condensada)
 - [ ] Gargalo principal: maior queda, qual canal, o que significa
 - [ ] Motivos de perda: top 3 da semana e canal de concentração
-- [ ] Testes: resultado plataforma + HubSpot, próximos testes
+- [ ] Testes: resultado plataforma + CRM, próximos testes
 - [ ] Realocação de budget: justificativa
-- [ ] Pendências: rastreio, criativos, LP, HubSpot
+- [ ] Pendências: rastreio, criativos, LP, CRM
 
 > 🚨 **Regras:** máximo 1 páginas. Sem métrica de vaidade. Se rastreio está quebrado, isso é o destaque principal.
 
@@ -465,7 +468,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 **TikTok**
 
 - [ ] Interest vs. lookalike vs. broad, qual performa?
-- [ ] SPC vs. manual, SPC viável se >50 conversões/semana
+- [ ] Lances automáticos vs. manual: automático viável acima de 50 conversões/semana (default do método) [VERIFICAR o que a sigla SPC designava no original e o mínimo atual recomendado pelo Google, 01/11/2026]
 - [ ] Pangle ativo e não performa? Excluir
 - [ ] Criativos com >14 dias → substituir. TikTok consome criativo mais rápido
 - [ ] Brand safety configurado?
@@ -478,9 +481,9 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 **Rastreio (validação rápida)**
 
 - [ ] UTMs seguindo padrão? `source` / `medium` / `campaign` / `content`
-- [ ] Discrepância leads plataforma vs. HubSpot por canal: <15% ok, >15% investigar, >30% congelar decisões
+- [ ] Discrepância leads plataforma vs. CRM por canal: <15% ok, >15% investigar, >30% congelar decisões
 - [ ] Eventos de conversão corretos em todas as plataformas?
-- [ ] HubSpot: original source drill-down populando? Workflows de lifecycle stage funcionando?
+- [ ] CRM: original source drill-down populando? Workflows de lifecycle stage funcionando?
 
 ---
 
@@ -495,7 +498,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 - [ ] Se CAC subindo: diagnosticar camada: mídia (eficiência), funil (conversão), pipeline (qualificação), mercado (saturação)
 - [ ] Pipeline value por canal: quanto está em aberto por fonte
 - [ ] Win rate por canal: efetividade real de cada fonte
-- [ ] Revisão em conjunto com GP e/ou Growth Direct
+- [ ] Revisão em conjunto com o gestor da frente e a liderança de growth
 
 ---
 
@@ -510,14 +513,14 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 #### Checklist obrigatório
 
 - [ ] LP publicada e testada (carregamento, mobile, formulário)
-- [ ] Formulário integrado com HubSpot, hidden fields de UTM passando
+- [ ] Formulário integrado com CRM, hidden fields de UTM passando
 - [ ] UTMs definidos e documentados
 - [ ] Tags no GTM configuradas e testadas via Preview Mode
 - [ ] Meta Pixel / CAPI / Google Tag / TikTok Pixel / Events API validados
 - [ ] Evento de conversão correto selecionado na plataforma
-- [ ] Workflow no HubSpot: lead → lifecycle stage → notificação comercial
+- [ ] Workflow no CRM: lead → lifecycle stage → notificação comercial
 - [ ] Hipótese documentada
-- [ ] Critério de sucesso duplo: plataforma + HubSpot
+- [ ] Critério de sucesso duplo: plataforma + CRM
 - [ ] Tempo mínimo de aprendizado definido e alinhado
 - [ ] Budget diário configurado (não lifetime em teste)
 
@@ -536,7 +539,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 - [ ] Variável vencedora isolada e confirmada
 - [ ] CPA estável por 7-14 dias (não pico de 2-3 dias)
-- [ ] MQL rate estável ou melhorando no HubSpot
+- [ ] MQL rate estável ou melhorando no CRM
 - [ ] Volume > 50 conversões no período
 - [ ] Funil pós-clique aguenta: LP, time comercial, capacidade de atendimento
 - [ ] Time comercial tem capacidade para volume maior
@@ -548,7 +551,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 | Meta | Duplicar conjunto vencedor com budget maior |
 | TikTok | Aumento gradual no ad group existente, máximo 20% a cada 48h |
 | Google Search | Não escala por budget, escala por cobertura de intenção: aumentar budget só em keywords com Impression Share Lost by Budget + expandir profundidade semântica (long tail, sinônimos, variações de estágio) |
-| Google Pmax/Display/YouTube | Aumento gradual de 20% por ciclo + alimentar audience signals com listas de MQLs do HubSpot, monitorar Search terms insights para evitar expansão fora do ICP |
+| Google Pmax/Display/YouTube | Aumento gradual de 20% por ciclo + alimentar audience signals com listas de MQLs do CRM, monitorar Search terms insights para evitar expansão fora do ICP |
 
 ---
 
@@ -557,7 +560,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 > 🚨 **Por que:** campanha em queda gera pânico. Pânico gera a pior decisão: mexer em tudo ao mesmo tempo.
 
 - [ ] Seguir árvore de diagnóstico do canal específico (passo 3.2)
-- [ ] Checar HubSpot: queda só na plataforma ou qualificação também caiu?
+- [ ] Checar CRM: queda só na plataforma ou qualificação também caiu?
 - [ ] CPA subiu + qualificação manteve → pode ser refinamento, não piora
 - [ ] CPA subiu + qualificação caiu → problema real, intervir
 - [ ] **Nunca mudar mais de uma variável ao mesmo tempo**
@@ -575,7 +578,7 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 - [ ] **TikTok**: estrutura, histórico, Pixel, Events API, match rate, criativos nativos ou reciclados
 - [ ] **LinkedIn**: segmentações, formatos, CPL histórico
 
-**Auditoria HubSpot**
+**Auditoria CRM**
 
 - [ ] Pipeline configurado? Stages fazem sentido?
 - [ ] Lifecycle stages definidos?
@@ -594,15 +597,19 @@ Pergunta-guia: **"alguma coisa quebrou ou saiu do padrão?"**
 
 #### Pós-auditoria
 
-- [ ] Documentar estado atual por plataforma + HubSpot
+- [ ] Documentar estado atual por plataforma + CRM
 - [ ] Prioridade: **rastreio → atribuição → estrutura → otimização → escala**
 - [ ] Expectativa: 2-4 semanas = compra de dados e validação
 
 ---
 
+## ANEXO HUBSPOT
+
+Na operação do Sarden o CRM é o HubSpot. O que é específico da plataforma: lifecycle stage como base de MQL e SQL com de-para por frente; propriedades de qualificação, Data de MQL e Data de SQL; as sete propriedades de atribuição com herança (first click, last click, jornada de fontes); relatórios com prefixo da organização; histórico de propriedade só na interface. Padrão completo em `00_susano/referencias/plataformas/crm/padrao_implementacao.md`; a plataforma em `00_susano/referencias/plataformas/hubspot/dossie_mestre.md`.
+
 ## NOTAS DA MIGRAÇÃO (2026-11-01)
 
 - A página original trazia um aviso de confidencialidade para o time de uma organização; o aviso saiu porque o conteúdo é método do Sarden (decisão do Sarden, 01/11/2026). Nenhum dado de cliente no texto.
-- Nomes de papéis (GP, Growth Direct) são os papéis de escalonamento da operação do Sarden; cada projeto mapeia para os seus em `10_<org>/`.
+- Papéis de escalonamento escritos de forma genérica (gestor da frente, liderança de growth) desde a v0.3.0; cada organização mapeia para os seus em `10_<org>/time/`.
 - A imagem do funil 360 por canal (captura de tela) não foi migrada; a tabela de leitura do funil que a acompanha está íntegra.
 - Thresholds (frequência >3, discrepância >15%, LTV:CAC >3:1, escalar 20 a 30% por vez) são regras operacionais do Sarden, não benchmarks de mercado: tratar como default a calibrar por projeto.

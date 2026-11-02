@@ -90,16 +90,14 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 ## `00_susano/biblioteca/balfour/02_product_channel_fit.md` (Brian Balfour (Reforge))
 - **Filtro do Canal Dominante**: Identificar o canal onde o encaixe produto-canal é mais natural e concentrar esforço até dominá-lo.
 - **Checklist de Product-Channel Fit**: Antes de escalar qualquer canal, verificar: (1) O produto tem as características que o canal exige nativamente?
-- **Filtro de Roadmap por Canal**: Toda feature nova deve ter resposta clara para "qual canal isso alavanca nativamente?" Feature sem canal = custo sem re…
+- **Filtro de Roadmap por Canal**: Toda feature nova (e toda aprovação de board) deve ter resposta clara para "qual canal isso alavanca nativamente?".
 - **Filtro do Pino Quadrado**: Ao diagnosticar falha de conversão ou CAC estourado, auditar se o produto possui arquitetura correta (fricção, onboardi…
-- **Filtro de Board para Roadmap**: Nenhuma nova feature aprovada sem resposta clara para "qual canal isso alavanca nativamente?" O canal de distribuição é…
 
 ## `00_susano/biblioteca/balfour/03_channel_model_fit.md` (Brian Balfour (Reforge))
 - **Espectro ARPU ↔ CAC**: Posicionar o produto do projeto no espectro antes de qualquer decisão de canal.
-- **Diagnóstico da Danger Zone**: AARPU médio + complexidade de produto = nem self-serve nem field sales funciona.
+- **Danger Zone ARPU-CAC: diagnóstico e saída**: AARPU médio demais para self-serve e baixo demais para pagar força de vendas direta, com complexidade de produto no mei…
 - **Multiple Spectrum Positioning**: Criar tiers de produto separados para posições diferentes no espectro, como LinkedIn faz com produto básico (viral) e e…
 - **How x AARPU**: Simplifique qualquer modelo de negócio a duas frentes: How (atrito da cobrança: trial, upfront, transacional) e AARPU (…
-- **ARPU-CAC Danger Zone**: AARPU baixo demais para pagar force de vendas direta, mas alto demais para self-serve.
 - **4 Fits (Product-Market-Model-Channel)**: Produto, mercado, canal e modelo são engrenagens interdependentes.
 
 ## `00_susano/biblioteca/balfour/04_model_market_fit.md` (Brian Balfour (Reforge))
@@ -113,7 +111,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 - **Revisão Periódica dos 4 Fits**: Revisar os 4 Fits trimestralmente como prática preventiva.
 
 ## `00_susano/biblioteca/bruno_nardon/growth.md` (Bruno Nardon)
-- **4 Fits**: Antes de qualquer escala, auditar os três encaixes: Mercado x Produto, Produto x Canal, Canal x Modelo.
+- **4 Fits**: Antes de qualquer escala, auditar os quatro encaixes: Mercado x Produto, Produto x Canal, Canal x Modelo, Modelo x Merc…
 - **Maturidade como filtro**: O crescimento é limitado pelo elo mais fraco.
 - **Retenção como prova de PMF**: Curva de retenção que estabiliza = base que acumula.
 - **LTV/CAC granularizado**: CAC médio não serve para decisão.
@@ -160,7 +158,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 - **Marketing da Esperança vs PLF**: "Criar e torcer" é o oposto de um lançamento estruturado como evento.
 
 ## `00_susano/biblioteca/fernando_miranda/arquitetura_conteudo_ia.md` (Fernando Miranda)
-- **Máquina de Engenharia de Guiões com IA**: IA nunca cria do zero.
+- **Máquina de Engenharia de Roteiros com IA**: IA nunca cria do zero.
 - **Guilhotina de Audiência**: Viral fora do ICP destrói o algoritmo e polui o retargeting.
 - **Tese dos 15 Formatos**: Nunca assumir que sabe o que o mercado quer.
 - **Brand Lift Estrutural**: Orgânico não substitui pago: lubrifica o funil para o pago ficar exponencialmente mais barato.
@@ -228,7 +226,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 ## `00_susano/biblioteca/nardon_g4_kiso/sistema_completo_crescimento.md` (Bruno Nardon + G4 Traction + Rafael Kiso)
 - **5 Camadas do Sistema**: Ao diagnosticar qualquer problema de crescimento, percorrer em sequência, Estrutura (ICP + encaixe) → Aquisição (canal …
 - **Pirâmide do Conhecimento**: Dado → Informação → Insight → Decisão.
-- **5 Alavancas de Mídia**: Alcance (público certo), Frequência (2x/semana captura 95% da lembrança a principal driver de ROAS), Horário (timing co…
+- **5 Alavancas de Mídia**: Alcance (público certo), Frequência (2x por semana captura 95% da lembrança: o principal driver de ROAS), Horário (timi…
 - **Funil + Loop**: Funil mostra onde você perde.
 - **Matemática de Alavancas**: Receita = tráfego × conversão × ticket × retenção.
 
@@ -245,7 +243,7 @@ Gerado por `python3 scripts/brain.py indice`. Não editar à mão. Aplique estes
 - **Equação de crescimento**: fórmula específica por empresa que sintetiza as principais alavancas.
 - **ICE Score**: sistema de priorização de ideias.
 - **Ciclo do growth hacking**: 4 fases em loop semanal: Análise → Ideação → Priorização (ICE) → Teste → volta à Análise.
-- **Desejo – Atrito = Taxa de Conversão**: reduzir atrito é geralmente mais fácil do que aumentar desejo.
+- **Desejo menos Atrito = Taxa de Conversão**: reduzir atrito é geralmente mais fácil do que aumentar desejo.
 - **Análise de coorte**: dividir usuários por data de aquisição (ou canal, ou produto) e monitorar retenção/receita ao longo do tempo.
 
 ## `00_susano/biblioteca/winning_by_design/revenue_architecture.md` (Winning by Design)

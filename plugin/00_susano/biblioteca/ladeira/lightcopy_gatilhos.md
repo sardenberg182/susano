@@ -4,7 +4,8 @@ tipo: pensador
 autor: Leandro Ladeira (*Apostila LightCopy 2023*) + Érico Rocha (*Os 10 Principais Gatilhos Mentais*)
 nivel: MISTO (ativos os princípios, passivos os frameworks operacionais)
 origem: knowledge_susano_lightcopy_gatilhos.md
-atualizado: 2026-10-31
+atualizado: 2026-11-01
+revisao_pendente: Sarden (edição v0.3.0: frase quebrada pela remoção do travessão reescrita)
 ---
 
 # LightCopy + Gatilhos Mentais
@@ -58,7 +59,7 @@ Copy que parece fraca converte mais: o "Detector de Bobagens" do leitor moderno 
 - **QFD: Quadro, Furadeira, Decorado**:
   - Furadeira = método/produto (deve ser mais eficiente, mais rápido, menos doloroso que o padrão)
   - Quadro = resultado imediato e tangível que a furadeira entrega
-  - Decorado = o que o avatar realmente quer na camada mais profunda (aceitação, identidade, liberdade a sempre com detalhe específico, nunca com rótulo genérico)
+  - Decorado = o que o avatar realmente quer na camada mais profunda (aceitação, identidade, liberdade), sempre com detalhe específico, nunca com rótulo genérico
   - O mesmo produto pode ter múltiplos anúncios focados em decorados diferentes. O que performar melhor pode virar o ponto central.
   - Gatilho: estruturação de qualquer oferta ou vídeo de vendas
 
