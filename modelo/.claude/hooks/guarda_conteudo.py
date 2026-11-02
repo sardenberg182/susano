@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""PreToolUse (Write|Edit|NotebookEdit) do Susano.
+"""PreToolUse (Write|Edit|MultiEdit|NotebookEdit) do Susano.
 
 Bloqueia segredo, cartao, CPF e travessao; pergunta antes de gravar telefone ou e-mail.
-Age so em arquivos dentro do repositorio. Falha interna = erro nao bloqueante (o CI segue valendo).
+Age so em arquivos dentro do repositorio. Falha interna (entrada invalida, import ausente, erro de leitura)
+barra a escrita com saida 2: uma trava de privacidade que nao conseguiu checar nao libera nada.
+A mensagem de falha cita so o tipo do erro, nunca o conteudo que seria gravado.
 """
 from __future__ import annotations
 
@@ -10,9 +12,6 @@ import json
 import os
 import sys
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import guardas  # noqa: E402
 
 
 def decidir(decisao: str, motivo: str) -> int:
@@ -32,8 +31,15 @@ def decidir(decisao: str, motivo: str) -> int:
 
 
 def main() -> int:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import guardas  # dentro do main: import quebrado tambem barra (saida 2)
+
     entrada = json.load(sys.stdin)
+    if not isinstance(entrada, dict):
+        raise ValueError("entrada do hook nao e um objeto JSON")
     ti = entrada.get("tool_input") or {}
+    if not isinstance(ti, dict):
+        raise ValueError("tool_input nao e um objeto")
     caminho = ti.get("file_path") or ti.get("notebook_path") or ""
     partes = [ti.get(k) for k in ("content", "new_string", "new_source") if isinstance(ti.get(k), str)]
     for edicao in ti.get("edits") or []:
@@ -77,5 +83,9 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except Exception as exc:
-        print(f"Susano: guarda de conteudo falhou ({exc}); escrita liberada, o CI valida.", file=sys.stderr)
-        sys.exit(1)
+        print(
+            f"Susano: a guarda de conteudo falhou ({type(exc).__name__}) e barrou a escrita por seguranca. "
+            "Confira o Python 3.9+ e o arquivo .claude/hooks/guardas.py; o CI segue validando.",
+            file=sys.stderr,
+        )
+        sys.exit(2)

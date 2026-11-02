@@ -147,7 +147,7 @@ def main() -> int:
     escrever(pessoas / "ana-souza.md",
              f"---\nid: pessoa-ana-souza\ntipo: pessoa\npapel: Head de Marketing\nrelacao: frente acme desde 2026-10\nfrentes: acme\n"
              f"contato_em: CRM, registro 884\naprovado_por: pessoa-teste\natualizado: {recente}\n---\n# Ana Souza\n\n"
-             "Decide orçamento de mídia da acme. E-mail: ana.souza@cliente-acme.com.br\n")
+             "Decide orçamento de mídia da acme. E-mail: ana.souza" + "@" + "cliente-acme.com.br\n")
     code, out, err = rodar(brain + ["validate"], repo)
     caso("pessoas: e-mail em pessoas/ é erro, não pergunta", code == 1 and "pessoas/" in out and "e-mail" in out, (out + err)[-200:])
     escrever(pessoas / "ana-souza.md",
@@ -157,7 +157,7 @@ def main() -> int:
     caso("pessoas: arquivo completo (papel, relação, aprovado_por) passa", code == 0, (out + err)[-300:])
     code, out, err = rodar(brain + ["pessoa", "joao-lima", "--nome", "João Lima", "--papel", "CFO", "--relacao", "frente acme desde 2026-09"], repo)
     caso("brain.py pessoa: sem --aprovado-por recusa (gate)", code == 1 and "gate" in out and not (pessoas / "joao-lima.md").exists(), out[-200:])
-    code, out, err = rodar(brain + ["pessoa", "joao-lima", "--nome", "João Lima", "--papel", "CFO", "--relacao", "fala com joao@cliente-acme.com.br",
+    code, out, err = rodar(brain + ["pessoa", "joao-lima", "--nome", "João Lima", "--papel", "CFO", "--relacao", "fala com joao" + "@" + "cliente-acme.com.br",
                                     "--aprovado-por", "@pessoa-teste"], repo)
     caso("brain.py pessoa: contato nos argumentos recusa", code == 1 and "contato" in out and not (pessoas / "joao-lima.md").exists(), out[-200:])
     code, out, err = rodar(brain + ["pessoa", "joao-lima", "--nome", "João Lima", "--papel", "CFO", "--relacao", "frente acme desde 2026-09",
@@ -219,7 +219,12 @@ def main() -> int:
     rodar(["git", "add", "-A"], repo)
     rodar(["git", "commit", "-q", "-m", "v0.2.0 fixtures"], repo)
 
-    env = {"CLAUDE_PROJECT_DIR": str(repo)}
+    claude_novo, claude_velho = tmp / "claude_novo", tmp / "claude_velho"
+    escrever(claude_novo, "#!/bin/sh\necho '2.1.316 (Claude Code)'\n")
+    escrever(claude_velho, "#!/bin/sh\necho '2.1.100 (Claude Code)'\n")
+    claude_novo.chmod(0o755)
+    claude_velho.chmod(0o755)
+    env = {"CLAUDE_PROJECT_DIR": str(repo), "CLAUDE_CODE_EXECPATH": str(claude_novo)}
     hooks = repo / ".claude" / "hooks"
     run_sh = ["bash", str(hooks / "run.sh")]
 
@@ -238,6 +243,11 @@ def main() -> int:
     caso("sessao_inicio: aponta frente fria da pessoa", "suas contas com estado frio: beta-labs" in out, out[:400])
     caso("sessao_inicio: avisa que está na main", "Branch: main" in out)
     caso("sessao_inicio: sem alerta de pasta fora da raiz", "ALERTA" not in out)
+
+    code, out, _ = rodar(run_sh + [str(hooks / "sessao_inicio.py")], repo, json.dumps({"cwd": str(repo)}),
+                         dict(env, CLAUDE_CODE_EXECPATH=str(claude_velho)))
+    caso("sessao_inicio: alerta quando o Claude Code está abaixo do mínimo das travas (2.1.295)",
+         code == 0 and "ALERTA: Claude Code 2.1.100 abaixo do minimo 2.1.295" in out, out[:300])
 
     # 3. abertura fora da raiz
     sub = pasta_frentes / "beta-labs"
@@ -284,6 +294,36 @@ def main() -> int:
     caso("guarda_conteudo: arquivo fora do repositório não é com ele", code == 0 and decisao == "")
     code, decisao, _, _ = guarda("NotebookEdit", {"notebook_path": str(repo / "x.ipynb"), "new_source": token})
     caso("guarda_conteudo: NotebookEdit com token bloqueia", decisao == "deny")
+    code, decisao, _, _ = guarda("MultiEdit", {"file_path": alvo, "edits": [{"old_string": "a", "new_string": "ok"},
+                                                                            {"old_string": "b", "new_string": token}]})
+    caso("guarda_conteudo: MultiEdit com token numa das edições bloqueia", decisao == "deny")
+    caso("settings.json: matcher da guarda cobre Write, Edit, MultiEdit e NotebookEdit",
+         cfg["hooks"]["PreToolUse"][0]["matcher"] == "Write|Edit|MultiEdit|NotebookEdit")
+
+    # 5b. falha da guarda barra (SUS04): entrada inválida, import quebrado, sem vazar o conteúdo
+    code, out, err = rodar(run_sh + [str(hooks / "guarda_conteudo.py")], repo, "isto não é JSON " + token, env)
+    caso("guarda_conteudo: JSON inválido barra (saída 2) sem repetir o conteúdo", code == 2 and "falhou" in err and token not in err + out,
+         err.strip()[:160])
+    code, out, err = rodar(run_sh + [str(hooks / "guarda_prompt.py")], repo, "[1, 2", env)
+    caso("guarda_prompt: JSON inválido barra (saída 2)", code == 2 and "falhou" in err, err.strip()[:160])
+    quebrado = tmp / "hooks_quebrados"
+    shutil.copytree(hooks, quebrado, ignore=shutil.ignore_patterns("__pycache__"))
+    (quebrado / "guardas.py").write_text("raise ImportError('biblioteca indisponivel')\n", encoding="utf-8")
+    payload = json.dumps({"tool_name": "Write", "tool_input": {"file_path": alvo, "content": "texto limpo"}, "cwd": str(repo)})
+    code, out, err = rodar(["bash", str(quebrado / "run.sh"), "--bloqueante", str(quebrado / "guarda_conteudo.py")], repo, payload, env)
+    caso("guarda_conteudo: import das guardas quebrado barra a escrita (saída 2)", code == 2 and "ImportError" in err, err.strip()[:160])
+    code, out, err = rodar(["bash", str(quebrado / "run.sh"), "--bloqueante", str(quebrado / "guarda_prompt.py")], repo,
+                           json.dumps({"prompt": "oi"}), env)
+    caso("guarda_prompt: import das guardas quebrado barra a mensagem (saída 2)", code == 2 and "ImportError" in err, err.strip()[:160])
+    code, out, err = rodar(run_sh + [str(hooks / "sessao_inicio.py")], repo, "não é JSON", env)
+    caso("sessao_inicio: hook informativo, entrada inválida não barra (sai 0)", code == 0 and "[SUSANO]" in out, err.strip()[:160])
+    for evento in ("UserPromptSubmit", "PreToolUse"):
+        h = cfg["hooks"][evento][0]["hooks"][0]
+        caso(f"settings.json: guarda de {evento} bloqueia em falha (onFailure block e run.sh --bloqueante)",
+             h.get("onFailure") == "block" and "run.sh\" --bloqueante" in h["command"], json.dumps(h)[:200])
+    h = cfg["hooks"]["SessionStart"][0]["hooks"][0]
+    caso("settings.json: abertura segue informativa (sem onFailure block, sem --bloqueante)",
+         "onFailure" not in h and "--bloqueante" not in h["command"])
 
     # 6. guarda de mensagem
     def prompt(texto):
@@ -295,30 +335,141 @@ def main() -> int:
     code, _, _ = prompt("analisa o funil " + chr(0x2014) + " sem pressa")
     caso("guarda_prompt: travessão na mensagem não barra", code == 0)
 
-    # 7. run.sh sem python
+    # 7. run.sh sem python: abertura informativa (1), trava bloqueante (2)
     vazio = tmp / "semPython"
     vazio.mkdir()
-    code, _, err = rodar(["/bin/bash", str(hooks / "run.sh"), str(hooks / "guarda_prompt.py")], repo, "{}",
+    code, _, err = rodar(["/bin/bash", str(hooks / "run.sh"), str(hooks / "sessao_inicio.py")], repo, "{}",
                          {"PATH": str(vazio)})
-    caso("run.sh: sem Python sai 1 (não bloqueante) com aviso", code == 1 and "Python" in err)
+    caso("run.sh: sem Python, a abertura sai 1 (não bloqueante) com aviso", code == 1 and "Python" in err)
+    code, _, err = rodar(["/bin/bash", str(hooks / "run.sh"), "--bloqueante", str(hooks / "guarda_prompt.py")], repo, "{}",
+                         {"PATH": str(vazio)})
+    caso("run.sh --bloqueante: sem Python, a trava sai 2 (barra a ação) com aviso", code == 2 and "barrada" in err, err.strip()[:160])
 
-    # 8. pre-commit com o brain.py real
+    # 8. pre-commit: índice do Git (não o disco), hook anterior preservado, reinstalação idempotente
     code, out, err = rodar(["bash", str(hooks / "instalar_precommit.sh")], repo)
     caso("instalar_precommit: instala", code == 0 and "instalado" in out, err.strip()[:120])
+    hook_pc = repo / ".git" / "hooks" / "pre-commit"
+    antes_pc = hook_pc.read_text(encoding="utf-8") if hook_pc.is_file() else ""
     code, out, _ = rodar(["bash", str(hooks / "instalar_precommit.sh")], repo)
-    caso("instalar_precommit: idempotente", code == 0 and "ja instalado" in out)
+    caso("instalar_precommit: idempotente (reinstalar não muda nem multiplica a cadeia)",
+         code == 0 and "ja instalado" in out and hook_pc.read_text(encoding="utf-8") == antes_pc and antes_pc.count("varrer --staged") == 1)
     nota = pasta_frentes / "gama" / "analises" / f"{hoje.isoformat()}_nota.md"
     escrever(nota, "# Nota\n\nCAC de R$ 182,40 em set/2026 [DADO: CRM]\n")
     rodar(["git", "add", "-A"], repo)
     code, out, err = rodar(["git", "commit", "-m", "teste pre-commit"], repo)
-    caso("pre-commit: roda brain.py validate e deixa passar arquivo limpo", code == 0 and "validate: OK" in (out + err),
-         (out + err)[-200:])
+    caso("pre-commit: inspeciona o índice, roda brain.py validate e deixa passar arquivo limpo",
+         code == 0 and "validate: OK" in (out + err) and "varrer (perfil projeto, índice" in (out + err), (out + err)[-200:])
     escrever(nota, "# Nota\n\nfunil " + chr(0x2014) + " cheio\n")
     rodar(["git", "add", "-A"], repo)
     code, out, err = rodar(["git", "commit", "-m", "teste travessao"], repo)
     caso("pre-commit: barra commit com travessão", code != 0 and "travessão" in (out + err), (out + err)[-200:])
     rodar(["git", "checkout", "--", "."], repo)
     rodar(["git", "reset", "-q", "--hard"], repo)
+    estranho = pasta_frentes / "gama" / "analises" / "relatório de mídia ação.csv"
+    escrever(estranho, f"campanha,token\nbusca,{token}\n")
+    rodar(["git", "add", "--", str(estranho.relative_to(repo))], repo)
+    escrever(estranho, "campanha,cpl\nbusca,12.30\n")  # disco limpo, índice com o token
+    code, out, err = rodar(["git", "commit", "-m", "teste indice"], repo)
+    caso("pre-commit: token no índice com disco limpo barra o commit (nome com espaço e acento)",
+         code != 0 and "token GitHub" in (out + err) and "relatório de mídia ação.csv" in (out + err), (out + err)[-300:])
+    rodar(["git", "reset", "-q", "--", str(estranho.relative_to(repo))], repo)  # tira do índice; o disco fica
+    code, out, err = rodar(["git", "commit", "-m", "corrige", "--allow-empty"], repo)
+    caso("pre-commit: tirar o arquivo do índice permite seguir pelo fluxo normal", code == 0, (out + err)[-300:])
+    (estranho).write_text("", encoding="utf-8")
+    rodar(["git", "add", "-A"], repo)
+    rodar(["git", "commit", "-q", "-m", "csv limpo"], repo)
+    # hook anterior: num clone do projeto, um pre-commit que falha já existia antes da instalação
+    outro = tmp / "projeto_com_hook"
+    rodar(["git", "clone", "-q", str(repo), str(outro)], tmp)
+    rodar(["git", "config", "user.name", "Pessoa Teste"], outro)
+    rodar(["git", "config", "user.email", "pessoa@example.com"], outro)
+    escrever(outro / ".git" / "hooks" / "pre-commit", "#!/usr/bin/env bash\necho 'checagem antiga falhou' >&2\nexit 1\n")
+    (outro / ".git" / "hooks" / "pre-commit").chmod(0o755)
+    code, out, err = rodar(["bash", str(outro / ".claude" / "hooks" / "instalar_precommit.sh")], outro)
+    caso("instalar_precommit: preserva o hook anterior", code == 0 and (outro / ".git" / "hooks" / "pre-commit.antes-susano").is_file(),
+         (out + err)[-200:])
+    escrever(outro / "40_playbooks" / "teste_hook.md", "# Teste\n\nlimpo\n")
+    rodar(["git", "add", "-A"], outro)
+    code, out, err = rodar(["git", "commit", "-m", "teste hook anterior"], outro)
+    caso("pre-commit: a falha do hook anterior continua barrando o commit", code != 0 and "checagem antiga falhou" in (out + err),
+         (out + err)[-200:])
+    escrever(outro / ".git" / "hooks" / "pre-commit.antes-susano", "#!/usr/bin/env bash\nexit 0\n")
+    code, out, err = rodar(["git", "commit", "-m", "teste hook anterior ok"], outro)
+    caso("pre-commit: hook anterior passando, a cadeia do Susano roda depois", code == 0 and "validate: OK" in (out + err),
+         (out + err)[-200:])
+    code, out, _ = rodar(["bash", str(outro / ".claude" / "hooks" / "instalar_precommit.sh")], outro)
+    caso("instalar_precommit: reinstalar com hook anterior não duplica a cadeia", code == 0 and "ja instalado" in out
+         and (outro / ".git" / "hooks" / "pre-commit").read_text(encoding="utf-8").count("pre-commit.antes-susano") == 2)
+
+    # 10. inspeção de privacidade em todo formato e pasta (SUS02)
+    def fixture(rel_path: str, conteudo, forcar: bool = False):
+        p = repo / rel_path
+        p.parent.mkdir(parents=True, exist_ok=True)
+        (p.write_bytes if isinstance(conteudo, bytes) else lambda c: p.write_text(c, encoding="utf-8"))(conteudo)
+        rodar(["git", "add"] + (["-f"] if forcar else []) + ["--", rel_path], repo)
+        return p
+
+    def retirar(p: Path):
+        rodar(["git", "rm", "-q", "-f", "--cached", "--", p.relative_to(repo).as_posix()], repo)
+        p.unlink()
+
+    rel_frente = pasta_frentes.relative_to(repo).as_posix()
+    caderno = json.dumps({"cells": [{"cell_type": "code", "source": ["token = '" + token + "'"]}], "nbformat": 4})
+    for rel_path, conteudo, forcar in ((f"{rel_frente}/gama/analises/export.csv", f"campanha,chave\nbusca,{token}\n", False),
+                                       ("90_arquivo/antigo/nota.md", f"# Antigo\n\nchave {token}\n", False),
+                                       (".env", f"API_KEY={token}\n", True),
+                                       ("50_referencia/caderno.ipynb", caderno, False),
+                                       ("50_referencia/LEIAME", f"chave {token}\n", False)):
+        p = fixture(rel_path, conteudo, forcar)
+        code, out, err = rodar(brain + ["validate"], repo)
+        extra = (rel_path != ".env") or "apesar do .gitignore" in out
+        caso(f"validate: token em {rel_path} é erro (todo formato e pasta)", code == 1 and f"{rel_path}:" in out and "token GitHub" in out and extra,
+             out[-300:])
+        retirar(p)
+    import io as _io
+    import zipfile as _zipfile
+    buf = _io.BytesIO()
+    with _zipfile.ZipFile(buf, "w") as z:
+        z.writestr("dentro/nota.md", f"chave {token}\n")
+    p = fixture("50_referencia/pacote.zip", buf.getvalue())
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: ZIP é aberto e o token dentro dele é erro", code == 1 and "pacote.zip!dentro/nota.md:1: token GitHub" in out, out[-300:])
+    retirar(p)
+    p = fixture("50_referencia/diagrama.png", b"\x89PNG\r\n\x1a\n" + bytes(64))
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: binário não inspecionável vira aviso visível no projeto", code == 0 and "sem inspeção de privacidade" in out
+         and "diagrama.png" in out, out[-300:])
+    code, out, err = rodar(brain + ["varrer", "--perfil", "publico", "50_referencia/diagrama.png"], repo)
+    caso("varrer --perfil publico: binário não inspecionável é erro", code == 1 and "não inspecionado" in out, out[-300:])
+    retirar(p)
+    contato = fixture("50_referencia/contatos.md", "# Fornecedores\n\nSuporte: atendimento" + "@" + "fornecedor-ficticio.com.br\n")
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: e-mail fora de pessoas/ é aviso no projeto", code == 0 and "contatos.md:3: e-mail" in out, out[-300:])
+    code, out, err = rodar(brain + ["varrer", "--perfil", "publico"], repo)
+    caso("varrer --perfil publico: e-mail é erro", code == 1 and "repositório público não leva contato" in out, out[-300:])
+    excecoes = repo / "PRIVACIDADE_EXCECOES.md"
+    escrever(excecoes, "# Exceções\n\n| regra | caminho | motivo |\n|---|---|---|\n"
+                       "| e-mail | 50_referencia/contatos.md | canal público do fornecedor fictício do teste |\n")
+    code, out, err = rodar(brain + ["varrer", "--perfil", "publico", "50_referencia/contatos.md"], repo)
+    caso("varrer: exceção por regra e arquivo exato, com motivo, libera o contato", code == 0, out[-300:])
+    escrever(excecoes, "# Exceções\n\n| regra | caminho | motivo |\n|---|---|---|\n| e-mail | 50_referencia/ | pasta inteira |\n"
+                       f"| token GitHub | {rel_frente}/gama/estado.md | fixture |\n| telefone | 50_referencia/contatos.md | |\n")
+    code, out, err = rodar(brain + ["varrer", "--perfil", "publico", "50_referencia/contatos.md"], repo)
+    caso("varrer: exceção de pasta, de segredo ou sem motivo é recusada",
+         code == 1 and "arquivo exato" in out and "não aceita exceção" in out and "sem motivo" in out, out[-400:])
+    excecoes.unlink()
+    retirar(contato)
+    guardas_py = hooks / "guardas.py"
+    guardas_py.rename(hooks / "guardas.py.fora")
+    code, out, err = rodar(brain + ["validate"], repo)
+    guardas_py_fora = hooks / "guardas.py.fora"
+    guardas_py_fora.rename(guardas_py)
+    caso("validate: sem a biblioteca de guardas falha (nunca sucesso sem inspeção)", code == 1 and "inspeção de privacidade não rodou" in out,
+         out[-300:])
+    rodar(["git", "add", "-A"], repo)
+    rodar(["git", "commit", "-q", "-m", "fixtures de privacidade"], repo)
+    code, out, err = rodar(brain + ["validate"], repo)
+    caso("validate: volta a passar depois das fixtures de privacidade", code == 0, out[-300:])
 
     # 9. arquivo gerenciado alterado fora de versão
     (repo / "00_susano" / "identidade.md").write_text("mexido\n", encoding="utf-8")

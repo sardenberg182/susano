@@ -2,6 +2,7 @@
 """UserPromptSubmit do Susano: barra mensagem com segredo, cartao ou CPF (saida 2).
 
 O travessao numa mensagem nao bloqueia: a regra de zero travessao vale para o que se grava.
+Falha interna (entrada invalida, import ausente) tambem barra com saida 2, sem repetir o conteudo da mensagem.
 """
 from __future__ import annotations
 
@@ -9,12 +10,14 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import guardas  # noqa: E402
-
 
 def main() -> int:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import guardas  # dentro do main: import quebrado tambem barra (saida 2)
+
     entrada = json.load(sys.stdin)
+    if not isinstance(entrada, dict):
+        raise ValueError("entrada do hook nao e um objeto JSON")
     prompt = entrada.get("prompt") or entrada.get("user_prompt") or ""
     if not isinstance(prompt, str) or not prompt.strip():
         return 0
@@ -34,5 +37,9 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except Exception as exc:
-        print(f"Susano: guarda de mensagem falhou ({exc}); mensagem liberada.", file=sys.stderr)
-        sys.exit(1)
+        print(
+            f"Susano: a guarda de mensagem falhou ({type(exc).__name__}) e barrou a mensagem por seguranca. "
+            "Confira o Python 3.9+ e o arquivo .claude/hooks/guardas.py.",
+            file=sys.stderr,
+        )
+        sys.exit(2)

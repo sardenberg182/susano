@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import date
@@ -15,6 +16,9 @@ from pathlib import Path
 
 JANELA_DIAS = 14
 MAX_CLIENTES = 12
+# Minimo do Claude Code para as travas barrarem tambem em timeout e falha ao iniciar ("onFailure": "block"),
+# conforme a doc de hooks conferida em 02/11/2026 (code.claude.com/docs/en/hooks).
+CLAUDE_MINIMO = (2, 1, 295)
 
 
 def git(*args: str, cwd: Path) -> str:
@@ -23,6 +27,16 @@ def git(*args: str, cwd: Path) -> str:
         return r.stdout.strip() if r.returncode == 0 else ""
     except Exception:
         return ""
+
+
+def versao_claude():
+    exe = os.environ.get("CLAUDE_CODE_EXECPATH") or "claude"
+    try:
+        r = subprocess.run([exe, "--version"], capture_output=True, text=True, timeout=5)
+        m = re.search(r"(\d+)\.(\d+)\.(\d+)", r.stdout)
+        return tuple(int(x) for x in m.groups()) if m else None
+    except Exception:
+        return None
 
 
 def frontmatter(texto: str) -> dict:
@@ -119,6 +133,14 @@ def main() -> int:
         saida.append(
             f"ALERTA: sessao aberta em {cwd}, fora da raiz do repositorio ({topo}). "
             "Peca para reabrir na raiz: settings, hooks e permissoes so carregam de la."
+        )
+
+    versao = versao_claude()
+    if versao and versao < CLAUDE_MINIMO:
+        saida.append(
+            "ALERTA: Claude Code " + ".".join(map(str, versao)) + " abaixo do minimo " + ".".join(map(str, CLAUDE_MINIMO))
+            + " do Susano: as travas de privacidade podem liberar a escrita quando estouram o tempo ou nao iniciam. "
+            "Peca para atualizar (claude update)."
         )
 
     nome = git("config", "user.name", cwd=cwd)
